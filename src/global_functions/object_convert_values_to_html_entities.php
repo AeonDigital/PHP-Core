@@ -46,4 +46,4 @@ function object_convert_values_to_html_entities($o)
     }
 
     return $nO;
-};
+}
