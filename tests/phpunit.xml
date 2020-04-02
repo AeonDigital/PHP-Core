@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
+    colors="true" verbose="true" stopOnFailure="false"
+    bootstrap="phpunit.php">
+
+    <!--
+        Todos os endereços de arquivos e diretórios são relativos ao
+        diretório no qual o PHP unit foi iniciado, ou aquele onde está
+        o arquivo de configuração "phpunit.xml".
+    -->
+
+    <testsuites>
+        <testsuite name="AeonDigital-PHP-Core">
+            <!--
+                Defina aqui cada arquivo de testes que será utilizado.
+            -->
+
+            <file>src/global_functionsTests.php</file>
+            <file>src/RealTypeTests.php</file>
+
+            <file>src/Tools/ToolsTests.php</file>
+            <file>src/Tools/ImageTests.php</file>
+            <file>src/Tools/JSONTests.php</file>
+            <file>src/Tools/MinifyCSSTest.php</file>
+            <file>src/Tools/MinifyJSTest.php</file>
+            <file>src/Tools/ZipTest.php</file>
+
+            <file>src/SimpleType/stBoolTest.php</file>
+            <file>src/SimpleType/stByteTest.php</file>
+            <file>src/SimpleType/stDateTimeTest.php</file>
+            <file>src/SimpleType/stDoubleTest.php</file>
+            <file>src/SimpleType/stFloatTest.php</file>
+            <file>src/SimpleType/stIntTest.php</file>
+            <file>src/SimpleType/stLongTest.php</file>
+            <file>src/SimpleType/stRealTest.php</file>
+            <file>src/SimpleType/stShortTest.php</file>
+            <file>src/SimpleType/stStringTest.php</file>
+
+            <file>src/Traits/HTTPRawStatusCodeTest.php</file>
+            <file>src/Traits/MimeTypeDataTest.php</file>
+            <file>src/Traits/ParseQualityHeadersTest.php</file>
+
+            <file>src/Collection/BasicCollectionTest.php</file>
+            <file>src/Collection/ProtectedCollectionTest.php</file>
+            <file>src/Collection/AppendOnlyCollectionTest.php</file>
+            <file>src/Collection/ReadOnlyCollectionTest.php</file>
+            <file>src/Collection/CaseInsensitiveCollectionTest.php</file>
+            <file>src/Collection/CollectionTest.php</file>
+            <file>src/Collection/TypeListTest.php</file>
+        </testsuite>
+    </testsuites>
+    <filter>
+       <whitelist processUncoveredFilesFromWhitelist="true">
+            <!--
+                Defina aqui cada diretório de projeto que será
+                avaliado em um teste de cobertura.
+            -->
+            <directory>../src</directory>
+        </whitelist>
+    </filter>
+</phpunit>

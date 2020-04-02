@@ -1,0 +1,32 @@
+{
+  "name": "aeondigital/phpcore",
+  "description": "Constantes, Funções Globais e Classes de uso geral.",
+  "version": "v0.1.0-alpha",
+  "time": "2020-04-02",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Rianna Cantarelli",
+      "email": "rianna.aeon@gmail.com",
+      "homepage": "http://aeondigital.com.br",
+      "role": "developer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.4",
+    "aeondigital/phpinterfaces": ">=v0.1.1-alpha"
+  },
+  "autoload": {
+    "files": [
+      "src/bootstrap.php"
+    ],
+    "classmap": [
+      "src/"
+    ]
+  },
+  "require-dev": {
+    "aeondigital/phpdoc-to-rst": "dev-master"
+  }
+}
