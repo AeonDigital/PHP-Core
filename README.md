@@ -18,13 +18,13 @@ _______________________________________________________________________________
 Instale em seu projeto usando o composer:
 **Via terminal**
 ```shell
-> composer require aeondigital/phpscalartype
+> composer require aeondigital/phpcore
 ```
 
 **Via composer.json**
 ```json
 "require": {
-    "aeondigital/phpscalartype": "dev-master"
+    "aeondigital/phpcore": "dev-master"
 }
 ```
 
@@ -45,7 +45,7 @@ padrão para pacotes instalados usando o composer mas o mesmo pode ser obtido no
 repositório oficial.
 
 A documentação completa pode ser vista em
-[ReadTheDocs](https://php-phpscalartype.readthedocs.io/pt/latest/).
+[ReadTheDocs](https://php-phpcore.readthedocs.io/pt/latest/).
 
 
 &nbsp;
