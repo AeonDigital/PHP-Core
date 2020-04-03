@@ -1,6 +1,6 @@
-----------
+==========
 html_print
-----------
+==========
 
 
 .. php:function:: html_print( $obj, $o=null, $w=null, $h=null)

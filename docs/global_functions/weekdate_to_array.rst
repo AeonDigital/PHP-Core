@@ -1,6 +1,6 @@
------------------
+=================
 weekdate_to_array
------------------
+=================
 
 
 .. php:function:: weekdate_to_array( $week)

@@ -1,6 +1,6 @@
--------------
+=============
 mb_str_remove
--------------
+=============
 
 
 .. php:function:: mb_str_remove( $str, $start, $length=null)

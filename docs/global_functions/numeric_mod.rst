@@ -1,6 +1,6 @@
------------
+===========
 numeric_mod
------------
+===========
 
 
 .. php:function:: numeric_mod( $n, $div)

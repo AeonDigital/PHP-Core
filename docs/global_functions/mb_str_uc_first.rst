@@ -1,6 +1,6 @@
----------------
+===============
 mb_str_uc_first
----------------
+===============
 
 
 .. php:function:: mb_str_uc_first( $string)

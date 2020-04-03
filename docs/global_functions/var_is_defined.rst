@@ -1,6 +1,6 @@
---------------
+==============
 var_is_defined
---------------
+==============
 
 
 .. php:function:: var_is_defined( &$o, $k=null)

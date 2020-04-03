@@ -1,6 +1,6 @@
------------------------
+=======================
 weekdate_get_first_week
------------------------
+=======================
 
 
 .. php:function:: weekdate_get_first_week( $year)

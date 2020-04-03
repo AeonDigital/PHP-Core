@@ -1,6 +1,6 @@
-------------
+============
 mb_str_split
-------------
+============
 
 
 .. php:function:: mb_str_split( $string, $string_length=1)

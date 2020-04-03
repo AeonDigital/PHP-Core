@@ -1,6 +1,6 @@
--------------------
+===================
 mb_str_replace_once
--------------------
+===================
 
 
 .. php:function:: mb_str_replace_once( $search, $replace, $subject)

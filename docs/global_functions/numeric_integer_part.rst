@@ -1,6 +1,6 @@
---------------------
+====================
 numeric_integer_part
---------------------
+====================
 
 
 .. php:function:: numeric_integer_part( $n)

@@ -1,6 +1,6 @@
--------------------
+===================
 dir_convert_to_utf8
--------------------
+===================
 
 
 .. php:function:: dir_convert_to_utf8( $absoluteSystemPaths, $validExtensions)

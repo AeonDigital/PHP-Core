@@ -1,6 +1,6 @@
----------------
+===============
 mb_str_uc_words
----------------
+===============
 
 
 .. php:function:: mb_str_uc_words( $string, $ignore=[])

@@ -1,6 +1,6 @@
----------------
+===============
 mb_str_contains
----------------
+===============
 
 
 .. php:function:: mb_str_contains( $str, $search)

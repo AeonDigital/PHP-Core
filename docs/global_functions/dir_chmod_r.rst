@@ -1,6 +1,6 @@
------------
+===========
 dir_chmod_r
------------
+===========
 
 
 .. php:function:: dir_chmod_r( $absoluteSystemPathToDir, $permissions)

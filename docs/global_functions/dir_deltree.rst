@@ -1,6 +1,6 @@
------------
+===========
 dir_deltree
------------
+===========
 
 
 .. php:function:: dir_deltree( $absoluteSystemPathToDir)

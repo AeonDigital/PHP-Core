@@ -1,6 +1,6 @@
---------------------
+====================
 mb_str_uc_names_ptbr
---------------------
+====================
 
 
 .. php:function:: mb_str_uc_names_ptbr( $string)

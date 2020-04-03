@@ -1,6 +1,6 @@
----------------------
+=====================
 mb_str_preserve_chars
----------------------
+=====================
 
 
 .. php:function:: mb_str_preserve_chars( $str, $remove)

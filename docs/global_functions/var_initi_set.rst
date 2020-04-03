@@ -1,6 +1,6 @@
--------------
+=============
 var_initi_set
--------------
+=============
 
 
 .. php:function:: var_initi_set( &$o, $d=null, $u=false)

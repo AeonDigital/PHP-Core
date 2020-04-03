@@ -76,7 +76,7 @@ Methods
 			| Verifica se o valor indicado pode ser convertido e usado como um valor válido
 			| dentro das definições deste tipo.
 			
-			| É esperado uma string usando o formato **yyyy-MM-dd HH:mm:ss**, um inteiro
+			| É esperado uma string usando o formato **Y-m-d H:i:s**, um inteiro
 			| representando um **timestamp** ou um objeto ``DateTime`` dentro dos limites
 			| especificados.
 			

@@ -1,6 +1,6 @@
---------------
+==============
 mb_str_pos_all
---------------
+==============
 
 
 .. php:function:: mb_str_pos_all( $haystack, $needle)

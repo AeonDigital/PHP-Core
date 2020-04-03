@@ -1,6 +1,6 @@
-----------------------
+======================
 weekdate_get_last_week
-----------------------
+======================
 
 
 .. php:function:: weekdate_get_last_week( $year)

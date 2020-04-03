@@ -1,6 +1,6 @@
---------------------
+====================
 file_convert_to_utf8
---------------------
+====================
 
 
 .. php:function:: file_convert_to_utf8( $absoluteSystemPathToFile)

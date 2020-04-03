@@ -1,6 +1,6 @@
---------------------
+====================
 weekdate_count_weeks
---------------------
+====================
 
 
 .. php:function:: weekdate_count_weeks( $year)

@@ -1,6 +1,6 @@
-------------
+============
 object_clone
-------------
+============
 
 
 .. php:function:: object_clone( $obj)

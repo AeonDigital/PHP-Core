@@ -1,6 +1,6 @@
------------
+===========
 array_in_ci
------------
+===========
 
 
 .. php:function:: array_in_ci( $needle, $haystack)

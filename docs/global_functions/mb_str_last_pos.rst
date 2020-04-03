@@ -1,6 +1,6 @@
----------------
+===============
 mb_str_last_pos
----------------
+===============
 
 
 .. php:function:: mb_str_last_pos( $str, $search, $start=0)

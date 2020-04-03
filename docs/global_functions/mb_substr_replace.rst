@@ -1,6 +1,6 @@
------------------
+=================
 mb_substr_replace
------------------
+=================
 
 
 .. php:function:: mb_substr_replace( $string, $replacement, $start, $length=null, $encoding=null)

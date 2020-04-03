@@ -1,6 +1,6 @@
--------------
+=============
 mb_str_insert
--------------
+=============
 
 
 .. php:function:: mb_str_insert( $str, $insert, $pos)

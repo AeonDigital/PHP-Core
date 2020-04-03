@@ -1,6 +1,6 @@
---------------------
+====================
 weekdate_to_datetime
---------------------
+====================
 
 
 .. php:function:: weekdate_to_datetime( $week)

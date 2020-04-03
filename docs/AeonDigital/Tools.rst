@@ -482,8 +482,9 @@ Methods
 			| 
 			| O formato padrão é o **Y-m-d H:i:s**.
 			| 
-			| Se no objeto original não houver o valor ``time``, será assumido o horário
-			| atual do sistema.
+			| Se no objeto original não houver o valor ``time`` e em ``$format`` também
+			| não existir definições para horários (H | i | s) esta conversão assumirá
+			| o valor zero para cada uma destas posições.
 			
 		
 		

@@ -1,6 +1,6 @@
---------
+========
 redirect
---------
+========
 
 
 .. php:function:: redirect( $url, $httpStatusCode=&#34;HTTP/1.1 302 Found&#34;)

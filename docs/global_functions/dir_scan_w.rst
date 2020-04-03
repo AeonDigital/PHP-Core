@@ -1,6 +1,6 @@
-----------
+==========
 dir_scan_w
-----------
+==========
 
 
 .. php:function:: dir_scan_w( $absoluteSystemPathToDir)

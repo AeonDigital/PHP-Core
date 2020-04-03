@@ -1,6 +1,6 @@
---------------------
+====================
 mb_str_remove_glyphs
---------------------
+====================
 
 
 .. php:function:: mb_str_remove_glyphs( $str)

@@ -1,6 +1,6 @@
---------------------
+====================
 numeric_decimal_part
---------------------
+====================
 
 
 .. php:function:: numeric_decimal_part( $n, $l=2)

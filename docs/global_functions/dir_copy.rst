@@ -1,6 +1,6 @@
---------
+========
 dir_copy
---------
+========
 
 
 .. php:function:: dir_copy( $absoluteSystemPathToDir_source, $absoluteSystemPathToDir_dest, $permissions=700)

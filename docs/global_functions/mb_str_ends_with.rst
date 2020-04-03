@@ -1,6 +1,6 @@
-----------------
+================
 mb_str_ends_with
-----------------
+================
 
 
 .. php:function:: mb_str_ends_with( $haystack, $needle)

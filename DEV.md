@@ -56,7 +56,7 @@ consulte a documentação oficial no respectivo arquivo README ou vá no
   ```
 - Extraia a documentação
   ```shell
-  > ./vendor/bin/phpdoc-to-rst generate-ns AeonDigital/ScalarType docs src --public-only
+  > ./vendor/bin/phpdoc-to-rst generate docs src --public-only
   ```
 - Converta a documentação reST para HTML
   ```shell

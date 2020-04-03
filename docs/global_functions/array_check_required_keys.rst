@@ -1,6 +1,6 @@
--------------------------
+=========================
 array_check_required_keys
--------------------------
+=========================
 
 
 .. php:function:: array_check_required_keys( $keys, $array)

@@ -1,6 +1,6 @@
-------------------
+==================
 mb_str_starts_with
-------------------
+==================
 
 
 .. php:function:: mb_str_starts_with( $haystack, $needle)

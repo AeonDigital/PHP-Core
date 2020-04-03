@@ -1,6 +1,6 @@
----------------
+===============
 mb_str_uc_names
----------------
+===============
 
 
 .. php:function:: mb_str_uc_names( $str, $locale=&#34;&#34;, $ignore=[])
