@@ -38,11 +38,11 @@ class MinifyJS
     public static function minifyCode(string $jsCode) : string
     {
         // Unifica marcações de nova linha.
-        $inputCode = str_replace(["\r\n", "\r"], "\n", $jsCode);
+        $inputCode = \str_replace(["\r\n", "\r"], "\n", $jsCode);
         $outputCode = "";
 
 
-        if (trim($inputCode) !== "") {
+        if (\trim($inputCode) !== "") {
             // Caracteres que permite eliminar os espaços existentes ao seu redor
             $NonSpaceAround = [
                 ":", ";", ",", "?", "<", ">",
@@ -53,7 +53,7 @@ class MinifyJS
 
 
             // Para cada caracter existênte no código original...
-            $codeLength = strlen($inputCode);
+            $codeLength = \strlen($inputCode);
             $lastCodeIndex = $codeLength - 1;
             for ($i = 0; $i < $codeLength; $i++) {
                 $CharType = "";
@@ -67,7 +67,7 @@ class MinifyJS
 
 
                 // Sendo um caracter sem representação gráfica...
-                if ($c === "\n" || ord($c) < 32) {
+                if ($c === "\n" || \ord($c) < 32) {
                     $CharType = "NonVisible";
                 } else {
                     // Conforme o caracter atual
@@ -84,7 +84,7 @@ class MinifyJS
                             elseif ($nc === "/") {
                                 // Resgata a posição do caracter imediatamente após do primeiro \n identificado
                                 // após o início da linha de comentário.
-                                $endBlock = strpos($inputCode, "\n", $i);
+                                $endBlock = \strpos($inputCode, "\n", $i);
                                 if ($endBlock !== false) {
                                     if ($endBlock < $lastCodeIndex) {
                                         $i = $endBlock;
@@ -96,7 +96,7 @@ class MinifyJS
                             elseif ($nc === "*") {
                                 // Resgata a posição do caracter */ encontrado a partir do início do bloco
                                 // de comentário
-                                $endBlock = strpos($inputCode, "*/", $i) + 1;
+                                $endBlock = \strpos($inputCode, "*/", $i) + 1;
                                 if ($endBlock !== false) {
                                     if ($endBlock < $lastCodeIndex) {
                                         $i = $endBlock;
@@ -112,7 +112,7 @@ class MinifyJS
 
 
                                 do {
-                                    $endBlock = strpos($inputCode, "/", $indexRegex + 1);
+                                    $endBlock = \strpos($inputCode, "/", $indexRegex + 1);
 
                                     // Se não encontrar o final do regex, dispara exception
                                     if ($endBlock === false) {
@@ -132,7 +132,7 @@ class MinifyJS
 
 
                                 if ($endBlock < $lastCodeIndex) {
-                                    $outputCode .= substr($inputCode, $i, ($endBlock - $i + 1));
+                                    $outputCode .= \substr($inputCode, $i, ($endBlock - $i + 1));
                                     $i = $endBlock;
                                 } else {
                                     $i = $lastCodeIndex;
@@ -176,7 +176,7 @@ class MinifyJS
                                 }
 
 
-                                $outputCode .= $quote . str_replace("\\\n", "", $quotestString) . $quote;
+                                $outputCode .= $quote . \str_replace("\\\n", "", $quotestString) . $quote;
                                 $i = $np;
                             }
 
@@ -203,8 +203,8 @@ class MinifyJS
                                 $c = "";
                             } else {
                                 if ($outputCode !== "") {
-                                    $lvc = $outputCode[strlen($outputCode) - 1];
-                                    if (in_array($lvc, $NonSpaceAround) === true || in_array($nc, $NonSpaceAround) === true) {
+                                    $lvc = $outputCode[\strlen($outputCode) - 1];
+                                    if (\in_array($lvc, $NonSpaceAround) === true || \in_array($nc, $NonSpaceAround) === true) {
                                         $c = "";
                                     }
                                 }
@@ -220,7 +220,7 @@ class MinifyJS
 
 
 
-        return trim($outputCode);
+        return \trim($outputCode);
     }
 
 
@@ -237,7 +237,7 @@ class MinifyJS
      */
     public static function minifyFile(string $absoluteSystemPathToFile) : string
     {
-        $cssCode = file_get_contents($absoluteSystemPathToFile);
+        $cssCode = \file_get_contents($absoluteSystemPathToFile);
         return self::minifyCode($cssCode);
     }
 
@@ -258,12 +258,12 @@ class MinifyJS
         $str = "";
 
         foreach ($absoluteSystemPathToFiles as $file) {
-            if (file_exists($file) === true) {
+            if (\file_exists($file) === true) {
                 $str .= self::minifyFile($file) . "\n";
             }
         }
 
-        return trim($str);
+        return \trim($str);
     }
 
 
@@ -287,7 +287,7 @@ class MinifyJS
     ) : bool {
 
         $minifiedCode = self::minifyFiles($absoluteSystemPathToFiles);
-        $r = file_put_contents($absoluteSystemPathToMinifiedFile, $minifiedCode);
+        $r = \file_put_contents($absoluteSystemPathToMinifiedFile, $minifiedCode);
 
         return ($r !== false);
     }

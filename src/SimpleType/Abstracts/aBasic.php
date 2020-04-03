@@ -104,7 +104,7 @@ abstract class aBasic implements iBasic
         if (static::validate($v) === false || $v === undefined) {
             $err = "error.st.unexpected.type";
         } else {
-            switch (strtolower($type)) {
+            switch (\strtolower($type)) {
                 case "bool":
                     $v = Tools::toBool($v);
                     break;

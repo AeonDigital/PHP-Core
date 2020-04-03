@@ -37,26 +37,26 @@ class MinifyCSS
      */
     public static function minifyCode(string $cssCode) : string
     {
-        if (trim($cssCode) !== "") {
+        if (\trim($cssCode) !== "") {
             // Remove comentários
-            $cssCode = preg_replace("!/\*[^*]*\*+([^/][^*]*\*+)*/!", "", $cssCode);
+            $cssCode = \preg_replace("!/\*[^*]*\*+([^/][^*]*\*+)*/!", "", $cssCode);
 
             // Remove tabs, espaços e novas linhas
-            $cssCode = preg_replace("/(\s\s+|\t|\n)/", " ", $cssCode);
+            $cssCode = \preg_replace("/(\s\s+|\t|\n)/", " ", $cssCode);
 
             // Remove espaços antes e depois de ";"
-            $cssCode = preg_replace(["(( )+{)", "({( )+)"], "{", $cssCode);
-            $cssCode = preg_replace(["(( )+})", "(}( )+)", "(;( )*})"], "}", $cssCode);
-            $cssCode = preg_replace(["(;( )+)", "(( )+;)"], ";", $cssCode);
+            $cssCode = \preg_replace(["(( )+{)", "({( )+)"], "{", $cssCode);
+            $cssCode = \preg_replace(["(( )+})", "(}( )+)", "(;( )*})"], "}", $cssCode);
+            $cssCode = \preg_replace(["(;( )+)", "(( )+;)"], ";", $cssCode);
 
             $NonSpaceAround = [":", ",", ">", "+"];
             foreach ($NonSpaceAround as $char) {
                 $arr = [" " . $char, $char . " "];
-                $cssCode = str_replace($arr, $char, $cssCode);
+                $cssCode = \str_replace($arr, $char, $cssCode);
             }
         }
 
-        return trim($cssCode);
+        return \trim($cssCode);
     }
 
 
@@ -73,7 +73,7 @@ class MinifyCSS
      */
     public static function minifyFile(string $absoluteSystemPathToFile) : string
     {
-        $cssCode = file_get_contents($absoluteSystemPathToFile);
+        $cssCode = \file_get_contents($absoluteSystemPathToFile);
         return self::minifyCode($cssCode);
     }
 
@@ -94,12 +94,12 @@ class MinifyCSS
         $str = "";
 
         foreach ($absoluteSystemPathToFiles as $file) {
-            if (file_exists($file) === true) {
+            if (\file_exists($file) === true) {
                 $str .= self::minifyFile($file) . "\n";
             }
         }
 
-        return trim($str);
+        return \trim($str);
     }
 
 
@@ -123,7 +123,7 @@ class MinifyCSS
     ) : bool {
 
         $minifiedCode = self::minifyFiles($absoluteSystemPathToFiles);
-        $r = file_put_contents($absoluteSystemPathToMinifiedFile, $minifiedCode);
+        $r = \file_put_contents($absoluteSystemPathToMinifiedFile, $minifiedCode);
 
         return ($r !== false);
     }

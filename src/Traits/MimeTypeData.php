@@ -779,8 +779,8 @@ trait MimeTypeData
      */
     public function retrieveFileMimeType(string $fileName) : string
     {
-        $ext = explode(".", $fileName);
-        $ext = strtolower($ext[count($ext) - 1]);
+        $ext = \explode(".", $fileName);
+        $ext = \strtolower($ext[\count($ext) - 1]);
         return ((isset($this->mimeTypeList[$ext]) === true) ? $this->mimeTypeList[$ext] : "application/octet-stream");
     }
 }

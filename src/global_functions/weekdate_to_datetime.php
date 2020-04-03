@@ -15,7 +15,9 @@ function weekdate_to_datetime($week) : ?\Datetime
     $r = \weekdate_to_array($week);
 
     if ($r !== null) {
-        $r = (new \DateTime())->setISODate($r["year"], $r["week"], $r["day"]);
+        $r = (new \DateTime())
+            ->setISODate($r["year"], $r["week"], $r["day"])
+            ->setTime(0, 0, 0);
     }
 
     return $r;

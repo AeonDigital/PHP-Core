@@ -147,7 +147,7 @@ class BasicCollection implements iBasicCollection
     protected function isImplement(string $interface) : bool
     {
         $iName = "AeonDigital\\Interfaces\\Collection\\" . $interface;
-        return in_array($iName, class_implements($this));
+        return \in_array($iName, \class_implements($this));
     }
 
 
@@ -291,7 +291,7 @@ class BasicCollection implements iBasicCollection
      */
     protected function useKey(string $key, $value = null) : string
     {
-        $useK = (($this->isCaseInsensitive() === false) ? $key : strtolower($key));
+        $useK = (($this->isCaseInsensitive() === false) ? $key : \mb_strtolower($key));
         if ($this->autoIncrementCollection === true) {
             foreach ($this->collection as $i => $v) {
                 if ($v["value"] === $useK) {
@@ -333,9 +333,9 @@ class BasicCollection implements iBasicCollection
     {
         $useVal = $value;
         if ($this->isProtected() === true) {
-            if (is_array($useVal) === true) {
-                $useVal = array_merge($useVal, []);
-            } elseif (is_object($useVal) === true) {
+            if (\is_array($useVal) === true) {
+                $useVal = \array_merge($useVal, []);
+            } elseif (\is_object($useVal) === true) {
                 $useVal = clone $useVal;
             }
         }
@@ -419,9 +419,9 @@ class BasicCollection implements iBasicCollection
             $useVal = $this->collection[$this->useKey($key)]["value"];
 
             if ($this->isProtected() === true) {
-                if (is_array($useVal) === true) {
-                    $useVal = array_merge($useVal, []);
-                } elseif (is_object($useVal) === true) {
+                if (\is_array($useVal) === true) {
+                    $useVal = \array_merge($useVal, []);
+                } elseif (\is_object($useVal) === true) {
                     $useVal = clone $useVal;
                 }
             }
@@ -626,7 +626,7 @@ class BasicCollection implements iBasicCollection
     protected function insertValues(array $values) : bool
     {
         $r = true;
-        if (count($values) > 0) {
+        if (\count($values) > 0) {
             foreach ($values as $k => $v) {
                 if ($r === true) {
                     $r = $this->set((string)$k, $v);
@@ -716,7 +716,7 @@ class BasicCollection implements iBasicCollection
      */
     protected function retrieveAllKeys() : array
     {
-        return array_keys($this->collection);
+        return \array_keys($this->collection);
     }
 
 
@@ -853,7 +853,7 @@ class BasicCollection implements iBasicCollection
      */
     public function count()
     {
-        return count($this->collection);
+        return \count($this->collection);
     }
 
 

@@ -30,7 +30,7 @@ function weekdate_to_array($week) : ?array
     if (\is_string($week) === true && $week !== "") {
         // Remove marcação "w", "W" e "-"
         // Parte a string em suas partes
-        $weekParts = array_filter(
+        $weekParts = \array_filter(
             \explode(
                 " ",
                 \str_replace(["w", "W", "-"], ["", "", " "], $week)

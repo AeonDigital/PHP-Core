@@ -371,7 +371,7 @@ class Tools
             if ($dec === 0.0) {
                 return ((string)$int);
             } else {
-                $dec = str_replace("0.", "", (string)$dec);
+                $dec = \str_replace("0.", "", (string)$dec);
                 return ((string)($int . "." . $dec));
             }
         }
@@ -467,8 +467,9 @@ class Tools
      *
      * O formato padrão é o **Y-m-d H:i:s**.
      *
-     * Se no objeto original não houver o valor ``time``, será assumido o horário
-     * atual do sistema.
+     * Se no objeto original não houver o valor ``time`` e em ``$format`` também
+     * não existir definições para horários (H | i | s) esta conversão assumirá
+     * o valor zero para cada uma destas posições.
      *
      * @param       string|int $o
      *              Objeto que será convertido.
@@ -493,23 +494,59 @@ class Tools
             if ((
                     \is_string($o) === true &&
                     \is_numeric($o) === true
-                ) || \is_float($o) === true)
-            {
+                ) ||
+                \is_float($o) === true
+            ) {
                 $o = (int)$o;
                 $oR = new \DateTime();
                 $oR->setTimestamp($o);
             }
             elseif (\is_string($o) === true) {
-                $l = \mb_strlen($o);
-                if ($format === "Y-m-d H:i:s" && $o !== 19) {
+                $o = \str_replace("/", "-", $o);
+                $format = \str_replace("/", "-", $format);
+
+
+                // Infere partes faltantes de datas cujo formatos são padrões
+                $l = \strlen($o);
+                if ($format === "Y-m-d H:i:s" && $l < 19) {
                     switch ($l) {
+                        case 4: $o .= "-01-01 00:00:00"; break;
+                        case 7: $o .= "-01 00:00:00"; break;
                         case 10: $o .= " 00:00:00"; break;
                         case 13: $o .= ":00:00"; break;
                         case 16: $o .= ":00"; break;
                     }
                 }
+                elseif ($format === "H:i:s" && $l < 8) {
+                    switch ($l) {
+                        case 2: $o .= ":00:00"; break;
+                        case 5: $o .= ":00"; break;
+                    }
+                }
+
+
                 $oR = \DateTime::createFromFormat($format, $o);
-                $oR = (($oR === false) ? null : $oR);
+                if ($oR === false) {
+                    $oR = null;
+                }
+                else {
+                    // Um objeto "DateTime" criado com o método "createFromFormat" preenche cada
+                    // componente da data com a informação do dia e hora atual.
+                    // Abaixo, todos os componentes não expressamente definidos em ``$format``
+                    // serão ``zerados`` conforme a data base 2000-01-01 00:00:00
+                    $oR->setDate(
+                        ((  \strpos($format, "Y") === false &&
+                            \strpos($format, "y") === false) ? 2000 : (int)$oR->format("Y")),
+                        ((\strpos($format, "m") === false) ? 1 : (int)$oR->format("m")),
+                        ((\strpos($format, "d") === false) ? 1 : (int)$oR->format("d"))
+                    );
+                    $oR->setTime(
+                        ((  \strpos($format, "H") === false &&
+                            \strpos($format, "h") === false) ? 0 : (int)$oR->format("H")),
+                        ((\strpos($format, "i") === false) ? 0 : (int)$oR->format("i")),
+                        ((\strpos($format, "s") === false) ? 0 : (int)$oR->format("s"))
+                    );
+                }
             }
             elseif (\is_a($o, "\DateTime") === true) {
                 $oR = $o;
@@ -588,11 +625,11 @@ class Tools
         if ($o === null) {
             $r = "null";
         }
-        elseif (is_a($o, "\DateTime") === true) {
-            $r = json_encode($o->format("Y-m-d H:i:s"));
+        elseif (\is_a($o, "\DateTime") === true) {
+            $r = \json_encode($o->format("Y-m-d H:i:s"));
         }
-        elseif (is_a($o, "AeonDigital\\Realtype") === true) {
-            $r = json_encode((string)$o);
+        elseif (\is_a($o, "AeonDigital\\Realtype") === true) {
+            $r = \json_encode((string)$o);
         }
         elseif (
             \is_bool($o) === true ||
@@ -601,7 +638,7 @@ class Tools
             \is_string($o) === true ||
             \is_array($o) === true
         ) {
-            $r = json_encode($o);
+            $r = \json_encode($o);
         }
 
         return $r;

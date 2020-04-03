@@ -35,7 +35,7 @@ function object_convert_values_to_html_entities($o)
             $nO = (string)$o;
         }
         else {
-            $nO = get_class($o);
+            $nO = \get_class($o);
         }
     }
     elseif (\is_string($o) === true) {

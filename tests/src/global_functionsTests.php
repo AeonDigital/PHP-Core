@@ -485,6 +485,21 @@ class global_functionsTest extends TestCase
 
 
 
+    public function test_method_mb_str_pattern_match()
+    {
+        $str = 'teste básico com "is pattern match"';
+        $pattern = "/básico/";
+        $result = mb_str_pattern_match($str, $pattern);
+        $this->assertEquals(true, $result);
+
+
+        $pattern = "/não/";
+        $result = mb_str_pattern_match($str, $pattern);
+        $this->assertEquals(false, $result);
+    }
+
+
+
     public function test_method_mb_str_pos_all()
     {
         $test = "1.000.111.333,00";

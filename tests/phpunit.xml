@@ -20,12 +20,14 @@
             <file>src/global_functionsTests.php</file>
             <file>src/RealTypeTests.php</file>
 
+
             <file>src/Tools/ToolsTests.php</file>
             <file>src/Tools/ImageTests.php</file>
             <file>src/Tools/JSONTests.php</file>
             <file>src/Tools/MinifyCSSTest.php</file>
             <file>src/Tools/MinifyJSTest.php</file>
             <file>src/Tools/ZipTest.php</file>
+
 
             <file>src/SimpleType/stBoolTest.php</file>
             <file>src/SimpleType/stByteTest.php</file>
@@ -38,9 +40,11 @@
             <file>src/SimpleType/stShortTest.php</file>
             <file>src/SimpleType/stStringTest.php</file>
 
+
             <file>src/Traits/HTTPRawStatusCodeTest.php</file>
             <file>src/Traits/MimeTypeDataTest.php</file>
             <file>src/Traits/ParseQualityHeadersTest.php</file>
+
 
             <file>src/Collection/BasicCollectionTest.php</file>
             <file>src/Collection/ProtectedCollectionTest.php</file>
@@ -49,6 +53,39 @@
             <file>src/Collection/CaseInsensitiveCollectionTest.php</file>
             <file>src/Collection/CollectionTest.php</file>
             <file>src/Collection/TypeListTest.php</file>
+
+
+            <file>src/DataFormat/patterns/brasil/CNPJTest.php</file>
+            <file>src/DataFormat/patterns/brasil/CPFTest.php</file>
+            <file>src/DataFormat/patterns/brasil/NumberTest.php</file>
+            <file>src/DataFormat/patterns/brasil/PhoneTest.php</file>
+            <file>src/DataFormat/patterns/brasil/ZipCodeTest.php</file>
+            <file>src/DataFormat/patterns/brasil/dates/DateTest.php</file>
+            <file>src/DataFormat/patterns/brasil/dates/DateTimeTest.php</file>
+            <file>src/DataFormat/patterns/brasil/dates/MonthTest.php</file>
+            <file>src/DataFormat/patterns/brasil/dates/WeekTest.php</file>
+
+
+            <file>src/DataFormat/patterns/eua/NumberTest.php</file>
+            <file>src/DataFormat/patterns/eua/PhoneTest.php</file>
+            <file>src/DataFormat/patterns/eua/ZipCodeTest.php</file>
+            <file>src/DataFormat/patterns/eua/dates/DateTest.php</file>
+            <file>src/DataFormat/patterns/eua/dates/DateTimeTest.php</file>
+
+
+            <file>src/DataFormat/patterns/world/ColorTest.php</file>
+            <file>src/DataFormat/patterns/world/EmailTest.php</file>
+            <file>src/DataFormat/patterns/world/LocaleTest.php</file>
+            <file>src/DataFormat/patterns/world/NumberTest.php</file>
+            <file>src/DataFormat/patterns/world/PasswordTest.php</file>
+            <file>src/DataFormat/patterns/world/URLTest.php</file>
+            <file>src/DataFormat/patterns/world/dates/DateTest.php</file>
+            <file>src/DataFormat/patterns/world/dates/DateTimeTest.php</file>
+            <file>src/DataFormat/patterns/world/dates/DateTimeGlobalZoneTest.php</file>
+            <file>src/DataFormat/patterns/world/dates/DateTimeLocalTest.php</file>
+            <file>src/DataFormat/patterns/world/dates/MonthTest.php</file>
+            <file>src/DataFormat/patterns/world/dates/TimeTest.php</file>
+            <file>src/DataFormat/patterns/world/dates/WeekTest.php</file>
         </testsuite>
     </testsuites>
     <filter>

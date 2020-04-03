@@ -129,19 +129,19 @@ class Image
 
 
 
-        $ext = strtolower(strrchr($absoluteSystemPathToOriginalImage, "."));
+        $ext = \strtolower(\strrchr($absoluteSystemPathToOriginalImage, "."));
         switch ($ext) {
             case ".jpeg":
             case ".jpg":
-                $imageOriginal = @imagecreatefromjpeg($absoluteSystemPathToOriginalImage);
+                $imageOriginal = @\imagecreatefromjpeg($absoluteSystemPathToOriginalImage);
                 break;
 
             case ".gif":
-                $imageOriginal = @imagecreatefromgif($absoluteSystemPathToOriginalImage);
+                $imageOriginal = @\imagecreatefromgif($absoluteSystemPathToOriginalImage);
                 break;
 
             case ".png":
-                $imageOriginal = @imagecreatefrompng($absoluteSystemPathToOriginalImage);
+                $imageOriginal = @\imagecreatefrompng($absoluteSystemPathToOriginalImage);
                 break;
 
             default:
@@ -158,8 +158,8 @@ class Image
             $msg = "Could not load the target image. File \"" . $absoluteSystemPathToOriginalImage . "\" .";
             throw new \Exception($msg);
         } else {
-            $imageOriginalWidth = imagesx($imageOriginal);
-            $imageOriginalHeight = imagesy($imageOriginal);
+            $imageOriginalWidth = \imagesx($imageOriginal);
+            $imageOriginalHeight = \imagesy($imageOriginal);
 
             $imgMaxWidth = ($imgMaxWidth === null) ? $imageOriginalWidth : $imgMaxWidth;
             $imgMaxHeight = ($imgMaxHeight === null) ? $imageOriginalHeight : $imgMaxHeight;
@@ -212,8 +212,8 @@ class Image
 
 
             // Recria a imagem com as dimensões calculadas
-            $imageFinal = imagecreatetruecolor($imageFinalWidth, $imageFinalHeight);
-            imagecopyresampled(
+            $imageFinal = \imagecreatetruecolor($imageFinalWidth, $imageFinalHeight);
+            \imagecopyresampled(
                 $imageFinal,
                 $imageOriginal,
                 0,
@@ -232,8 +232,8 @@ class Image
             // Se for para "cropar"
             if ($imgCrop === true) {
                 // Efetua o corte.
-                $imageCropped = imagecreatetruecolor($imgCropWidth, $imgCropHeight);
-                imagecopyresampled(
+                $imageCropped = \imagecreatetruecolor($imgCropWidth, $imgCropHeight);
+                \imagecopyresampled(
                     $imageCropped,
                     $imageFinal,
                     0,
@@ -249,15 +249,15 @@ class Image
                 switch ($ext) {
                     case ".jpeg":
                     case ".jpg":
-                        imagejpeg($imageCropped, $absoluteSystemPathToNewImage, 100);
+                        \imagejpeg($imageCropped, $absoluteSystemPathToNewImage, 100);
                         break;
 
                     case ".png":
-                        imagepng($imageCropped, $absoluteSystemPathToNewImage);
+                        \imagepng($imageCropped, $absoluteSystemPathToNewImage);
                         break;
 
                     case ".gif":
-                        imagegif($imageCropped, $absoluteSystemPathToNewImage);
+                        \imagegif($imageCropped, $absoluteSystemPathToNewImage);
                         break;
                 }
 
@@ -272,9 +272,9 @@ class Image
 
             // Verifica se a extenção do nome da imagem final confere com a original
             // altera em caso de discordancia.
-            $nExt = strtolower(strrchr($absoluteSystemPathToNewImage, "."));
+            $nExt = \strtolower(\strrchr($absoluteSystemPathToNewImage, "."));
             if ($nExt !== $ext) {
-                $absoluteSystemPathToNewImage = str_replace($nExt, $ext, $absoluteSystemPathToNewImage);
+                $absoluteSystemPathToNewImage = \str_replace($nExt, $ext, $absoluteSystemPathToNewImage);
             }
 
 
@@ -283,25 +283,25 @@ class Image
             switch ($ext) {
                 case ".jpg":
                 case ".jpeg":
-                    imagejpeg($imageFinal, $absoluteSystemPathToNewImage, 90);
+                    \imagejpeg($imageFinal, $absoluteSystemPathToNewImage, 90);
                     break;
 
                 case ".gif":
-                    imagegif($imageFinal, $absoluteSystemPathToNewImage);
+                    \imagegif($imageFinal, $absoluteSystemPathToNewImage);
                     break;
 
                 case ".png":
-                    imagepng($imageFinal, $absoluteSystemPathToNewImage, 0);
+                    \imagepng($imageFinal, $absoluteSystemPathToNewImage, 0);
                     break;
             }
 
 
-            imagedestroy($imageOriginal);
-            imagedestroy($imageFinal);
+            \imagedestroy($imageOriginal);
+            \imagedestroy($imageFinal);
 
 
             // Testa se a imagem nova foi gerada com sucesso
-            $r = file_exists($absoluteSystemPathToNewImage);
+            $r = \file_exists($absoluteSystemPathToNewImage);
         }
 
 

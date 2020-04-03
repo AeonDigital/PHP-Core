@@ -339,12 +339,13 @@ class ToolsTests extends TestCase
     {
         date_default_timezone_set("America/Sao_Paulo");
 
-        $convertTrue = ["0", "1980-05-17 09:45", new \DateTime("1980-05-17 9:45:15"),];
-        $convertFormat = ["", "Y-m-d H:i", ""];
+        $convertTrue = ["0", "1980-05-17 09:45", new \DateTime("1980-05-17 9:45:15"), "17-05-1980"];
+        $convertFormat = ["", "Y-m-d H:i", "", "d-m-Y"];
         $resultConvert = [
             ["1969-12-31", null],
             ["1980-05-17", "09:45:00"],
             ["1980-05-17", "09:45:15"],
+            ["1980-05-17", "00:00:00"]
         ];
         $convertFalse = [
             undefined, "", new \stdClass()
@@ -357,7 +358,7 @@ class ToolsTests extends TestCase
             $dTemp = Tools::toDateTime($convertTrue[$i], $convertFormat[$i]);
             $this->assertEquals($dTemp->format("Y-m-d"), $resultConvert[$i][0]);
             if ($resultConvert[$i][1] !== null) {
-                $this->assertEquals($dTemp->format("h:i:s"), $resultConvert[$i][1]);
+                $this->assertEquals($dTemp->format("H:i:s"), $resultConvert[$i][1]);
             }
         }
 

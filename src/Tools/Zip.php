@@ -49,17 +49,17 @@ class Zip
         $targetDirs = [];
 
 
-        for ($i = 0; $i < count($absoluteSystemPaths); $i++) {
+        for ($i = 0; $i < \count($absoluteSystemPaths); $i++) {
             // Corrige o endereço do recurso alvo conforme o padrão do sistema
-            $sysPath = to_system_path($absoluteSystemPaths[$i]);
+            $sysPath = \to_system_path($absoluteSystemPaths[$i]);
 
             // Se o arquivo não existir, encerra o processamento
-            if (file_exists($sysPath) === false) {
+            if (\file_exists($sysPath) === false) {
                 $isOK = false;
                 break;
             } else {
                 // Se for um arquivo...
-                if (is_file($sysPath) === true) {
+                if (\is_file($sysPath) === true) {
                     $targetFiles[] = $sysPath;
                 } // Senão, se for um diretório...
                 else {
@@ -76,21 +76,21 @@ class Zip
 
 
             if ($zip->open($absoluteSystemPathToFile, \ZIPARCHIVE::CREATE | \ZIPARCHIVE::OVERWRITE) === true) {
-                $absoluteSystemPaths = array_merge($targetFiles, $targetDirs);
+                $absoluteSystemPaths = \array_merge($targetFiles, $targetDirs);
 
 
                 // Para cada item que deve ser comprimido...
                 foreach ($absoluteSystemPaths as $key => $resource) {
-                    $rParts = explode(DS, $resource);
-                    $rName = $rParts[count($rParts) - 1];
+                    $rParts = \explode(DS, $resource);
+                    $rName = $rParts[\count($rParts) - 1];
 
 
                     // Tratando-se de um arquivo normal...
-                    if (is_file($resource) === true) {
+                    if (\is_file($resource) === true) {
                         $zip->addFile($resource, $rName);
                     } else {
                         $useContainer = "";
-                        if (count($absoluteSystemPaths) > 1) {
+                        if (\count($absoluteSystemPaths) > 1) {
                             $useContainer = $rName;
                             $zip->addEmptyDir($useContainer);
                             $useContainer .= DS;
@@ -100,12 +100,12 @@ class Zip
                         $childResources = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($resource), \RecursiveIteratorIterator::SELF_FIRST);
                         foreach ($childResources as $child) {
                             $childName = (string)$child;
-                            if (mb_str_ends_with($childName, ".") === false &&
-                                mb_str_ends_with($childName, "..") === false
+                            if (\mb_str_ends_with($childName, ".") === false &&
+                                \mb_str_ends_with($childName, "..") === false
                             ) {
-                                $recName = $useContainer . str_replace($resource . DS, "", $childName);
+                                $recName = $useContainer . \str_replace($resource . DS, "", $childName);
 
-                                if (is_dir($childName) === true) {
+                                if (\is_dir($childName) === true) {
                                     $zip->addEmptyDir($recName);
                                 } else {
                                     $zip->addFile($childName, $recName);
@@ -143,10 +143,10 @@ class Zip
      */
     public static function pack(string $absoluteSystemPaths, ?string $absoluteSystemPathToFile = null) : bool
     {
-        $useTgtPath = (($absoluteSystemPathToFile === null) ? dirname(to_system_path($absoluteSystemPaths)) : $absoluteSystemPathToFile);
-        $useTgtFileName = basename(to_system_path($absoluteSystemPaths));
+        $useTgtPath = (($absoluteSystemPathToFile === null) ? \dirname(\to_system_path($absoluteSystemPaths)) : $absoluteSystemPathToFile);
+        $useTgtFileName = \basename(\to_system_path($absoluteSystemPaths));
         $useTgtPathToFile = $useTgtPath . DS . $useTgtFileName;
-        if (strpos($useTgtPathToFile, ".zip") === false) {
+        if (\strpos($useTgtPathToFile, ".zip") === false) {
             $useTgtPathToFile .= ".zip";
         }
 
@@ -177,21 +177,21 @@ class Zip
         $isOK = false;
 
         // Apenas se o arquivo existir...
-        if (is_file($absoluteSystemPathToFile) === true) {
+        if (\is_file($absoluteSystemPathToFile) === true) {
 
             // Caso o destino da versão descompactada não seja definida...
             $useTargetDir = $absoluteSystemPathToDir;
             if ($useTargetDir === null) {
                 $countDir = 0;
 
-                $fileInfo = pathinfo($absoluteSystemPathToFile);
+                $fileInfo = \pathinfo($absoluteSystemPathToFile);
                 $fName = $fileInfo["filename"];
                 $dName = $fileInfo["dirname"];
 
                 $baseDirName = $dName . DS . $fName . "_unpacked";
                 $useTargetDir = $baseDirName;
 
-                while (file_exists($useTargetDir) === true) {
+                while (\file_exists($useTargetDir) === true) {
                     $countDir++;
                     $useTargetDir = $baseDirName . "_" . $countDir;
                 }
@@ -201,13 +201,13 @@ class Zip
             $zip = new \ZipArchive();
 
             if ($zip->open($absoluteSystemPathToFile) === true) {
-                $useTargetDir = to_system_path($useTargetDir);
-                $existLocal = (file_exists($useTargetDir) && is_dir($useTargetDir));
+                $useTargetDir = \to_system_path($useTargetDir);
+                $existLocal = (\file_exists($useTargetDir) && \is_dir($useTargetDir));
 
                 // Se o caminho final não existir...
                 if ($existLocal === false) {
-                    if (file_exists($useTargetDir) === false) {
-                        $existLocal = mkdir($useTargetDir, 0700);
+                    if (\file_exists($useTargetDir) === false) {
+                        $existLocal = \mkdir($useTargetDir, 0700);
                     }
                 }
 
@@ -252,17 +252,17 @@ class Zip
 
 
         // Apenas se o arquivo alvo existir...
-        if (is_file($absoluteSystemPathToFile) === true) {
+        if (\is_file($absoluteSystemPathToFile) === true) {
             $zip = new \ZipArchive();
 
             if ($zip->open($absoluteSystemPathToFile) === true) {
                 // Cria um diretório temporário para explorar o conteúdo do zip
-                $tempDirName = pathinfo($absoluteSystemPathToFile, PATHINFO_FILENAME) . "_temp";
-                $tempDirName = pathinfo($absoluteSystemPathToFile, PATHINFO_DIRNAME) . DS . $tempDirName;
-                $tempDirName = to_system_path($tempDirName);
+                $tempDirName = \pathinfo($absoluteSystemPathToFile, PATHINFO_FILENAME) . "_temp";
+                $tempDirName = \pathinfo($absoluteSystemPathToFile, PATHINFO_DIRNAME) . DS . $tempDirName;
+                $tempDirName = \to_system_path($tempDirName);
 
 
-                if (mkdir($tempDirName, 0700, true) === true) {
+                if (\mkdir($tempDirName, 0700, true) === true) {
                     // Extrai todo o conteúdo para o diretório temporário.
                     if ($zip->extractTo($tempDirName) === true) {
                         $zip->close();
@@ -275,7 +275,7 @@ class Zip
                             $absolutePathToResource = $tempDirName . DS . $key;
 
                             // Se algum dos recursos alvo não existir...
-                            if (file_exists($absolutePathToResource) === false) {
+                            if (\file_exists($absolutePathToResource) === false) {
                                 $allResourcesExists = false;
 
                                 $msg = "Request resource not found : \"" . $absoluteSystemPathToFile . DS . $key . "\"";
@@ -297,28 +297,28 @@ class Zip
 
 
                                 // Se for um arquivo, adiciona o nome do recurso ao caminho
-                                if (is_file($absolutePathToTempResource) === true) {
-                                    $absolutePathToFinalResource .= DS . pathinfo($key, PATHINFO_BASENAME);
+                                if (\is_file($absolutePathToTempResource) === true) {
+                                    $absolutePathToFinalResource .= DS . \pathinfo($key, PATHINFO_BASENAME);
                                 } else {
                                     $absolutePathToFinalResource .= DS . $key;
                                 }
 
 
                                 // Se o caminho ainda não existe...
-                                $tgtPathToFinalResource = dirname($absolutePathToFinalResource);
-                                if (is_dir($tgtPathToFinalResource) === false) {
-                                    mkdir($tgtPathToFinalResource, 0700, true);
+                                $tgtPathToFinalResource = \dirname($absolutePathToFinalResource);
+                                if (\is_dir($tgtPathToFinalResource) === false) {
+                                    \mkdir($tgtPathToFinalResource, 0700, true);
                                 }
 
-                                if (is_dir($absolutePathToTempResource) === true) {
-                                    if (dir_copy($absolutePathToTempResource, $absolutePathToFinalResource) === false) {
+                                if (\is_dir($absolutePathToTempResource) === true) {
+                                    if (\dir_copy($absolutePathToTempResource, $absolutePathToFinalResource) === false) {
                                         // @codeCoverageIgnoreStart
                                         $isOK = false;
                                         // @codeCoverageIgnoreEnd
                                         break;
                                     }
                                 } else {
-                                    if (copy($absolutePathToTempResource, $absolutePathToFinalResource) === false) {
+                                    if (\copy($absolutePathToTempResource, $absolutePathToFinalResource) === false) {
                                         // @codeCoverageIgnoreStart
                                         $isOK = false;
                                         // @codeCoverageIgnoreEnd
@@ -333,7 +333,7 @@ class Zip
 
 
                     // Remove o diretório temporário e todo seu conteúdo
-                    dir_deltree($tempDirName);
+                    \dir_deltree($tempDirName);
                 }
             }
         }

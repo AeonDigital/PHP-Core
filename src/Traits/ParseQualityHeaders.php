@@ -69,11 +69,11 @@ trait ParseQualityHeaders
             $qualitIncreasse = 100;
 
             foreach ($headers as $rawPart) {
-                $rawPart = str_replace("; q=", ";q=", $rawPart);
-                list($value, $quality) = array_merge(explode(";q=", $rawPart), [1]);
+                $rawPart = \str_replace("; q=", ";q=", $rawPart);
+                list($value, $quality) = \array_merge(\explode(";q=", $rawPart), [1]);
 
-                $value = trim($value);
-                $quality = trim((string)$quality);
+                $value = \trim($value);
+                $quality = \trim((string)$quality);
 
                 $indexQuality[] = (float)$quality + $qualitIncreasse;
                 $r[] = ["value" => $value, "quality" => (float)$quality];
@@ -81,7 +81,7 @@ trait ParseQualityHeaders
                 $qualitIncreasse--;
             }
 
-            array_multisort($indexQuality, SORT_DESC, $r);
+            \array_multisort($indexQuality, SORT_DESC, $r);
         }
 
         return $r;
@@ -124,7 +124,7 @@ trait ParseQualityHeaders
 
         if ($headers !== null && $headers !== "") {
             // Separa os valores do header em seus componentes fundamentais
-            $splitedHeader = explode(",", $headers);
+            $splitedHeader = \explode(",", $headers);
             $r = $this->parseArrayOfQualityHeaders($splitedHeader);
         }
 
@@ -168,26 +168,26 @@ trait ParseQualityHeaders
     {
         $r = null;
 
-        if ($headers !== null && count($headers) > 0) {
-            $headers = $this->parseRawLineOfQualityHeaders(implode(",", $headers));
+        if ($headers !== null && \count($headers) > 0) {
+            $headers = $this->parseRawLineOfQualityHeaders(\implode(",", $headers));
 
             $locales = [];
             $languages = [];
 
             $lang = [];
             foreach ($headers as $k => $val) {
-                $uVal = trim($val["value"]);
+                $uVal = \trim($val["value"]);
 
-                if (strlen($uVal) === 5) {
-                    $locales[] = strtolower($uVal);
-                    $lang[] = strtolower(substr($uVal, 0, 2));
-                } elseif (strlen($uVal) === 2) {
-                    $languages[] = strtolower($uVal);
+                if (\strlen($uVal) === 5) {
+                    $locales[] = \strtolower($uVal);
+                    $lang[] = \strtolower(\substr($uVal, 0, 2));
+                } elseif (\strlen($uVal) === 2) {
+                    $languages[] = \strtolower($uVal);
                 }
             }
 
-            $languages = array_merge($languages, $lang);
-            $languages = array_unique($languages);
+            $languages = \array_merge($languages, $lang);
+            $languages = \array_unique($languages);
 
             $r = [
                 "locales" => $locales,
@@ -231,7 +231,7 @@ trait ParseQualityHeaders
         $r = null;
 
         if ($headers !== null && $headers !== "") {
-            return $this->parseArrayOfHeaderAcceptLanguage(array_map("trim", explode(",", $headers)));
+            return $this->parseArrayOfHeaderAcceptLanguage(\array_map("trim", \explode(",", $headers)));
         }
 
         return $r;

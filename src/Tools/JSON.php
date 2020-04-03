@@ -47,16 +47,16 @@ class JSON
     {
         $rJSON = null;
 
-        if (file_exists($absoluteSystemPathToFile) === true) {
-            $JSON = file_get_contents($absoluteSystemPathToFile);
+        if (\file_exists($absoluteSystemPathToFile) === true) {
+            $JSON = \file_get_contents($absoluteSystemPathToFile);
 
             // Tenta converter o objeto tal qual ele se apresenta
-            $rJSON = json_decode($JSON, $assoc);
+            $rJSON = \json_decode($JSON, $assoc);
             if ($rJSON === null) {
                 // Remove comentários, se houverem
                 $commentPattern = "/(?:(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)|(?:(?<!\:|\\\|\')\/\/.*))/";
-                $JSON = preg_replace($commentPattern, "", $JSON);
-                $rJSON = json_decode($JSON, $assoc);
+                $JSON = \preg_replace($commentPattern, "", $JSON);
+                $rJSON = \json_decode($JSON, $assoc);
             }
         }
 
@@ -85,8 +85,8 @@ class JSON
 
         $endLineLevel = null;
 
-        $utf8split = preg_split('//u', $strJSON, -1, PREG_SPLIT_NO_EMPTY);
-        for ($i = 0; $i < count($utf8split); $i++) {
+        $utf8split = \preg_split('//u', $strJSON, -1, PREG_SPLIT_NO_EMPTY);
+        for ($i = 0; $i < \count($utf8split); $i++) {
             $c = $utf8split[$i];
             $newLineLevel = null;
             $post = "";
@@ -136,7 +136,7 @@ class JSON
 
 
             if ($newLineLevel !== null) {
-                $strReturn .= "\n" . str_repeat("\t", $newLineLevel);
+                $strReturn .= "\n" . \str_repeat("\t", $newLineLevel);
             }
 
             $strReturn .= $c . $post;
@@ -170,15 +170,15 @@ class JSON
         $strJSON = $JSON;
 
         // Se o objeto passado não for uma string, converte-o
-        if (is_string($JSON) === false) {
-            $strJSON = json_encode($JSON, $options);
+        if (\is_string($JSON) === false) {
+            $strJSON = \json_encode($JSON, $options);
         }
 
         // Identa corretamente o objeto JSON
         $strJSON = self::indent($strJSON);
 
         // Salva-o no local definido.
-        $r = file_put_contents($absoluteSystemPathToFile, $strJSON);
+        $r = \file_put_contents($absoluteSystemPathToFile, $strJSON);
 
         return (($r === false) ? false : true);
     }

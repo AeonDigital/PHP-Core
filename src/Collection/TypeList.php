@@ -122,7 +122,7 @@ class TypeList extends Collection implements iTypeList
 
         $this->collectionType = $type;
         $this->collectionModelType = $this->generateCollectionModelType($useType);
-        $this->isCollectionNullable = (strpos($this->collectionModelType["structureType"], "nullable") === 0);
+        $this->isCollectionNullable = (\strpos($this->collectionModelType["structureType"], "nullable") === 0);
 
         parent::__construct($initialValues, $autoincrement);
     }
@@ -173,7 +173,7 @@ class TypeList extends Collection implements iTypeList
 
 
         if ($structure["dataType"] === "type") {
-            $nullable = (strpos($structure["structureType"], "nullable") === 0);
+            $nullable = (\strpos($structure["structureType"], "nullable") === 0);
 
 
             if ($nullable === true && $value === null) {
@@ -186,27 +186,27 @@ class TypeList extends Collection implements iTypeList
 
                     case "?bool":
                     case "bool":
-                        $r = (is_bool($value) === true);
+                        $r = (\is_bool($value) === true);
                         break;
 
                     case "?int":
                     case "int":
-                        $r = (is_int($value) === true);
+                        $r = (\is_int($value) === true);
                         break;
 
                     case "?float":
                     case "float":
-                        $r = (is_float($value) === true);
+                        $r = (\is_float($value) === true);
                         break;
 
                     case "?string":
                     case "string":
-                        $r = (is_string($value) === true);
+                        $r = (\is_string($value) === true);
                         break;
 
                     default:
                         $cname = $structure["internalStructure"];
-                        $r = (is_a($value, $cname) === true || in_array($cname, class_implements($value)) === true);
+                        $r = (\is_a($value, $cname) === true || \in_array($cname, \class_implements($value)) === true);
                         break;
                 }
 
@@ -216,9 +216,9 @@ class TypeList extends Collection implements iTypeList
             }
         } else {
             if ($structure["dataType"] === "array-of-types") {
-                if (strpos($structure["structureType"], "nullable") === 0 && $value === null) {
+                if (\strpos($structure["structureType"], "nullable") === 0 && $value === null) {
                     $r = true;
-                } elseif (is_array($value) === true && $this->isAssoc($value) === false) {
+                } elseif (\is_array($value) === true && $this->isAssoc($value) === false) {
                     $childModels = $structure["childModel"];
 
                     foreach ($value as $i => $v) {
@@ -229,14 +229,14 @@ class TypeList extends Collection implements iTypeList
                     }
                 }
             } elseif ($structure["dataType"] === "array-assoc") {
-                if (strpos($structure["structureType"], "nullable") === 0 && $value === null) {
+                if (\strpos($structure["structureType"], "nullable") === 0 && $value === null) {
                     $r = true;
                 } elseif ($this->isAssoc($value) === true) {
                     $childModels = $structure["childModel"];
-                    $key = array_keys($value)[0];
+                    $key = \array_keys($value)[0];
                     $val = $value[$key];
 
-                    if (strpos($structure["structureType"], "nullable") === 0 && $val === null) {
+                    if (\strpos($structure["structureType"], "nullable") === 0 && $val === null) {
                         $r = true;
                     } else {
                         $r = ($this->validateCollectionTypeValue($childModels[0], $key) === true &&
@@ -266,8 +266,8 @@ class TypeList extends Collection implements iTypeList
      */
     protected function isAssoc($o) : bool
     {
-        if (is_array($o) && $o !== []) {
-            return array_keys($o) !== range(0, count($o) - 1);
+        if (\is_array($o) && $o !== []) {
+            return \array_keys($o) !== \range(0, \count($o) - 1);
         }
         return false;
     }
@@ -287,11 +287,11 @@ class TypeList extends Collection implements iTypeList
      */
     protected function normalizeTypeBeforeParse(string $type) : string
     {
-        $type = trim(str_replace(" ", "", $type));
+        $type = \trim(\str_replace(" ", "", $type));
 
         $l = -1;
         $parseType = "";
-        $arrType = str_split($type);
+        $arrType = \str_split($type);
         foreach ($arrType as $c) {
             if ($c === "[") {
                 $l++;
@@ -354,7 +354,7 @@ class TypeList extends Collection implements iTypeList
                 $structure["childModel"] = [];
                 $nLvl = $lvl + 1;
 
-                $splitTypes = explode("<$lvl>", $structure["internalStructure"]);
+                $splitTypes = \explode("<$lvl>", $structure["internalStructure"]);
 
                 foreach ($splitTypes as $tp) {
                     $structure["childModel"][] = $this->generateCollectionModelType($tp, $nLvl);
@@ -363,7 +363,7 @@ class TypeList extends Collection implements iTypeList
                 $structure["childModel"] = [];
                 $nLvl = $lvl + 1;
 
-                $splitKeyValue = explode("=>", $structure["internalStructure"], 2);
+                $splitKeyValue = \explode("=>", $structure["internalStructure"], 2);
                 $key = $splitKeyValue[0];
                 $value = $splitKeyValue[1];
 
@@ -413,9 +413,9 @@ class TypeList extends Collection implements iTypeList
         if ($structure === "mixed" || $structure === "?mixed") {
             $structureType .= "nullable-";
             $structure = "mixed";
-        } elseif (strpos($structure, "?") === 0) {
+        } elseif (\strpos($structure, "?") === 0) {
             $structureType .= "nullable-";
-            $structure = substr($structure, 1, (strlen($structure) - 1));
+            $structure = \substr($structure, 1, (\strlen($structure) - 1));
         }
 
 
@@ -426,7 +426,7 @@ class TypeList extends Collection implements iTypeList
             $structureType .= "array";
 
             // Remove os "[]"
-            $structure = substr($structure, 1, (strlen($structure) - 2));
+            $structure = \substr($structure, 1, (\strlen($structure) - 2));
             if ($this->isStructureASingleType($structure) === true ||
                 $this->isStructureAnArrayOfTypes($structure, $lvl) === true) {
                 $dataType = "array-of-types";
@@ -465,7 +465,7 @@ class TypeList extends Collection implements iTypeList
      */
     protected function isStructureAnCommomArray(string $structure) : bool
     {
-        return (strpos($structure, "[") === 0 && strrpos($structure, "]") === (strlen($structure) - 1));
+        return (\strpos($structure, "[") === 0 && \strrpos($structure, "]") === (\strlen($structure) - 1));
     }
     /**
      * Identifica se estrutura de dados é um ``array`` associativo.
@@ -491,8 +491,8 @@ class TypeList extends Collection implements iTypeList
      */
     protected function isStructureAnAssocArray(string $structure, int $lvl) : bool
     {
-        $arrow = strpos($structure, "=>");
-        $comma = strpos($structure, "<$lvl>");
+        $arrow = \strpos($structure, "=>");
+        $comma = \strpos($structure, "<$lvl>");
 
         return (($arrow === false) ? false : (($comma === false && $arrow !== false) ? true : ($arrow < $comma)));
     }
@@ -518,8 +518,8 @@ class TypeList extends Collection implements iTypeList
      */
     protected function isStructureAnArrayOfTypes(string $structure, int $lvl) : bool
     {
-        $arrow = strpos($structure, "=>");
-        $comma = strpos($structure, "<$lvl>");
+        $arrow = \strpos($structure, "=>");
+        $comma = \strpos($structure, "<$lvl>");
 
         if ($comma === false) {
             return false;
@@ -553,7 +553,7 @@ class TypeList extends Collection implements iTypeList
      */
     protected function isStructureASingleType(string $structure) : bool
     {
-        return (preg_match("/[=,\[\]><]/", $structure) === 0);
+        return (\preg_match("/[=,\[\]><]/", $structure) === 0);
     }
     /**
      * Verifica se um tipo específico de dados é válido.
@@ -591,8 +591,8 @@ class TypeList extends Collection implements iTypeList
                 break;
 
             default:
-                $checkType = str_replace("?", "", $type);
-                $r = ($isKey === false && (class_exists($checkType) || interface_exists($checkType)));
+                $checkType = \str_replace("?", "", $type);
+                $r = ($isKey === false && (\class_exists($checkType) || \interface_exists($checkType)));
                 break;
         }
 
