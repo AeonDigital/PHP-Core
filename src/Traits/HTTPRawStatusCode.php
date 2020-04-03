@@ -45,7 +45,7 @@ trait HTTPRawStatusCode
      *
      * @see         http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
      */
-    static protected $rawStatusCode = [
+    static protected array $rawStatusCode = [
         // 1xx : Informativo
         100 => "Continue",
         101 => "Switching Protocols",

@@ -35,7 +35,7 @@ class TypeList extends Collection implements iTypeList
      *
      * @var         array
      */
-    private $collectionModelType = null;
+    private array $collectionModelType = [];
 
 
 
@@ -47,7 +47,7 @@ class TypeList extends Collection implements iTypeList
      *
      * @var         bool
      */
-    private $isCollectionNullable = true;
+    private bool $isCollectionNullable = true;
     /**
      * Indica se a coleção aceita valores ``null`` para seus pares de chave/valor.
      *
@@ -68,7 +68,7 @@ class TypeList extends Collection implements iTypeList
      *
      * @var         string
      */
-    private $collectionType = "mixed";
+    private string $collectionType = "mixed";
     /**
      * Retorna o tipo de dado que é aceito para o valor dos itens da coleção.
      *

@@ -45,7 +45,7 @@ trait MimeTypeData
      *
      * @see         https://www.freeformatter.com/mime-types-list.html
      */
-    protected $mimeTypeList = [
+    protected array $mimeTypeList = [
         "123" => "application/vnd.lotus-1-2-3",
         "3dml" => "text/vnd.in3d.3dml",
         "3g2" => "video/3gpp2",
@@ -749,7 +749,7 @@ trait MimeTypeData
      *
      * @var         array
      */
-    protected $responseMimeTypes = [
+    protected array $responseMimeTypes = [
         "txt" => "text/plain",
 
         "html" => "text/html",
