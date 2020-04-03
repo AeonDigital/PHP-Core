@@ -134,7 +134,7 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
             }
             $aux = $aux[$p];
         } else {
-            $aux = null;
+            $aux = "Y-m-d H:i:s";
         }
 
         if (\is_a($v, "\DateTime") === true) {
