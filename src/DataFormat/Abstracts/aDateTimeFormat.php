@@ -128,13 +128,10 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
     protected static function formatDateTime($v, ?array $aux = null, string $dateMask) : ?string
     {
         if (\is_array($aux) === true && \count($aux) === 1) {
-            $p = 0;
-            if (\array_is_assoc($aux) === true) {
-                $p = "DateMask";
-            }
+            $p = (\array_is_assoc($aux) === true) ? "DateMask" : 0;
             $aux = $aux[$p];
         } else {
-            $aux = "Y-m-d H:i:s";
+            $aux = null;
         }
 
         if (\is_a($v, "\DateTime") === true) {
