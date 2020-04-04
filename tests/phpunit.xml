@@ -86,6 +86,19 @@
             <file>src/DataFormat/patterns/world/dates/MonthTest.php</file>
             <file>src/DataFormat/patterns/world/dates/TimeTest.php</file>
             <file>src/DataFormat/patterns/world/dates/WeekTest.php</file>
+
+
+            <file>src/DataModel/t01FieldTest.php</file>
+            <file>src/DataModel/t02FieldCollectionTest.php</file>
+            <file>src/DataModel/t03ModelTest.php</file>
+            <file>src/DataModel/t04ModelFactory_SimpleFieldsTest.php</file>
+            <file>src/DataModel/t05FieldModelTest.php</file>
+            <file>src/DataModel/t06FieldModelCollectionTest.php</file>
+            <file>src/DataModel/t07ComplexFieldModelCollectionTest.php</file>
+
+
+            <file>src/Stream/StreamTest.php</file>
+            <file>src/Stream/FileStreamTest.php</file>
         </testsuite>
     </testsuites>
     <filter>

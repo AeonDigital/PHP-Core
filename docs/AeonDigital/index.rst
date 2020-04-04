@@ -1,6 +1,7 @@
 .. rst-class:: phpdoctorst
 
-.. role:: php(code)
+.. role:: php(code)
+
 	:language: php
 
 
@@ -17,11 +18,15 @@ Namespaces
 
 .. toctree::
 	:maxdepth: 6
-	
+
+	Traits <Traits/index>
 	Collection <Collection/index>
 	SimpleType <SimpleType/index>
-	Tools <Tools/index>
-	Traits <Traits/index>
+	DataFormat <DataFormat/index>
+	DataModel <DataModel/index>
+	Stream <Stream/index>
+
+
 
 
 Classes
@@ -29,8 +34,6 @@ Classes
 
 .. toctree::
 	:maxdepth: 6
-	
+
 	Realtype <Realtype>
 	Tools <Tools>
-
-
