@@ -95,10 +95,6 @@
             <file>src/DataModel/t05FieldModelTest.php</file>
             <file>src/DataModel/t06FieldModelCollectionTest.php</file>
             <file>src/DataModel/t07ComplexFieldModelCollectionTest.php</file>
-
-
-            <file>src/Stream/StreamTest.php</file>
-            <file>src/Stream/FileStreamTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
