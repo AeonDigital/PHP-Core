@@ -41,11 +41,6 @@
             <file>src/SimpleType/stStringTest.php</file>
 
 
-            <file>src/Traits/HTTPRawStatusCodeTest.php</file>
-            <file>src/Traits/MimeTypeDataTest.php</file>
-            <file>src/Traits/ParseQualityHeadersTest.php</file>
-
-
             <file>src/Collection/BasicCollectionTest.php</file>
             <file>src/Collection/ProtectedCollectionTest.php</file>
             <file>src/Collection/AppendOnlyCollectionTest.php</file>
