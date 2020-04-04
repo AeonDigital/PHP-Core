@@ -10,5 +10,3 @@ require_once $tstDir . "/DataModel/concrete/DataModel.php";
 require_once $tstDir . "/DataModel/concrete/ModelFactory.php";
 require_once $tstDir . "/DataModel/concrete/DataFieldModel.php";
 require_once $tstDir . "/DataModel/concrete/DataFieldModelCollection.php";
-
-require_once $tstDir . "/Stream/__provider.php";
