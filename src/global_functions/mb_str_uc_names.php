@@ -22,7 +22,7 @@ function mb_str_uc_names(string $str, string $locale = "", array $ignore = []) :
 {
     $locale = \mb_strtolower(\str_replace("-", "", $locale));
     if ($locale === "" || \function_exists("mb_str_uc_names_$locale") === false) {
-        return \mb_str_uc_words(\mb_strtolower($str), $ignore);
+        return \ucfirst(\mb_str_uc_words(\mb_strtolower($str), $ignore));
     }
     else {
         $f = "mb_str_uc_names_$locale";
