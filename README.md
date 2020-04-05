@@ -40,10 +40,6 @@ _______________________________________________________________________________
 Este e outros projetos **Aeon Digital** utilizam o sistema de [Versionamento
 Semântico](https://semver.org/) proposto por Tom Preston-Werner.
 
-O diretório `tests` contendo os testes em `PHPUnit` não está disponível por
-padrão para pacotes instalados usando o composer mas o mesmo pode ser obtido no
-repositório oficial.
-
 A documentação completa pode ser vista em
 [ReadTheDocs](https://php-phpcore.readthedocs.io/pt/latest/).
 
