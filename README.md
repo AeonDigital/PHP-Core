@@ -41,7 +41,7 @@ Este e outros projetos **Aeon Digital** utilizam o sistema de [Versionamento
 Semântico](https://semver.org/) proposto por Tom Preston-Werner.
 
 A documentação completa pode ser vista em
-[ReadTheDocs](https://php-phpcore.readthedocs.io/pt/latest/).
+[ReadTheDocs](https://aeondigital-php-core.readthedocs.io/en/latest/).
 
 
 &nbsp;
