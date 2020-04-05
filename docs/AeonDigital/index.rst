@@ -19,14 +19,11 @@ Namespaces
 .. toctree::
 	:maxdepth: 6
 
-	Traits <Traits/index>
+	Tools <Tools/index>
 	Collection <Collection/index>
 	SimpleType <SimpleType/index>
 	DataFormat <DataFormat/index>
 	DataModel <DataModel/index>
-	Stream <Stream/index>
-
-
 
 
 Classes
