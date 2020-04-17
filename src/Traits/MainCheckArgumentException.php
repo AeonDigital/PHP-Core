@@ -1112,7 +1112,7 @@ trait MainCheckArgumentException
         $r = true;
         $err = "";
         $argName = $rules["argName"];
-        $argValue = to_system_path($rules["argValue"]);
+        $argValue = \to_system_path($rules["argValue"]);
 
 
         if (\is_dir($argValue) === false && \is_file($argValue) === false) {
@@ -1137,7 +1137,7 @@ trait MainCheckArgumentException
         $r = true;
         $err = "";
         $argName = $rules["argName"];
-        $argValue = to_system_path($rules["argValue"]);
+        $argValue = \to_system_path($rules["argValue"]);
 
 
         if (\is_dir($argValue) === false) {
@@ -1162,7 +1162,7 @@ trait MainCheckArgumentException
         $r = true;
         $err = "";
         $argName = $rules["argName"];
-        $argValue = to_system_path($rules["argValue"]);
+        $argValue = \to_system_path($rules["argValue"]);
 
 
         if (\is_file($argValue) === false) {
