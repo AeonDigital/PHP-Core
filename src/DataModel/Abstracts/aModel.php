@@ -783,14 +783,13 @@ abstract class aModel extends BObject implements iModel
         $fields             = ((isset($config["fields"]))               ? $config["fields"]             : null);
 
 
-
-        if (\is_array($fields) === false) {
-            $msg = "Invalid given fields. Must be an array of \"iField\" objects.";
-            throw new \InvalidArgumentException($msg);
-        } elseif (\count($fields) === 0) {
-            $msg = "At least one field must be defined.";
-            throw new \InvalidArgumentException($msg);
-        }
+        $this->mainCheckForInvalidArgumentException(
+            "config['fields']", $fields, [
+                [
+                    "validate"          => "is array not empty or null"
+                ]
+            ]
+        );
 
 
         // Seta propriedades definidas

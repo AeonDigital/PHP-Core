@@ -77,7 +77,7 @@ class t03ModelTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid given fields. Must be an array of \"iField\" objects.", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"config['fields']\". Expected a non-empty array. Given: [ not array ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -93,7 +93,7 @@ class t03ModelTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("At least one field must be defined.", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"config['fields']\". Expected a non-empty array.", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
