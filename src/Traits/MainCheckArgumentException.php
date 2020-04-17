@@ -1075,6 +1075,30 @@ trait MainCheckArgumentException
 
 
     /**
+     * Verifica se o argumento passado é do tipo "resource".
+     *
+     * @param       array $rules
+     *              Regras para as validações.
+     *
+     * @return      bool
+     */
+    protected function checkArgument_is_resource(array $rules) : bool
+    {
+        $r = true;
+        $err = "";
+        $argName = $rules["argName"];
+        $argValue = $rules["argValue"];
+
+
+        if (\is_resource($argValue) === false) {
+            $err = "Invalid value defined for \"$argName\". Expected resource type.";
+            $r = false;
+        }
+
+        $this->invalidArgumentExceptionMessage = $err;
+        return $r;
+    }
+    /**
      * Verifica se o argumento passado corresponde ao caminho para um
      * diretório ou arquivo existente.
      *
