@@ -166,17 +166,17 @@ class ToolsTests extends TestCase
             $this->assertFalse(Tools::isDateTime($bFalse[$i]));
         }
     }
-    public function test_method_isRealType()
+    public function test_method_isRealtype()
     {
         $bTrue = [new Realtype("12232.43445")];
         $bFalse = [null, true, false, -1, 0, 1, 12.33];
 
         for ($i = 0; $i < count($bTrue); $i++) {
-            $this->assertTrue(Tools::isRealType($bTrue[$i]));
+            $this->assertTrue(Tools::isRealtype($bTrue[$i]));
         }
 
         for ($i = 0; $i < count($bFalse); $i++) {
-            $this->assertFalse(Tools::isRealType($bFalse[$i]));
+            $this->assertFalse(Tools::isRealtype($bFalse[$i]));
         }
     }
 
@@ -394,7 +394,7 @@ class ToolsTests extends TestCase
             $this->assertNull($dTemp);
         }
     }
-    public function test_method_toRealType()
+    public function test_method_toRealtype()
     {
         $convertTrue = [
             1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.999999, 2,
@@ -409,12 +409,12 @@ class ToolsTests extends TestCase
 
 
         for ($i = 0; $i < count($convertTrue); $i++) {
-            $result = Tools::toRealType($convertTrue[$i]);
+            $result = Tools::toRealtype($convertTrue[$i]);
             $this->assertEquals($result->value(), strval($resultConvert[$i]));
         }
 
         for ($i = 0; $i < count($convertFalse); $i++) {
-            $result = Tools::toRealType($convertFalse[$i]);
+            $result = Tools::toRealtype($convertFalse[$i]);
             $this->assertNull($result);
         }
     }

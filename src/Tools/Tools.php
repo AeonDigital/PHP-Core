@@ -202,7 +202,7 @@ class Tools
      *
      * @return      bool
      */
-    public static function isRealType($o) : bool
+    public static function isRealtype($o) : bool
     {
         return (\is_a($o, "AeonDigital\\Realtype") === true);
     }
@@ -598,9 +598,9 @@ class Tools
      * @return      ?Realtype
      *              Retornará ``null`` caso não seja possível efetuar a conversão.
      */
-    public static function toRealType($o) : ?Realtype
+    public static function toRealtype($o) : ?Realtype
     {
-        if (Realtype::isValistRealType($o) === true) {
+        if (Realtype::isValidRealtype($o) === true) {
             return new Realtype($o);
         } else {
             return null;

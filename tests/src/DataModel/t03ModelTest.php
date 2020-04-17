@@ -114,7 +114,7 @@ class t03ModelTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid configuration. The attribute \"name\" is required.", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"name\". Expected string that matches the ``a-zA-Z0-9_`` pattern.", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -135,7 +135,7 @@ class t03ModelTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid given field name [\"invalid|\"].", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"name\". Expected string that matches the ``a-zA-Z0-9_`` pattern. Given: [ invalid| ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }

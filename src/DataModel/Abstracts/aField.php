@@ -6,8 +6,8 @@ namespace AeonDigital\DataModel\Abstracts;
 use AeonDigital\Interfaces\DataModel\iField as iField;
 use AeonDigital\Interfaces\DataModel\iModel as iModel;
 use AeonDigital\Interfaces\DataModel\iModelFactory as iModelFactory;
-
-
+use AeonDigital\BObject as BObject;
+use AeonDigital\Traits\MainCheckArgumentException as MainCheckArgumentException;
 
 
 
@@ -20,9 +20,9 @@ use AeonDigital\Interfaces\DataModel\iModelFactory as iModelFactory;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aField implements iField
+abstract class aField extends BObject implements iField
 {
-
+    use MainCheckArgumentException;
 
 
 
@@ -190,18 +190,16 @@ abstract class aField implements iField
      */
     private function setName(string $n) : void
     {
-        if ($n === "") {
-            $msg = "Invalid configuration. The attribute \"name\" is required.";
-            throw new \InvalidArgumentException($msg);
-        } else {
-            // Se forem encontrados caracteres inválidos para o nome do campo
-            \preg_match("/^[a-zA-Z0-9_]+$/", $n, $fnd);
-            if (\count($fnd) === 0) {
-                $msg = "Invalid given field name [\"" . $n . "\"].";
-                throw new \InvalidArgumentException($msg);
-            }
-            $this->name = $n;
-        }
+        $this->mainCheckForInvalidArgumentException(
+            "name", $n, [
+                [
+                    "validate"          => "is string matches pattern",
+                    "patternPregMatch"  => "/^[a-zA-Z0-9_]+$/",
+                    "errorShowPattern"  => "a-zA-Z0-9_"
+                ]
+            ]
+        );
+        $this->name = $n;
     }
     /**
      * Retorna o nome do campo.
@@ -271,27 +269,31 @@ abstract class aField implements iField
      */
     private function setType(string $t) : void
     {
-        if ($t === "") {
-            $msg = "Invalid configuration. The attribute \"type\" is required.";
-            throw new \InvalidArgumentException($msg);
-        } else {
-            if (\class_exists($t) === false || $t === "DateTime") {
-                $t = "AeonDigital\\SimpleType\\st" . $t;
-            }
+        $t = $this->mainCheckForInvalidArgumentException(
+            "type", $t, [
+                [
+                    "validate" => "is string not empty",
+                    "executeBeforeReturn" => function($args) {
+                        $argValue = $args["argValue"];
+                        if ($argValue !== "" && (\class_exists($argValue) === false || $argValue === "DateTime")) {
+                            $argValue = "AeonDigital\\SimpleType\\st" . $argValue;
+                        }
+                        return $argValue;
+                    }
+                ],
+                [
+                    "validate" => "is class exists"
+                ],
+                [
+                    "validate" => "is class implements interface",
+                    "interface" => "AeonDigital\\Interfaces\\SimpleType\\iSimpleType"
+                ]
+            ]
+        );
 
-            if (\class_exists($t) === false) {
-                $msg = "The given \"type\" class does not exists.";
-                throw new \InvalidArgumentException($msg);
-            } else {
-                $this->typeReflection = new \ReflectionClass($t);
 
-                if ($this->isValidSimpleType() === false) {
-                    $msg = "The given \"type\" class does not implements the interface \"AeonDigital\\Interfaces\\SimpleType\\iSimpleType\".";
-                    throw new \InvalidArgumentException($msg);
-                }
-                $this->type = $t;
-            }
-        }
+        $this->typeReflection = new \ReflectionClass($t);
+        $this->type = $t;
     }
     /**
      * Retorna o nome completo da classe que determina o tipo deste campo.
@@ -354,80 +356,58 @@ abstract class aField implements iField
      */
     private function setInputFormat($if) : void
     {
-        if ($if !== null) {
-            if (\is_array($if) === true) {
-                $requiredKeys = ["name", "length", "check", "removeFormat", "format", "storageFormat"];
+        if (\is_array($if) === true) {
+            $this->mainCheckForInvalidArgumentException(
+                "inputFormat", $if,
+                [
+                    [
+                        "validate" => "has array assoc required keys",
+                        "requiredKeys" => [
+                            "name"          => ["is string not empty"],
+                            "length"        => ["is integer greather than zero or null"],
+                            "check"         => ["is callable"],
+                            "removeFormat"  => ["is callable"],
+                            "format"        => ["is callable"],
+                            "storageFormat" => ["is callable"]
+                        ]
+                    ]
+                ]
+            );
 
-                foreach ($requiredKeys as $key) {
-                    if (\array_key_exists($key, $if) === false) {
-                        $msg = "Lost required key in the given input format rule.";
-                        throw new \InvalidArgumentException($msg);
-                    } else {
-                        $msg = null;
-                        $kVal = $if[$key];
-                        switch ($key) {
-                            case "name":
-                                if (\is_string($kVal) === false || \strlen($kVal) === 0) {
-                                    $msg = "Invalid given \"$key\" of input format. Expected a not empty string.";
-                                }
-                                break;
 
-                            case "length":
-                                if (\is_int($kVal) === false && $kVal !== null) {
-                                    $msg = "Invalid given \"$key\" of input format. Expected integer or null.";
-                                }
-                                break;
-
-                            case "check":
-                            case "removeFormat":
-                            case "format":
-                            case "storageFormat":
-                                if (\is_callable($kVal) === false) {
-                                    $msg = "Invalid given \"$key\" of input format. Expected callable.";
-                                }
-                                break;
-                        }
-
-                        if ($msg !== null) {
-                            throw new \InvalidArgumentException($msg);
-                        }
-                    }
-                }
-
-                $this->inputFormat = [
-                    "name"          => \strtoupper($if["name"]),
-                    "length"        => (($if["length"] === null) ? null : (int)$if["length"]),
-                    "check"         => $if["check"],
-                    "removeFormat"  => $if["removeFormat"],
-                    "format"        => $if["format"],
-                    "storageFormat" => $if["storageFormat"]
-                ];
-            } else {
-                if (\class_exists($if) === false) {
-                    $if = "AeonDigital\\DataFormat\\Patterns\\" . \str_replace(".", "\\", $if);
-                }
-
-                if (\class_exists($if) === false) {
-                    $msg = "The given \"inputFormat\" class does not exists [\"$if\"].";
-                    throw new \InvalidArgumentException($msg);
-                } else {
-                    $this->inputFormatReflection = new \ReflectionClass($if);
-
-                    if ($this->isValidInputFormat($if) === false) {
-                        $msg = "The given \"inputFormat\" class does not implements the interface \"AeonDigital\\Interfaces\\DataFormat\\iFormat\".";
-                        throw new \InvalidArgumentException($msg);
-                    }
-
-                    $this->inputFormat = [
-                        "name"          => $if,
-                        "length"        => $if::MaxLength,
-                        "check"         => $if . "::check",
-                        "removeFormat"  => $if . "::removeFormat",
-                        "format"        => $if . "::format",
-                        "storageFormat" => $if . "::storageFormat"
-                    ];
-                }
+            $this->inputFormat = [
+                "name"          => \strtoupper($if["name"]),
+                "length"        => (($if["length"] === null) ? null : (int)$if["length"]),
+                "check"         => $if["check"],
+                "removeFormat"  => $if["removeFormat"],
+                "format"        => $if["format"],
+                "storageFormat" => $if["storageFormat"]
+            ];
+        }
+        elseif (is_string($if) === true) {
+            if (\class_exists($if) === false) {
+                $if = "AeonDigital\\DataFormat\\Patterns\\" . \str_replace(".", "\\", $if);
             }
+
+            $this->mainCheckForInvalidArgumentException(
+                "inputFormat", $if, [
+                    "is class exists",
+                    [
+                        "validate" => "is class implements interface",
+                        "interface" => "AeonDigital\\Interfaces\\DataFormat\\iFormat"
+                    ]
+                ]
+            );
+
+
+            $this->inputFormat = [
+                "name"          => $if,
+                "length"        => $if::MaxLength,
+                "check"         => $if . "::check",
+                "removeFormat"  => $if . "::removeFormat",
+                "format"        => $if . "::format",
+                "storageFormat" => $if . "::storageFormat"
+            ];
         }
     }
     /**
@@ -524,8 +504,9 @@ abstract class aField implements iField
                 $m = $this->type::parseIfValidate($m, $err);
 
                 if ($err !== null) {
-                    $msg = "Invalid min value.";
-                    throw new \InvalidArgumentException($msg);
+                    $this->mainCheckForInvalidArgumentException(
+                        "min", $m, ["is numeric"]
+                    );
                 } else {
                     $this->min = $m;
                 }
@@ -584,8 +565,9 @@ abstract class aField implements iField
                 $m = $this->type::parseIfValidate($m, $err);
 
                 if ($err !== null) {
-                    $msg = "Invalid max value.";
-                    throw new \InvalidArgumentException($msg);
+                    $this->mainCheckForInvalidArgumentException(
+                        "max", $m, ["is numeric"]
+                    );
                 } else {
                     $this->max = $m;
                 }
@@ -1562,8 +1544,9 @@ abstract class aField implements iField
             $iCV = $this->internal_CheckValue($v);
 
             if ($iCV["valid"] === false) {
-                $msg = "The given \"default\" value is invalid.";
-                throw new \InvalidArgumentException($msg);
+                $this->mainCheckForInvalidArgumentException(
+                    "default", $v, ["fail"]
+                );
             } else {
                 $this->default = $this->internal_RetrieveInStorageFormat($v);
             }
@@ -1626,63 +1609,62 @@ abstract class aField implements iField
      */
     private function setEnumerator($enum) : void
     {
-        if (\is_string($enum) === true) {
-            if (\file_exists($enum) === false) {
-                $msg = "The target enumerator file description does not exist.";
-                throw new \InvalidArgumentException($msg);
-            } else {
-                $enum = include $enum;
-
-                if (\is_array($enum) === false) {
-                    $msg = "The target enumerator file does not have a valid array.";
-                    throw new \InvalidArgumentException($msg);
-                }
-            }
-        }
-
-
-
-        if (\count($enum) === 0) {
-            $msg = "Invalid enumerator value. The given array is empty.";
-            throw new \InvalidArgumentException($msg);
-        } else {
-            if (\array_is_assoc($enum) === true) {
-                $msg = "Invalid enumerator value. Can not be an assoc array.";
-                throw new \InvalidArgumentException($msg);
-            } else {
-                $rEnum = [];
-
-                foreach ($enum as $val) {
-                    $v = $val;
-
-                    if (\is_array($v) === true) {
-                        if (\count($v) !== 2) {
-                            $msg = "Invalid enumerator value. Multidimensional arrays must have 2 values defined.";
-                            throw new \InvalidArgumentException($msg);
-                        } else {
-                            $v = $val[0];
-                        }
+        $this->enumerator = $this->mainCheckForInvalidArgumentException(
+            "enumerator", $enum,
+            [
+                [
+                    "conditions"    => "is string",
+                    "validate"      => "is file exists",
+                    "executeBeforeReturn" => function($args) {
+                        return include $args["argValue"];
                     }
+                ],
+                [
+                    "validate" => "is array not empty",
+                ],
+                [
+                    "validate" => "is not array assoc"
+                ],
+                [
+                    "validate" => "check array childs",
+                    "foreachChild" => [
+                        [
+                            "conditions"            => "is array",
+                            "validate"              => "is array with x values",
+                            "expectedCountValues"   => 2
+                        ],
+                        [
+                            "executeBeforeValidate" => function($args) {
+                                $argValue = $args["argValue"];
+                                return ((\is_array($argValue) === true) ? $argValue[0] : $argValue);
+                            },
+                            "validate" => "closure",
+                            "closure" => function($arg) {
+                                $ivCV = $this->individualValue_CheckValue($arg);
+                                return $ivCV["valid"];
+                            }
+                        ]
+                    ],
+                    "executeBeforeReturn" => function($args) {
+                        $argValue = $args["argValue"];
+                        $newArgValue = [];
 
+                        foreach ($argValue as $val) {
+                            $v = ((\is_array($val) === true) ? $val[0] : $val);
+                            $v = $this->individualValue_RetrieveInStorageFormat($v);
 
-                    $ivCV = $this->individualValue_CheckValue($v);
-                    if ($ivCV["valid"] === false) {
-                        $msg = "Invalid enumerator value.";
-                        throw new \InvalidArgumentException($msg);
-                    } else {
-                        $v = $this->individualValue_RetrieveInStorageFormat($v);
-
-                        if (\is_array($val) === true) {
-                            $rEnum[] = [$v, $val[1]];
-                        } else {
-                            $rEnum[] = $v;
+                            if (\is_array($val) === true) {
+                                $newArgValue[] = [$v, $val[1]];
+                            } else {
+                                $newArgValue[] = $v;
+                            }
                         }
-                    }
-                }
 
-                $this->enumerator = $rEnum;
-            }
-        }
+                        return $newArgValue;
+                    }
+                ]
+            ]
+        );
     }
     /**
      * Retorna um ``array`` com a coleção de valores que este campo está apto a assumir.

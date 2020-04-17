@@ -5,8 +5,8 @@ namespace AeonDigital\DataModel\Abstracts;
 
 use AeonDigital\Interfaces\DataModel\iModel as iModel;
 use AeonDigital\Interfaces\DataModel\iField as iField;
-
-
+use AeonDigital\BObject as BObject;
+use AeonDigital\Traits\MainCheckArgumentException as MainCheckArgumentException;
 
 
 
@@ -20,9 +20,9 @@ use AeonDigital\Interfaces\DataModel\iField as iField;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aModel implements iModel
+abstract class aModel extends BObject implements iModel
 {
-
+    use MainCheckArgumentException;
 
 
 
@@ -66,18 +66,16 @@ abstract class aModel implements iModel
      */
     private function setName(string $n) : void
     {
-        if ($n === "") {
-            $msg = "Invalid configuration. The attribute \"name\" is required.";
-            throw new \InvalidArgumentException($msg);
-        } else {
-            // Se forem encontrados caracteres inválidos para o nome do modelo de dados
-            \preg_match("/^[a-zA-Z0-9_]+$/", $n, $fnd);
-            if (\count($fnd) === 0) {
-                $msg = "Invalid given field name [\"" . $n . "\"].";
-                throw new \InvalidArgumentException($msg);
-            }
-            $this->name = $n;
-        }
+        $this->mainCheckForInvalidArgumentException(
+            "name", $n, [
+                [
+                    "validate"          => "is string matches pattern",
+                    "patternPregMatch"  => "/^[a-zA-Z0-9_]+$/",
+                    "errorShowPattern"  => "a-zA-Z0-9_"
+                ]
+            ]
+        );
+        $this->name = $n;
     }
     /**
      * Retorna o nome do modelo de dados.
@@ -739,19 +737,6 @@ abstract class aModel implements iModel
         $r = [];
         foreach ($this->fieldsCollection as $fieldName => $field) {
             $val = $field->getRawValue();
-
-            /*if ($field->isReference() === true) {
-                if ($field->isCollection() === true) {
-                    $useVal = [];
-                    foreach ($val as $inst) {
-                        $useVal[] = $inst->getRawValue();
-                    }
-                    $val = $useVal;
-                } else {
-                    $val = $val->getRawValue();
-                }
-            }*/
-
             $r[$field->getName()] = $val;
         }
         return $r;

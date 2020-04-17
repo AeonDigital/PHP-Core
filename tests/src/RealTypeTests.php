@@ -26,7 +26,7 @@ class RealtypeTests extends TestCase
             $obj = new Realtype(null);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Argument must be a valid Realtype.", $ex->getMessage());
+            $this->assertSame("Argument must be a valid Realtype. Given: [ ``null`` ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -214,10 +214,10 @@ class RealtypeTests extends TestCase
 
 
         foreach ($sucessValues as $value) {
-            $this->assertTrue(Realtype::isValistRealtype($value));
+            $this->assertTrue(Realtype::isValidRealtype($value));
         }
         foreach ($failValues as $value) {
-            $this->assertFalse(Realtype::isValistRealtype($value));
+            $this->assertFalse(Realtype::isValidRealtype($value));
         }
     }
 

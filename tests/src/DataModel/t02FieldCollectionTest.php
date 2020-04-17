@@ -310,7 +310,7 @@ class t02FieldCollectionTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("The given \"default\" value is invalid.", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"default\". Given: [ invalid value ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }

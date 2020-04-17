@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Collection;
 
 use AeonDigital\Interfaces\Collection\iBasicCollection as iBasicCollection;
-
+use AeonDigital\BObject as BObject;
 
 
 
@@ -36,7 +36,7 @@ use AeonDigital\Interfaces\Collection\iBasicCollection as iBasicCollection;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class BasicCollection implements iBasicCollection
+class BasicCollection extends BObject implements iBasicCollection
 {
 
 

@@ -3,8 +3,8 @@ declare (strict_types=1);
 
 namespace AeonDigital;
 
-
-
+use AeonDigital\BObject as BObject;
+use AeonDigital\Traits\MainCheckArgumentException as MainCheckArgumentException;
 
 
 
@@ -22,9 +22,9 @@ namespace AeonDigital;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class Realtype
+final class Realtype extends BObject
 {
-
+    use MainCheckArgumentException;
 
 
 
@@ -350,7 +350,17 @@ class Realtype
     function __construct($v = 0)
     {
         if ($v === "") { $v = 0; }
-        $this->checkArgument($v);
+        $this->mainCheckForInvalidArgumentException(
+            "v", $v,
+            [
+                [
+                    "validate"          => "closure",
+                    "closure"           => function ($argValue) { return Realtype::isValidRealtype($argValue); },
+                    "customErrorMessage"=> "Argument must be a valid Realtype."
+                ]
+            ]
+        );
+
 
         if (\is_int($v) === true || \is_float($v) === true) {
             $this->val = (string)$v;
@@ -395,7 +405,7 @@ class Realtype
      * @return      bool
      *              Retorna ``true`` se o valor passado for válido.
      */
-    static public function isValistRealtype($v) : bool
+    static public function isValidRealtype($v) : bool
     {
         return (
             (\is_int($v) === true || \is_float($v) === true) ||
@@ -403,28 +413,6 @@ class Realtype
             ($v instanceof Realtype)
         );
     }
-
-
-
-
-    /**
-     * Identifica se o valor passado é um ``Realtype`` válido.
-     *
-     * @param       mixed $v
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma string numérica.
-     *
-     * @return      void
-     *
-     * @throws      \InvalidArgumentException
-     *              Lançado se o valor for considerado inválido.
-     */
-    protected function checkArgument($v) : void
-    {
-        if (self::isValistRealtype($v) === false) {
-            throw new \InvalidArgumentException("Argument must be a valid Realtype.");
-        }
-    }
-
 
 
 

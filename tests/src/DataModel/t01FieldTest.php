@@ -46,7 +46,10 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid configuration. The attribute \"name\" is required.", $ex->getMessage());
+            $this->assertSame(
+                "Invalid value defined for \"name\". Expected string that matches the ``a-zA-Z0-9_`` pattern.",
+                $ex->getMessage()
+            );
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -62,7 +65,7 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid given field name [\"invalid|\"].", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"name\". Expected string that matches the ``a-zA-Z0-9_`` pattern. Given: [ invalid| ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -116,7 +119,7 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid configuration. The attribute \"type\" is required.", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"type\". Expected non empty string.", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -132,7 +135,7 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("The given \"type\" class does not exists.", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"type\". The given class name does not exists. Given: [ AeonDigital\SimpleType\stinvalid_class_name ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -148,7 +151,10 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("The given \"type\" class does not implements the interface \"AeonDigital\\Interfaces\\SimpleType\\iSimpleType\".", $ex->getMessage());
+            $this->assertSame(
+                "Invalid value defined for \"type\". Expected Namespace of class thats implements the interface AeonDigital\Interfaces\SimpleType\iSimpleType. Given: [ StdClass ]",
+                $ex->getMessage()
+            );
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -184,7 +190,10 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("The given \"inputFormat\" class does not exists [\"AeonDigital\DataFormat\Patterns\invalid_class_name\"].", $ex->getMessage());
+            $this->assertSame(
+                "Invalid value defined for \"inputFormat\". The given class name does not exists. Given: [ AeonDigital\DataFormat\Patterns\invalid_class_name ]",
+                $ex->getMessage()
+            );
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -201,7 +210,10 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("The given \"inputFormat\" class does not implements the interface \"AeonDigital\Interfaces\DataFormat\iFormat\".", $ex->getMessage());
+            $this->assertSame(
+                "Invalid value defined for \"inputFormat\". Expected Namespace of class thats implements the interface AeonDigital\Interfaces\DataFormat\iFormat. Given: [ DateTime ]",
+                $ex->getMessage()
+            );
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -233,7 +245,7 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Lost required key in the given input format rule.", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"inputFormat\". Expected an assoc array with the keys \"name, length, check, removeFormat, format, storageFormat\".", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -257,7 +269,10 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid given \"name\" of input format. Expected a not empty string.", $ex->getMessage());
+            $this->assertSame(
+                "Invalid value defined for \"inputFormat['name']\". Expected non empty string.",
+                $ex->getMessage()
+            );
         }
         $this->assertTrue($fail, "Test must fail");
 
@@ -279,7 +294,10 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid given \"length\" of input format. Expected integer or null.", $ex->getMessage());
+            $this->assertSame(
+                "Invalid value defined for \"inputFormat['length']\". Expected integer greather than zero. Given: [ invalid ]",
+                $ex->getMessage()
+            );
         }
         $this->assertTrue($fail, "Test must fail");
 
@@ -301,7 +319,10 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid given \"check\" of input format. Expected callable.", $ex->getMessage());
+            $this->assertSame(
+                "Invalid value defined for \"inputFormat['check']\". Expected callable. Given: [ ``null`` ]",
+                $ex->getMessage()
+            );
         }
         $this->assertTrue($fail, "Test must fail");
 
@@ -323,7 +344,10 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid given \"removeFormat\" of input format. Expected callable.", $ex->getMessage());
+            $this->assertSame(
+                "Invalid value defined for \"inputFormat['removeFormat']\". Expected callable. Given: [ ``null`` ]",
+                $ex->getMessage()
+            );
         }
         $this->assertTrue($fail, "Test must fail");
 
@@ -345,7 +369,10 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid given \"format\" of input format. Expected callable.", $ex->getMessage());
+            $this->assertSame(
+                "Invalid value defined for \"inputFormat['format']\". Expected callable. Given: [ ``null`` ]",
+                $ex->getMessage()
+            );
         }
         $this->assertTrue($fail, "Test must fail");
 
@@ -367,7 +394,10 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid given \"storageFormat\" of input format. Expected callable.", $ex->getMessage());
+            $this->assertSame(
+                "Invalid value defined for \"inputFormat['storageFormat']\". Expected callable. Given: [ ``null`` ]",
+                $ex->getMessage()
+            );
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -466,7 +496,7 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid min value.", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"min\". Expected numeric. Given: [ - ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -546,7 +576,7 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid max value.", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"max\". Expected numeric. Given: [ - ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -896,6 +926,7 @@ class t01FieldTest extends TestCase
             "type"                      => "Int",
             "enumerator"                => [["1", "Janeiro"], ["2", "Fevereiro"], ["3", "Março"]]
         ]);
+
 
         $val            = 0;
         $r              = $obj->validateValue($val);
@@ -1278,7 +1309,7 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("The given \"default\" value is invalid.", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"default\". Given: [ invalid email set ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -1336,7 +1367,10 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid enumerator value. The given array is empty.", $ex->getMessage());
+            $this->assertSame(
+                "Invalid value defined for \"enumerator\". Expected a non-empty array.",
+                $ex->getMessage()
+            );
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -1353,7 +1387,10 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid enumerator value. Can not be an assoc array.", $ex->getMessage());
+            $this->assertSame(
+                "Invalid value defined for \"enumerator\". Expected simple array (not assoc). Given: [ Janeiro Fevereiro 3 ]",
+                $ex->getMessage()
+            );
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -1370,7 +1407,10 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid enumerator value. Multidimensional arrays must have 2 values defined.", $ex->getMessage());
+            $this->assertSame(
+                "Invalid value defined for \"enumerator['2']\". Expected an array with exact 2 itens. Given: [ 3 ]",
+                $ex->getMessage()
+            );
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -1387,7 +1427,7 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid enumerator value.", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"enumerator['1']\". Given: [ invalid ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -1406,7 +1446,7 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("The target enumerator file description does not exist.", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"enumerator\". File does not exists. Given: [ \invalidpath.php ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -1425,7 +1465,7 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("The target enumerator file does not have a valid array.", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"enumerator\". Expected a non-empty array. Given: [ invalidValue ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
