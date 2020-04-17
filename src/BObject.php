@@ -96,15 +96,4 @@ abstract class BObject
     {
         throw new \RuntimeException("Unable to use \"__set_state\" method.");
     }
-
-
-    /**
-     * Desabilita a função mágica ``__clone ``.
-     *
-     * @codeCoverageIgnore
-     */
-    public function __clone()
-    {
-        throw new \RuntimeException("Unable to use \"__clone \" method.");
-    }
 }
