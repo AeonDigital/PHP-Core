@@ -53,6 +53,21 @@ trait MainCheckArgumentException
      * @var         bool
      */
     private bool $throwsExceptionOnValidateFail = true;
+    /**
+     * Indica o resultado da última validação efetuada.
+     *
+     * @var         bool
+     */
+    private bool $lastArgumentValidateResult = true;
+    /**
+     * Retorna o resultado da última validação efetuada.
+     *
+     * @return      bool
+     */
+    protected function getLastArgumentValidateResult() : bool
+    {
+        return $this->lastArgumentValidateResult;
+    }
 
 
 
@@ -68,28 +83,33 @@ trait MainCheckArgumentException
      */
     private function throwInvalidArgumentException($argValue) : void
     {
-        if ($this->invalidArgumentExceptionMessage !== "" &&
-            $this->throwsExceptionOnValidateFail === true)
+        $this->lastArgumentValidateResult = true;
+        if ($this->invalidArgumentExceptionMessage !== "")
         {
-            $exceptionMessage = (
-                ($this->customInvalidArgumentExceptionMessage === "") ?
-                $this->invalidArgumentExceptionMessage :
-                $this->customInvalidArgumentExceptionMessage
-            );
+            $this->lastArgumentValidateResult = false;
 
 
-            if ($this->showArgumentInExceptionMessage === true) {
-                $strArg = "";
-                if ($argValue === null) { $strArg = "``null``"; }
-                elseif ($argValue === 0) { $strArg = "0"; }
-                else {
-                    $strArg = \trim(\AeonDigital\Tools::toString($argValue));
+            if ($this->throwsExceptionOnValidateFail === true) {
+                $exceptionMessage = (
+                    ($this->customInvalidArgumentExceptionMessage === "") ?
+                    $this->invalidArgumentExceptionMessage :
+                    $this->customInvalidArgumentExceptionMessage
+                );
+
+
+                if ($this->showArgumentInExceptionMessage === true) {
+                    $strArg = "";
+                    if ($argValue === null) { $strArg = "``null``"; }
+                    elseif ($argValue === 0) { $strArg = "0"; }
+                    else {
+                        $strArg = \trim(\AeonDigital\Tools::toString($argValue));
+                    }
+                    if ($strArg !== "") {
+                        $exceptionMessage .= " Given: [ " . $strArg . " ]";
+                    }
                 }
-                if ($strArg !== "") {
-                    $exceptionMessage .= " Given: [ " . $strArg . " ]";
-                }
+                throw new \InvalidArgumentException($exceptionMessage);
             }
-            throw new \InvalidArgumentException($exceptionMessage);
         }
         $this->throwsExceptionOnValidateFail = true;
     }
@@ -165,6 +185,7 @@ trait MainCheckArgumentException
                 $rules
             );
         }
+
         return $argValue;
     }
 
