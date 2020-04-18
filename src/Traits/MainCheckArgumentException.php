@@ -47,6 +47,12 @@ trait MainCheckArgumentException
      * @var         bool
      */
     private bool $showArgumentInExceptionMessage = true;
+    /**
+     * Indica quando deve ou não lançar a exception em caso de falhar na validação.
+     *
+     * @var         bool
+     */
+    private bool $throwsExceptionOnValidateFail = true;
 
 
 
@@ -62,7 +68,9 @@ trait MainCheckArgumentException
      */
     private function throwInvalidArgumentException($argValue) : void
     {
-        if ($this->invalidArgumentExceptionMessage !== "") {
+        if ($this->invalidArgumentExceptionMessage !== "" &&
+            $this->throwsExceptionOnValidateFail === true)
+        {
             $exceptionMessage = (
                 ($this->customInvalidArgumentExceptionMessage === "") ?
                 $this->invalidArgumentExceptionMessage :
@@ -83,6 +91,7 @@ trait MainCheckArgumentException
             }
             throw new \InvalidArgumentException($exceptionMessage);
         }
+        $this->throwsExceptionOnValidateFail = true;
     }
 
 
@@ -128,6 +137,9 @@ trait MainCheckArgumentException
      *              A chave "showArgumentInMessage" deve indicar (``true|false``) se deve ou não mostrar
      *              o valor atual do argumento que falhou ao ser processado.
      *
+     * @param       ?bool $throws
+     *              Indica quando é para lançar a exception.
+     *
      * @return      mixed
      *              Retornará o próprio ``$argValue`` ou, sua versão modificada por qualquer das
      *              funções especiais indicadas em ``$validateRules``.
@@ -139,8 +151,13 @@ trait MainCheckArgumentException
     protected function mainCheckForInvalidArgumentException(
         string $argName,
         $argValue,
-        array $validateRules
+        array $validateRules,
+        ?bool $throws = null
     ) {
+        if ($throws !== null) {
+            $this->throwsExceptionOnValidateFail = $throws;
+        }
+
         foreach ($validateRules as $rules) {
             $argValue = $this->checkForInvalidArgumentException(
                 $argName,
