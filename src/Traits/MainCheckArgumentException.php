@@ -1000,7 +1000,7 @@ trait MainCheckArgumentException
     /**
      * Utiliza uma closure para validar o valor do argumento.
      * São esperados os seguintes parâmetros:
-     * - "closure"    : function($args) { return bool; }
+     * - "closure"    : function($arg) { return bool; }
      *
      * @param       array $rules
      *              Regras para as validações.
