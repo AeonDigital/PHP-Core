@@ -333,7 +333,7 @@ class MainCheckArgumentExceptionTest extends TestCase
         } catch (\Exception $ex) {
             $fail = true;
             $this->assertSame(
-                "Invalid value defined for \"arg08\". Expected [ aaa, bbb, ccc, 111]. Given: [ ddd ]",
+                "Invalid value defined for \"arg08\". Expected [ aaa, bbb, ccc, 111 ]. Given: [ ddd ]",
                 $ex->getMessage()
             );
         }

@@ -978,13 +978,13 @@ trait MainCheckArgumentException
 
         if ($caseInsensitive === true) {
             if (\array_in_ci($argValue, $allowedValues) === false) {
-                $err = "Invalid value defined for \"$argName\". Expected [ " . \implode(", ", $allowedValues) . "].";
+                $err = "Invalid value defined for \"$argName\". Expected [ " . \implode(", ", $allowedValues) . " ].";
                 $r = false;
             }
         }
         else {
             if (\in_array($argValue, $allowedValues) === false) {
-                $err = "Invalid value defined for \"$argName\". Expected [ " . \implode(", ", $allowedValues) . "].";
+                $err = "Invalid value defined for \"$argName\". Expected [ " . \implode(", ", $allowedValues) . " ].";
                 $r = false;
             }
         }
