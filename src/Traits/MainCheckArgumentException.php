@@ -413,7 +413,7 @@ trait MainCheckArgumentException
 
         if (\is_string($argValue) === false || $argValue === "") {
             $err = "Invalid value defined for \"$argName\". Expected non empty string.";
-            $r = true;
+            $r = false;
         }
 
         $this->invalidArgumentExceptionMessage = $err;
