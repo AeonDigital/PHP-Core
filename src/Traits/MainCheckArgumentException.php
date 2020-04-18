@@ -111,7 +111,6 @@ trait MainCheckArgumentException
                 throw new \InvalidArgumentException($exceptionMessage);
             }
         }
-        $this->throwsExceptionOnValidateFail = true;
     }
 
 
