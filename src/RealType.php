@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital;
 
 use AeonDigital\BObject as BObject;
-use AeonDigital\Traits\MainCheckArgumentException as MainCheckArgumentException;
+
 
 
 
@@ -24,7 +24,7 @@ use AeonDigital\Traits\MainCheckArgumentException as MainCheckArgumentException;
  */
 final class Realtype extends BObject
 {
-    use MainCheckArgumentException;
+    use \AeonDigital\Traits\MainCheckArgumentException;
 
 
 

@@ -5,7 +5,7 @@ namespace AeonDigital\DataModel\Abstracts;
 
 use AeonDigital\Interfaces\DataModel\iFieldCollection as iFieldCollection;
 use AeonDigital\DataModel\Abstracts\aField as aField;
-use AeonDigital\DataModel\Traits\FieldCollectionCommomMethods as FieldCollectionCommomMethods;
+
 
 
 
@@ -23,7 +23,7 @@ use AeonDigital\DataModel\Traits\FieldCollectionCommomMethods as FieldCollection
  */
 abstract class aFieldCollection extends aField implements iFieldCollection
 {
-    use FieldCollectionCommomMethods;
+    use \AeonDigital\DataModel\Traits\FieldCollectionCommomMethods;
 
 
 

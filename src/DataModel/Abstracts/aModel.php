@@ -6,7 +6,7 @@ namespace AeonDigital\DataModel\Abstracts;
 use AeonDigital\Interfaces\DataModel\iModel as iModel;
 use AeonDigital\Interfaces\DataModel\iField as iField;
 use AeonDigital\BObject as BObject;
-use AeonDigital\Traits\MainCheckArgumentException as MainCheckArgumentException;
+
 
 
 
@@ -22,7 +22,7 @@ use AeonDigital\Traits\MainCheckArgumentException as MainCheckArgumentException;
  */
 abstract class aModel extends BObject implements iModel
 {
-    use MainCheckArgumentException;
+    use \AeonDigital\Traits\MainCheckArgumentException;
 
 
 

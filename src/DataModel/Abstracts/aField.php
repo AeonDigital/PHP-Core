@@ -7,7 +7,7 @@ use AeonDigital\Interfaces\DataModel\iField as iField;
 use AeonDigital\Interfaces\DataModel\iModel as iModel;
 use AeonDigital\Interfaces\DataModel\iModelFactory as iModelFactory;
 use AeonDigital\BObject as BObject;
-use AeonDigital\Traits\MainCheckArgumentException as MainCheckArgumentException;
+
 
 
 
@@ -22,7 +22,7 @@ use AeonDigital\Traits\MainCheckArgumentException as MainCheckArgumentException;
  */
 abstract class aField extends BObject implements iField
 {
-    use MainCheckArgumentException;
+    use \AeonDigital\Traits\MainCheckArgumentException;
 
 
 
