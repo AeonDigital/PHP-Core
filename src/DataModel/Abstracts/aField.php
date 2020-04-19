@@ -1626,7 +1626,7 @@ abstract class aField extends BObject implements iField
                     "validate" => "is not array assoc"
                 ],
                 [
-                    "validate" => "check array childs",
+                    "validate" => "foreach array child",
                     "foreachChild" => [
                         [
                             "conditions"            => "is array",

@@ -919,7 +919,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_check_array_childs(array $rules) : bool
+    protected function checkArgument_foreach_array_child(array $rules) : bool
     {
         $r = true;
         $err = "";
