@@ -31,7 +31,7 @@ function object_convert_values_to_html_entities($o)
         $nO = $o->format("Y-m-d H:i:s");
     }
     elseif (\is_object($o) === true) {
-        if (\method_exists($val, "__toString") === true) {
+        if (\method_exists($o, "__toString") === true) {
             $nO = (string)$o;
         }
         else {
