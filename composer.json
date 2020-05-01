@@ -1,8 +1,8 @@
 {
   "name": "aeondigital/phpcore",
   "description": "Constantes, Funções Globais e Classes de uso geral.",
-  "version": "v0.5.0-beta",
-  "time": "2020-04-04",
+  "version": "v0.5.5-beta",
+  "time": "2020-05-01",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -16,7 +16,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=7.4",
-    "aeondigital/phpinterfaces": ">=v0.5.0-beta"
+    "aeondigital/phpinterfaces": ">=v0.5.5-beta"
   },
   "autoload": {
     "files": [
@@ -25,8 +25,5 @@
     "classmap": [
       "src/"
     ]
-  },
-  "require-dev": {
-    "aeondigital/phpdoc-to-rst": "dev-master"
   }
 }
