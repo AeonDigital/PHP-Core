@@ -1016,13 +1016,13 @@ trait MainCheckArgumentException
         foreach ($argValue as $key => $value) {
             if ($caseInsensitive === true) {
                 if (\array_in_ci($key, $allowedValues) === false) {
-                    $err = "Invalid key defined for \"$argName\". Expected keys [ " . \implode(", ", $allowedValues) . " ].";
+                    $err = "Invalid key defined for \"$argName\". Expected keys [ " . \implode(", ", $allowedValues) . " ]. Given: [ $key ].";
                     $r = false;
                 }
             }
             else {
                 if (\in_array($key, $allowedValues) === false) {
-                    $err = "Invalid key defined for \"$argName\". Expected keys [ " . \implode(", ", $allowedValues) . " ].";
+                    $err = "Invalid key defined for \"$argName\". Expected keys [ " . \implode(", ", $allowedValues) . " ]. Given: [ $key ].";
                     $r = false;
                 }
             }
