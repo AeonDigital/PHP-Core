@@ -315,6 +315,44 @@ class MainCheckArgumentExceptionTest extends TestCase
         }
         $this->assertTrue($fail, "Test must fail");
     }
+    public function test_check_foreach_array_child()
+    {
+        $fail = false;
+        try {
+            $obj = new MainCheckArgumentExceptionMockClass02(
+                "arg01", 1, 1,
+                [
+                    "key1" => 1
+                ]
+            );
+        } catch (\Exception $ex) {
+            $fail = true;
+            $this->assertSame(
+                "Invalid value defined for \"arg04['key1']\". Expected string. Given: [ 1 ]",
+                $ex->getMessage()
+            );
+        }
+        $this->assertTrue($fail, "Test must fail");
+
+
+
+        $fail = false;
+        try {
+            $obj = new MainCheckArgumentExceptionMockClass02(
+                "arg01", 1, 1,
+                [
+                    "key1" => ""
+                ]
+            );
+        } catch (\Exception $ex) {
+            $fail = true;
+            $this->assertSame(
+                "Invalid value defined for \"arg04\". Expected only the HTTP Methods \"HEAD, OPTIONS, TRACE, DEV, CONNECT\".",
+                $ex->getMessage()
+            );
+        }
+        $this->assertTrue($fail, "Test must fail");
+    }
 
 
 
@@ -334,6 +372,25 @@ class MainCheckArgumentExceptionTest extends TestCase
             $fail = true;
             $this->assertSame(
                 "Invalid value defined for \"arg08\". Expected [ aaa, bbb, ccc, 111 ]. Given: [ ddd ]",
+                $ex->getMessage()
+            );
+        }
+        $this->assertTrue($fail, "Test must fail");
+    }
+    public function test_check_is_allowed_key()
+    {
+        $fail = false;
+        try {
+            $obj = new MainCheckArgumentExceptionMockClass02(
+                "arg01", 1, 1, null,
+                [
+                    "invalid" => ""
+                ]
+            );
+        } catch (\Exception $ex) {
+            $fail = true;
+            $this->assertSame(
+                "Invalid key defined for \"arg05\". Expected keys [ HEAD, OPTIONS, TRACE, DEV, CONNECT ].",
                 $ex->getMessage()
             );
         }
@@ -810,7 +867,6 @@ class MainCheckArgumentExceptionMockClass
                 ]
             ]
         );
-
     }
 }
 
@@ -824,7 +880,9 @@ class MainCheckArgumentExceptionMockClass02
     function __construct(
         $arg01 = "",
         $arg02 = "",
-        $arg03 = ""
+        $arg03 = "",
+        $arg04 = null,
+        $arg05 = null
     ) {
 
         $this->mainCheckForInvalidArgumentException(
@@ -864,6 +922,46 @@ class MainCheckArgumentExceptionMockClass02
                 ],
             ]
         );
+
+        $this->mainCheckForInvalidArgumentException(
+            "arg04", $arg04, [
+                [
+                    "conditions" => ["not null", "is array assoc"],
+                    "validate" => "foreach array child",
+                    "foreachChild" => [
+                        ["validate" => 'is string']
+                    ]
+                ],
+                [
+                    "conditions" => ["not null", "is array assoc"],
+                    "validate" => "foreach array child",
+                    "foreachChild" => function($key, $value) {
+                        $allowed = ["HEAD", "OPTIONS", "TRACE", "DEV", "CONNECT"];
+                        if (\in_array($key, $allowed) === false) {
+                            $this->invalidArgumentExceptionMessage = "Invalid value defined for \"arg04\". Expected only the HTTP Methods \"" . implode(", ", $allowed) . "\".";
+
+                            return false;
+                        }
+                        else {
+                            return true;
+                        }
+                    }
+                ]
+            ]
+        );
+
+        $this->mainCheckForInvalidArgumentException(
+            "arg05", $arg05, [
+                [
+                    "conditions" => ["not null", "is array assoc"],
+                    "validate" => "is allowed key",
+                    "allowedValues" => ["HEAD", "OPTIONS", "TRACE", "DEV", "CONNECT"],
+                    "caseInsensitive" => false,
+                ]
+            ]
+        );
+
+
     }
 
 

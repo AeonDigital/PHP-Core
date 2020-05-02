@@ -913,6 +913,8 @@ trait MainCheckArgumentException
      *                      OU
      *                      Closure que será usada para a validação de cada objeto separadamente.
      *                      neste caso use: function($key, $value) { return bool; }
+     *                      No caso de usar uma closure, cabe ao escopo da mesma definir a mensagem de
+     *                      erro que deve ser utilizada.
      *
      * @param       array $rules
      *              Regras para as validações.
@@ -947,8 +949,6 @@ trait MainCheckArgumentException
             }
         }
 
-
-        $this->invalidArgumentExceptionMessage = $err;
         return $r;
     }
 
@@ -988,6 +988,46 @@ trait MainCheckArgumentException
                 $r = false;
             }
         }
+
+        $this->invalidArgumentExceptionMessage = $err;
+        return $r;
+    }
+    /**
+     * Verifica se o argumento passado é igual a um dos valores permitidos.
+     * São esperados os seguintes parâmetros:
+     * - "allowedValues"    : Array simples indicando quais os valores são válidos.
+     * - "caseInsensitive"  : Se ``true`` fará a comparação de forma 'case-insensitive'.
+     *
+     * @param       array $rules
+     *              Regras para as validações.
+     *
+     * @return      bool
+     */
+    protected function checkArgument_is_allowed_key(array $rules) : bool
+    {
+        $r = true;
+        $err = "";
+        $argName = $rules["argName"];
+        $argValue = $rules["argValue"];
+        $allowedValues = $rules["allowedValues"];
+        $caseInsensitive = ((isset($rules["caseInsensitive"]) === true) ? $rules["caseInsensitive"] : false);
+
+
+        foreach ($argValue as $key => $value) {
+            if ($caseInsensitive === true) {
+                if (\array_in_ci($key, $allowedValues) === false) {
+                    $err = "Invalid key defined for \"$argName\". Expected keys [ " . \implode(", ", $allowedValues) . " ].";
+                    $r = false;
+                }
+            }
+            else {
+                if (\in_array($key, $allowedValues) === false) {
+                    $err = "Invalid key defined for \"$argName\". Expected keys [ " . \implode(", ", $allowedValues) . " ].";
+                    $r = false;
+                }
+            }
+        }
+
 
         $this->invalidArgumentExceptionMessage = $err;
         return $r;
