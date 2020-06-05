@@ -1128,7 +1128,7 @@ trait MainCheckArgumentException
         $r = true;
         $err = "";
         $argName = $rules["argName"];
-        $argValue = $rules["argValue"];
+        $argValue = ((\is_object($rules["argValue"]) === true) ? \get_class($rules["argValue"]) : $rules["argValue"]);
         $interface = $rules["interface"];
 
         if (\class_exists($argValue) === false) {

@@ -390,7 +390,7 @@ class MainCheckArgumentExceptionTest extends TestCase
         } catch (\Exception $ex) {
             $fail = true;
             $this->assertSame(
-                "Invalid key defined for \"arg05\". Expected keys [ HEAD, OPTIONS, TRACE, DEV, CONNECT ].",
+                "Invalid key defined for \"arg05\". Expected keys [ HEAD, OPTIONS, TRACE, DEV, CONNECT ]. Given: [ invalid ].",
                 $ex->getMessage()
             );
         }
