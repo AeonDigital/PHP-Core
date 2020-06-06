@@ -31,6 +31,20 @@ class MainCheckArgumentExceptionTest extends TestCase
         }
         $this->assertTrue($fail, "Test must fail");
     }
+    public function test_check_is_boolean()
+    {
+        $fail = false;
+        try {
+            $obj = new MainCheckArgumentExceptionMockClass03(1);
+        } catch (\Exception $ex) {
+            $fail = true;
+            $this->assertSame(
+                "Invalid value defined for \"arg01\". Expected boolean. Given: [ 1 ]",
+                $ex->getMessage()
+            );
+        }
+        $this->assertTrue($fail, "Test must fail");
+    }
     public function test_check_is_string()
     {
         $fail = false;
@@ -969,5 +983,22 @@ class MainCheckArgumentExceptionMockClass02
     private $result = null;
     public function getResult() {
         return $this->result;
+    }
+}
+
+
+class MainCheckArgumentExceptionMockClass03
+{
+    use MainCheckArgumentException;
+
+
+
+    function __construct(
+        $arg01 = false
+    ) {
+
+        $this->mainCheckForInvalidArgumentException(
+            "arg01", $arg01, ["is boolean"]
+        );
     }
 }

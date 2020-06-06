@@ -372,6 +372,30 @@ trait MainCheckArgumentException
         return $r;
     }
     /**
+     * Verifica se o argumento passado é diferente do tipo boolean.
+     *
+     * @param       array $rules
+     *              Regras para as validações.
+     *
+     * @return      bool
+     */
+    protected function checkArgument_is_boolean(array $rules) : bool
+    {
+        $r = true;
+        $err = "";
+        $argName = $rules["argName"];
+        $argValue = $rules["argValue"];
+
+
+        if (\is_bool($argValue) === false) {
+            $err = "Invalid value defined for \"$argName\". Expected boolean.";
+            $r = false;
+        }
+
+        $this->invalidArgumentExceptionMessage = $err;
+        return $r;
+    }
+    /**
      * Verifica se o argumento passado é diferente do tipo string.
      *
      * @param       array $rules
