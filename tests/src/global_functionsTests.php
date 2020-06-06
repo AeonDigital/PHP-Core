@@ -586,6 +586,16 @@ class global_functionsTest extends TestCase
 
 
 
+    public function test_mb_str_remove_invisible_chars()
+    {
+        $this->assertEquals(
+            mb_str_remove_invisible_chars(" Acentuação \x1F"),
+            " Acentuação "
+        );
+    }
+
+
+
     public function test_method_mb_str_replace_once()
     {
         $search = "passará";
@@ -643,6 +653,16 @@ class global_functionsTest extends TestCase
         foreach ($strFalse as $s) {
             $this->assertFalse(mb_str_starts_with($s, "prefix"));
         }
+    }
+
+
+
+    public function test_mb_str_to_valid_filename()
+    {
+        $this->assertEquals(
+            mb_str_to_valid_filename(" Acentuação e <> \x1F Outros | caracteres inválidos "),
+            "Acentuacao_e_Outros_caracteres_invalidos"
+        );
     }
 
 
