@@ -21,8 +21,14 @@ aField
 		| Classe abstrata que implementa ``iField``.
 
 
+	:Parent:
+		:php:class:`AeonDigital\\BObject`
+
 	:Implements:
 		:php:interface:`AeonDigital\\Interfaces\\DataModel\\iField`
+
+	:Used traits:
+		:php:trait:`AeonDigital\Traits\MainCheckArgumentException`
 
 
 Properties

@@ -21,8 +21,14 @@ aModel
 		| Classe abstrata que implementa ``iModel``.
 
 
+	:Parent:
+		:php:class:`AeonDigital\\BObject`
+
 	:Implements:
 		:php:interface:`AeonDigital\\Interfaces\\DataModel\\iModel`
+
+	:Used traits:
+		:php:trait:`AeonDigital\Traits\MainCheckArgumentException`
 
 
 Properties

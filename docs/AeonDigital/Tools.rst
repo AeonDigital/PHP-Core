@@ -475,7 +475,7 @@ Methods
 
 .. rst-class:: public static
 
-	.. php:method:: public static toDateTime( $o, $format=&#34;Y-m-d H:i:s&#34;)
+	.. php:method:: public static toDateTime( $o, $format="Y-m-d H:i:s")
 
 		.. rst-class:: phpdoc-description
 
@@ -511,7 +511,7 @@ Methods
 
 .. rst-class:: public static
 
-	.. php:method:: public static toDateTimeString( $o, $inputFormat=&#34;Y-m-d H:i:s&#34;, $outputFormat=&#34;Y-m-d H:i:s&#34;)
+	.. php:method:: public static toDateTimeString( $o, $inputFormat="Y-m-d H:i:s", $outputFormat="Y-m-d H:i:s")
 
 		.. rst-class:: phpdoc-description
 

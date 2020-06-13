@@ -19,11 +19,12 @@ Namespaces
 .. toctree::
 	:maxdepth: 6
 
-	Tools <Tools/index>
 	Collection <Collection/index>
 	SimpleType <SimpleType/index>
 	DataFormat <DataFormat/index>
 	DataModel <DataModel/index>
+	Tools <Tools/index>
+	Traits <Traits/index>
 
 
 Classes
@@ -32,5 +33,6 @@ Classes
 .. toctree::
 	:maxdepth: 6
 
+	BObject <BObject>
 	Realtype <Realtype>
 	Tools <Tools>
