@@ -10,7 +10,7 @@ declare (strict_types=1);
  *              URL para onde o ``UA`` será redirecionado.
  *
  * @param       string $httpStatusCode
- *              Status HTTP que deve ser informado no header.
+ *              Status ``Http`` que deve ser informado no header.
  *              O status padrão **HTTP/1.1 302 Found** indica que o redirecionamento é
  *              esperado ou que faz parte do fluxo padrão da aplicação.
  *
