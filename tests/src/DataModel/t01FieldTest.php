@@ -135,7 +135,7 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid value defined for \"type\". The given class name does not exists. Given: [ AeonDigital\SimpleType\stinvalid_class_name ]", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"type\". The given class name does not exists. Given: [ AeonDigital\Objects\Statics\stinvalid_class_name ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }

@@ -17,28 +17,32 @@
                 Defina aqui cada arquivo de testes que será utilizado.
             -->
             <file>src/global_functionsTests.php</file>
-            <file>src/Traits/MainCheckArgumentExceptionTest.php</file>
-            <file>src/RealtypeTests.php</file>
+            <file>src/Objects/RealtypeTests.php</file>
+            <file>src/Objects/ToolsTests.php</file>
+            <file>src/Objects/Traits/MainCheckArgumentExceptionTest.php</file>
 
 
-            <file>src/Tools/ToolsTests.php</file>
+            <file>src/Objects/Standart/Types/stdBoolTest.php</file>
+            <file>src/Objects/Standart/Types/stdByteTest.php</file>
+            <file>src/Objects/Standart/Types/stdDateTimeTest.php</file>
+            <file>src/Objects/Standart/Types/stdDoubleTest.php</file>
+            <file>src/Objects/Standart/Types/stdFloatTest.php</file>
+            <file>src/Objects/Standart/Types/stdIntTest.php</file>
+            <file>src/Objects/Standart/Types/stdLongTest.php</file>
+            <file>src/Objects/Standart/Types/stdRealTest.php</file>
+            <file>src/Objects/Standart/Types/stdShortTest.php</file>
+            <file>src/Objects/Standart/Types/stdStringTest.php</file>
+
+
+            <!--file>src/Objects/ArrayOf/ArrayOfObjectsTests.php</file-->
+
+
+            <!--file>src/Tools/ToolsTests.php</file>
             <file>src/Tools/ImageTests.php</file>
             <file>src/Tools/JSONTests.php</file>
             <file>src/Tools/MinifyCSSTest.php</file>
             <file>src/Tools/MinifyJSTest.php</file>
             <file>src/Tools/ZipTest.php</file>
-
-
-            <file>src/SimpleType/stBoolTest.php</file>
-            <file>src/SimpleType/stByteTest.php</file>
-            <file>src/SimpleType/stDateTimeTest.php</file>
-            <file>src/SimpleType/stDoubleTest.php</file>
-            <file>src/SimpleType/stFloatTest.php</file>
-            <file>src/SimpleType/stIntTest.php</file>
-            <file>src/SimpleType/stLongTest.php</file>
-            <file>src/SimpleType/stRealTest.php</file>
-            <file>src/SimpleType/stShortTest.php</file>
-            <file>src/SimpleType/stStringTest.php</file>
 
 
             <file>src/Collection/BasicCollectionTest.php</file>
@@ -89,7 +93,7 @@
             <file>src/DataModel/t04ModelFactory_SimpleFieldsTest.php</file>
             <file>src/DataModel/t05FieldModelTest.php</file>
             <file>src/DataModel/t06FieldModelCollectionTest.php</file>
-            <file>src/DataModel/t07ComplexFieldModelCollectionTest.php</file>
+            <file>src/DataModel/t07ComplexFieldModelCollectionTest.php</file-->
         </testsuite>
     </testsuites>
     <filter>

@@ -19,6 +19,26 @@ class global_functionsTest extends TestCase
 
 
 
+    public function test_method_iterable_check_default()
+    {
+        $assocArr = [
+            "Prop0" => 0,
+            "Prop2" => 2,
+            "Prop4" => 4
+        ];
+
+        $this->assertFalse(key_exists("Prop1", $assocArr));
+        $this->assertFalse(key_exists("Prop3", $assocArr));
+
+        for ($i = 0; $i <= 4; $i++) {
+            $k = "Prop$i";
+            $v = iterable_check_default($assocArr, $k, $i);
+            $this->assertSame($i, $v);
+        }
+    }
+
+
+
     public function test_method_array_check_required_keys()
     {
         $requiredKeys = ["Prop1", "Prop2", "Prop4"];

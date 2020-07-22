@@ -1,0 +1,49 @@
+<?php
+declare (strict_types=1);
+
+namespace AeonDigital\Objects\Standart\Types;
+
+use AeonDigital\Objects\Standart\Types\Abstracts\aFloat as aFloat;
+use AeonDigital\Objects\Tools as Tools;
+
+
+
+
+
+
+
+/**
+ * Define um ``Standart\Types do tipo float`` (flutuante de 32 bits).
+ *
+ * @package     AeonDigital\Objects\Standart
+ * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
+ * @copyright   2020, Rianna Cantarelli
+ * @license     MIT
+ */
+final class stdFloat extends aFloat
+{
+
+
+
+    /**
+     * Retorna o menor valor possível para este tipo.
+     *
+     * @return      float
+     */
+    public static function min() : float
+    {
+        return (float)-2147483648;
+    }
+
+
+
+    /**
+     * Retorna o maior valor possível para este tipo.
+     *
+     * @return      float
+     */
+    public static function max() : float
+    {
+        return (float)2147483647;
+    }
+}
