@@ -2,9 +2,9 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Standart\Types\stdLong as stdLong;
+use AeonDigital\Objects\Standart\stdLong as stdLong;
 
-require_once __DIR__ . "/../../../../phpunit.php";
+require_once __DIR__ . "/../../../phpunit.php";
 
 
 
@@ -105,7 +105,7 @@ class stdLongTest extends TestCase
         ];
         $convertFalseError = [
             "error.std.value.out.of.range", "error.std.value.out.of.range",
-            "error.std.type.unexpected", "error.std.type.unexpected", "error.std.type.unexpected"
+            "error.std.type.unexpected", "error.std.type.not.nullable", "error.std.type.unexpected"
         ];
 
 
@@ -116,10 +116,13 @@ class stdLongTest extends TestCase
 
         for ($i = 0; $i < count($convertFalse); $i++) {
             $err = null;
-            $result = stdLong::parseIfValidate($convertFalse[$i], $err);
+            $result = stdLong::parseIfValidate($convertFalse[$i], false, false, $err);
             $this->assertSame($result, $convertFalse[$i]);
             $this->assertSame($convertFalseError[$i], $err);
         }
+
+        $this->assertSame(null, stdLong::parseIfValidate(null, true));
+        $this->assertSame(0, stdLong::parseIfValidate(null, false, true));
     }
 
 
@@ -141,5 +144,65 @@ class stdLongTest extends TestCase
     public function test_method_max()
     {
         $this->assertSame(9223372036854775806, stdLong::max());
+    }
+
+
+
+
+
+
+
+
+
+
+    public function test_instance()
+    {
+        // Testa a inicialização simples.
+        $obj = new stdLong();
+        $this->assertTrue(is_a($obj, stdLong::class));
+        $this->assertFalse($obj->isNullable());
+        $this->assertFalse($obj->isReadOnly());
+        $this->assertSame(0, $obj->get());
+
+
+        // Testa a inicialização de um tipo nullable
+        $obj = new stdLong(null, true);
+        $this->assertTrue(is_a($obj, stdLong::class));
+        $this->assertTrue($obj->isNullable());
+        $this->assertFalse($obj->isReadOnly());
+        $this->assertSame(null, $obj->get());
+        $this->assertSame(0, $obj->getNotNull());
+
+
+        // Testa a alteração do valor atualmente definido
+        $obj = new stdLong(null, true);
+        $this->assertSame(null, $obj->get());
+
+        $this->assertTrue($obj->set(1));
+        $this->assertSame(1, $obj->get());
+
+        $this->assertTrue($obj->set(-1));
+        $this->assertSame(-1, $obj->get());
+
+
+        // Testa uma instância readonly
+        $obj = new stdLong(1, true, true);
+        $this->assertSame(1, $obj->get());
+
+        $this->assertFalse($obj->set(2, true, $err));
+        $this->assertSame(1, $obj->get());
+        $this->assertSame("error.std.type.readonly", $err);
+
+
+        // Testa uma atribuição que dispara uma exception.
+        $fail = false;
+        try {
+            $obj = new stdLong(1, true);
+            $obj->set("throws an error");
+        } catch (\Exception $ex) {
+            $fail = true;
+            $this->assertSame("Invalid given value to instance of \"?stdLong\"", $ex->getMessage());
+        }
+        $this->assertTrue($fail, "Test must fail");
     }
 }

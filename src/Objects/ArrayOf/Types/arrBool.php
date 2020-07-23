@@ -13,7 +13,7 @@ use AeonDigital\Objects\ArrayOf\Abstracts\ArrayOfObject as ArrayOfObject;
 
 
 /**
- * Array de ``bool``.
+ * Array de ``bool``. seguir definindo os tipos array: stdBoolArray | arrayBool | arrayOfBool
  *
  * @package     AeonDigital\Objects\ArrayOf
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>

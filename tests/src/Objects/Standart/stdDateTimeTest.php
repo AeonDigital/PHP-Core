@@ -2,9 +2,9 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Standart\Types\stdDateTime as stdDateTime;
+use AeonDigital\Objects\Standart\stdDateTime as stdDateTime;
 
-require_once __DIR__ . "/../../../../phpunit.php";
+require_once __DIR__ . "/../../../phpunit.php";
 
 
 
@@ -78,7 +78,7 @@ class stdDateTimeTest extends TestCase
             undefined, null, []
         ];
         $convertFalseError = [
-            "error.std.type.unexpected", "error.std.type.unexpected", "error.std.type.unexpected"
+            "error.std.type.unexpected", "error.std.type.not.nullable", "error.std.type.unexpected"
         ];
 
 
@@ -89,10 +89,16 @@ class stdDateTimeTest extends TestCase
 
         for ($i = 0; $i < count($convertFalse); $i++) {
             $err = null;
-            $result = stdDateTime::parseIfValidate($convertFalse[$i], $err);
+            $result = stdDateTime::parseIfValidate($convertFalse[$i], false, false, $err);
             $this->assertSame($result, $convertFalse[$i]);
             $this->assertSame($convertFalseError[$i], $err);
         }
+
+        $this->assertSame(null, stdDateTime::parseIfValidate(null, true));
+
+        $dtExpe = new \DateTime("0001-01-01 00:00:00");
+        $nulEqu = stdDateTime::parseIfValidate(null, false, true);
+        $this->assertSame($dtExpe->format("Y-m-d H:i:s"), $nulEqu->format("Y-m-d H:i:s"));
     }
 
 
@@ -120,5 +126,68 @@ class stdDateTimeTest extends TestCase
         $dtExpe = new \DateTime("9999-12-31 23:59:59");
         $nulEqu = stdDateTime::max();
         $this->assertSame($dtExpe->format("Y-m-d H:i:s"), $nulEqu->format("Y-m-d H:i:s"));
+    }
+
+
+
+
+
+
+
+
+
+
+    public function test_instance()
+    {
+        $nulEqu = stdDateTime::nullEquivalent();
+
+
+        // Testa a inicialização simples.
+        $obj = new stdDateTime();
+        $this->assertTrue(is_a($obj, stdDateTime::class));
+        $this->assertFalse($obj->isNullable());
+        $this->assertFalse($obj->isReadOnly());
+        $this->assertSame($nulEqu, $obj->get());
+
+
+        // Testa a inicialização de um tipo nullable
+        $obj = new stdDateTime(null, true);
+        $this->assertTrue(is_a($obj, stdDateTime::class));
+        $this->assertTrue($obj->isNullable());
+        $this->assertFalse($obj->isReadOnly());
+        $this->assertSame(null, $obj->get());
+        $this->assertSame($nulEqu, $obj->getNotNull());
+
+
+        // Testa a alteração do valor atualmente definido
+        $obj = new stdDateTime(null, true);
+        $this->assertSame(null, $obj->get());
+
+        $this->assertTrue($obj->set(new \DateTime("2020-02-02 22:22:22")));
+        $this->assertSame("2020-02-02 22:22:22", $obj->get()->format("Y-m-d H:i:s"));
+
+        $this->assertTrue($obj->set(new \DateTime("2010-01-01 11:11:11")));
+        $this->assertSame("2010-01-01 11:11:11", $obj->get()->format("Y-m-d H:i:s"));
+
+
+        // Testa uma instância readonly
+        $obj = new stdDateTime(new \DateTime("2020-02-02 22:22:22"), true, true);
+        $this->assertSame("2020-02-02 22:22:22", $obj->get()->format("Y-m-d H:i:s"));
+
+        $this->assertFalse($obj->set(new \DateTime("2010-01-01 11:11:11"), true, $err));
+        $this->assertSame("2020-02-02 22:22:22", $obj->get()->format("Y-m-d H:i:s"));
+        $this->assertSame("error.std.type.readonly", $err);
+
+
+        // Testa uma atribuição que dispara uma exception.
+        $fail = false;
+        try {
+            $obj = new stdDateTime(true, true);
+            $obj->set("throws an error");
+        } catch (\Exception $ex) {
+            $fail = true;
+            $this->assertSame("Invalid given value to instance of \"?stdDateTime\"", $ex->getMessage());
+        }
+        $this->assertTrue($fail, "Test must fail");
     }
 }

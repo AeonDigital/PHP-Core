@@ -2,9 +2,9 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Standart\Types\stdBool as stdBool;
+use AeonDigital\Objects\Standart\stdBool as stdBool;
 
-require_once __DIR__ . "/../../../../phpunit.php";
+require_once __DIR__ . "/../../../phpunit.php";
 
 
 
@@ -62,7 +62,7 @@ class stdBoolTest extends TestCase
         ];
         $convertFalseError = [
             "error.std.type.unexpected",
-            "error.std.type.unexpected",
+            "error.std.type.not.nullable",
             "error.std.type.unexpected"
         ];
 
@@ -75,10 +75,13 @@ class stdBoolTest extends TestCase
 
         for ($i = 0; $i < count($convertFalse); $i++) {
             $err = null;
-            $result = stdBool::parseIfValidate($convertFalse[$i], $err);
+            $result = stdBool::parseIfValidate($convertFalse[$i], false, false, $err);
             $this->assertSame($result, $convertFalse[$i]);
             $this->assertSame($convertFalseError[$i], $err);
         }
+
+        $this->assertSame(null, stdBool::parseIfValidate(null, true));
+        $this->assertSame(false, stdBool::parseIfValidate(null, false, true));
     }
 
 
@@ -100,5 +103,65 @@ class stdBoolTest extends TestCase
     public function test_method_max()
     {
         $this->assertSame(null, stdBool::max());
+    }
+
+
+
+
+
+
+
+
+
+
+    public function test_instance()
+    {
+        // Testa a inicialização simples.
+        $obj = new stdBool();
+        $this->assertTrue(is_a($obj, stdBool::class));
+        $this->assertFalse($obj->isNullable());
+        $this->assertFalse($obj->isReadOnly());
+        $this->assertSame(false, $obj->get());
+
+
+        // Testa a inicialização de um tipo nullable
+        $obj = new stdBool(null, true);
+        $this->assertTrue(is_a($obj, stdBool::class));
+        $this->assertTrue($obj->isNullable());
+        $this->assertFalse($obj->isReadOnly());
+        $this->assertSame(null, $obj->get());
+        $this->assertSame(false, $obj->getNotNull());
+
+
+        // Testa a alteração do valor atualmente definido
+        $obj = new stdBool(null, true);
+        $this->assertSame(null, $obj->get());
+
+        $this->assertTrue($obj->set(true));
+        $this->assertSame(true, $obj->get());
+
+        $this->assertTrue($obj->set(false));
+        $this->assertSame(false, $obj->get());
+
+
+        // Testa uma instância readonly
+        $obj = new stdBool(true, true, true);
+        $this->assertSame(true, $obj->get());
+
+        $this->assertFalse($obj->set(false, true, $err));
+        $this->assertSame(true, $obj->get());
+        $this->assertSame("error.std.type.readonly", $err);
+
+
+        // Testa uma atribuição que dispara uma exception.
+        $fail = false;
+        try {
+            $obj = new stdBool(true, true);
+            $obj->set("throws an error");
+        } catch (\Exception $ex) {
+            $fail = true;
+            $this->assertSame("Invalid given value to instance of \"?stdBool\"", $ex->getMessage());
+        }
+        $this->assertTrue($fail, "Test must fail");
     }
 }

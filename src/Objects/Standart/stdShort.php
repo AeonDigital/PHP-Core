@@ -1,9 +1,9 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Standart\Types;
+namespace AeonDigital\Objects\Standart;
 
-use AeonDigital\Objects\Standart\Types\Abstracts\aInt as aInt;
+use AeonDigital\Objects\Standart\Abstracts\aInt as aInt;
 use AeonDigital\Objects\Tools as Tools;
 
 
@@ -13,7 +13,7 @@ use AeonDigital\Objects\Tools as Tools;
 
 
 /**
- * Define um ``Standart\Types do tipo short`` (inteiro de 16 bits).
+ * Define um ``Standart do tipo short`` (inteiro de 16 bits).
  *
  * @package     AeonDigital\Objects\Standart
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>

@@ -1,9 +1,9 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Standart\Types;
+namespace AeonDigital\Objects\Standart;
 
-use AeonDigital\Objects\Standart\Types\Abstracts\aInt as aInt;
+use AeonDigital\Objects\Standart\Abstracts\aInt as aInt;
 use AeonDigital\Objects\Tools as Tools;
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Tools as Tools;
 
 
 /**
- * Define um ``Standart\Types do tipo int`` (inteiro de 32 bits).
+ * Define um ``Standart do tipo byte`` (inteiro de 8 bits).
  *
  * @package     AeonDigital\Objects\Standart
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-final class stdInt extends aInt
+final class stdByte extends aInt
 {
 
 
@@ -32,7 +32,7 @@ final class stdInt extends aInt
      */
     public static function min() : int
     {
-        return (int)-2147483648;
+        return (int)-128;
     }
 
 
@@ -44,6 +44,6 @@ final class stdInt extends aInt
      */
     public static function max() : int
     {
-        return (int)2147483647;
+        return (int)127;
     }
 }

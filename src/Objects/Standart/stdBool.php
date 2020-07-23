@@ -1,10 +1,10 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Standart\Types;
+namespace AeonDigital\Objects\Standart;
 
-use AeonDigital\Interfaces\Objects\Standart\Types\iBool as iBool;
-use AeonDigital\Objects\Standart\Types\Abstracts\aStandartType as aStandartType;
+use AeonDigital\Interfaces\Objects\Standart\iBool as iBool;
+use AeonDigital\Objects\Standart\Abstracts\aStandartType as aStandartType;
 use AeonDigital\Objects\Tools as Tools;
 
 
@@ -13,7 +13,7 @@ use AeonDigital\Objects\Tools as Tools;
 
 
 /**
- * Define um ``Standart\Types do tipo bool``.
+ * Define um ``Standart do tipo bool``.
  *
  * @package     AeonDigital\Objects\Standart
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
@@ -22,6 +22,35 @@ use AeonDigital\Objects\Tools as Tools;
  */
 final class stdBool extends aStandartType implements iBool
 {
+
+
+
+    /**
+     * Retorna o valor atualmente definido para a instância atual.
+     *
+     * @return      ?bool
+     */
+    public function get() : ?bool
+    {
+        return parent::stdGet();
+    }
+    /**
+     * Retorna o valor atualmente definido para a instância atual mas caso o
+     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent()``.
+     *
+     * @return      bool
+     */
+    public function getNotNull() : bool
+    {
+        return parent::stdGetNotNull();
+    }
+
+
+
+
+
+
+
 
 
 
@@ -49,14 +78,19 @@ final class stdBool extends aStandartType implements iBool
      * Verifica se o valor indicado pode ser convertido e usado como um valor válido
      * dentro das definições deste tipo.
      *
+     * A não ser que seja explicitado o contrário, o valor ``null`` não será aceito.
+     *
      * @param       mixed $v
      *              Valor que será verificado.
      *
+     * @param       bool $nullable
+     *              Quando ``true`` indica que o valor ``null`` é válido para este tipo.
+     *
      * @return      bool
      */
-    public static function validate($v) : bool
+    public static function validate($v, bool $nullable = false) : bool
     {
-        return (Tools::toBool($v) !== null);
+        return (($v === null && $nullable === true) || Tools::toBool($v) !== null);
     }
 
 
@@ -71,19 +105,48 @@ final class stdBool extends aStandartType implements iBool
      * @param       mixed $v
      *              Valor que será convertido.
      *
+     * @param       bool $nullable
+     *              Quando ``true`` indica que o valor ``null`` é válido para este tipo
+     *              e não será convertido.
+     *
+     * @param       bool $nullEquivalent
+     *              Quando ``true``, converterá ``null`` para o valor existente em
+     *              ``self::nullEquivalent()``. Se ``$nullable`` for definido esta opção
+     *              será ignorada.
+     *
      * @param       ?string $err
      *              Código do erro da validação.
      *
-     * @return      ?bool
+     * @return      mixed
      */
-    public static function parseIfValidate($v, ?string &$err = null)
-    {
-        $r = Tools::toBool($v);
-        if ($r === null || $v === undefined) {
-            $r = $v;
-            $err = "error.std.type.unexpected";
+    public static function parseIfValidate(
+        $v,
+        bool $nullable = false,
+        bool $nullEquivalent = false,
+        ?string &$err = null
+    ) {
+        $err = null;
+
+        if ($v === null) {
+            if ($nullable === false) {
+                if ($nullEquivalent === true) {
+                    $v = self::nullEquivalent();
+                }
+                else {
+                    $err = "error.std.type.not.nullable";
+                }
+            }
         }
-        return $r;
+        else {
+            $n = Tools::toBool($v);
+            if ($n === null) {
+                $err = "error.std.type.unexpected";
+            } else {
+                $v = $n;
+            }
+        }
+
+        return $v;
     }
 
 

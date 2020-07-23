@@ -1,9 +1,9 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Standart\Types;
+namespace AeonDigital\Objects\Standart;
 
-use AeonDigital\Objects\Standart\Types\Abstracts\aFloat as aFloat;
+use AeonDigital\Objects\Standart\Abstracts\aInt as aInt;
 use AeonDigital\Objects\Tools as Tools;
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Tools as Tools;
 
 
 /**
- * Define um ``Standart\Types do tipo float`` (flutuante de 32 bits).
+ * Define um ``Standart do tipo int`` (inteiro de 32 bits).
  *
  * @package     AeonDigital\Objects\Standart
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-final class stdFloat extends aFloat
+final class stdInt extends aInt
 {
 
 
@@ -28,11 +28,11 @@ final class stdFloat extends aFloat
     /**
      * Retorna o menor valor possível para este tipo.
      *
-     * @return      float
+     * @return      int
      */
-    public static function min() : float
+    public static function min() : int
     {
-        return (float)-2147483648;
+        return (int)-2147483648;
     }
 
 
@@ -40,10 +40,10 @@ final class stdFloat extends aFloat
     /**
      * Retorna o maior valor possível para este tipo.
      *
-     * @return      float
+     * @return      int
      */
-    public static function max() : float
+    public static function max() : int
     {
-        return (float)2147483647;
+        return (int)2147483647;
     }
 }

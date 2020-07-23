@@ -2,9 +2,9 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Standart\Types\stdByte as stdByte;
+use AeonDigital\Objects\Standart\stdByte as stdByte;
 
-require_once __DIR__ . "/../../../../phpunit.php";
+require_once __DIR__ . "/../../../phpunit.php";
 
 
 
@@ -72,7 +72,7 @@ class stdByteTest extends TestCase
         ];
         $convertFalseError = [
             "error.std.value.out.of.range", "error.std.value.out.of.range",
-            "error.std.type.unexpected", "error.std.type.unexpected", "error.std.type.unexpected"
+            "error.std.type.unexpected", "error.std.type.not.nullable", "error.std.type.unexpected"
         ];
 
 
@@ -83,10 +83,13 @@ class stdByteTest extends TestCase
 
         for ($i = 0; $i < count($convertFalse); $i++) {
             $err = null;
-            $result = stdByte::parseIfValidate($convertFalse[$i], $err);
+            $result = stdByte::parseIfValidate($convertFalse[$i], false, false, $err);
             $this->assertSame($result, $convertFalse[$i]);
             $this->assertSame($convertFalseError[$i], $err);
         }
+
+        $this->assertSame(null, stdByte::parseIfValidate(null, true));
+        $this->assertSame(0, stdByte::parseIfValidate(null, false, true));
     }
 
 
@@ -108,5 +111,65 @@ class stdByteTest extends TestCase
     public function test_method_max()
     {
         $this->assertSame(127, stdByte::max());
+    }
+
+
+
+
+
+
+
+
+
+
+    public function test_instance()
+    {
+        // Testa a inicialização simples.
+        $obj = new stdByte();
+        $this->assertTrue(is_a($obj, stdByte::class));
+        $this->assertFalse($obj->isNullable());
+        $this->assertFalse($obj->isReadOnly());
+        $this->assertSame(0, $obj->get());
+
+
+        // Testa a inicialização de um tipo nullable
+        $obj = new stdByte(null, true);
+        $this->assertTrue(is_a($obj, stdByte::class));
+        $this->assertTrue($obj->isNullable());
+        $this->assertFalse($obj->isReadOnly());
+        $this->assertSame(null, $obj->get());
+        $this->assertSame(0, $obj->getNotNull());
+
+
+        // Testa a alteração do valor atualmente definido
+        $obj = new stdByte(null, true);
+        $this->assertSame(null, $obj->get());
+
+        $this->assertTrue($obj->set(1));
+        $this->assertSame(1, $obj->get());
+
+        $this->assertTrue($obj->set(-1));
+        $this->assertSame(-1, $obj->get());
+
+
+        // Testa uma instância readonly
+        $obj = new stdByte(1, true, true);
+        $this->assertSame(1, $obj->get());
+
+        $this->assertFalse($obj->set(2, true, $err));
+        $this->assertSame(1, $obj->get());
+        $this->assertSame("error.std.type.readonly", $err);
+
+
+        // Testa uma atribuição que dispara uma exception.
+        $fail = false;
+        try {
+            $obj = new stdByte(1, true);
+            $obj->set("throws an error");
+        } catch (\Exception $ex) {
+            $fail = true;
+            $this->assertSame("Invalid given value to instance of \"?stdByte\"", $ex->getMessage());
+        }
+        $this->assertTrue($fail, "Test must fail");
     }
 }
