@@ -74,6 +74,25 @@ abstract class aStandartType implements iStandartType
 
 
     /**
+     * Informa se esta instância está ``undefined``.
+     *
+     * @var         bool
+     */
+    protected bool $undefined = true;
+    /**
+     * Informa se esta instância está ``undefined``.
+     * Significa que ela nunca recebeu um valor de forma explicita.
+     *
+     * @return      bool
+     */
+    public function isUndefined() : bool
+    {
+        return $this->undefined;
+    }
+
+
+
+    /**
      * Define um novo valor para a instância.
      *
      * @param       mixed $v
@@ -109,6 +128,7 @@ abstract class aStandartType implements iStandartType
             else {
                 $r = true;
                 $this->value = $n;
+                $this->undefined = false;
             }
         }
 

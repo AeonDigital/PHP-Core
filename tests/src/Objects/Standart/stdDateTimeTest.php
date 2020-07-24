@@ -147,6 +147,7 @@ class stdDateTimeTest extends TestCase
         $this->assertTrue(is_a($obj, stdDateTime::class));
         $this->assertFalse($obj->isNullable());
         $this->assertFalse($obj->isReadOnly());
+        $this->assertTrue($obj->isUndefined());
         $this->assertSame($nulEqu, $obj->get());
 
 
@@ -155,6 +156,7 @@ class stdDateTimeTest extends TestCase
         $this->assertTrue(is_a($obj, stdDateTime::class));
         $this->assertTrue($obj->isNullable());
         $this->assertFalse($obj->isReadOnly());
+        $this->assertFalse($obj->isUndefined());
         $this->assertSame(null, $obj->get());
         $this->assertSame($nulEqu, $obj->getNotNull());
 

@@ -144,6 +144,7 @@ class stdRealTest extends TestCase
         $this->assertTrue(is_a($obj, stdReal::class));
         $this->assertFalse($obj->isNullable());
         $this->assertFalse($obj->isReadOnly());
+        $this->assertTrue($obj->isUndefined());
         $this->assertSame("0", (string)$obj->get());
 
 
@@ -152,6 +153,7 @@ class stdRealTest extends TestCase
         $this->assertTrue(is_a($obj, stdReal::class));
         $this->assertTrue($obj->isNullable());
         $this->assertFalse($obj->isReadOnly());
+        $this->assertFalse($obj->isUndefined());
         $this->assertSame(null, $obj->get());
         $this->assertSame("0", (string)$obj->getNotNull());
 

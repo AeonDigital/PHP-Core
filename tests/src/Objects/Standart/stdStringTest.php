@@ -120,6 +120,7 @@ class stdStringTest extends TestCase
         $this->assertTrue(is_a($obj, stdString::class));
         $this->assertFalse($obj->isNullable());
         $this->assertFalse($obj->isReadOnly());
+        $this->assertTrue($obj->isUndefined());
         $this->assertSame("", $obj->get());
 
 
@@ -128,6 +129,7 @@ class stdStringTest extends TestCase
         $this->assertTrue(is_a($obj, stdString::class));
         $this->assertTrue($obj->isNullable());
         $this->assertFalse($obj->isReadOnly());
+        $this->assertFalse($obj->isUndefined());
         $this->assertSame(null, $obj->get());
         $this->assertSame("", $obj->getNotNull());
 

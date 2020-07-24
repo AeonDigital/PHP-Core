@@ -129,6 +129,7 @@ class stdByteTest extends TestCase
         $this->assertTrue(is_a($obj, stdByte::class));
         $this->assertFalse($obj->isNullable());
         $this->assertFalse($obj->isReadOnly());
+        $this->assertTrue($obj->isUndefined());
         $this->assertSame(0, $obj->get());
 
 
@@ -137,6 +138,7 @@ class stdByteTest extends TestCase
         $this->assertTrue(is_a($obj, stdByte::class));
         $this->assertTrue($obj->isNullable());
         $this->assertFalse($obj->isReadOnly());
+        $this->assertFalse($obj->isUndefined());
         $this->assertSame(null, $obj->get());
         $this->assertSame(0, $obj->getNotNull());
 
