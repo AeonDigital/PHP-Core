@@ -37,7 +37,7 @@ abstract class aFloat extends aStandartType implements iNumeric
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent()``.
+     * valor seja ``null``, retornará o valor definido em ``static::nullEquivalent()``.
      *
      * @return      float
      */
@@ -122,7 +122,7 @@ abstract class aFloat extends aStandartType implements iNumeric
      *
      * @param       bool $nullEquivalent
      *              Quando ``true``, converterá ``null`` para o valor existente em
-     *              ``self::nullEquivalent()``. Se ``$nullable`` for definido esta opção
+     *              ``static::nullEquivalent()``. Se ``$nullable`` for definido esta opção
      *              será ignorada.
      *
      * @param       ?string $err
@@ -136,33 +136,7 @@ abstract class aFloat extends aStandartType implements iNumeric
         bool $nullEquivalent = false,
         ?string &$err = null
     ) {
-        $err = null;
-
-        if ($v === null) {
-            if ($nullable === false) {
-                if ($nullEquivalent === true) {
-                    $v = self::nullEquivalent();
-                }
-                else {
-                    $err = "error.std.type.not.nullable";
-                }
-            }
-        }
-        else {
-            $n = Tools::toFloat($v);
-            if ($n === null) {
-                $err = "error.std.type.unexpected";
-            } else {
-                if (static::validateRange($n) === false) {
-                    $err = "error.std.value.out.of.range";
-                }
-                else {
-                    $v = $n;
-                }
-            }
-        }
-
-        return $v;
+        return static::stdParseIfValidate($v, $nullable, $nullEquivalent, $err, "toFloat");
     }
 
 

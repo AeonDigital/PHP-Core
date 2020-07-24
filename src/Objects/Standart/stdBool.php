@@ -55,6 +55,16 @@ final class stdBool extends aStandartType implements iBool
 
 
     /**
+     * Indica quando este tipo é ``comparable``, ou seja, os operadores matemáticos
+     * naturais do PHP podem ser utilizados.
+     *
+     * @var         bool
+     */
+    protected static bool $isComparable = false;
+
+
+
+    /**
      * Tenta efetuar a conversão do valor indicado para o tipo ``string``.
      * Caso não seja possível converter o valor, retorna ``null``.
      *
@@ -125,28 +135,7 @@ final class stdBool extends aStandartType implements iBool
         bool $nullEquivalent = false,
         ?string &$err = null
     ) {
-        $err = null;
-
-        if ($v === null) {
-            if ($nullable === false) {
-                if ($nullEquivalent === true) {
-                    $v = self::nullEquivalent();
-                }
-                else {
-                    $err = "error.std.type.not.nullable";
-                }
-            }
-        }
-        else {
-            $n = Tools::toBool($v);
-            if ($n === null) {
-                $err = "error.std.type.unexpected";
-            } else {
-                $v = $n;
-            }
-        }
-
-        return $v;
+        return static::stdParseIfValidate($v, $nullable, $nullEquivalent, $err, "toBool");
     }
 
 

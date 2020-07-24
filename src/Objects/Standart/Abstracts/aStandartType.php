@@ -148,7 +148,7 @@ abstract class aStandartType implements iStandartType
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent()``.
+     * valor seja ``null``, retornará o valor definido em ``static::nullEquivalent()``.
      *
      * @return      mixed
      */
@@ -163,12 +163,12 @@ abstract class aStandartType implements iStandartType
     /**
      * Inicia uma nova instância.
      *
-     * O valor inicial é sempre aquele definido em ``self::nullEquivalent()``.
+     * O valor inicial é sempre aquele definido em ``static::nullEquivalent()``.
      *
      * @param       mixed $v
      *              Valor inicial.
      *              Se o valor atribuido for inválido, será mantido como
-     *              ``self::nullEquivalent()`` exceto se a instância for definida como
+     *              ``static::nullEquivalent()`` exceto se a instância for definida como
      *              ``nullable``. Neste caso será usado o valor inicial ``null``.
      *
      * @param       bool $nullable
@@ -207,6 +207,16 @@ abstract class aStandartType implements iStandartType
 
 
 
+
+
+
+    /**
+     * Indica quando este tipo é ``comparable``, ou seja, os operadores matemáticos
+     * naturais do PHP podem ser utilizados.
+     *
+     * @var         bool
+     */
+    protected static bool $isComparable = true;
 
 
 
@@ -261,7 +271,7 @@ abstract class aStandartType implements iStandartType
      *
      * @param       bool $nullEquivalent
      *              Quando ``true``, converterá ``null`` para o valor existente em
-     *              ``self::nullEquivalent()``. Se ``$nullable`` for definido esta opção
+     *              ``static::nullEquivalent()``. Se ``$nullable`` for definido esta opção
      *              será ignorada.
      *
      * @param       ?string $err
@@ -275,6 +285,71 @@ abstract class aStandartType implements iStandartType
         bool $nullEquivalent = false,
         ?string &$err = null
     );
+
+
+
+    /**
+     * Efetuará a conversão do valor indicado para o tipo que esta classe representa
+     * apenas se passar na validação.
+     *
+     * Caso não passe retornará um código que identifica o erro ocorrido na variável
+     * ``$err``.
+     *
+     * @param       mixed $v
+     *              Valor que será convertido.
+     *
+     * @param       bool $nullable
+     *              Quando ``true`` indica que o valor ``null`` é válido para este tipo
+     *              e não será convertido.
+     *
+     * @param       bool $nullEquivalent
+     *              Quando ``true``, converterá ``null`` para o valor existente em
+     *              ``static::nullEquivalent()``. Se ``$nullable`` for definido esta opção
+     *              será ignorada.
+     *
+     * @param       ?string $err
+     *              Código do erro da validação.
+     *
+     * @param       string $toType
+     *              Nome do método que será usado para tentar converter o tipo.
+     *
+     * @return      mixed
+     */
+    protected static function stdParseIfValidate(
+        $v,
+        bool $nullable = false,
+        bool $nullEquivalent = false,
+        ?string &$err = null,
+        string $toType = ""
+    ) {
+        $err = null;
+
+        if ($v === null) {
+            if ($nullable === false) {
+                if ($nullEquivalent === true) {
+                    $v = static::nullEquivalent();
+                }
+                else {
+                    $err = "error.std.type.not.nullable";
+                }
+            }
+        }
+        else {
+            $n = Tools::$toType($v);
+            if ($n === null) {
+                $err = "error.std.type.unexpected";
+            } else {
+                if (static::validateRange($n) === false) {
+                    $err = "error.std.value.out.of.range";
+                }
+                else {
+                    $v = $n;
+                }
+            }
+        }
+
+        return $v;
+    }
 
 
 
@@ -295,6 +370,6 @@ abstract class aStandartType implements iStandartType
      */
     protected static function validateRange($v) : bool
     {
-        return ($v >= static::min() && $v <= static::max());
+        return (static::$isComparable === false || ($v >= static::min() && $v <= static::max()));
     }
 }
