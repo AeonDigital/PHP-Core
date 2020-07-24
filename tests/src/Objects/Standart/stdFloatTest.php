@@ -132,6 +132,8 @@ class stdFloatTest extends TestCase
 
     public function test_instance()
     {
+        $this->assertSame("Float", stdFloat::TYPE);
+
         // Testa a inicialização simples.
         $obj = new stdFloat();
         $this->assertTrue(is_a($obj, stdFloat::class));

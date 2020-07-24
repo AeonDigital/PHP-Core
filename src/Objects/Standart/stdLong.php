@@ -35,6 +35,11 @@ use AeonDigital\Objects\Tools as Tools;
  */
 final class stdLong extends aInt
 {
+    /**
+     * Nome deste tipo.
+     * Namespace completa para quando tratar-se de uma classe.
+     */
+    const TYPE = "Long";
 
 
 

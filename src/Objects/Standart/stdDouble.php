@@ -22,6 +22,11 @@ use AeonDigital\Objects\Tools as Tools;
  */
 final class stdDouble extends aFloat
 {
+    /**
+     * Nome deste tipo.
+     * Namespace completa para quando tratar-se de uma classe.
+     */
+    const TYPE = "Double";
 
 
 

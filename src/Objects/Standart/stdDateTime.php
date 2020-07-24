@@ -22,6 +22,11 @@ use AeonDigital\Objects\Tools as Tools;
  */
 final class stdDateTime extends aStandartType implements iDateTime
 {
+    /**
+     * Nome deste tipo.
+     * Namespace completa para quando tratar-se de uma classe.
+     */
+    const TYPE = "DateTime";
 
 
 

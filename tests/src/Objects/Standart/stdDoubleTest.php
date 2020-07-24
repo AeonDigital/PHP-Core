@@ -144,6 +144,8 @@ class stdDoubleTest extends TestCase
 
     public function test_instance()
     {
+        $this->assertSame("Double", stdDouble::TYPE);
+
         // Testa a inicialização simples.
         $obj = new stdDouble();
         $this->assertTrue(is_a($obj, stdDouble::class));

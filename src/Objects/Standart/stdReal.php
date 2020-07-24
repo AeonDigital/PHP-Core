@@ -22,6 +22,11 @@ use AeonDigital\Objects\Realtype as Realtype;
  */
 final class stdReal extends aStandartType implements iReal
 {
+    /**
+     * Nome deste tipo.
+     * Namespace completa para quando tratar-se de uma classe.
+     */
+    const TYPE = "AeonDigital\Objects\Realtype";
 
 
 

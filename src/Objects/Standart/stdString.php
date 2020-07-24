@@ -22,6 +22,11 @@ use AeonDigital\Objects\Tools as Tools;
  */
 final class stdString extends aStandartType implements iString
 {
+    /**
+     * Nome deste tipo.
+     * Namespace completa para quando tratar-se de uma classe.
+     */
+    const TYPE = "String";
 
 
 

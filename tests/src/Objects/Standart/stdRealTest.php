@@ -139,6 +139,8 @@ class stdRealTest extends TestCase
 
     public function test_instance()
     {
+        $this->assertSame("AeonDigital\Objects\Realtype", stdReal::TYPE);
+
         // Testa a inicialização simples.
         $obj = new stdReal();
         $this->assertTrue(is_a($obj, stdReal::class));
