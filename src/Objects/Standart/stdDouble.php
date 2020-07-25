@@ -3,8 +3,8 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Standart;
 
-use AeonDigital\Objects\Standart\Abstracts\aFloat as aFloat;
-use AeonDigital\Objects\Tools as Tools;
+use AeonDigital\Interfaces\Objects\Standart\iDouble as iDouble;
+use AeonDigital\Objects\Standart\Abstracts\aNumericFloating as aNumericFloating;
 
 
 
@@ -13,20 +13,15 @@ use AeonDigital\Objects\Tools as Tools;
 
 
 /**
- * Define um ``Standart do tipo double`` (flutuante de 64 bits).
+ * Define um ``Standart`` para o tipo ``double`` (flutuante de 64 bits).
  *
  * @package     AeonDigital\Objects\Standart
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-final class stdDouble extends aFloat
+final class stdDouble extends aNumericFloating implements iDouble
 {
-    /**
-     * Nome deste tipo.
-     * Namespace completa para quando tratar-se de uma classe.
-     */
-    const TYPE = "Double";
 
 
 

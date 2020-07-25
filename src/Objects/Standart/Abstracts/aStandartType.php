@@ -23,6 +23,9 @@ use AeonDigital\Objects\Tools as Tools;
  */
 abstract class aStandartType implements iStandartType
 {
+
+
+
     /**
      * Valor da instância.
      *
@@ -211,16 +214,6 @@ abstract class aStandartType implements iStandartType
 
 
     /**
-     * Indica quando este tipo é ``comparable``, ou seja, os operadores matemáticos
-     * naturais do PHP podem ser utilizados.
-     *
-     * @var         bool
-     */
-    protected static bool $isComparable = true;
-
-
-
-    /**
      * Tenta efetuar a conversão do valor indicado para o tipo ``string``.
      * Caso não seja possível converter o valor, retorna ``null``.
      *
@@ -231,7 +224,11 @@ abstract class aStandartType implements iStandartType
      */
     public static function toString($v) : ?string
     {
-        return Tools::toString($v);
+        if (static::validate($v) === true) {
+            if (static::TYPE === "Bool") { $v = Tools::toBool($v); }
+            return Tools::toString($v);
+        }
+        return null;
     }
 
 
@@ -251,7 +248,21 @@ abstract class aStandartType implements iStandartType
      *
      * @return      bool
      */
-    abstract static function validate($v, bool $nullable = false) : bool;
+    public static function validate($v, bool $nullable = false) : bool
+    {
+        if ($v === null && $nullable === true) {
+            return true;
+        }
+        else {
+            $n = static::stdTryParseForThisType($v);
+            if ($n === null) {
+                return false;
+            }
+            else {
+                return ((static::HAS_LIMIT_RANGE === false) ? true : static::validateRange($n));
+            }
+        }
+    }
 
 
 
@@ -279,48 +290,11 @@ abstract class aStandartType implements iStandartType
      *
      * @return      mixed
      */
-    abstract static function parseIfValidate(
+    public static function parseIfValidate(
         $v,
         bool $nullable = false,
         bool $nullEquivalent = false,
         ?string &$err = null
-    );
-
-
-
-    /**
-     * Efetuará a conversão do valor indicado para o tipo que esta classe representa
-     * apenas se passar na validação.
-     *
-     * Caso não passe retornará um código que identifica o erro ocorrido na variável
-     * ``$err``.
-     *
-     * @param       mixed $v
-     *              Valor que será convertido.
-     *
-     * @param       bool $nullable
-     *              Quando ``true`` indica que o valor ``null`` é válido para este tipo
-     *              e não será convertido.
-     *
-     * @param       bool $nullEquivalent
-     *              Quando ``true``, converterá ``null`` para o valor existente em
-     *              ``static::nullEquivalent()``. Se ``$nullable`` for definido esta opção
-     *              será ignorada.
-     *
-     * @param       ?string $err
-     *              Código do erro da validação.
-     *
-     * @param       string $toType
-     *              Nome do método que será usado para tentar converter o tipo.
-     *
-     * @return      mixed
-     */
-    protected static function stdParseIfValidate(
-        $v,
-        bool $nullable = false,
-        bool $nullEquivalent = false,
-        ?string &$err = null,
-        string $toType = ""
     ) {
         $err = null;
 
@@ -335,7 +309,7 @@ abstract class aStandartType implements iStandartType
             }
         }
         else {
-            $n = Tools::$toType($v);
+            $n = static::stdTryParseForThisType($v);
             if ($n === null) {
                 $err = "error.std.type.unexpected";
             } else {
@@ -370,6 +344,65 @@ abstract class aStandartType implements iStandartType
      */
     protected static function validateRange($v) : bool
     {
-        return (static::$isComparable === false || ($v >= static::min() && $v <= static::max()));
+        return (static::HAS_LIMIT_RANGE === false || ($v >= static::min() && $v <= static::max()));
+    }
+    /**
+     * Retorna o nome do método a ser usado para efetuar a tentativa de conversão
+     * de um dado em outro tipo.
+     *
+     * O método informado deve existir em ``AeonDigital\Objects\Tools``
+     *
+     * @return      string
+     */
+    protected static function stdGetToolsTryParserForThisType() : string
+    {
+        $r = "";
+
+        switch(static::TYPE) {
+            case "Bool":
+                $r = "toBool";
+                break;
+
+            case "Byte":
+            case "Short":
+            case "Int":
+            case "Long":
+                $r = "toInt";
+                break;
+
+            case "Float":
+            case "Double":
+                $r = "toFloat";
+                break;
+
+            case "DateTime":
+                $r = "toDateTime";
+                break;
+
+            case "AeonDigital\Objects\Realtype":
+                $r = "toRealtype";
+                break;
+
+            case "String":
+                $r = "toString";
+                break;
+        }
+
+        return $r;
+    }
+    /**
+     * Tenta converter o tipo do valor passado para o tipo atual desta classe.
+     * Apenas valores realmente compatíveis serão convertidos.
+     *
+     * @param       mixed $v
+     *              valor que será convertido.
+     *
+     * @return      ?bool
+     *              Retornará ``null`` caso não seja possível efetuar a conversão.
+     */
+    protected static function stdTryParseForThisType($v)
+    {
+        $toType = static::stdGetToolsTryParserForThisType();
+        return Tools::$toType($v);
     }
 }

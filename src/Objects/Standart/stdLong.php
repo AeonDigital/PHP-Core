@@ -3,8 +3,8 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Standart;
 
-use AeonDigital\Objects\Standart\Abstracts\aInt as aInt;
-use AeonDigital\Objects\Tools as Tools;
+use AeonDigital\Interfaces\Objects\Standart\iLong as iLong;
+use AeonDigital\Objects\Standart\Abstracts\aNumericInteger as aNumericInteger;
 
 
 
@@ -13,7 +13,7 @@ use AeonDigital\Objects\Tools as Tools;
 
 
 /**
- * Define um ``Standart do tipo long`` (inteiro de 64 bits).
+ * Define um ``Standart`` para o tipo ``long`` (inteiro de 64 bits).
  *
  * **Importante**
  * Em sistemas de 64 bits o limiar mínimo para valores inteiros é de **-9223372036854775808**
@@ -33,13 +33,8 @@ use AeonDigital\Objects\Tools as Tools;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-final class stdLong extends aInt
+final class stdLong extends aNumericInteger implements iLong
 {
-    /**
-     * Nome deste tipo.
-     * Namespace completa para quando tratar-se de uma classe.
-     */
-    const TYPE = "Long";
 
 
 

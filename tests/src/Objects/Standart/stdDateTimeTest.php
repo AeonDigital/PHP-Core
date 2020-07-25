@@ -140,6 +140,9 @@ class stdDateTimeTest extends TestCase
     public function test_instance()
     {
         $this->assertSame("DateTime", stdDateTime::TYPE);
+        $this->assertSame(true, stdDateTime::IS_CLASS);
+        $this->assertSame(true, stdDateTime::HAS_LIMIT_RANGE);
+
 
         $nulEqu = stdDateTime::nullEquivalent();
 

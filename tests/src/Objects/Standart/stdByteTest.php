@@ -125,6 +125,8 @@ class stdByteTest extends TestCase
     public function test_instance()
     {
         $this->assertSame("Byte", stdByte::TYPE);
+        $this->assertSame(false, stdByte::IS_CLASS);
+        $this->assertSame(true, stdByte::HAS_LIMIT_RANGE);
 
         // Testa a inicialização simples.
         $obj = new stdByte();

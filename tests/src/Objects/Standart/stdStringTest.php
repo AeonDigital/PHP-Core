@@ -116,6 +116,8 @@ class stdStringTest extends TestCase
     public function test_instance()
     {
         $this->assertSame("String", stdString::TYPE);
+        $this->assertSame(false, stdString::IS_CLASS);
+        $this->assertSame(false, stdString::HAS_LIMIT_RANGE);
 
         // Testa a inicialização simples.
         $obj = new stdString();

@@ -134,6 +134,8 @@ class stdIntTest extends TestCase
     public function test_instance()
     {
         $this->assertSame("Int", stdInt::TYPE);
+        $this->assertSame(false, stdInt::IS_CLASS);
+        $this->assertSame(true, stdInt::HAS_LIMIT_RANGE);
 
         // Testa a inicialização simples.
         $obj = new stdInt();

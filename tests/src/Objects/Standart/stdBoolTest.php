@@ -117,6 +117,8 @@ class stdBoolTest extends TestCase
     public function test_instance()
     {
         $this->assertSame("Bool", stdBool::TYPE);
+        $this->assertSame(false, stdBool::IS_CLASS);
+        $this->assertSame(false, stdBool::HAS_LIMIT_RANGE);
 
         // Testa a inicialização simples.
         $obj = new stdBool();

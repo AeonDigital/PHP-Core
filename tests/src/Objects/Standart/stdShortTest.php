@@ -128,6 +128,8 @@ class stdShortTest extends TestCase
     public function test_instance()
     {
         $this->assertSame("Short", stdShort::TYPE);
+        $this->assertSame(false, stdShort::IS_CLASS);
+        $this->assertSame(true, stdShort::HAS_LIMIT_RANGE);
 
         // Testa a inicialização simples.
         $obj = new stdShort();

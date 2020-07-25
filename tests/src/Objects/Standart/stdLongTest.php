@@ -158,6 +158,8 @@ class stdLongTest extends TestCase
     public function test_instance()
     {
         $this->assertSame("Long", stdLong::TYPE);
+        $this->assertSame(false, stdLong::IS_CLASS);
+        $this->assertSame(true, stdLong::HAS_LIMIT_RANGE);
 
         // Testa a inicialização simples.
         $obj = new stdLong();

@@ -26,6 +26,19 @@ abstract class ArrayOfObject extends \ArrayObject
 
 
 
+    /**
+     * Nas classes concretas deve ser definido uma constante com o nome ``TYPE``
+     * que deverá trazer o nome do tipo de dado que aquela classe pretende definir.
+     *
+     * >>> Trazer a constante para cá.
+     * >>> especializar as interfaces em seus sub-tipos como "integer > byte | short | int | long"
+     *
+     * >>> Criar a constante IS_CLASS
+     * >>> Criar a constante HAS_LIMIT_RANGE
+     *
+     * Em StandartArray gerar métodos que apontem para estes valores estáticos e constantes.
+     */
+
 
 
     /**
