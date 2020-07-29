@@ -13,7 +13,7 @@ use AeonDigital\Objects\Standart\stdReal as stdReal;
 
 
 /**
- * Classe concreta para o tipo ``real`` (Realtype).
+ * Classe concreta para o tipo ``Realtype``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>

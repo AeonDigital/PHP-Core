@@ -13,7 +13,7 @@ use AeonDigital\Objects\Standart\Abstracts\aStandart as aStandart;
 
 
 /**
- * Define um ``Standart do tipo string``.
+ * Define um ``Standart`` para o tipo ``string``.
  *
  * @package     AeonDigital\Objects\Standart
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
