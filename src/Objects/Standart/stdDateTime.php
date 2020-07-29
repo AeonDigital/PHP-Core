@@ -38,9 +38,6 @@ final class stdDateTime extends aGeneralDateTime implements iDateTime
         }
         return self::$stdNull;
     }
-
-
-
     /**
      * Retorna o menor valor possível para este tipo.
      *
@@ -53,9 +50,6 @@ final class stdDateTime extends aGeneralDateTime implements iDateTime
         }
         return self::$stdMin;
     }
-
-
-
     /**
      * Retorna o maior valor possível para este tipo.
      *

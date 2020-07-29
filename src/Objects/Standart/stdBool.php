@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Standart;
 
 use AeonDigital\Interfaces\Objects\Standart\iBool as iBool;
-use AeonDigital\Objects\Standart\Abstracts\aStandartType as aStandartType;
+use AeonDigital\Objects\Standart\Abstracts\aStandart as aStandart;
 
 
 
@@ -20,37 +20,8 @@ use AeonDigital\Objects\Standart\Abstracts\aStandartType as aStandartType;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-final class stdBool extends aStandartType implements iBool
+final class stdBool extends aStandart implements iBool
 {
-
-
-
-    /**
-     * Retorna o valor atualmente definido para a instância atual.
-     *
-     * @return      ?bool
-     */
-    public function get() : ?bool
-    {
-        return parent::stdGet();
-    }
-    /**
-     * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent()``.
-     *
-     * @return      bool
-     */
-    public function getNotNull() : bool
-    {
-        return parent::stdGetNotNull();
-    }
-
-
-
-
-
-
-
 
 
 
@@ -64,9 +35,6 @@ final class stdBool extends aStandartType implements iBool
     {
         return false;
     }
-
-
-
     /**
      * Retorna o menor valor possível para este tipo.
      * Quando ``null`` indica que não há limites definidos ou que isto não se aplica
@@ -78,9 +46,6 @@ final class stdBool extends aStandartType implements iBool
     {
         return null;
     }
-
-
-
     /**
      * Retorna o maior valor possível para este tipo.
      * Quando ``null`` indica que não há limites definidos ou que isto não se aplica

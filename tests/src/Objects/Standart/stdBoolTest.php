@@ -17,6 +17,15 @@ class stdBoolTest extends TestCase
 
 
 
+    public function test_constants()
+    {
+        $this->assertSame("Bool", stdBool::TYPE);
+        $this->assertSame(false, stdBool::IS_CLASS);
+        $this->assertSame(false, stdBool::HAS_LIMIT_RANGE);
+    }
+
+
+
     public function test_method_toString()
     {
         $originalValues = [true, "yes", 1, "1", "on", false, "no", 0, "0", "off", 2, undefined, null, []];
@@ -61,9 +70,9 @@ class stdBoolTest extends TestCase
             "", null, undefined
         ];
         $convertFalseError = [
-            "error.std.type.unexpected",
-            "error.std.type.not.nullable",
-            "error.std.type.unexpected"
+            "error.obj.type.unexpected",
+            "error.obj.type.not.nullable",
+            "error.obj.type.unexpected"
         ];
 
 
@@ -74,7 +83,7 @@ class stdBoolTest extends TestCase
         }
 
         for ($i = 0; $i < count($convertFalse); $i++) {
-            $err = null;
+            $err = "";
             $result = stdBool::parseIfValidate($convertFalse[$i], false, false, $err);
             $this->assertSame($result, $convertFalse[$i]);
             $this->assertSame($convertFalseError[$i], $err);
@@ -103,71 +112,5 @@ class stdBoolTest extends TestCase
     public function test_method_max()
     {
         $this->assertSame(null, stdBool::max());
-    }
-
-
-
-
-
-
-
-
-
-
-    public function test_instance()
-    {
-        $this->assertSame("Bool", stdBool::TYPE);
-        $this->assertSame(false, stdBool::IS_CLASS);
-        $this->assertSame(false, stdBool::HAS_LIMIT_RANGE);
-
-        // Testa a inicialização simples.
-        $obj = new stdBool();
-        $this->assertTrue(is_a($obj, stdBool::class));
-        $this->assertFalse($obj->isNullable());
-        $this->assertFalse($obj->isReadOnly());
-        $this->assertTrue($obj->isUndefined());
-        $this->assertSame(false, $obj->get());
-
-
-        // Testa a inicialização de um tipo nullable
-        $obj = new stdBool(null, true);
-        $this->assertTrue(is_a($obj, stdBool::class));
-        $this->assertTrue($obj->isNullable());
-        $this->assertFalse($obj->isReadOnly());
-        $this->assertFalse($obj->isUndefined());
-        $this->assertSame(null, $obj->get());
-        $this->assertSame(false, $obj->getNotNull());
-
-
-        // Testa a alteração do valor atualmente definido
-        $obj = new stdBool(null, true);
-        $this->assertSame(null, $obj->get());
-
-        $this->assertTrue($obj->set(true));
-        $this->assertSame(true, $obj->get());
-
-        $this->assertTrue($obj->set(false));
-        $this->assertSame(false, $obj->get());
-
-
-        // Testa uma instância readonly
-        $obj = new stdBool(true, true, true);
-        $this->assertSame(true, $obj->get());
-
-        $this->assertFalse($obj->set(false, true, $err));
-        $this->assertSame(true, $obj->get());
-        $this->assertSame("error.std.type.readonly", $err);
-
-
-        // Testa uma atribuição que dispara uma exception.
-        $fail = false;
-        try {
-            $obj = new stdBool(true, true);
-            $obj->set("throws an error");
-        } catch (\Exception $ex) {
-            $fail = true;
-            $this->assertSame("Invalid given value to instance of \"?stdBool\"", $ex->getMessage());
-        }
-        $this->assertTrue($fail, "Test must fail");
     }
 }

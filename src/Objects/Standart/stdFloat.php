@@ -34,9 +34,6 @@ final class stdFloat extends aNumericFloating implements iFloat
     {
         return (float)-2147483648;
     }
-
-
-
     /**
      * Retorna o maior valor possível para este tipo.
      *

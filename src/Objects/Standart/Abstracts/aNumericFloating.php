@@ -3,7 +3,7 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Standart\Abstracts;
 
-use AeonDigital\Objects\Standart\Abstracts\aNumeric as aNumeric;
+use AeonDigital\Objects\Standart\Abstracts\aStandart as aStandart;
 
 
 
@@ -13,44 +13,15 @@ use AeonDigital\Objects\Standart\Abstracts\aNumeric as aNumeric;
 
 
 /**
- * Extende a classe ``aNumeric`` para atender a interface ``iNumericFloating``.
+ * Extende a classe ``aStandart`` para atender tipos numéricos de ponto flutuante.
  *
  * @package     AeonDigital\Objects\Standart
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aNumericFloating extends aNumeric
+abstract class aNumericFloating extends aStandart
 {
-
-
-
-    /**
-     * Retorna o valor atualmente definido para a instância atual.
-     *
-     * @return      ?float
-     */
-    public function get() : ?float
-    {
-        return parent::stdGet();
-    }
-    /**
-     * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``static::nullEquivalent()``.
-     *
-     * @return      float
-     */
-    public function getNotNull() : float
-    {
-        return parent::stdGetNotNull();
-    }
-
-
-
-
-
-
-
 
 
 

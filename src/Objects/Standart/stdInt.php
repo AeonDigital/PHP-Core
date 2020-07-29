@@ -34,9 +34,6 @@ final class stdInt extends aNumericInteger implements iInt
     {
         return (int)-2147483648;
     }
-
-
-
     /**
      * Retorna o maior valor possível para este tipo.
      *

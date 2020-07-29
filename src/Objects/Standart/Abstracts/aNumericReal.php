@@ -3,7 +3,7 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Standart\Abstracts;
 
-use AeonDigital\Objects\Standart\Abstracts\aNumeric as aNumeric;
+use AeonDigital\Objects\Standart\Abstracts\aStandart as aStandart;
 use AeonDigital\Objects\Realtype as Realtype;
 
 
@@ -13,45 +13,15 @@ use AeonDigital\Objects\Realtype as Realtype;
 
 
 /**
- * Extende a classe ``aNumeric`` para atender a interface ``iNumericReal``.
+ * Extende a classe ``aStandart`` para atender tipos numéricos reais.
  *
  * @package     AeonDigital\Objects\Standart
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aNumericReal extends aNumeric
+abstract class aNumericReal extends aStandart
 {
-
-
-
-    /**
-     * Retorna o valor atualmente definido para a instância atual.
-     *
-     * @return      ?Realtype
-     */
-    public function get() : ?Realtype
-    {
-        return parent::stdGet();
-    }
-    /**
-     * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``static::nullEquivalent()``.
-     *
-     * @return      Realtype
-     */
-    public function getNotNull() : Realtype
-    {
-        return parent::stdGetNotNull();
-    }
-
-
-
-
-
-
-
-
 
 
 
@@ -74,11 +44,6 @@ abstract class aNumericReal extends aNumeric
         }
         return self::$stdNull;
     }
-
-
-
-
-
 
 
 

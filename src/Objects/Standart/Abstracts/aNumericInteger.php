@@ -3,7 +3,7 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Standart\Abstracts;
 
-use AeonDigital\Objects\Standart\Abstracts\aNumeric as aNumeric;
+use AeonDigital\Objects\Standart\Abstracts\aStandart as aStandart;
 
 
 
@@ -13,44 +13,15 @@ use AeonDigital\Objects\Standart\Abstracts\aNumeric as aNumeric;
 
 
 /**
- * Extende a classe ``aNumeric`` para atender a interface ``iNumericInteger``.
+ * Extende a classe ``aStandart`` para atender tipos numéricos inteiros.
  *
  * @package     AeonDigital\Objects\Standart
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aNumericInteger extends aNumeric
+abstract class aNumericInteger extends aStandart
 {
-
-
-
-    /**
-     * Retorna o valor atualmente definido para a instância atual.
-     *
-     * @return      ?int
-     */
-    public function get() : ?int
-    {
-        return parent::stdGet();
-    }
-    /**
-     * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``static::nullEquivalent()``.
-     *
-     * @return      int
-     */
-    public function getNotNull() : int
-    {
-        return parent::stdGetNotNull();
-    }
-
-
-
-
-
-
-
 
 
 

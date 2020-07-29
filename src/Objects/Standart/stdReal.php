@@ -37,9 +37,6 @@ final class stdReal extends aNumericReal implements iReal
         }
         return self::$stdMin;
     }
-
-
-
     /**
      * Retorna o maior valor possível para este tipo.
      *

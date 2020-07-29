@@ -17,6 +17,15 @@ class stdDoubleTest extends TestCase
 
 
 
+    public function test_constants()
+    {
+        $this->assertSame("Double", stdDouble::TYPE);
+        $this->assertSame(false, stdDouble::IS_CLASS);
+        $this->assertSame(true, stdDouble::HAS_LIMIT_RANGE);
+    }
+
+
+
     public function test_method_toString()
     {
         $originalValues = [
@@ -92,7 +101,7 @@ class stdDoubleTest extends TestCase
             undefined, null, []
         ];
         $convertFalseError = [
-            "error.std.type.unexpected", "error.std.type.not.nullable", "error.std.type.unexpected"
+            "error.obj.type.unexpected", "error.obj.type.not.nullable", "error.obj.type.unexpected"
         ];
 
 
@@ -102,7 +111,7 @@ class stdDoubleTest extends TestCase
         }
 
         for ($i = 0; $i < count($convertFalse); $i++) {
-            $err = null;
+            $err = "";
             $result = stdDouble::parseIfValidate($convertFalse[$i], false, false, $err);
             $this->assertSame($result, $convertFalse[$i]);
             $this->assertSame($convertFalseError[$i], $err);
@@ -131,71 +140,5 @@ class stdDoubleTest extends TestCase
     public function test_method_max()
     {
         $this->assertSame((float)9223372036854775806, stdDouble::max());
-    }
-
-
-
-
-
-
-
-
-
-
-    public function test_instance()
-    {
-        $this->assertSame("Double", stdDouble::TYPE);
-        $this->assertSame(false, stdDouble::IS_CLASS);
-        $this->assertSame(true, stdDouble::HAS_LIMIT_RANGE);
-
-        // Testa a inicialização simples.
-        $obj = new stdDouble();
-        $this->assertTrue(is_a($obj, stdDouble::class));
-        $this->assertFalse($obj->isNullable());
-        $this->assertFalse($obj->isReadOnly());
-        $this->assertTrue($obj->isUndefined());
-        $this->assertSame(0.0, $obj->get());
-
-
-        // Testa a inicialização de um tipo nullable
-        $obj = new stdDouble(null, true);
-        $this->assertTrue(is_a($obj, stdDouble::class));
-        $this->assertTrue($obj->isNullable());
-        $this->assertFalse($obj->isReadOnly());
-        $this->assertFalse($obj->isUndefined());
-        $this->assertSame(null, $obj->get());
-        $this->assertSame(0.0, $obj->getNotNull());
-
-
-        // Testa a alteração do valor atualmente definido
-        $obj = new stdDouble(null, true);
-        $this->assertSame(null, $obj->get());
-
-        $this->assertTrue($obj->set(1));
-        $this->assertSame(1.0, $obj->get());
-
-        $this->assertTrue($obj->set(-1));
-        $this->assertSame(-1.0, $obj->get());
-
-
-        // Testa uma instância readonly
-        $obj = new stdDouble(1, true, true);
-        $this->assertSame(1.0, $obj->get());
-
-        $this->assertFalse($obj->set(2, true, $err));
-        $this->assertSame(1.0, $obj->get());
-        $this->assertSame("error.std.type.readonly", $err);
-
-
-        // Testa uma atribuição que dispara uma exception.
-        $fail = false;
-        try {
-            $obj = new stdDouble(1, true);
-            $obj->set("throws an error");
-        } catch (\Exception $ex) {
-            $fail = true;
-            $this->assertSame("Invalid given value to instance of \"?stdDouble\"", $ex->getMessage());
-        }
-        $this->assertTrue($fail, "Test must fail");
     }
 }

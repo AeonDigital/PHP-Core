@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Standart;
 
 use AeonDigital\Interfaces\Objects\Standart\iString as iString;
-use AeonDigital\Objects\Standart\Abstracts\aStandartType as aStandartType;
+use AeonDigital\Objects\Standart\Abstracts\aStandart as aStandart;
 
 
 
@@ -20,37 +20,8 @@ use AeonDigital\Objects\Standart\Abstracts\aStandartType as aStandartType;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-final class stdString extends aStandartType implements iString
+final class stdString extends aStandart implements iString
 {
-
-
-
-    /**
-     * Retorna o valor atualmente definido para a instância atual.
-     *
-     * @return      ?string
-     */
-    public function get() : ?string
-    {
-        return parent::stdGet();
-    }
-    /**
-     * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``static::nullEquivalent()``.
-     *
-     * @return      string
-     */
-    public function getNotNull() : string
-    {
-        return parent::stdGetNotNull();
-    }
-
-
-
-
-
-
-
 
 
 
@@ -64,9 +35,6 @@ final class stdString extends aStandartType implements iString
     {
         return "";
     }
-
-
-
     /**
      * Retorna o menor valor possível para este tipo.
      * Quando ``null`` indica que não há limites definidos ou que isto não se aplica
@@ -78,9 +46,6 @@ final class stdString extends aStandartType implements iString
     {
         return null;
     }
-
-
-
     /**
      * Retorna o maior valor possível para este tipo.
      * Quando ``null`` indica que não há limites definidos ou que isto não se aplica

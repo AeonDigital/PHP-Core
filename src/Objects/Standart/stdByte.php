@@ -34,9 +34,6 @@ final class stdByte extends aNumericInteger implements iByte
     {
         return (int)-128;
     }
-
-
-
     /**
      * Retorna o maior valor possível para este tipo.
      *

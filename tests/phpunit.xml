@@ -34,6 +34,15 @@
             <file>src/Objects/Standart/stdStringTest.php</file>
 
 
+            <file>src/Objects/Types/tpBoolTest.php</file>
+            <file>src/Objects/Types/tpNumericIntegerTest.php</file>
+            <file>src/Objects/Types/tpNumericFloatingTest.php</file>
+            <file>src/Objects/Types/tpNumericRealTest.php</file>
+            <file>src/Objects/Types/tpGeneralDateTime.php</file>
+            <file>src/Objects/Types/tpStringTest.php</file>
+
+
+
             <!--file>src/Objects/ArrayOf/ArrayOfObjectsTests.php</file-->
 
 

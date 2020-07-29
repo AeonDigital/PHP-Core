@@ -34,9 +34,6 @@ final class stdShort extends aNumericInteger implements iShort
     {
         return (int)-32768;
     }
-
-
-
     /**
      * Retorna o maior valor possível para este tipo.
      *

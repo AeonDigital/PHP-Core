@@ -34,9 +34,6 @@ final class stdDouble extends aNumericFloating implements iDouble
     {
         return (float)-9223372036854775807;
     }
-
-
-
     /**
      * Retorna o maior valor possível para este tipo.
      *
