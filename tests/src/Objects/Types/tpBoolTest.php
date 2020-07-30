@@ -122,5 +122,14 @@ class tpBoolTest extends TestCase
         $this->assertFalse($obj->set(false));
         $this->assertSame("error.obj.type.readonly", $obj->getLastSetError());
         $this->assertSame(true, $obj->get());
+
+
+        $obj = tpBool::fromArray([
+            "value" => true,
+            "allowNull" => true
+        ]);
+        $this->assertSame(true, $obj->get());
+        $this->assertTrue($obj->isAllowNull());
+
     }
 }

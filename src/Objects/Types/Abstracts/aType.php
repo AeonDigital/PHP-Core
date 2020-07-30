@@ -364,4 +364,32 @@ abstract class aType implements iType
         if (static::standart()::TYPE === "Bool") { $v = Tools::toBool($v); }
         return Tools::toString($v);
     }
+
+
+
+    /**
+     * Retorna uma instância definida com as propriedades definidas no
+     * ``array`` de configuração.
+     *
+     * @param       string $useType
+     *              Namespace completa do tipo que deve ser instanciado.
+     *
+     * @param       array $cfg
+     *              Array associativo contendo as configurações para a
+     *              definição da instância resultante.
+     *
+     * @return      iType
+     */
+    protected static function tpFromArray(string $useType, array $cfg) : iType
+    {
+        return new $useType(
+            ((\key_exists("value", $cfg) === true)        ? $cfg["value"]         : undefined),
+            ((\key_exists("allowNull", $cfg) === true)    ? $cfg["allowNull"]     : false),
+            ((\key_exists("allowEmpty", $cfg) === true)   ? $cfg["allowEmpty"]    : true),
+            ((\key_exists("readonly", $cfg) === true)     ? $cfg["readonly"]      : false),
+            ((\key_exists("valueDefault", $cfg) === true) ? $cfg["valueDefault"]  : null),
+            ((\key_exists("valueMin", $cfg) === true)     ? $cfg["valueMin"]      : undefined),
+            ((\key_exists("valueMax", $cfg) === true)     ? $cfg["valueMax"]      : undefined)
+        );
+    }
 }

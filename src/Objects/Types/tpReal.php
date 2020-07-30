@@ -35,4 +35,23 @@ class tpReal extends aNumericReal implements iReal
     {
         return stdReal::class;
     }
+
+
+
+
+
+    /**
+     * Retorna uma instância definida com as propriedades definidas no
+     * ``array`` de configuração.
+     *
+     * @param       array $cfg
+     *              Array associativo contendo as configurações para a
+     *              definição da instância resultante.
+     *
+     * @return      iType
+     */
+    public static function fromArray(array $cfg) : self
+    {
+        return static::tpFromArray(self::class, $cfg);
+    }
 }
