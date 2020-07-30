@@ -29,12 +29,13 @@ class tpGeneralDateTime extends TestCase
 
         // Testes de inicialização
         $obj = new tpDateTime();
-        $this->assertSame("0001-01-01 00:00:00", $obj->nullEquivalent()->format("Y-m-d H:i:s"));
+        $this->assertSame(tpDateTime::standart()::TYPE, $obj->getType());
+        $this->assertSame(null, $obj->default());
         $this->assertSame("-9999-12-31 23:59:59", $obj->min()->format("Y-m-d H:i:s"));
         $this->assertSame("9999-12-31 23:59:59", $obj->max()->format("Y-m-d H:i:s"));
 
         $this->assertTrue($obj->isUndefined());
-        $this->assertFalse($obj->isNullable());
+        $this->assertFalse($obj->isAllowNull());
         $this->assertFalse($obj->isReadOnly());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
@@ -45,11 +46,11 @@ class tpGeneralDateTime extends TestCase
 
 
 
-        // Teste de inicialização com "undefined" em um tipo "nullable"
+        // Teste de inicialização com "undefined" em um tipo "allowNull"
         // Objetivo é verificar se, neste caso, o valor incialmente definido para
         // a instância tornar-se-a "null"
         $obj = new tpDateTime(undefined, true);
-        $this->assertTrue($obj->isNullable());
+        $this->assertTrue($obj->isAllowNull());
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
         $this->assertNull($obj->get());
@@ -57,23 +58,43 @@ class tpGeneralDateTime extends TestCase
 
 
 
-        // Teste de inicialização com um tipo arbitrário para "nullEquivalent"
-        // Tanto passando "undefined" quando "null" o resultado deverá ser o mesmo
-        // definido em ""nullEquivalent"
-        $obj = new tpDateTime(undefined, false, false, new DateTime("2020-01-01 00:00:00"));
-        $this->assertTrue($obj->isNullEquivalent());
-        $this->assertTrue($obj->isNullOrEquivalent());
+
+
+        // Teste de inicialização com um tipo arbitrário para "default" e que
+        // não aceita "null" como válido.
+        // Passando "undefined" o valor será definido como o "default".
+        $obj = new tpDateTime(undefined, false, true, false, new DateTime("2020-01-01 00:00:00"));
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertFalse($obj->isNullOrEquivalent());
         $this->assertSame("2020-01-01 00:00:00", $obj->get()->format("Y-m-d H:i:s"));
 
-        $obj = new tpDateTime(null, false, false, new DateTime("2020-01-01 00:00:00"));
+        // Passando "null" o valor será definido como o "nullEquivalent".
+        $obj = new tpDateTime(null, false, true, false, new DateTime("2020-01-01 00:00:00"));
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
+        $this->assertSame("0001-01-01 00:00:00", $obj->get()->format("Y-m-d H:i:s"));
+
+
+        // Teste de inicialização com um tipo arbitrário para "default" e que
+        // aceita "null" como válido.
+        // Passando "undefined" o valor será definido como o "default"
+        $obj = new tpDateTime(undefined, true, true, false, new DateTime("2020-01-01 00:00:00"));
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertFalse($obj->isNullOrEquivalent());
         $this->assertSame("2020-01-01 00:00:00", $obj->get()->format("Y-m-d H:i:s"));
+
+        // Passando "null" o valor será definido como "null".
+        $obj = new tpDateTime(null, true, true, false, new DateTime("2020-01-01 00:00:00"));
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertTrue($obj->isNullOrEquivalent());
+        $this->assertSame(null, $obj->get());
+
+
 
 
 
         // Teste de alteração de valor atualmetne setado.
-        // Feito com uma instância "nullable"
+        // Feito com uma instância "allowNull"
         $obj = new tpDateTime(null, true);
         $this->assertNull($obj->get());
         $this->assertFalse($obj->isNullEquivalent());
@@ -97,7 +118,7 @@ class tpGeneralDateTime extends TestCase
 
         // Teste de uma instância do tipo "readonly", ou seja, uma instância que
         // não permite a alteração de seu valor após ser iniciada.
-        $obj = new tpDateTime("2020-01-01 02:00:00", false, true);
+        $obj = new tpDateTime("2020-01-01 02:00:00", false, true, true);
         $this->assertSame("2020-01-01 02:00:00", $obj->get()->format("Y-m-d H:i:s"));
 
         $this->assertFalse($obj->set("2020-01-01 01:00:00"));
@@ -106,14 +127,14 @@ class tpGeneralDateTime extends TestCase
 
 
 
-        // Teste de uma instância não "nullable" com um intervalo arbitrário de números
+        // Teste de uma instância não "allowNull" com um intervalo arbitrário de números
         // válidos definidos.
-        $obj = new tpDateTime(undefined, false, false, undefined,
+        $obj = new tpDateTime(undefined, false, false, false, undefined,
             new DateTime("2020-01-01 01:00:01"),
             new DateTime("2020-01-01 10:00:00")
         );
-        $this->assertSame(null, $obj->get());
-        $this->assertSame("0001-01-01 00:00:00", $obj->getNotNull()->format("Y-m-d H:i:s"));
+        $this->assertSame("2020-01-01 01:00:01", $obj->get()->format("Y-m-d H:i:s"));
+        $this->assertSame("2020-01-01 01:00:01", $obj->getNotNull()->format("Y-m-d H:i:s"));
         $this->assertTrue($obj->set("2020-01-01 10:00:00"));
 
         $this->assertFalse($obj->set("2020-01-01 10:00:01"));

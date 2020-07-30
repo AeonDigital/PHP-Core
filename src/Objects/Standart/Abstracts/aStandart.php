@@ -36,9 +36,16 @@ abstract class aStandart implements iStandart
      */
     public static function toString($v) : ?string
     {
-        if (static::validate($v) === true) {
-            if (static::TYPE === "Bool") { $v = Tools::toBool($v); }
-            return Tools::toString($v);
+        if (static::TYPE === "iGeneric") {
+            if (\is_object($v) === true && \method_exists($v, "__toString") === true) {
+                return (string)$v;
+            }
+        }
+        else {
+            if (static::validate($v) === true) {
+                if (static::TYPE === "Bool") { $v = Tools::toBool($v); }
+                return Tools::toString($v);
+            }
         }
         return null;
     }
@@ -55,14 +62,16 @@ abstract class aStandart implements iStandart
      * @param       mixed $v
      *              Valor que será verificado.
      *
-     * @param       bool $nullable
+     * @param       bool $allowNull
      *              Quando ``true`` indica que o valor ``null`` é válido para este tipo.
      *
      * @return      bool
      */
-    public static function validate($v, bool $nullable = false) : bool
-    {
-        if ($v === null && $nullable === true) {
+    public static function validate(
+        $v,
+        bool $allowNull = false
+    ) : bool {
+        if ($v === null && $allowNull === true) {
             return true;
         }
         else {
@@ -88,13 +97,13 @@ abstract class aStandart implements iStandart
      * @param       mixed $v
      *              Valor que será convertido.
      *
-     * @param       bool $nullable
+     * @param       bool $allowNull
      *              Quando ``true`` indica que o valor ``null`` é válido para este tipo
      *              e não será convertido.
      *
      * @param       bool $nullEquivalent
      *              Quando ``true``, converterá ``null`` para o valor existente em
-     *              ``static::nullEquivalent()``. Se ``$nullable`` for definido esta opção
+     *              ``static::nullEquivalent()``. Se ``$allowNull`` for definido esta opção
      *              será ignorada.
      *
      * @param       string $err
@@ -104,19 +113,19 @@ abstract class aStandart implements iStandart
      */
     public static function parseIfValidate(
         $v,
-        bool $nullable = false,
+        bool $allowNull = false,
         bool $nullEquivalent = false,
         string &$err = ""
     ) {
         $err = "";
 
         if ($v === null) {
-            if ($nullable === false) {
+            if ($allowNull === false) {
                 if ($nullEquivalent === true) {
                     $v = static::nullEquivalent();
                 }
                 else {
-                    $err = "error.obj.type.not.nullable";
+                    $err = "error.obj.type.not.allow.null";
                 }
             }
         }
@@ -214,7 +223,12 @@ abstract class aStandart implements iStandart
      */
     protected static function stdTryParseForThisType($v)
     {
-        $toType = static::stdGetToolsTryParserForThisType();
-        return Tools::$toType($v);
+        if (static::TYPE === "iGeneric") {
+            return ((\is_object($v) === true) ? $v : null);
+        }
+        else {
+            $toType = static::stdGetToolsTryParserForThisType();
+            return Tools::$toType($v);
+        }
     }
 }

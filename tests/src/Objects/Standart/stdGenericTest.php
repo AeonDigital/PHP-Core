@@ -2,7 +2,7 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Standart\stdBool as stdBool;
+use AeonDigital\Objects\Standart\stdGeneric as stdGeneric;
 
 require_once __DIR__ . "/../../../phpunit.php";
 
@@ -12,27 +12,27 @@ require_once __DIR__ . "/../../../phpunit.php";
 
 
 
-class stdBoolTest extends TestCase
+class stdGenericTest extends TestCase
 {
 
 
 
     public function test_constants()
     {
-        $this->assertSame("Bool", stdBool::TYPE);
-        $this->assertSame(false, stdBool::IS_CLASS);
-        $this->assertSame(false, stdBool::HAS_LIMIT_RANGE);
+        $this->assertSame("iGeneric", stdGeneric::TYPE);
+        $this->assertSame(true, stdGeneric::IS_CLASS);
+        $this->assertSame(false, stdGeneric::HAS_LIMIT_RANGE);
     }
 
 
 
     public function test_method_toString()
     {
-        $originalValues = [true, "yes", 1, "1", "on", false, "no", 0, "0", "off", 2, undefined, null, []];
-        $expectedValues = ["1", "1", "1", "1", "1", "0", "0", "0", "0", "0", "1", null, null, null];
+        $originalValues = [new \DateTime("2020-01-01 00:00:00")];
+        $expectedValues = [null];
 
         for ($i = 0; $i < count($originalValues); $i++) {
-            $result = stdBool::toString($originalValues[$i]);
+            $result = stdGeneric::toString($originalValues[$i]);
             $this->assertEquals($result, $expectedValues[$i]);
         }
     }
@@ -41,16 +41,16 @@ class stdBoolTest extends TestCase
 
     public function test_method_validate()
     {
-        $validateTrue = [true, "yes", 1, "1", 2, "on", false, "no", 0, "0", "off"];
-        $validateFalse = ["", null, undefined, new DateTime()];
+        $validateTrue = [new \stdClass(), new \DateTime()];
+        $validateFalse = ["", null, undefined];
 
 
         for ($i = 0; $i < count($validateTrue); $i++) {
-            $this->assertTrue(stdBool::validate($validateTrue[$i]));
+            $this->assertTrue(stdGeneric::validate($validateTrue[$i]));
         }
 
         for ($i = 0; $i < count($validateFalse); $i++) {
-            $this->assertFalse(stdBool::validate($validateFalse[$i]));
+            $this->assertFalse(stdGeneric::validate($validateFalse[$i]));
         }
     }
 
@@ -58,13 +58,14 @@ class stdBoolTest extends TestCase
 
     public function test_method_parseIfValidate()
     {
+        $oSTD = new \stdClass();
+        $oDT = new \DateTime();
+
         $originalValues = [
-            true, "yes", 1, "1", "on",
-            false, "no", 0, "0", "off"
+            $oSTD, $oDT
         ];
         $resultConvert = [
-            true, true, true, true, true,
-            false, false, false, false, false
+            $oSTD, $oDT
         ];
         $convertFalse = [
             "", null, undefined
@@ -78,39 +79,39 @@ class stdBoolTest extends TestCase
 
 
         for ($i = 0; $i < count($originalValues); $i++) {
-            $result = stdBool::parseIfValidate($originalValues[$i]);
+            $result = stdGeneric::parseIfValidate($originalValues[$i]);
             $this->assertEquals($result, $resultConvert[$i]);
         }
 
         for ($i = 0; $i < count($convertFalse); $i++) {
             $err = "";
-            $result = stdBool::parseIfValidate($convertFalse[$i], false, false, $err);
+            $result = stdGeneric::parseIfValidate($convertFalse[$i], false, false, $err);
             $this->assertSame($result, $convertFalse[$i]);
             $this->assertSame($convertFalseError[$i], $err);
         }
 
-        $this->assertSame(null, stdBool::parseIfValidate(null, true));
-        $this->assertSame(false, stdBool::parseIfValidate(null, false, true));
+        $this->assertSame(null, stdGeneric::parseIfValidate(null, true));
+        $this->assertSame($oSTD, stdGeneric::parseIfValidate($oSTD, false, true));
     }
 
 
 
     public function test_method_nullEquivalent()
     {
-        $this->assertSame(false, stdBool::nullEquivalent());
+        $this->assertSame(null, stdGeneric::nullEquivalent());
     }
 
 
 
     public function test_method_min()
     {
-        $this->assertSame(null, stdBool::min());
+        $this->assertSame(null, stdGeneric::min());
     }
 
 
 
     public function test_method_max()
     {
-        $this->assertSame(null, stdBool::max());
+        $this->assertSame(null, stdGeneric::max());
     }
 }

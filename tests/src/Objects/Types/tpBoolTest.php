@@ -26,12 +26,14 @@ class tpBoolTest extends TestCase
 
         // Testes de inicialização
         $obj = new tpBool();
-        $this->assertSame(false, $obj->nullEquivalent());
+        $this->assertSame(tpBool::standart()::TYPE, $obj->getType());
+        $this->assertSame(null, $obj->default());
         $this->assertSame(null, $obj->min());
         $this->assertSame(null, $obj->max());
 
         $this->assertTrue($obj->isUndefined());
-        $this->assertFalse($obj->isNullable());
+        $this->assertFalse($obj->isAllowNull());
+        $this->assertFalse($obj->isAllowEmpty());
         $this->assertFalse($obj->isReadOnly());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
@@ -42,11 +44,11 @@ class tpBoolTest extends TestCase
 
 
 
-        // Teste de inicialização com "undefined" em um tipo "nullable"
+        // Teste de inicialização com "undefined" em um tipo "allowNull"
         // Objetivo é verificar se, neste caso, o valor incialmente definido para
         // a instância tornar-se-a "null"
         $obj = new tpBool(undefined, true);
-        $this->assertTrue($obj->isNullable());
+        $this->assertTrue($obj->isAllowNull());
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
         $this->assertNull($obj->get());
@@ -54,23 +56,43 @@ class tpBoolTest extends TestCase
 
 
 
-        // Teste de inicialização com um tipo arbitrário para "nullEquivalent"
-        // Tanto passando "undefined" quando "null" o resultado deverá ser o mesmo
-        // definido em ""nullEquivalent"
-        $obj = new tpBool(undefined, false, false, true);
-        $this->assertTrue($obj->isNullEquivalent());
-        $this->assertTrue($obj->isNullOrEquivalent());
+
+
+        // Teste de inicialização com um tipo arbitrário para "default" e que
+        // não aceita "null" como válido.
+        // Passando "undefined" o valor será definido como o "default".
+        $obj = new tpBool(undefined, false, true, false, true);
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertFalse($obj->isNullOrEquivalent());
         $this->assertSame(true, $obj->get());
 
-        $obj = new tpBool(null, false, false, true);
+        // Passando "null" o valor será definido como o "nullEquivalent".
+        $obj = new tpBool(null, false, true, false, true);
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
+        $this->assertSame(false, $obj->get());
+
+
+        // Teste de inicialização com um tipo arbitrário para "default" e que
+        // aceita "null" como válido.
+        // Passando "undefined" o valor será definido como o "default"
+        $obj = new tpBool(undefined, true, true, false, true);
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertFalse($obj->isNullOrEquivalent());
         $this->assertSame(true, $obj->get());
+
+        // Passando "null" o valor será definido como "null".
+        $obj = new tpBool(null, true, true, false, true);
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertTrue($obj->isNullOrEquivalent());
+        $this->assertSame(null, $obj->get());
+
+
 
 
 
         // Teste de alteração de valor atualmetne setado.
-        // Feito com uma instância "nullable"
+        // Feito com uma instância "allowNull"
         $obj = new tpBool(null, true);
         $this->assertNull($obj->get());
         $this->assertFalse($obj->isNullEquivalent());
@@ -94,7 +116,7 @@ class tpBoolTest extends TestCase
 
         // Teste de uma instância do tipo "readonly", ou seja, uma instância que
         // não permite a alteração de seu valor após ser iniciada.
-        $obj = new tpBool(true, false, true);
+        $obj = new tpBool(true, false, true, true);
         $this->assertSame(true, $obj->get());
 
         $this->assertFalse($obj->set(false));

@@ -26,14 +26,14 @@ abstract class aNumericReal extends aType
 
 
     /**
-     * Indica qual valor (para esta instância) deve ser considerado equivalente a ``null``
-     * para fins de comparação.
+     * Valor padrão a ser definido para este tipo de instância caso nenhum valor válido
+     * tenha sido explicitamente definido.
      *
-     * @return      Realtype
+     * @return      ?Realtype
      */
-    public function nullEquivalent() : Realtype
+    public function default() : ?Realtype
     {
-        return $this->valueNullEquivalent;
+        return $this->valueDefault;
     }
     /**
      * Retorna o menor valor possível para este tipo.
@@ -59,14 +59,14 @@ abstract class aNumericReal extends aType
 
 
     /**
-     * Informa se o valor atualmente definido é o mesmo que ``nullEquivalent``.
-     * Retornará ``false`` caso o valor seja ``null``.
+     * Informa se o valor atualmente definido é ``null`` ou se é o mesmo que
+     * ``static::nullEquivalent()``.
      *
      * @return      bool
      */
     public function isNullEquivalent() : bool
     {
-        return ($this->value !== null && $this->value->value() === $this->valueNullEquivalent->value());
+        return ($this->value !== null && $this->value->value() === static::standart()::nullEquivalent()->value());
     }
 
 
@@ -97,64 +97,6 @@ abstract class aNumericReal extends aType
 
 
     /**
-     * Inicia uma nova instância.
-     *
-     * @param       mixed $value
-     *              Valor inicial da instância.
-     *              Se não for definido usará o valor definido como ``self::nullEquivalent()``.
-     *              Se ``nullEquivalent`` não for definido mas tratar-se de um tipo
-     *              ``nullable`` usará ``null`` como valor inicial caso contrário
-     *              usará o valor definido como ``nullEquivalent`` da classe ``Standart``
-     *              original.
-     *              Se for definido como ``null`` mas não for do tipo ``nullable`` usará
-     *              o valor definido em ``nullEquivalent`` aqui definido ou aquele que
-     *              existir na classe ``Standart`` original.
-     *
-     * @param       bool $nullable
-     *              Quando ``true`` esta instância aceitará ``null`` como um valor válido.
-     *
-     * @param       bool $readonly
-     *              Quando ``true`` indica que esta instância não poderá ter seu valor
-     *              alterado após a inicialização.
-     *
-     * @param       mixed $valueNullEquivalent
-     *              Valor equivalente a ``null`` a ser usado por esta instância.
-     *              Se não for definido usará o valor existente em ``nullEquivalent`` da
-     *              classe ``Standart`` original.
-     *
-     * @param       int|float|Realtype|\DateTime $valueMin
-     *              Indica o menor valor aceitável para um tipo numérico ou comparável.
-     *              Se não for definido usará o valor existente em ``min`` da classe
-     *              ``Standart`` original.
-     *
-     * @param       int|float|Realtype|\DateTime $valueMax
-     *              Indica o maior valor aceitável para um tipo numérico ou comparável.
-     *              Se não for definido usará o valor existente em ``max`` da classe
-     *              ``Standart`` original.
-     */
-    function __construct(
-        $value = undefined,
-        bool $nullable = false,
-        bool $readonly = false,
-        $valueNullEquivalent = undefined,
-        $valueMin = undefined,
-        $valueMax = undefined
-    ) {
-        parent::__construct(
-            $value,
-            $nullable,
-            $readonly,
-            $valueNullEquivalent,
-            $valueMin,
-            $valueMax
-        );
-    }
-
-
-
-
-
-    /**
      * Verifica se o valor informado está entre o intervalo definido para este tipo.
      *
      * @param       mixed $v
@@ -164,6 +106,9 @@ abstract class aNumericReal extends aType
      */
     protected function validateRange($v) : bool
     {
-        return ($v->isGreaterOrEqualAs($this->valueMin) === true && $v->isLessOrEqualAs($this->valueMax) === true);
+        return ($v === null ||
+            ($v->isGreaterOrEqualAs($this->valueMin) === true &&
+            $v->isLessOrEqualAs($this->valueMax) === true)
+        );
     }
 }

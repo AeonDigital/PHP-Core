@@ -96,7 +96,7 @@ class stdRealTest extends TestCase
         ];
         $convertFalseError = [
             "error.obj.value.out.of.range", "error.obj.value.out.of.range",
-            "error.obj.type.unexpected", "error.obj.type.not.nullable", "error.obj.type.unexpected"
+            "error.obj.type.unexpected", "error.obj.type.not.allow.null", "error.obj.type.unexpected"
         ];
 
 

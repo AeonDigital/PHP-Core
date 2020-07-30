@@ -35,12 +35,12 @@ abstract class aType implements iType
 
 
     /**
-     * Valor deve ser considerado equivalente a ``null``
-     * para fins de comparação.
+     * Valor padrão para uma instância recém criada e que não recebeu
+     * um valor explicitamente definido.
      *
      * @var         mixed
      */
-    protected $valueNullEquivalent = undefined;
+    protected $valueDefault = null;
     /**
      * Menor valor aceitável para um tipo numérico ou comparável.
      *
@@ -53,6 +53,29 @@ abstract class aType implements iType
      * @var         int|float|Realtype|\DateTime $max
      */
     protected $valueMax = null;
+
+
+
+
+
+    /**
+     * Namespace completa da classe que está sendo implementada nesta instância.
+     *
+     * @var         string
+     */
+    protected string $type = "";
+    /**
+     * Retorna o namespace completo da classe usada por esta instância.
+     * Em classes de tipo invariável retornará o mesmo resultado obtido pelo
+     * método ``static::standart()``.
+     *
+     * @return      string
+     */
+    public function getType() : string
+    {
+        return $this->type;
+    }
+
 
 
 
@@ -75,22 +98,38 @@ abstract class aType implements iType
         return $this->undefined;
     }
     /**
-     * Informa se esta instância é ``nullable``.
+     * Indica se esta instância aceita ``null`` como válido.
      *
      * @var         bool
      */
-    protected bool $nullable = false;
+    protected bool $allowNull = false;
     /**
-     * Informa se esta instância é ``nullable``.
+     * Informa se esta instância aceita ``null`` como válido.
      *
      * @return      bool
      */
-    public function isNullable() : bool
+    public function isAllowNull() : bool
     {
-        return $this->nullable;
+        return $this->allowNull;
     }
     /**
-     * Informa se esta instância é ``readonly``.
+     * Indica se esta instância aceita ``""`` como válido.
+     *
+     * @var         bool
+     */
+    protected bool $allowEmpty = false;
+    /**
+     * Informa se esta instância aceita ``""`` como um valor válido.
+     * Esta configuação funciona apenas em casos de tipo ``string``.
+     *
+     * @return      bool
+     */
+    public function isAllowEmpty() : bool
+    {
+        return $this->allowEmpty;
+    }
+    /**
+     * Indica se esta instância é ``readonly``.
      *
      * @var         bool
      */
@@ -108,18 +147,18 @@ abstract class aType implements iType
         return $this->readonly;
     }
     /**
-     * Informa se o valor atualmente definido é o mesmo que ``nullEquivalent``.
+     * Informa se o valor atualmente definido é o mesmo que ``static::nullEquivalent()``.
      * Retornará ``false`` caso o valor seja ``null``.
      *
      * @return      bool
      */
     public function isNullEquivalent() : bool
     {
-        return ($this->value === $this->valueNullEquivalent);
+        return ($this->value === static::standart()::nullEquivalent());
     }
     /**
      * Informa se o valor atualmente definido é ``null`` ou se é o mesmo que
-     * ``nullEquivalent``.
+     * ``static::nullEquivalent()``.
      *
      * @return      bool
      */
@@ -167,15 +206,20 @@ abstract class aType implements iType
             $this->lastSetError = "error.obj.type.readonly";
         }
         else {
-            $n = static::standart()::parseIfValidate($v, $this->nullable, false, $this->lastSetError);
+            $n = static::standart()::parseIfValidate($v, $this->allowNull, false, $this->lastSetError);
             if ($this->lastSetError === "") {
-                if ($n !== null && $this->validateRange($n) === false) {
-                    $this->lastSetError = "error.obj.out.of.range";
+                if ($n === "" && $this->allowEmpty === false) {
+                    $this->lastSetError = "error.obj.type.not.allow.empty";
                 }
                 else {
-                    $r = true;
-                    $this->value = $n;
-                    $this->undefined = false;
+                    if ($this->validateRange($n) === false) {
+                        $this->lastSetError = "error.obj.out.of.range";
+                    }
+                    else {
+                        $r = true;
+                        $this->value = $n;
+                        $this->undefined = false;
+                    }
                 }
             }
         }
@@ -193,13 +237,13 @@ abstract class aType implements iType
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
+     * valor seja ``null``, retornará o valor definido em ``static::nullEquivalent()``.
      *
      * @return      mixed
      */
     protected function stdGetNotNull()
     {
-        return ($this->value ?? $this->nullEquivalent());
+        return ($this->value ?? static::standart()::nullEquivalent());
     }
     /**
      * Verifica se o valor informado está entre o intervalo definido para este tipo.
@@ -211,7 +255,7 @@ abstract class aType implements iType
      */
     protected function validateRange($v) : bool
     {
-        return (static::standart()::HAS_LIMIT_RANGE === false ||
+        return ($v === null || static::standart()::HAS_LIMIT_RANGE === false ||
             ($v >= $this->valueMin && $v <= $this->valueMax)
         );
     }
@@ -230,26 +274,28 @@ abstract class aType implements iType
      *
      * @param       mixed $value
      *              Valor inicial da instância.
-     *              Se não for definido usará o valor definido como ``self::nullEquivalent()``.
-     *              Se ``nullEquivalent`` não for definido mas tratar-se de um tipo
-     *              ``nullable`` usará ``null`` como valor inicial caso contrário
-     *              usará o valor definido como ``nullEquivalent`` da classe ``Standart``
-     *              original.
-     *              Se for definido como ``null`` mas não for do tipo ``nullable`` usará
-     *              o valor definido em ``nullEquivalent`` aqui definido ou aquele que
-     *              existir na classe ``Standart`` original.
+     *              Se for passado ``undefined`` irá iniciar a instância com o valor definido
+     *              em ``$valueDefault`` mas caso este não esteja definido também irá usar ``null``
+     *              se este for um valor aceitável.
+     *              Caso ``null`` não seja aceitável, usará o valor equivalente encontrado em
+     *              em ``static::nullEquivalent()``.
+     *              Em último caso tentará definir a instância com o valor de ``self::min()``.
      *
-     * @param       bool $nullable
+     * @param       bool $allowNull
      *              Quando ``true`` esta instância aceitará ``null`` como um valor válido.
+     *
+     * @param       bool $allowEmpty
+     *              Quando ``true`` esta instância aceitará ``""`` como um valor válido.
+     *              Esta configuação funciona apenas em casos de tipo ``string``.
      *
      * @param       bool $readonly
      *              Quando ``true`` indica que esta instância não poderá ter seu valor
      *              alterado após a inicialização.
      *
-     * @param       mixed $valueNullEquivalent
-     *              Valor equivalente a ``null`` a ser usado por esta instância.
-     *              Se não for definido usará o valor existente em ``nullEquivalent`` da
-     *              classe ``Standart`` original.
+     * @param       mixed $valueDefault
+     *              Valor padrão a ser definido para este tipo de instância caso nenhum
+     *              valor válido tenha sido explicitamente definido.
+     *              Se não for definido, ``null`` será usado.
      *
      * @param       int|float|Realtype|\DateTime $valueMin
      *              Indica o menor valor aceitável para um tipo numérico ou comparável.
@@ -263,39 +309,42 @@ abstract class aType implements iType
      */
     function __construct(
         $value = undefined,
-        bool $nullable = false,
+        bool $allowNull = false,
+        bool $allowEmpty = true,
         bool $readonly = false,
-        $valueNullEquivalent = undefined,
+        $valueDefault = null,
         $valueMin = undefined,
         $valueMax = undefined
     ) {
-        $this->nullable = $nullable;
-        $this->valueMin = (
-            ($valueMin === undefined) ? static::standart()::min() : $valueMin
-        );
-        $this->valueMax = (
-            ($valueMax === undefined) ? static::standart()::max() : $valueMax
-        );
-        $this->valueNullEquivalent = (
-            ($valueNullEquivalent === undefined) ? static::standart()::nullEquivalent() : $valueNullEquivalent
-        );
+        $this->type = (($this->type === "") ? static::standart()::TYPE : $this->type);
+        $this->allowNull = $allowNull;
+        $this->allowEmpty = ($allowEmpty === true && static::standart()::TYPE === "String");
+        $this->valueDefault = (($valueDefault === undefined) ? null : $valueDefault);
+
+        if (static::standart()::HAS_LIMIT_RANGE === true) {
+            $this->valueMin = (($valueMin === undefined) ? static::standart()::min() : $valueMin);
+            $this->valueMax = (($valueMax === undefined) ? static::standart()::max() : $valueMax);
+        }
+
+
         $undefined = ($value === undefined);
-
-
-        if ($value === undefined) {
-            if ($valueNullEquivalent === undefined) {
-                $value = (($nullable === true) ? null : $this->valueNullEquivalent);
+        if ($value === undefined || $value === "") {
+            if ($valueDefault === null) {
+                $value = (($allowNull === true) ? null : static::standart()::nullEquivalent());
             }
             else {
-                $value = $valueNullEquivalent;
+                $value = $valueDefault;
             }
         }
-        elseif ($value === null && $nullable === false) {
-            $value = $this->valueNullEquivalent;
+        elseif ($value === null) {
+            $value = (($allowNull === true) ? null : static::standart()::nullEquivalent());
         }
 
 
-        $this->set($value);
+        if ($this->set($value) === false) {
+            $this->set($this->valueMin);
+        }
+
         $this->undefined = $undefined;
         $this->readonly = $readonly;
     }

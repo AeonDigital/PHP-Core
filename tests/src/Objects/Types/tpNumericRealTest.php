@@ -29,12 +29,13 @@ class tpNumericRealTest extends TestCase
 
         // Testes de inicialização
         $obj = new tpReal();
-        $this->assertSame("0", $obj->nullEquivalent()->value());
+        $this->assertSame(tpReal::standart()::TYPE, $obj->getType());
+        $this->assertSame(null, $obj->default());
         $this->assertSame("-999999999999999999999999999999999999", $obj->min()->value());
         $this->assertSame("999999999999999999999999999999999999", $obj->max()->value());
 
         $this->assertTrue($obj->isUndefined());
-        $this->assertFalse($obj->isNullable());
+        $this->assertFalse($obj->isAllowNull());
         $this->assertFalse($obj->isReadOnly());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
@@ -45,11 +46,11 @@ class tpNumericRealTest extends TestCase
 
 
 
-        // Teste de inicialização com "undefined" em um tipo "nullable"
+        // Teste de inicialização com "undefined" em um tipo "allowNull"
         // Objetivo é verificar se, neste caso, o valor incialmente definido para
         // a instância tornar-se-a "null"
         $obj = new tpReal(undefined, true);
-        $this->assertTrue($obj->isNullable());
+        $this->assertTrue($obj->isAllowNull());
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
         $this->assertNull($obj->get());
@@ -57,23 +58,43 @@ class tpNumericRealTest extends TestCase
 
 
 
-        // Teste de inicialização com um tipo arbitrário para "nullEquivalent"
-        // Tanto passando "undefined" quando "null" o resultado deverá ser o mesmo
-        // definido em ""nullEquivalent"
-        $obj = new tpReal(undefined, false, false, new Realtype(10));
-        $this->assertTrue($obj->isNullEquivalent());
-        $this->assertTrue($obj->isNullOrEquivalent());
+
+
+        // Teste de inicialização com um tipo arbitrário para "default" e que
+        // não aceita "null" como válido.
+        // Passando "undefined" o valor será definido como o "default".
+        $obj = new tpReal(undefined, false, true, false, new Realtype(10));
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertFalse($obj->isNullOrEquivalent());
         $this->assertSame("10", $obj->get()->value());
 
-        $obj = new tpReal(null, false, false, new Realtype(10));
+        // Passando "null" o valor será definido como o "nullEquivalent".
+        $obj = new tpReal(null, false, true, false, new Realtype(10));
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
+        $this->assertSame("0", $obj->get()->value());
+
+
+        // Teste de inicialização com um tipo arbitrário para "default" e que
+        // aceita "null" como válido.
+        // Passando "undefined" o valor será definido como o "default"
+        $obj = new tpReal(undefined, true, true, false, new Realtype(10));
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertFalse($obj->isNullOrEquivalent());
         $this->assertSame("10", $obj->get()->value());
+
+        // Passando "null" o valor será definido como "null".
+        $obj = new tpReal(null, true, true, false, new Realtype(10));
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertTrue($obj->isNullOrEquivalent());
+        $this->assertSame(null, $obj->get());
+
+
 
 
 
         // Teste de alteração de valor atualmetne setado.
-        // Feito com uma instância "nullable"
+        // Feito com uma instância "allowNull"
         $obj = new tpReal(null, true);
         $this->assertNull($obj->get());
         $this->assertFalse($obj->isNullEquivalent());
@@ -97,7 +118,7 @@ class tpNumericRealTest extends TestCase
 
         // Teste de uma instância do tipo "readonly", ou seja, uma instância que
         // não permite a alteração de seu valor após ser iniciada.
-        $obj = new tpReal(2, false, true);
+        $obj = new tpReal(2, false, true, true);
         $this->assertSame("2", $obj->get()->value());
 
         $this->assertFalse($obj->set(1));
@@ -106,9 +127,9 @@ class tpNumericRealTest extends TestCase
 
 
 
-        // Teste de uma instância não "nullable" com um intervalo arbitrário de números
+        // Teste de uma instância não "allowNull" com um intervalo arbitrário de números
         // válidos definidos.
-        $obj = new tpReal(undefined, false, false, undefined, new Realtype(0), new Realtype(100));
+        $obj = new tpReal(undefined, false, false, false, undefined, new Realtype(0), new Realtype(100));
         $this->assertSame("0", $obj->get()->value());
         $this->assertTrue($obj->set(100));
 

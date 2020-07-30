@@ -2,7 +2,7 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Types\tpString as tpString;
+use AeonDigital\Objects\Types\tpGeneric as tpGeneric;
 
 require_once __DIR__ . "/../../../phpunit.php";
 
@@ -12,33 +12,36 @@ require_once __DIR__ . "/../../../phpunit.php";
 
 
 
-class tpStringTest extends TestCase
+class tpGenericTest extends TestCase
 {
 
 
 
     public function test_instance()
     {
-        $this->assertSame("String", tpString::standart()::TYPE);
-        $this->assertSame(false, tpString::standart()::IS_CLASS);
-        $this->assertSame(false, tpString::standart()::HAS_LIMIT_RANGE);
+        $this->assertSame("iGeneric", tpGeneric::standart()::TYPE);
+        $this->assertSame(true, tpGeneric::standart()::IS_CLASS);
+        $this->assertSame(false, tpGeneric::standart()::HAS_LIMIT_RANGE);
 
+
+        $valueDefault = new \DateTime("2020-01-01 00:00:00");
 
         // Testes de inicialização
-        $obj = new tpString();
-        $this->assertSame(tpString::standart()::TYPE, $obj->getType());
-        $this->assertSame(null, $obj->default());
+        $obj = new tpGeneric(undefined, true, true, false, $valueDefault, null, null, "DateTime");
+        $this->assertSame("DateTime", $obj->getType());
+        $this->assertSame($valueDefault, $obj->default());
         $this->assertSame(null, $obj->min());
         $this->assertSame(null, $obj->max());
 
         $this->assertTrue($obj->isUndefined());
-        $this->assertFalse($obj->isAllowNull());
+        $this->assertTrue($obj->isAllowNull());
+        $this->assertFalse($obj->isAllowEmpty());
         $this->assertFalse($obj->isReadOnly());
-        $this->assertTrue($obj->isNullEquivalent());
-        $this->assertTrue($obj->isNullOrEquivalent());
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertFalse($obj->isNullOrEquivalent());
 
         $this->assertSame("", $obj->getLastSetError());
-        $this->assertSame("", $obj->get());
+        $this->assertSame($valueDefault, $obj->get());
         $this->assertSame("", $obj->toString());
 
 
@@ -46,12 +49,12 @@ class tpStringTest extends TestCase
         // Teste de inicialização com "undefined" em um tipo "allowNull"
         // Objetivo é verificar se, neste caso, o valor incialmente definido para
         // a instância tornar-se-a "null"
-        $obj = new tpString(undefined, true);
+        $obj = new tpGeneric(null, true, true, false, $valueDefault, null, null, "DateTime");
         $this->assertTrue($obj->isAllowNull());
-        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
         $this->assertNull($obj->get());
-        $this->assertSame("", $obj->getNotNull());
+        $this->assertSame(null, $obj->getNotNull());
 
 
 
@@ -60,29 +63,29 @@ class tpStringTest extends TestCase
         // Teste de inicialização com um tipo arbitrário para "default" e que
         // não aceita "null" como válido.
         // Passando "undefined" o valor será definido como o "default".
-        $obj = new tpString(undefined, false, true, false, "null");
+        $obj = new tpGeneric(undefined, false, true, false, $valueDefault, null, null, "DateTime");
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertFalse($obj->isNullOrEquivalent());
-        $this->assertSame("null", $obj->get());
+        $this->assertSame($valueDefault, $obj->get());
 
         // Passando "null" o valor será definido como o "nullEquivalent".
-        $obj = new tpString(null, false, true, false, "null");
+        $obj = new tpGeneric(null, false, true, false, $valueDefault, null, null, "DateTime");
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
-        $this->assertSame("", $obj->get());
+        $this->assertSame(null, $obj->get());
 
 
         // Teste de inicialização com um tipo arbitrário para "default" e que
         // aceita "null" como válido.
         // Passando "undefined" o valor será definido como o "default"
-        $obj = new tpString(undefined, true, true, false, "null");
+        $obj = new tpGeneric(undefined, true, true, false, $valueDefault, null, null, "DateTime");
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertFalse($obj->isNullOrEquivalent());
-        $this->assertSame("null", $obj->get());
+        $this->assertSame($valueDefault, $obj->get());
 
         // Passando "null" o valor será definido como "null".
-        $obj = new tpString(null, true, true, false, "null");
-        $this->assertFalse($obj->isNullEquivalent());
+        $obj = new tpGeneric(null, true, true, false, $valueDefault, null, null, "DateTime");
+        $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
         $this->assertSame(null, $obj->get());
 
@@ -92,46 +95,35 @@ class tpStringTest extends TestCase
 
         // Teste de alteração de valor atualmetne setado.
         // Feito com uma instância "allowNull"
-        $obj = new tpString(null, true);
+        $obj = new tpGeneric(null, true, true, false, $valueDefault, null, null, "DateTime");
         $this->assertNull($obj->get());
-        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
 
-        $this->assertTrue($obj->set("change 1"));
+        $nDT = new DateTime();
+        $this->assertTrue($obj->set($nDT));
         $this->assertSame("", $obj->getLastSetError());
-        $this->assertSame("change 1", $obj->get());
+        $this->assertSame($nDT, $obj->get());
 
-        $this->assertTrue($obj->set("change 2"));
+        $this->assertTrue($obj->set(null));
         $this->assertSame("", $obj->getLastSetError());
-        $this->assertSame("change 2", $obj->get());
+        $this->assertSame(null, $obj->get());
 
         // Tenta setar um valor inválido e verifica que a mensagem de erro
         // informa a natureza do mesmo alem do valor ser mantido o mesmo.
-        $this->assertFalse($obj->set(new stdClass()));
+        $this->assertFalse($obj->set("invalid"));
         $this->assertSame("error.obj.type.unexpected", $obj->getLastSetError());
-        $this->assertSame("change 2", $obj->get());
+        $this->assertSame(null, $obj->get());
 
 
 
         // Teste de uma instância do tipo "readonly", ou seja, uma instância que
         // não permite a alteração de seu valor após ser iniciada.
-        $obj = new tpString("immutable", false, true, true);
-        $this->assertSame("immutable", $obj->get());
+        $obj = new tpGeneric($nDT, true, true, true, $valueDefault, null, null, "DateTime");
+        $this->assertSame($nDT, $obj->get());
 
-        $this->assertFalse($obj->set("try to change"));
+        $this->assertFalse($obj->set($valueDefault));
         $this->assertSame("error.obj.type.readonly", $obj->getLastSetError());
-        $this->assertSame("immutable", $obj->get());
-
-
-
-        // Teste de uma instância em que "allowEmpty" é "false" e
-        // onde há um valor padrão definido.
-        $obj = new tpString("", false, false, false, "notEmpty");
-        $this->assertSame("notEmpty", $obj->default());
-        $this->assertSame("notEmpty", $obj->get());
-
-        $this->assertFalse($obj->set(""));
-        $this->assertSame("error.obj.type.not.allow.empty", $obj->getLastSetError());
-        $this->assertSame("notEmpty", $obj->get());
+        $this->assertSame($nDT, $obj->get());
     }
 }

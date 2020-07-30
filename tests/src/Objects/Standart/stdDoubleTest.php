@@ -101,7 +101,7 @@ class stdDoubleTest extends TestCase
             undefined, null, []
         ];
         $convertFalseError = [
-            "error.obj.type.unexpected", "error.obj.type.not.nullable", "error.obj.type.unexpected"
+            "error.obj.type.unexpected", "error.obj.type.not.allow.null", "error.obj.type.unexpected"
         ];
 
 

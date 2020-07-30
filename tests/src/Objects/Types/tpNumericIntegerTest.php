@@ -41,12 +41,13 @@ class tpNumericIntegerTest extends TestCase
 
         // Testes de inicialização
         $obj = new tpByte();
-        $this->assertSame(0, $obj->nullEquivalent());
+        $this->assertSame(tpByte::standart()::TYPE, $obj->getType());
+        $this->assertSame(null, $obj->default());
         $this->assertSame(-128, $obj->min());
         $this->assertSame(127, $obj->max());
 
         $this->assertTrue($obj->isUndefined());
-        $this->assertFalse($obj->isNullable());
+        $this->assertFalse($obj->isAllowNull());
         $this->assertFalse($obj->isReadOnly());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
@@ -57,11 +58,11 @@ class tpNumericIntegerTest extends TestCase
 
 
 
-        // Teste de inicialização com "undefined" em um tipo "nullable"
+        // Teste de inicialização com "undefined" em um tipo "allowNull"
         // Objetivo é verificar se, neste caso, o valor incialmente definido para
         // a instância tornar-se-a "null"
         $obj = new tpByte(undefined, true);
-        $this->assertTrue($obj->isNullable());
+        $this->assertTrue($obj->isAllowNull());
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
         $this->assertNull($obj->get());
@@ -69,23 +70,43 @@ class tpNumericIntegerTest extends TestCase
 
 
 
-        // Teste de inicialização com um tipo arbitrário para "nullEquivalent"
-        // Tanto passando "undefined" quando "null" o resultado deverá ser o mesmo
-        // definido em ""nullEquivalent"
-        $obj = new tpByte(undefined, false, false, 10);
-        $this->assertTrue($obj->isNullEquivalent());
-        $this->assertTrue($obj->isNullOrEquivalent());
+
+
+        // Teste de inicialização com um tipo arbitrário para "default" e que
+        // não aceita "null" como válido.
+        // Passando "undefined" o valor será definido como o "default".
+        $obj = new tpByte(undefined, false, true, false, 10);
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertFalse($obj->isNullOrEquivalent());
         $this->assertSame(10, $obj->get());
 
-        $obj = new tpByte(null, false, false, 10);
+        // Passando "null" o valor será definido como o "nullEquivalent".
+        $obj = new tpByte(null, false, true, false, 10);
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
+        $this->assertSame(0, $obj->get());
+
+
+        // Teste de inicialização com um tipo arbitrário para "default" e que
+        // aceita "null" como válido.
+        // Passando "undefined" o valor será definido como o "default"
+        $obj = new tpByte(undefined, true, true, false, 10);
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertFalse($obj->isNullOrEquivalent());
         $this->assertSame(10, $obj->get());
+
+        // Passando "null" o valor será definido como "null".
+        $obj = new tpByte(null, true, true, false, 10);
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertTrue($obj->isNullOrEquivalent());
+        $this->assertSame(null, $obj->get());
+
+
 
 
 
         // Teste de alteração de valor atualmetne setado.
-        // Feito com uma instância "nullable"
+        // Feito com uma instância "allowNull"
         $obj = new tpByte(null, true);
         $this->assertNull($obj->get());
         $this->assertFalse($obj->isNullEquivalent());
@@ -109,7 +130,7 @@ class tpNumericIntegerTest extends TestCase
 
         // Teste de uma instância do tipo "readonly", ou seja, uma instância que
         // não permite a alteração de seu valor após ser iniciada.
-        $obj = new tpByte(2, false, true);
+        $obj = new tpByte(2, false, true, true);
         $this->assertSame(2, $obj->get());
 
         $this->assertFalse($obj->set(1));
@@ -118,9 +139,9 @@ class tpNumericIntegerTest extends TestCase
 
 
 
-        // Teste de uma instância não "nullable" com um intervalo arbitrário de números
+        // Teste de uma instância não "allowNull" com um intervalo arbitrário de números
         // válidos definidos.
-        $obj = new tpByte(undefined, false, false, undefined, 0, 100);
+        $obj = new tpByte(undefined, false, false, false, undefined, 0, 100);
         $this->assertSame(0, $obj->get());
         $this->assertTrue($obj->set(100));
 

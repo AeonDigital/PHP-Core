@@ -41,14 +41,14 @@ class tpBool extends aType implements iBool
 
 
     /**
-     * Indica qual valor (para esta instância) deve ser considerado equivalente a ``null``
-     * para fins de comparação.
+     * Valor padrão a ser definido para este tipo de instância caso nenhum valor válido
+     * tenha sido explicitamente definido.
      *
-     * @return      bool
+     * @return      ?bool
      */
-    public function nullEquivalent() : bool
+    public function default() : ?bool
     {
-        return $this->valueNullEquivalent;
+        return $this->valueDefault;
     }
     /**
      * Retorna o menor valor aceitável para esta instância.
@@ -59,7 +59,7 @@ class tpBool extends aType implements iBool
      */
     public function min()
     {
-        return $this->valueMin;
+        return null;
     }
     /**
      * Retorna o menor valor aceitável para esta instância.
@@ -70,7 +70,7 @@ class tpBool extends aType implements iBool
      */
     public function max()
     {
-        return $this->valueMax;
+        return null;
     }
 
 
@@ -95,63 +95,5 @@ class tpBool extends aType implements iBool
     public function getNotNull() : bool
     {
         return parent::stdGetNotNull();
-    }
-
-
-
-
-
-    /**
-     * Inicia uma nova instância.
-     *
-     * @param       mixed $value
-     *              Valor inicial da instância.
-     *              Se não for definido usará o valor definido como ``self::nullEquivalent()``.
-     *              Se ``nullEquivalent`` não for definido mas tratar-se de um tipo
-     *              ``nullable`` usará ``null`` como valor inicial caso contrário
-     *              usará o valor definido como ``nullEquivalent`` da classe ``Standart``
-     *              original.
-     *              Se for definido como ``null`` mas não for do tipo ``nullable`` usará
-     *              o valor definido em ``nullEquivalent`` aqui definido ou aquele que
-     *              existir na classe ``Standart`` original.
-     *
-     * @param       bool $nullable
-     *              Quando ``true`` esta instância aceitará ``null`` como um valor válido.
-     *
-     * @param       bool $readonly
-     *              Quando ``true`` indica que esta instância não poderá ter seu valor
-     *              alterado após a inicialização.
-     *
-     * @param       mixed $valueNullEquivalent
-     *              Valor equivalente a ``null`` a ser usado por esta instância.
-     *              Se não for definido usará o valor existente em ``nullEquivalent`` da
-     *              classe ``Standart`` original.
-     *
-     * @param       int|float|Realtype|\DateTime $valueMin
-     *              Indica o menor valor aceitável para um tipo numérico ou comparável.
-     *              Se não for definido usará o valor existente em ``min`` da classe
-     *              ``Standart`` original.
-     *
-     * @param       int|float|Realtype|\DateTime $valueMax
-     *              Indica o maior valor aceitável para um tipo numérico ou comparável.
-     *              Se não for definido usará o valor existente em ``max`` da classe
-     *              ``Standart`` original.
-     */
-    function __construct(
-        $value = undefined,
-        bool $nullable = false,
-        bool $readonly = false,
-        $valueNullEquivalent = undefined,
-        $valueMin = undefined,
-        $valueMax = undefined
-    ) {
-        parent::__construct(
-            $value,
-            $nullable,
-            $readonly,
-            $valueNullEquivalent,
-            undefined,
-            undefined
-        );
     }
 }
