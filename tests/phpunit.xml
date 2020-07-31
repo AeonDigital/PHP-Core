@@ -16,7 +16,7 @@
             <!--
                 Defina aqui cada arquivo de testes que será utilizado.
             -->
-            <file>src/global_functionsTests.php</file>
+            <!--file>src/global_functionsTests.php</file>
             <file>src/Objects/RealtypeTests.php</file>
             <file>src/Objects/ToolsTests.php</file>
             <file>src/Objects/Traits/MainCheckArgumentExceptionTest.php</file>
@@ -41,7 +41,9 @@
             <file>src/Objects/Types/tpNumericRealTest.php</file>
             <file>src/Objects/Types/tpGeneralDateTime.php</file>
             <file>src/Objects/Types/tpStringTest.php</file>
-            <file>src/Objects/Types/tpGenericTest.php</file>
+            <file>src/Objects/Types/tpGenericTest.php</file-->
+
+            <file>src/Objects/Types/tpTypeArrayTest.php</file>
 
 
 

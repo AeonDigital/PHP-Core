@@ -80,6 +80,8 @@ class tpBool extends aType implements iBool
     /**
      * Retorna o valor atualmente definido para a instância atual.
      *
+     * Usado apenas em casos onde ``self::isIterable() = false``.
+     *
      * @return      ?bool
      */
     public function get() : ?bool
@@ -89,6 +91,8 @@ class tpBool extends aType implements iBool
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
      * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
+     *
+     * Usado apenas em casos onde ``self::isIterable() = false``.
      *
      * @return      bool
      */

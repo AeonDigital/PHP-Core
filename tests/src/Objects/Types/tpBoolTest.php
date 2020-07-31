@@ -35,6 +35,7 @@ class tpBoolTest extends TestCase
         $this->assertFalse($obj->isAllowNull());
         $this->assertFalse($obj->isAllowEmpty());
         $this->assertFalse($obj->isReadOnly());
+        $this->assertFalse($obj->isIterable());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
 

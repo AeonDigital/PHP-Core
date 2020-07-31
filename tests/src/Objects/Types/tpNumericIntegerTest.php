@@ -49,6 +49,7 @@ class tpNumericIntegerTest extends TestCase
         $this->assertTrue($obj->isUndefined());
         $this->assertFalse($obj->isAllowNull());
         $this->assertFalse($obj->isReadOnly());
+        $this->assertFalse($obj->isIterable());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
 

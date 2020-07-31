@@ -37,6 +37,7 @@ class tpGenericTest extends TestCase
         $this->assertTrue($obj->isAllowNull());
         $this->assertFalse($obj->isAllowEmpty());
         $this->assertFalse($obj->isReadOnly());
+        $this->assertFalse($obj->isIterable());
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertFalse($obj->isNullOrEquivalent());
 

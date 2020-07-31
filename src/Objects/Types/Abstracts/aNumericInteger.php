@@ -61,6 +61,8 @@ abstract class aNumericInteger extends aType
     /**
      * Retorna o valor atualmente definido para a instância atual.
      *
+     * Usado apenas em casos onde ``self::isIterable() = false``.
+     *
      * @return      ?int
      */
     public function get() : ?int
@@ -70,6 +72,8 @@ abstract class aNumericInteger extends aType
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
      * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
+     *
+     * Usado apenas em casos onde ``self::isIterable() = false``.
      *
      * @return      int
      */

@@ -75,6 +75,8 @@ abstract class aNumericReal extends aType
     /**
      * Retorna o valor atualmente definido para a instância atual.
      *
+     * Usado apenas em casos onde ``self::isIterable() = false``.
+     *
      * @return      ?Realtype
      */
     public function get() : ?Realtype
@@ -84,6 +86,8 @@ abstract class aNumericReal extends aType
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
      * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
+     *
+     * Usado apenas em casos onde ``self::isIterable() = false``.
      *
      * @return      Realtype
      */

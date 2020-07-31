@@ -80,6 +80,25 @@ abstract class aType implements iType
 
 
 
+    /**
+     * Indica quando o tipo de valor aceito é do tipo ``iterable``.
+     *
+     * @var         bool
+     */
+    protected bool $iterable = false;
+    /**
+     * Informa quando o tipo de valor aceito é do tipo ``iterable``.
+     *
+     * @return      bool
+     */
+    public function isIterable() : bool
+    {
+        return $this->iterable;
+    }
+
+
+
+
 
     /**
      * Indica se esta instância já recebeu algum valor válido de forma explicita.
@@ -146,24 +165,35 @@ abstract class aType implements iType
     {
         return $this->readonly;
     }
+
+
+
     /**
      * Informa se o valor atualmente definido é o mesmo que ``static::nullEquivalent()``.
      * Retornará ``false`` caso o valor seja ``null``.
+     *
+     * Usado apenas em casos onde ``self::isIterable() = false``.
+     * Se ``isIterable = true`` deve retornar sempre ``false``.
      *
      * @return      bool
      */
     public function isNullEquivalent() : bool
     {
+        if ($this->isIterable() === true) { return false; }
         return ($this->value === static::standart()::nullEquivalent());
     }
     /**
      * Informa se o valor atualmente definido é ``null`` ou se é o mesmo que
      * ``static::nullEquivalent()``.
      *
+     * Usado apenas em casos onde ``self::isIterable() = false``.
+     * Se ``isIterable = true`` deve retornar sempre ``false``.
+     *
      * @return      bool
      */
     public function isNullOrEquivalent() : bool
     {
+        if ($this->isIterable() === true) { return false; }
         return (($this->value === null) || $this->isNullEquivalent() === true);
     }
 
@@ -193,6 +223,8 @@ abstract class aType implements iType
 
     /**
      * Define um novo valor para a instância.
+     *
+     * Usado apenas em casos onde ``self::isIterable() = false``.
      *
      * @param       mixed $v
      *              Valor a ser atribuido.
@@ -356,10 +388,15 @@ abstract class aType implements iType
     /**
      * Converte o valor atualmente definido para uma ``string``.
      *
+     * Usado apenas em casos onde ``self::isIterable() = false``.
+     * Se ``isIterable = true`` deve retornar sempre ``""``.
+     *
      * @return      string
      */
     public function toString() : string
     {
+        if ($this->isIterable() === true) { return ""; }
+
         $v = $this->value;
         if (static::standart()::TYPE === "Bool") { $v = Tools::toBool($v); }
         return Tools::toString($v);
