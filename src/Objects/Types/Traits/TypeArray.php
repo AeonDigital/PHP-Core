@@ -201,14 +201,13 @@ trait TypeArray
      */
     public function getValuesNotNull() : self
     {
-        $arr = [];
-        foreach ($this->valueArray as $key => $val) {
-            if ($val["value"] !== null) {
-                $arr[$val["key"]] = $val["value"];
+        $arr = clone $this;
+        foreach ($arr as $key => $val) {
+            if ($val === null) {
+                $arr->unsetValue($key);
             }
         }
-
-        return new self($arr);
+        return $arr;
     }
     /**
      * Retorna um ``array associativo`` contendo as chaves e respectivos valores atualmente
@@ -293,6 +292,10 @@ trait TypeArray
      *              Indica o maior valor aceitável para um tipo numérico ou comparável.
      *              Se não for definido usará o valor existente em ``max`` da classe
      *              ``Standart`` original.
+     *
+     * @param       bool $caseSensitive
+     *              Informa se as chaves de valores devem ser tratadas de forma
+     *              ``case-sensitive``.
      */
     function __construct(
         $value = [],
@@ -301,7 +304,8 @@ trait TypeArray
         bool $readonly = false,
         $valueDefault = null,
         $valueMin = undefined,
-        $valueMax = undefined
+        $valueMax = undefined,
+        bool $caseSensitive = true
     ) {
         parent::__construct(
             undefined,
@@ -313,6 +317,7 @@ trait TypeArray
             $valueMax
         );
 
+        $this->caseSensitive = $caseSensitive;
         if (\is_array($value) && \count($value) > 0) {
             foreach ($value as $k => $v) {
                 $this->setValue($k, $v);

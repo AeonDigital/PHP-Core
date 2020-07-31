@@ -354,8 +354,8 @@ abstract class aType implements iType
         $this->valueDefault = (($valueDefault === undefined) ? null : $valueDefault);
 
         if (static::standart()::HAS_LIMIT_RANGE === true) {
-            $this->valueMin = (($valueMin === undefined) ? static::standart()::min() : $valueMin);
-            $this->valueMax = (($valueMax === undefined) ? static::standart()::max() : $valueMax);
+            $this->valueMin = (($valueMin === undefined || $valueMin === null) ? static::standart()::min() : $valueMin);
+            $this->valueMax = (($valueMax === undefined || $valueMax === null) ? static::standart()::max() : $valueMax);
         }
 
 
