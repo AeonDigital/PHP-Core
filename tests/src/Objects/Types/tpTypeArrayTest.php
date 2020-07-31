@@ -2,13 +2,18 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
+use AeonDigital\Objects\Types\tpBoolArray as tpBoolArray;
 use AeonDigital\Objects\Types\tpByteArray as tpByteArray;
+use AeonDigital\Objects\Types\tpShortArray as tpShortArray;
+use AeonDigital\Objects\Types\tpIntArray as tpIntArray;
+use AeonDigital\Objects\Types\tpLongArray as tpLongArray;
+use AeonDigital\Objects\Types\tpFloatArray as tpFloatArray;
+use AeonDigital\Objects\Types\tpDoubleArray as tpDoubleArray;
+use AeonDigital\Objects\Types\tpRealArray as tpRealArray;
+use AeonDigital\Objects\Types\tpDateTimeArray as tpDateTimeArray;
+use AeonDigital\Objects\Types\tpStringArray as tpStringArray;
 
 require_once __DIR__ . "/../../../phpunit.php";
-
-
-
-
 
 
 
@@ -17,13 +22,52 @@ class tpTypeArrayTest extends TestCase
 
 
 
-    public function test_instance()
-    {
+    public function test_static() {
+        $this->assertSame("Bool", tpBoolArray::standart()::TYPE);
+        $this->assertSame(false, tpBoolArray::standart()::IS_CLASS);
+        $this->assertSame(false, tpBoolArray::standart()::HAS_LIMIT_RANGE);
+
         $this->assertSame("Byte", tpByteArray::standart()::TYPE);
         $this->assertSame(false, tpByteArray::standart()::IS_CLASS);
         $this->assertSame(true, tpByteArray::standart()::HAS_LIMIT_RANGE);
 
+        $this->assertSame("Short", tpShortArray::standart()::TYPE);
+        $this->assertSame(false, tpShortArray::standart()::IS_CLASS);
+        $this->assertSame(true, tpShortArray::standart()::HAS_LIMIT_RANGE);
 
+        $this->assertSame("Int", tpIntArray::standart()::TYPE);
+        $this->assertSame(false, tpIntArray::standart()::IS_CLASS);
+        $this->assertSame(true, tpIntArray::standart()::HAS_LIMIT_RANGE);
+
+        $this->assertSame("Long", tpLongArray::standart()::TYPE);
+        $this->assertSame(false, tpLongArray::standart()::IS_CLASS);
+        $this->assertSame(true, tpLongArray::standart()::HAS_LIMIT_RANGE);
+
+        $this->assertSame("Float", tpFloatArray::standart()::TYPE);
+        $this->assertSame(false, tpFloatArray::standart()::IS_CLASS);
+        $this->assertSame(true, tpFloatArray::standart()::HAS_LIMIT_RANGE);
+
+        $this->assertSame("Double", tpDoubleArray::standart()::TYPE);
+        $this->assertSame(false, tpDoubleArray::standart()::IS_CLASS);
+        $this->assertSame(true, tpDoubleArray::standart()::HAS_LIMIT_RANGE);
+
+        $this->assertSame("AeonDigital\Objects\Realtype", tpRealArray::standart()::TYPE);
+        $this->assertSame(true, tpRealArray::standart()::IS_CLASS);
+        $this->assertSame(true, tpRealArray::standart()::HAS_LIMIT_RANGE);
+
+        $this->assertSame("DateTime", tpDateTimeArray::standart()::TYPE);
+        $this->assertSame(true, tpDateTimeArray::standart()::IS_CLASS);
+        $this->assertSame(true, tpDateTimeArray::standart()::HAS_LIMIT_RANGE);
+
+        $this->assertSame("String", tpStringArray::standart()::TYPE);
+        $this->assertSame(false, tpStringArray::standart()::IS_CLASS);
+        $this->assertSame(false, tpStringArray::standart()::HAS_LIMIT_RANGE);
+    }
+
+
+
+    public function test_instance()
+    {
         // Testes de inicialização
         $obj = new tpByteArray();
         $this->assertSame(tpByteArray::standart()::TYPE, $obj->getType());
@@ -113,4 +157,7 @@ class tpTypeArrayTest extends TestCase
         $this->assertSame(8, count($obj));
         $this->assertTrue($obj->isLocked());
     }
+
+
+
 }

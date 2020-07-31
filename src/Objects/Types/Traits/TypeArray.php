@@ -35,6 +35,15 @@ trait TypeArray
 
 
 
+    /**
+     * Indica quando o tipo de valor aceito é do tipo ``iterable``.
+     *
+     * @var         bool
+     */
+    protected bool $iterable = true;
+
+
+
 
 
     /**
@@ -296,6 +305,10 @@ trait TypeArray
      * @param       bool $caseSensitive
      *              Informa se as chaves de valores devem ser tratadas de forma
      *              ``case-sensitive``.
+     *
+     * @param       string $type
+     *              Informa a namespace completa da classe ou interface que os valores
+     *              a serem usados por esta instância deverão possuir.
      */
     function __construct(
         $value = [],
@@ -305,7 +318,8 @@ trait TypeArray
         $valueDefault = null,
         $valueMin = undefined,
         $valueMax = undefined,
-        bool $caseSensitive = true
+        bool $caseSensitive = true,
+        string $type = ""
     ) {
         parent::__construct(
             undefined,
@@ -314,7 +328,8 @@ trait TypeArray
             $readonly,
             $valueDefault,
             $valueMin,
-            $valueMax
+            $valueMax,
+            $type
         );
 
         $this->caseSensitive = $caseSensitive;
