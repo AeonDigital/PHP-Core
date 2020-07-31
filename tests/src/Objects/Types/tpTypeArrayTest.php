@@ -53,6 +53,7 @@ class tpTypeArrayTest extends TestCase
         $this->assertTrue($obj->setValue("first", 1));
         $this->assertTrue($obj->hasValue("first"));
         $this->assertSame(1, $obj->getValue("first"));
+        $this->assertSame(undefined, $obj->getValue("sec"));
         $this->assertTrue($obj->unsetValue("first"));
         $this->assertFalse($obj->hasValue("first"));
 
