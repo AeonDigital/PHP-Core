@@ -185,7 +185,7 @@ trait TypeArray
         if ($this->hasValue($key) === true) {
             return $this->valueArray[$this->useKey($key)]["value"];
         }
-        return null;
+        return undefined;
     }
 
 
