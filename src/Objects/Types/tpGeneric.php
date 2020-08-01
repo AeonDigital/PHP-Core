@@ -187,6 +187,10 @@ class tpGeneric extends aType implements iGeneric
      *              Se não for definido usará o valor existente em ``max`` da classe
      *              ``Standart`` original.
      *
+     * @param       ?int $valueLength
+     *              tamanho máximo (em caracteres) que um valor do tipo ``string``
+     *              pode ter.
+     *
      * @param       string $type
      *              Informa a namespace completa da classe ou interface que os valores
      *              a serem usados por esta instância deverão possuir.
@@ -199,6 +203,7 @@ class tpGeneric extends aType implements iGeneric
         $valueDefault = null,
         $valueMin = undefined,
         $valueMax = undefined,
+        ?int $valueLength = null,
         string $type
     ) {
         $this->type = $type;
@@ -209,7 +214,8 @@ class tpGeneric extends aType implements iGeneric
             $readonly,
             $valueDefault,
             $valueMin,
-            $valueMax
+            $valueMax,
+            $valueLength
         );
     }
 

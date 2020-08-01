@@ -53,6 +53,14 @@ abstract class aType implements iType
      * @var         int|float|Realtype|\DateTime $max
      */
     protected $valueMax = null;
+    /**
+     * Tamanho máximo que um valor do tipo ``string`` pode possuir
+     * em número de caracteres.
+     * ``null`` indica que não há limites.
+     *
+     * @var         ?int
+     */
+    protected ?int $valueLength = null;
 
 
 
@@ -94,6 +102,22 @@ abstract class aType implements iType
     public function isIterable() : bool
     {
         return $this->iterable;
+    }
+
+
+
+
+
+    /**
+     * Retorna o tamanho máximo (em caracteres) que um valor do tipo ``string`` pode ter.
+     * O valor ``null`` indica que não existe tal limitação.
+     * Esta configuação funciona apenas em casos de tipo ``string``.
+     *
+     * @return      ?int
+     */
+    public function length() : ?int
+    {
+        return $this->valueLength;
     }
 
 
@@ -240,10 +264,21 @@ abstract class aType implements iType
         else {
             $n = static::standart()::parseIfValidate($v, $this->allowNull, false, $this->lastSetError);
             if ($this->lastSetError === "") {
-                if ($n === "" && $this->allowEmpty === false) {
-                    $this->lastSetError = "error.obj.type.not.allow.empty";
+                if (static::standart()::TYPE === "String" && $n !== null) {
+                    if ($n === "") {
+                        if ($this->allowEmpty === false) {
+                            if ($this->allowNull === true) { $n = null; }
+                            else { $this->lastSetError = "error.obj.type.not.allow.empty"; }
+                        }
+                    }
+                    else {
+                        if ($this->valueLength !== null && \mb_strlen($n) > $this->valueLength) {
+                            $this->lastSetError = "error.obj.max.length.exceeded";
+                        }
+                    }
                 }
-                else {
+
+                if ($this->lastSetError === "") {
                     if ($this->validateRange($n) === false) {
                         $this->lastSetError = "error.obj.out.of.range";
                     }
@@ -338,6 +373,10 @@ abstract class aType implements iType
      *              Indica o maior valor aceitável para um tipo numérico ou comparável.
      *              Se não for definido usará o valor existente em ``max`` da classe
      *              ``Standart`` original.
+     *
+     * @param       ?int $valueLength
+     *              tamanho máximo (em caracteres) que um valor do tipo ``string``
+     *              pode ter.
      */
     function __construct(
         $value = undefined,
@@ -346,16 +385,20 @@ abstract class aType implements iType
         bool $readonly = false,
         $valueDefault = null,
         $valueMin = undefined,
-        $valueMax = undefined
+        $valueMax = undefined,
+        ?int $valueLength = null
     ) {
         $this->type = (($this->type === "") ? static::standart()::TYPE : $this->type);
         $this->allowNull = $allowNull;
-        $this->allowEmpty = ($allowEmpty === true && static::standart()::TYPE === "String");
         $this->valueDefault = (($valueDefault === undefined) ? null : $valueDefault);
 
         if (static::standart()::HAS_LIMIT_RANGE === true) {
             $this->valueMin = (($valueMin === undefined || $valueMin === null) ? static::standart()::min() : $valueMin);
             $this->valueMax = (($valueMax === undefined || $valueMax === null) ? static::standart()::max() : $valueMax);
+        }
+        if (static::standart()::TYPE === "String") {
+            $this->allowEmpty = $allowEmpty;
+            $this->valueLength = $valueLength;
         }
 
 
@@ -420,13 +463,15 @@ abstract class aType implements iType
     protected static function tpFromArray(string $useType, array $cfg) : iType
     {
         return new $useType(
-            ((\key_exists("value", $cfg) === true)        ? $cfg["value"]         : undefined),
-            ((\key_exists("allowNull", $cfg) === true)    ? $cfg["allowNull"]     : false),
-            ((\key_exists("allowEmpty", $cfg) === true)   ? $cfg["allowEmpty"]    : true),
-            ((\key_exists("readonly", $cfg) === true)     ? $cfg["readonly"]      : false),
-            ((\key_exists("valueDefault", $cfg) === true) ? $cfg["valueDefault"]  : null),
-            ((\key_exists("valueMin", $cfg) === true)     ? $cfg["valueMin"]      : undefined),
-            ((\key_exists("valueMax", $cfg) === true)     ? $cfg["valueMax"]      : undefined)
+            ((\key_exists("value", $cfg) === true)          ? $cfg["value"]         : undefined),
+            ((\key_exists("allowNull", $cfg) === true)      ? $cfg["allowNull"]     : false),
+            ((\key_exists("allowEmpty", $cfg) === true)     ? $cfg["allowEmpty"]    : true),
+            ((\key_exists("readonly", $cfg) === true)       ? $cfg["readonly"]      : false),
+            ((\key_exists("valueDefault", $cfg) === true)   ? $cfg["valueDefault"]  : null),
+            ((\key_exists("valueMin", $cfg) === true)       ? $cfg["valueMin"]      : undefined),
+            ((\key_exists("valueMax", $cfg) === true)       ? $cfg["valueMax"]      : undefined),
+            ((\key_exists("length", $cfg) === true)         ? $cfg["length"]        : null),
+            ((\key_exists("type", $cfg) === true)           ? $cfg["type"]          : null),
         );
     }
 }

@@ -27,7 +27,7 @@ class tpGenericTest extends TestCase
         $valueDefault = new \DateTime("2020-01-01 00:00:00");
 
         // Testes de inicialização
-        $obj = new tpGeneric(undefined, true, true, false, $valueDefault, null, null, "DateTime");
+        $obj = new tpGeneric(undefined, true, true, false, $valueDefault, null, null, null, "DateTime");
         $this->assertSame("DateTime", $obj->getType());
         $this->assertSame($valueDefault, $obj->default());
         $this->assertSame(null, $obj->min());
@@ -50,7 +50,7 @@ class tpGenericTest extends TestCase
         // Teste de inicialização com "undefined" em um tipo "allowNull"
         // Objetivo é verificar se, neste caso, o valor incialmente definido para
         // a instância tornar-se-a "null"
-        $obj = new tpGeneric(null, true, true, false, $valueDefault, null, null, "DateTime");
+        $obj = new tpGeneric(null, true, true, false, $valueDefault, null, null, null, "DateTime");
         $this->assertTrue($obj->isAllowNull());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
@@ -64,13 +64,13 @@ class tpGenericTest extends TestCase
         // Teste de inicialização com um tipo arbitrário para "default" e que
         // não aceita "null" como válido.
         // Passando "undefined" o valor será definido como o "default".
-        $obj = new tpGeneric(undefined, false, true, false, $valueDefault, null, null, "DateTime");
+        $obj = new tpGeneric(undefined, false, true, false, $valueDefault, null, null, null, "DateTime");
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertFalse($obj->isNullOrEquivalent());
         $this->assertSame($valueDefault, $obj->get());
 
         // Passando "null" o valor será definido como o "nullEquivalent".
-        $obj = new tpGeneric(null, false, true, false, $valueDefault, null, null, "DateTime");
+        $obj = new tpGeneric(null, false, true, false, $valueDefault, null, null, null, "DateTime");
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
         $this->assertSame(null, $obj->get());
@@ -79,13 +79,13 @@ class tpGenericTest extends TestCase
         // Teste de inicialização com um tipo arbitrário para "default" e que
         // aceita "null" como válido.
         // Passando "undefined" o valor será definido como o "default"
-        $obj = new tpGeneric(undefined, true, true, false, $valueDefault, null, null, "DateTime");
+        $obj = new tpGeneric(undefined, true, true, false, $valueDefault, null, null, null, "DateTime");
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertFalse($obj->isNullOrEquivalent());
         $this->assertSame($valueDefault, $obj->get());
 
         // Passando "null" o valor será definido como "null".
-        $obj = new tpGeneric(null, true, true, false, $valueDefault, null, null, "DateTime");
+        $obj = new tpGeneric(null, true, true, false, $valueDefault, null, null, null, "DateTime");
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
         $this->assertSame(null, $obj->get());
@@ -96,7 +96,7 @@ class tpGenericTest extends TestCase
 
         // Teste de alteração de valor atualmetne setado.
         // Feito com uma instância "allowNull"
-        $obj = new tpGeneric(null, true, true, false, $valueDefault, null, null, "DateTime");
+        $obj = new tpGeneric(null, true, true, false, $valueDefault, null, null, null, "DateTime");
         $this->assertNull($obj->get());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
@@ -120,7 +120,7 @@ class tpGenericTest extends TestCase
 
         // Teste de uma instância do tipo "readonly", ou seja, uma instância que
         // não permite a alteração de seu valor após ser iniciada.
-        $obj = new tpGeneric($nDT, true, true, true, $valueDefault, null, null, "DateTime");
+        $obj = new tpGeneric($nDT, true, true, true, $valueDefault, null, null, null, "DateTime");
         $this->assertSame($nDT, $obj->get());
 
         $this->assertFalse($obj->set($valueDefault));

@@ -90,7 +90,7 @@ class tpTypeArrayTest extends TestCase
 
 
         // Teste dos métodos específicos para uso como um array
-        $obj = new tpByteArray(null, true, true, false, null, null, null, false);
+        $obj = new tpByteArray(null, true, true, false, null, null, null, null, false);
         $this->assertFalse($obj->isCaseSensitive());
         $this->assertFalse($obj->isLocked());
         $this->assertFalse($obj->hasValue("first"));

@@ -302,6 +302,10 @@ trait TypeArray
      *              Se não for definido usará o valor existente em ``max`` da classe
      *              ``Standart`` original.
      *
+     * @param       ?int $valueLength
+     *              tamanho máximo (em caracteres) que um valor do tipo ``string``
+     *              pode ter.
+     *
      * @param       bool $caseSensitive
      *              Informa se as chaves de valores devem ser tratadas de forma
      *              ``case-sensitive``.
@@ -318,6 +322,7 @@ trait TypeArray
         $valueDefault = null,
         $valueMin = undefined,
         $valueMax = undefined,
+        ?int $valueLength = null,
         bool $caseSensitive = true,
         string $type = ""
     ) {
@@ -329,6 +334,7 @@ trait TypeArray
             $valueDefault,
             $valueMin,
             $valueMax,
+            $valueLength,
             $type
         );
 
