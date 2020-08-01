@@ -108,20 +108,20 @@ class stdShortTest extends TestCase
 
     public function test_method_nullEquivalent()
     {
-        $this->assertSame(0, stdShort::nullEquivalent());
+        $this->assertSame(0, stdShort::getNullEquivalent());
     }
 
 
 
     public function test_method_min()
     {
-        $this->assertSame(-32768, stdShort::min());
+        $this->assertSame(-32768, stdShort::getMin());
     }
 
 
 
     public function test_method_max()
     {
-        $this->assertSame(32767, stdShort::max());
+        $this->assertSame(32767, stdShort::getMax());
     }
 }

@@ -103,7 +103,7 @@ abstract class aStandart implements iStandart
      *
      * @param       bool $nullEquivalent
      *              Quando ``true``, converterá ``null`` para o valor existente em
-     *              ``static::nullEquivalent()``. Se ``$allowNull`` for definido esta opção
+     *              ``static::getNullEquivalent()``. Se ``$allowNull`` for definido esta opção
      *              será ignorada.
      *
      * @param       string $err
@@ -122,7 +122,7 @@ abstract class aStandart implements iStandart
         if ($v === null) {
             if ($allowNull === false) {
                 if ($nullEquivalent === true) {
-                    $v = static::nullEquivalent();
+                    $v = static::getNullEquivalent();
                 }
                 else {
                     $err = "error.obj.type.not.allow.null";
@@ -165,7 +165,7 @@ abstract class aStandart implements iStandart
      */
     protected static function validateRange($v) : bool
     {
-        return (static::HAS_LIMIT_RANGE === false || ($v >= static::min() && $v <= static::max()));
+        return (static::HAS_LIMIT_RANGE === false || ($v >= static::getMin() && $v <= static::getMax()));
     }
     /**
      * Retorna o nome do método a ser usado para efetuar a tentativa de conversão

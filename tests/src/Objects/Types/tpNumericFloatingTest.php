@@ -19,13 +19,13 @@ class tpNumericFloatingTest extends TestCase
 
     public function test_instance()
     {
-        $this->assertSame("Float", tpFloat::standart()::TYPE);
-        $this->assertSame(false, tpFloat::standart()::IS_CLASS);
-        $this->assertSame(true, tpFloat::standart()::HAS_LIMIT_RANGE);
+        $this->assertSame("Float", tpFloat::getStandart()::TYPE);
+        $this->assertSame(false, tpFloat::getStandart()::IS_CLASS);
+        $this->assertSame(true, tpFloat::getStandart()::HAS_LIMIT_RANGE);
 
-        $this->assertSame("Double", tpDouble::standart()::TYPE);
-        $this->assertSame(false, tpDouble::standart()::IS_CLASS);
-        $this->assertSame(true, tpDouble::standart()::HAS_LIMIT_RANGE);
+        $this->assertSame("Double", tpDouble::getStandart()::TYPE);
+        $this->assertSame(false, tpDouble::getStandart()::IS_CLASS);
+        $this->assertSame(true, tpDouble::getStandart()::HAS_LIMIT_RANGE);
 
 
 
@@ -33,10 +33,10 @@ class tpNumericFloatingTest extends TestCase
 
         // Testes de inicialização
         $obj = new tpFloat();
-        $this->assertSame(tpFloat::standart()::TYPE, $obj->getType());
-        $this->assertSame(null, $obj->default());
-        $this->assertSame(-2147483648.0, $obj->min());
-        $this->assertSame(2147483647.0, $obj->max());
+        $this->assertSame(tpFloat::getStandart()::TYPE, $obj->getType());
+        $this->assertSame(null, $obj->getDefault());
+        $this->assertSame(-2147483648.0, $obj->getMin());
+        $this->assertSame(2147483647.0, $obj->getMax());
 
         $this->assertTrue($obj->isUndefined());
         $this->assertFalse($obj->isAllowNull());

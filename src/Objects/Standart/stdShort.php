@@ -30,7 +30,7 @@ final class stdShort extends aNumericInteger implements iShort
      *
      * @return      int
      */
-    public static function min() : int
+    public static function getMin() : int
     {
         return (int)-32768;
     }
@@ -39,7 +39,7 @@ final class stdShort extends aNumericInteger implements iShort
      *
      * @return      int
      */
-    public static function max() : int
+    public static function getMax() : int
     {
         return (int)32767;
     }

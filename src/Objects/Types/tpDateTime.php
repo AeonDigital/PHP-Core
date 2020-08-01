@@ -31,7 +31,7 @@ class tpDateTime extends aGeneralDateTime implements iDateTime
      *
      * @return      string
      */
-    public static function standart() : string
+    public static function getStandart() : string
     {
         return stdDateTime::class;
     }

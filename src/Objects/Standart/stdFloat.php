@@ -30,7 +30,7 @@ final class stdFloat extends aNumericFloating implements iFloat
      *
      * @return      float
      */
-    public static function min() : float
+    public static function getMin() : float
     {
         return (float)-2147483648;
     }
@@ -39,7 +39,7 @@ final class stdFloat extends aNumericFloating implements iFloat
      *
      * @return      float
      */
-    public static function max() : float
+    public static function getMax() : float
     {
         return (float)2147483647;
     }

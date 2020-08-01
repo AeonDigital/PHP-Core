@@ -20,9 +20,9 @@ class tpTypeTest extends TestCase
 
     public function test_instance()
     {
-        $this->assertSame("AeonDigital\Interfaces\Objects\iType", tpType::standart()::TYPE);
-        $this->assertSame(true, tpType::standart()::IS_CLASS);
-        $this->assertSame(false, tpType::standart()::HAS_LIMIT_RANGE);
+        $this->assertSame("AeonDigital\Interfaces\Objects\iType", tpType::getStandart()::TYPE);
+        $this->assertSame(true, tpType::getStandart()::IS_CLASS);
+        $this->assertSame(false, tpType::getStandart()::HAS_LIMIT_RANGE);
 
 
         $valueDefault = new tpString("Instância Filha");

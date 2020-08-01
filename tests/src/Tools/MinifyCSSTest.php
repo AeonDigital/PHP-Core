@@ -25,7 +25,7 @@ class MinifyCSSTest extends TestCase
         $final = file_get_contents(__DIR__ . "/files/minifyCSS_final1.css");
 
 
-        $minify = MinifyCSS::minifyCode($original);
+        $minify = MinifyCSS::getMinifyCode($original);
         $this->assertSame($final, $minify);
     }
 
@@ -40,7 +40,7 @@ class MinifyCSSTest extends TestCase
         $final = file_get_contents(__DIR__ . "/files/minifyCSS_final2.css");
 
 
-        $minify = MinifyCSS::minifyFiles($filesToMinify);
+        $minify = MinifyCSS::getMinifyFiles($filesToMinify);
 
         // Converte a versão minificada e a versão final em um array
         // levando em conta o formato UTF-8

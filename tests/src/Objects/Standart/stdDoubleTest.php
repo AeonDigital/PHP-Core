@@ -125,20 +125,20 @@ class stdDoubleTest extends TestCase
 
     public function test_method_nullEquivalent()
     {
-        $this->assertSame(0.0, stdDouble::nullEquivalent());
+        $this->assertSame(0.0, stdDouble::getNullEquivalent());
     }
 
 
 
     public function test_method_min()
     {
-        $this->assertSame((float)-9223372036854775807, stdDouble::min());
+        $this->assertSame((float)-9223372036854775807, stdDouble::getMin());
     }
 
 
 
     public function test_method_max()
     {
-        $this->assertSame((float)9223372036854775806, stdDouble::max());
+        $this->assertSame((float)9223372036854775806, stdDouble::getMax());
     }
 }

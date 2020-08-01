@@ -138,20 +138,20 @@ class stdLongTest extends TestCase
 
     public function test_method_nullEquivalent()
     {
-        $this->assertSame(0, stdLong::nullEquivalent());
+        $this->assertSame(0, stdLong::getNullEquivalent());
     }
 
 
 
     public function test_method_min()
     {
-        $this->assertSame(-9223372036854775807, stdLong::min());
+        $this->assertSame(-9223372036854775807, stdLong::getMin());
     }
 
 
 
     public function test_method_max()
     {
-        $this->assertSame(9223372036854775806, stdLong::max());
+        $this->assertSame(9223372036854775806, stdLong::getMax());
     }
 }

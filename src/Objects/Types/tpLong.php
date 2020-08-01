@@ -31,7 +31,7 @@ class tpLong extends aNumericInteger implements iLong
      *
      * @return      string
      */
-    public static function standart() : string
+    public static function getStandart() : string
     {
         return stdLong::class;
     }

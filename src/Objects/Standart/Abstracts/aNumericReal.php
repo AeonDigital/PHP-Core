@@ -37,7 +37,7 @@ abstract class aNumericReal extends aStandart
      *
      * @return      Realtype
      */
-    public static function nullEquivalent() : Realtype
+    public static function getNullEquivalent() : Realtype
     {
         if (isset(self::$stdNull) === false) {
             self::$stdNull = new Realtype("0");
@@ -76,7 +76,7 @@ abstract class aNumericReal extends aStandart
      */
     protected static function validateRange($v) : bool
     {
-        return ($v->isGreaterOrEqualAs(static::min()) === true &&
-                $v->isLessOrEqualAs(static::max()) === true);
+        return ($v->isGreaterOrEqualAs(static::getMin()) === true &&
+                $v->isLessOrEqualAs(static::getMax()) === true);
     }
 }

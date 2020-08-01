@@ -19,21 +19,21 @@ class tpNumericIntegerTest extends TestCase
 
     public function test_instance()
     {
-        $this->assertSame("Byte", tpByte::standart()::TYPE);
-        $this->assertSame(false, tpByte::standart()::IS_CLASS);
-        $this->assertSame(true, tpByte::standart()::HAS_LIMIT_RANGE);
+        $this->assertSame("Byte", tpByte::getStandart()::TYPE);
+        $this->assertSame(false, tpByte::getStandart()::IS_CLASS);
+        $this->assertSame(true, tpByte::getStandart()::HAS_LIMIT_RANGE);
 
-        $this->assertSame("Short", tpShort::standart()::TYPE);
-        $this->assertSame(false, tpShort::standart()::IS_CLASS);
-        $this->assertSame(true, tpShort::standart()::HAS_LIMIT_RANGE);
+        $this->assertSame("Short", tpShort::getStandart()::TYPE);
+        $this->assertSame(false, tpShort::getStandart()::IS_CLASS);
+        $this->assertSame(true, tpShort::getStandart()::HAS_LIMIT_RANGE);
 
-        $this->assertSame("Int", tpInt::standart()::TYPE);
-        $this->assertSame(false, tpInt::standart()::IS_CLASS);
-        $this->assertSame(true, tpInt::standart()::HAS_LIMIT_RANGE);
+        $this->assertSame("Int", tpInt::getStandart()::TYPE);
+        $this->assertSame(false, tpInt::getStandart()::IS_CLASS);
+        $this->assertSame(true, tpInt::getStandart()::HAS_LIMIT_RANGE);
 
-        $this->assertSame("Long", tpLong::standart()::TYPE);
-        $this->assertSame(false, tpLong::standart()::IS_CLASS);
-        $this->assertSame(true, tpLong::standart()::HAS_LIMIT_RANGE);
+        $this->assertSame("Long", tpLong::getStandart()::TYPE);
+        $this->assertSame(false, tpLong::getStandart()::IS_CLASS);
+        $this->assertSame(true, tpLong::getStandart()::HAS_LIMIT_RANGE);
 
 
 
@@ -41,10 +41,10 @@ class tpNumericIntegerTest extends TestCase
 
         // Testes de inicialização
         $obj = new tpByte();
-        $this->assertSame(tpByte::standart()::TYPE, $obj->getType());
-        $this->assertSame(null, $obj->default());
-        $this->assertSame(-128, $obj->min());
-        $this->assertSame(127, $obj->max());
+        $this->assertSame(tpByte::getStandart()::TYPE, $obj->getType());
+        $this->assertSame(null, $obj->getDefault());
+        $this->assertSame(-128, $obj->getMin());
+        $this->assertSame(127, $obj->getMax());
 
         $this->assertTrue($obj->isUndefined());
         $this->assertFalse($obj->isAllowNull());

@@ -30,7 +30,7 @@ final class stdInt extends aNumericInteger implements iInt
      *
      * @return      int
      */
-    public static function min() : int
+    public static function getMin() : int
     {
         return (int)-2147483648;
     }
@@ -39,7 +39,7 @@ final class stdInt extends aNumericInteger implements iInt
      *
      * @return      int
      */
-    public static function max() : int
+    public static function getMax() : int
     {
         return (int)2147483647;
     }

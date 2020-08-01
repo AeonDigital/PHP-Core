@@ -30,7 +30,7 @@ final class stdDouble extends aNumericFloating implements iDouble
      *
      * @return      float
      */
-    public static function min() : float
+    public static function getMin() : float
     {
         return (float)-9223372036854775807;
     }
@@ -39,7 +39,7 @@ final class stdDouble extends aNumericFloating implements iDouble
      *
      * @return      float
      */
-    public static function max() : float
+    public static function getMax() : float
     {
         return (float)9223372036854775806;
     }

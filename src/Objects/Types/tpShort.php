@@ -31,7 +31,7 @@ class tpShort extends aNumericInteger implements iShort
      *
      * @return      string
      */
-    public static function standart() : string
+    public static function getStandart() : string
     {
         return stdShort::class;
     }

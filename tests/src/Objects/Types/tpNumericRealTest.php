@@ -19,9 +19,9 @@ class tpNumericRealTest extends TestCase
 
     public function test_instance()
     {
-        $this->assertSame(Realtype::class, tpReal::standart()::TYPE);
-        $this->assertSame(true, tpReal::standart()::IS_CLASS);
-        $this->assertSame(true, tpReal::standart()::HAS_LIMIT_RANGE);
+        $this->assertSame(Realtype::class, tpReal::getStandart()::TYPE);
+        $this->assertSame(true, tpReal::getStandart()::IS_CLASS);
+        $this->assertSame(true, tpReal::getStandart()::HAS_LIMIT_RANGE);
 
 
 
@@ -29,10 +29,10 @@ class tpNumericRealTest extends TestCase
 
         // Testes de inicialização
         $obj = new tpReal();
-        $this->assertSame(tpReal::standart()::TYPE, $obj->getType());
-        $this->assertSame(null, $obj->default());
-        $this->assertSame("-999999999999999999999999999999999999", $obj->min()->value());
-        $this->assertSame("999999999999999999999999999999999999", $obj->max()->value());
+        $this->assertSame(tpReal::getStandart()::TYPE, $obj->getType());
+        $this->assertSame(null, $obj->getDefault());
+        $this->assertSame("-999999999999999999999999999999999999", $obj->getMin()->value());
+        $this->assertSame("999999999999999999999999999999999999", $obj->getMax()->value());
 
         $this->assertTrue($obj->isUndefined());
         $this->assertFalse($obj->isAllowNull());

@@ -31,7 +31,7 @@ abstract class aGeneralDateTime extends aType
      *
      * @return      ?\DateTime
      */
-    public function default() : ?\DateTime
+    public function getDefault() : ?\DateTime
     {
         return $this->valueDefault;
     }
@@ -40,7 +40,7 @@ abstract class aGeneralDateTime extends aType
      *
      * @return      \DateTime
      */
-    public function min() : \DateTime
+    public function getMin() : \DateTime
     {
         return $this->valueMin;
     }
@@ -49,7 +49,7 @@ abstract class aGeneralDateTime extends aType
      *
      * @return      \DateTime
      */
-    public function max() : \DateTime
+    public function getMax() : \DateTime
     {
         return $this->valueMax;
     }
@@ -71,7 +71,7 @@ abstract class aGeneralDateTime extends aType
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
+     * valor seja ``null``, retornará o valor definido em ``self::getNullEquivalent``.
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
      *

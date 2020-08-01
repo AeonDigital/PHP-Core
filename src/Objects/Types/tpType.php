@@ -32,7 +32,7 @@ class tpType extends aType implements iiType
      *
      * @return      string
      */
-    public static function standart() : string
+    public static function getStandart() : string
     {
         return stdType::class;
     }
@@ -47,7 +47,7 @@ class tpType extends aType implements iiType
      *
      * @return      ?iType
      */
-    public function default() : ?iType
+    public function getDefault() : ?iType
     {
         return $this->valueDefault;
     }
@@ -58,7 +58,7 @@ class tpType extends aType implements iiType
      *
      * @return      mixed
      */
-    public function min()
+    public function getMin()
     {
         return null;
     }
@@ -69,7 +69,7 @@ class tpType extends aType implements iiType
      *
      * @return      mixed
      */
-    public function max()
+    public function getMax()
     {
         return null;
     }
@@ -91,7 +91,7 @@ class tpType extends aType implements iiType
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
+     * valor seja ``null``, retornará o valor definido em ``self::getNullEquivalent``.
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
      *

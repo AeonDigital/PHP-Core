@@ -75,7 +75,7 @@ abstract class aType implements iType
     /**
      * Retorna o namespace completo da classe usada por esta instância.
      * Em classes de tipo invariável retornará o mesmo resultado obtido pelo
-     * método ``static::standart()``.
+     * método ``static::getStandart()``.
      *
      * @return      string
      */
@@ -115,7 +115,7 @@ abstract class aType implements iType
      *
      * @return      ?int
      */
-    public function length() : ?int
+    public function getLength() : ?int
     {
         return $this->valueLength;
     }
@@ -193,7 +193,7 @@ abstract class aType implements iType
 
 
     /**
-     * Informa se o valor atualmente definido é o mesmo que ``static::nullEquivalent()``.
+     * Informa se o valor atualmente definido é o mesmo que ``static::getNullEquivalent()``.
      * Retornará ``false`` caso o valor seja ``null``.
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
@@ -204,11 +204,11 @@ abstract class aType implements iType
     public function isNullEquivalent() : bool
     {
         if ($this->isIterable() === true) { return false; }
-        return ($this->value === static::standart()::nullEquivalent());
+        return ($this->value === static::getStandart()::getNullEquivalent());
     }
     /**
      * Informa se o valor atualmente definido é ``null`` ou se é o mesmo que
-     * ``static::nullEquivalent()``.
+     * ``static::getNullEquivalent()``.
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
      * Se ``isIterable = true`` deve retornar sempre ``false``.
@@ -262,9 +262,9 @@ abstract class aType implements iType
             $this->lastSetError = "error.obj.type.readonly";
         }
         else {
-            $n = static::standart()::parseIfValidate($v, $this->allowNull, false, $this->lastSetError);
+            $n = static::getStandart()::parseIfValidate($v, $this->allowNull, false, $this->lastSetError);
             if ($this->lastSetError === "") {
-                if (static::standart()::TYPE === "String" && $n !== null) {
+                if (static::getStandart()::TYPE === "String" && $n !== null) {
                     if ($n === "") {
                         if ($this->allowEmpty === false) {
                             if ($this->allowNull === true) { $n = null; }
@@ -304,13 +304,13 @@ abstract class aType implements iType
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``static::nullEquivalent()``.
+     * valor seja ``null``, retornará o valor definido em ``static::getNullEquivalent()``.
      *
      * @return      mixed
      */
     protected function stdGetNotNull()
     {
-        return ($this->value ?? static::standart()::nullEquivalent());
+        return ($this->value ?? static::getStandart()::getNullEquivalent());
     }
     /**
      * Verifica se o valor informado está entre o intervalo definido para este tipo.
@@ -322,7 +322,7 @@ abstract class aType implements iType
      */
     protected function validateRange($v) : bool
     {
-        return ($v === null || static::standart()::HAS_LIMIT_RANGE === false ||
+        return ($v === null || static::getStandart()::HAS_LIMIT_RANGE === false ||
             ($v >= $this->valueMin && $v <= $this->valueMax)
         );
     }
@@ -345,8 +345,8 @@ abstract class aType implements iType
      *              em ``$valueDefault`` mas caso este não esteja definido também irá usar ``null``
      *              se este for um valor aceitável.
      *              Caso ``null`` não seja aceitável, usará o valor equivalente encontrado em
-     *              em ``static::nullEquivalent()``.
-     *              Em último caso tentará definir a instância com o valor de ``self::min()``.
+     *              em ``static::getNullEquivalent()``.
+     *              Em último caso tentará definir a instância com o valor de ``self::getMin()``.
      *
      * @param       bool $allowNull
      *              Quando ``true`` esta instância aceitará ``null`` como um valor válido.
@@ -388,15 +388,15 @@ abstract class aType implements iType
         $valueMax = undefined,
         ?int $valueLength = null
     ) {
-        $this->type = (($this->type === "") ? static::standart()::TYPE : $this->type);
+        $this->type = (($this->type === "") ? static::getStandart()::TYPE : $this->type);
         $this->allowNull = $allowNull;
         $this->valueDefault = (($valueDefault === undefined) ? null : $valueDefault);
 
-        if (static::standart()::HAS_LIMIT_RANGE === true) {
-            $this->valueMin = (($valueMin === undefined || $valueMin === null) ? static::standart()::min() : $valueMin);
-            $this->valueMax = (($valueMax === undefined || $valueMax === null) ? static::standart()::max() : $valueMax);
+        if (static::getStandart()::HAS_LIMIT_RANGE === true) {
+            $this->valueMin = (($valueMin === undefined || $valueMin === null) ? static::getStandart()::getMin() : $valueMin);
+            $this->valueMax = (($valueMax === undefined || $valueMax === null) ? static::getStandart()::getMax() : $valueMax);
         }
-        if (static::standart()::TYPE === "String") {
+        if (static::getStandart()::TYPE === "String") {
             $this->allowEmpty = $allowEmpty;
             $this->valueLength = $valueLength;
         }
@@ -405,14 +405,14 @@ abstract class aType implements iType
         $undefined = ($value === undefined);
         if ($value === undefined || $value === "") {
             if ($valueDefault === null) {
-                $value = (($allowNull === true) ? null : static::standart()::nullEquivalent());
+                $value = (($allowNull === true) ? null : static::getStandart()::getNullEquivalent());
             }
             else {
                 $value = $valueDefault;
             }
         }
         elseif ($value === null) {
-            $value = (($allowNull === true) ? null : static::standart()::nullEquivalent());
+            $value = (($allowNull === true) ? null : static::getStandart()::getNullEquivalent());
         }
 
 
@@ -444,7 +444,7 @@ abstract class aType implements iType
         if ($this->isIterable() === true) { return ""; }
 
         $v = $this->value;
-        if (static::standart()::TYPE === "Bool") { $v = Tools::toBool($v); }
+        if (static::getStandart()::TYPE === "Bool") { $v = Tools::toBool($v); }
         return Tools::toString($v);
     }
 

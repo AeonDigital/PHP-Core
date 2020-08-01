@@ -19,17 +19,17 @@ class tpBoolTest extends TestCase
 
     public function test_instance()
     {
-        $this->assertSame("Bool", tpBool::standart()::TYPE);
-        $this->assertSame(false, tpBool::standart()::IS_CLASS);
-        $this->assertSame(false, tpBool::standart()::HAS_LIMIT_RANGE);
+        $this->assertSame("Bool", tpBool::getStandart()::TYPE);
+        $this->assertSame(false, tpBool::getStandart()::IS_CLASS);
+        $this->assertSame(false, tpBool::getStandart()::HAS_LIMIT_RANGE);
 
 
         // Testes de inicialização
         $obj = new tpBool();
-        $this->assertSame(tpBool::standart()::TYPE, $obj->getType());
-        $this->assertSame(null, $obj->default());
-        $this->assertSame(null, $obj->min());
-        $this->assertSame(null, $obj->max());
+        $this->assertSame(tpBool::getStandart()::TYPE, $obj->getType());
+        $this->assertSame(null, $obj->getDefault());
+        $this->assertSame(null, $obj->getMin());
+        $this->assertSame(null, $obj->getMax());
 
         $this->assertTrue($obj->isUndefined());
         $this->assertFalse($obj->isAllowNull());

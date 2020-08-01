@@ -31,7 +31,7 @@ class tpInt extends aNumericInteger implements iInt
      *
      * @return      string
      */
-    public static function standart() : string
+    public static function getStandart() : string
     {
         return stdInt::class;
     }

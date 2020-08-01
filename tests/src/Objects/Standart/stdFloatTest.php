@@ -113,20 +113,20 @@ class stdFloatTest extends TestCase
 
     public function test_method_nullEquivalent()
     {
-        $this->assertSame(0.0, stdFloat::nullEquivalent());
+        $this->assertSame(0.0, stdFloat::getNullEquivalent());
     }
 
 
 
     public function test_method_min()
     {
-        $this->assertSame((float)-2147483648, stdFloat::min());
+        $this->assertSame((float)-2147483648, stdFloat::getMin());
     }
 
 
 
     public function test_method_max()
     {
-        $this->assertSame((float)2147483647, stdFloat::max());
+        $this->assertSame((float)2147483647, stdFloat::getMax());
     }
 }

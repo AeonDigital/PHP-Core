@@ -31,7 +31,7 @@ class tpDouble extends aNumericFloating implements iDouble
      *
      * @return      string
      */
-    public static function standart() : string
+    public static function getStandart() : string
     {
         return stdDouble::class;
     }

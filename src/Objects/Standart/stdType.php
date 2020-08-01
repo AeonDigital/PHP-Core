@@ -31,7 +31,7 @@ final class stdType extends aStandart implements iType
      *
      * @return      mixed
      */
-    public static function nullEquivalent()
+    public static function getNullEquivalent()
     {
         return null;
     }
@@ -42,7 +42,7 @@ final class stdType extends aStandart implements iType
      *
      * @return      null
      */
-    public static function min()
+    public static function getMin()
     {
         return null;
     }
@@ -53,7 +53,7 @@ final class stdType extends aStandart implements iType
      *
      * @return      null
      */
-    public static function max()
+    public static function getMax()
     {
         return null;
     }

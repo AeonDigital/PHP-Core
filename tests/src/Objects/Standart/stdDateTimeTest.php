@@ -115,7 +115,7 @@ class stdDateTimeTest extends TestCase
     public function test_method_nullEquivalent()
     {
         $dtExpe = new \DateTime("0001-01-01 00:00:00");
-        $nulEqu = stdDateTime::nullEquivalent();
+        $nulEqu = stdDateTime::getNullEquivalent();
         $this->assertSame($dtExpe->format("Y-m-d H:i:s"), $nulEqu->format("Y-m-d H:i:s"));
     }
 
@@ -124,7 +124,7 @@ class stdDateTimeTest extends TestCase
     public function test_method_min()
     {
         $dtExpe = new \DateTime("-9999-12-31 23:59:59");
-        $nulEqu = stdDateTime::min();
+        $nulEqu = stdDateTime::getMin();
         $this->assertSame($dtExpe->format("Y-m-d H:i:s"), $nulEqu->format("Y-m-d H:i:s"));
     }
 
@@ -133,7 +133,7 @@ class stdDateTimeTest extends TestCase
     public function test_method_max()
     {
         $dtExpe = new \DateTime("9999-12-31 23:59:59");
-        $nulEqu = stdDateTime::max();
+        $nulEqu = stdDateTime::getMax();
         $this->assertSame($dtExpe->format("Y-m-d H:i:s"), $nulEqu->format("Y-m-d H:i:s"));
     }
 }

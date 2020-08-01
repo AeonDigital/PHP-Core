@@ -31,7 +31,7 @@ abstract class aNumericInteger extends aStandart
      *
      * @return      int
      */
-    public static function nullEquivalent() : int
+    public static function getNullEquivalent() : int
     {
         return 0;
     }

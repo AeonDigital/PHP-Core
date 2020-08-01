@@ -19,9 +19,9 @@ class tpGenericTest extends TestCase
 
     public function test_instance()
     {
-        $this->assertSame("iGeneric", tpGeneric::standart()::TYPE);
-        $this->assertSame(true, tpGeneric::standart()::IS_CLASS);
-        $this->assertSame(false, tpGeneric::standart()::HAS_LIMIT_RANGE);
+        $this->assertSame("iGeneric", tpGeneric::getStandart()::TYPE);
+        $this->assertSame(true, tpGeneric::getStandart()::IS_CLASS);
+        $this->assertSame(false, tpGeneric::getStandart()::HAS_LIMIT_RANGE);
 
 
         $valueDefault = new \DateTime("2020-01-01 00:00:00");
@@ -29,9 +29,9 @@ class tpGenericTest extends TestCase
         // Testes de inicialização
         $obj = new tpGeneric(undefined, true, true, false, $valueDefault, null, null, null, "DateTime");
         $this->assertSame("DateTime", $obj->getType());
-        $this->assertSame($valueDefault, $obj->default());
-        $this->assertSame(null, $obj->min());
-        $this->assertSame(null, $obj->max());
+        $this->assertSame($valueDefault, $obj->getDefault());
+        $this->assertSame(null, $obj->getMin());
+        $this->assertSame(null, $obj->getMax());
 
         $this->assertTrue($obj->isUndefined());
         $this->assertTrue($obj->isAllowNull());

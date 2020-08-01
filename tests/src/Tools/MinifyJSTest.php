@@ -25,7 +25,7 @@ class MinifyJSTest extends TestCase
         $final = file_get_contents(__DIR__ . "/files/minifyJS_final1.js");
 
 
-        $minify = MinifyJS::minifyCode($original);
+        $minify = MinifyJS::getMinifyCode($original);
         $this->assertSame($final, $minify);
     }
 
@@ -40,7 +40,7 @@ class MinifyJSTest extends TestCase
         $final = file_get_contents(__DIR__ . "/files/minifyJS_final2.js");
 
 
-        $minify = MinifyJS::minifyFiles($filesToMinify);
+        $minify = MinifyJS::getMinifyFiles($filesToMinify);
 
         // Converte a versão minificada e a versão final em um array
         // levando em conta o formato UTF-8

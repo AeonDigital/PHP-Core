@@ -31,7 +31,7 @@ class tpGeneric extends aType implements iGeneric
      *
      * @return      string
      */
-    public static function standart() : string
+    public static function getStandart() : string
     {
         return stdGeneric::class;
     }
@@ -46,7 +46,7 @@ class tpGeneric extends aType implements iGeneric
      *
      * @return      mixed
      */
-    public function default()
+    public function getDefault()
     {
         return $this->valueDefault;
     }
@@ -57,7 +57,7 @@ class tpGeneric extends aType implements iGeneric
      *
      * @return      mixed
      */
-    public function min()
+    public function getMin()
     {
         return $this->valueMin;
     }
@@ -68,7 +68,7 @@ class tpGeneric extends aType implements iGeneric
      *
      * @return      mixed
      */
-    public function max()
+    public function getMax()
     {
         return $this->valueMax;
     }
@@ -134,7 +134,7 @@ class tpGeneric extends aType implements iGeneric
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
+     * valor seja ``null``, retornará o valor definido em ``self::getNullEquivalent``.
      *
      * @return      mixed
      */
@@ -156,8 +156,8 @@ class tpGeneric extends aType implements iGeneric
      *              em ``$valueDefault`` mas caso este não esteja definido também irá usar ``null``
      *              se este for um valor aceitável.
      *              Caso ``null`` não seja aceitável, usará o valor equivalente encontrado em
-     *              em ``static::nullEquivalent()``.
-     *              Em último caso tentará definir a instância com o valor de ``self::min()``.
+     *              em ``static::getNullEquivalent()``.
+     *              Em último caso tentará definir a instância com o valor de ``self::getMin()``.
      *
      * @param       bool $allowNull
      *              Quando ``true`` esta instância aceitará ``null`` como um valor válido.
@@ -230,7 +230,7 @@ class tpGeneric extends aType implements iGeneric
      */
     public function toString() : string
     {
-        return static::standart()::toString($this->value) ?? "";
+        return static::getStandart()::toString($this->value) ?? "";
     }
 
 

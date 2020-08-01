@@ -44,7 +44,7 @@ final class stdLong extends aNumericInteger implements iLong
      *
      * @return      int
      */
-    public static function min() : int
+    public static function getMin() : int
     {
         return (int)-9223372036854775807;
     }
@@ -53,7 +53,7 @@ final class stdLong extends aNumericInteger implements iLong
      *
      * @return      int
      */
-    public static function max() : int
+    public static function getMax() : int
     {
         return (int)9223372036854775806;
     }

@@ -31,7 +31,7 @@ abstract class aNumericFloating extends aType
      *
      * @return      ?float
      */
-    public function default() : ?float
+    public function getDefault() : ?float
     {
         return $this->valueDefault;
     }
@@ -40,7 +40,7 @@ abstract class aNumericFloating extends aType
      *
      * @return      float
      */
-    public function min() : float
+    public function getMin() : float
     {
         return $this->valueMin;
     }
@@ -49,7 +49,7 @@ abstract class aNumericFloating extends aType
      *
      * @return      float
      */
-    public function max() : float
+    public function getMax() : float
     {
         return $this->valueMax;
     }
@@ -71,7 +71,7 @@ abstract class aNumericFloating extends aType
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
+     * valor seja ``null``, retornará o valor definido em ``self::getNullEquivalent``.
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
      *

@@ -19,18 +19,18 @@ class tpStringTest extends TestCase
 
     public function test_instance()
     {
-        $this->assertSame("String", tpString::standart()::TYPE);
-        $this->assertSame(false, tpString::standart()::IS_CLASS);
-        $this->assertSame(false, tpString::standart()::HAS_LIMIT_RANGE);
+        $this->assertSame("String", tpString::getStandart()::TYPE);
+        $this->assertSame(false, tpString::getStandart()::IS_CLASS);
+        $this->assertSame(false, tpString::getStandart()::HAS_LIMIT_RANGE);
 
 
         // Testes de inicialização
         $obj = new tpString();
-        $this->assertSame(tpString::standart()::TYPE, $obj->getType());
-        $this->assertSame(null, $obj->default());
-        $this->assertSame(null, $obj->min());
-        $this->assertSame(null, $obj->max());
-        $this->assertSame(null, $obj->length());
+        $this->assertSame(tpString::getStandart()::TYPE, $obj->getType());
+        $this->assertSame(null, $obj->getDefault());
+        $this->assertSame(null, $obj->getMin());
+        $this->assertSame(null, $obj->getMax());
+        $this->assertSame(null, $obj->getLength());
 
         $this->assertTrue($obj->isUndefined());
         $this->assertFalse($obj->isAllowNull());
@@ -129,7 +129,7 @@ class tpStringTest extends TestCase
         // Teste de uma instância em que "allowEmpty" é "false" e
         // onde há um valor padrão definido.
         $obj = new tpString("", false, false, false, "notEmpty");
-        $this->assertSame("notEmpty", $obj->default());
+        $this->assertSame("notEmpty", $obj->getDefault());
         $this->assertSame("notEmpty", $obj->get());
 
         $this->assertFalse($obj->set(""));
@@ -144,7 +144,7 @@ class tpStringTest extends TestCase
         // ele será substituido pelo valor "default" mas ao ser setado ""
         // o mesmo será convertido para "null".
         $obj = new tpString("", true, false, false, "notEmpty");
-        $this->assertSame("notEmpty", $obj->default());
+        $this->assertSame("notEmpty", $obj->getDefault());
         $this->assertSame("notEmpty", $obj->get());
 
         $this->assertTrue($obj->set(""));
@@ -156,8 +156,8 @@ class tpStringTest extends TestCase
         // Teste de uma instância em que há um limite definido para o tamanho
         // que a "string" pode possuir.
         $obj = new tpString("", true, false, false, "notEmpty", null, null, 10);
-        $this->assertSame(10, $obj->length());
-        $this->assertSame("notEmpty", $obj->default());
+        $this->assertSame(10, $obj->getLength());
+        $this->assertSame("notEmpty", $obj->getDefault());
         $this->assertSame("notEmpty", $obj->get());
 
         $this->assertFalse($obj->set("value exceeded length"));

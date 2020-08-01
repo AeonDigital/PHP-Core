@@ -114,20 +114,20 @@ class stdIntTest extends TestCase
 
     public function test_method_nullEquivalent()
     {
-        $this->assertSame(0, stdInt::nullEquivalent());
+        $this->assertSame(0, stdInt::getNullEquivalent());
     }
 
 
 
     public function test_method_min()
     {
-        $this->assertSame(-2147483648, stdInt::min());
+        $this->assertSame(-2147483648, stdInt::getMin());
     }
 
 
 
     public function test_method_max()
     {
-        $this->assertSame(2147483647, stdInt::max());
+        $this->assertSame(2147483647, stdInt::getMax());
     }
 }

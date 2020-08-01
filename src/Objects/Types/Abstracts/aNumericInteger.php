@@ -31,7 +31,7 @@ abstract class aNumericInteger extends aType
      *
      * @return      ?int
      */
-    public function default() : ?int
+    public function getDefault() : ?int
     {
         return $this->valueDefault;
     }
@@ -40,7 +40,7 @@ abstract class aNumericInteger extends aType
      *
      * @return      int
      */
-    public function min() : int
+    public function getMin() : int
     {
         return $this->valueMin;
     }
@@ -49,7 +49,7 @@ abstract class aNumericInteger extends aType
      *
      * @return      int
      */
-    public function max() : int
+    public function getMax() : int
     {
         return $this->valueMax;
     }
@@ -71,7 +71,7 @@ abstract class aNumericInteger extends aType
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
+     * valor seja ``null``, retornará o valor definido em ``self::getNullEquivalent``.
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
      *

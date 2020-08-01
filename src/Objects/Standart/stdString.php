@@ -31,7 +31,7 @@ final class stdString extends aStandart implements iString
      *
      * @return      string
      */
-    public static function nullEquivalent() : string
+    public static function getNullEquivalent() : string
     {
         return "";
     }
@@ -42,7 +42,7 @@ final class stdString extends aStandart implements iString
      *
      * @return      null
      */
-    public static function min()
+    public static function getMin()
     {
         return null;
     }
@@ -53,7 +53,7 @@ final class stdString extends aStandart implements iString
      *
      * @return      null
      */
-    public static function max()
+    public static function getMax()
     {
         return null;
     }

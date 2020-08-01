@@ -120,20 +120,20 @@ class stdRealTest extends TestCase
 
     public function test_method_nullEquivalent()
     {
-        $this->assertSame("0", (string)stdReal::nullEquivalent());
+        $this->assertSame("0", (string)stdReal::getNullEquivalent());
     }
 
 
 
     public function test_method_min()
     {
-        $this->assertSame("-999999999999999999999999999999999999", (string)stdReal::min());
+        $this->assertSame("-999999999999999999999999999999999999", (string)stdReal::getMin());
     }
 
 
 
     public function test_method_max()
     {
-        $this->assertSame("999999999999999999999999999999999999", (string)stdReal::max());
+        $this->assertSame("999999999999999999999999999999999999", (string)stdReal::getMax());
     }
 }

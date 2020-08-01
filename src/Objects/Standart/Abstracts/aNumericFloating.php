@@ -31,7 +31,7 @@ abstract class aNumericFloating extends aStandart
      *
      * @return      float
      */
-    public static function nullEquivalent() : float
+    public static function getNullEquivalent() : float
     {
         return 0.0;
     }

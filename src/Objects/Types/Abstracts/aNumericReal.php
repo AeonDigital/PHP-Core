@@ -31,7 +31,7 @@ abstract class aNumericReal extends aType
      *
      * @return      ?Realtype
      */
-    public function default() : ?Realtype
+    public function getDefault() : ?Realtype
     {
         return $this->valueDefault;
     }
@@ -40,7 +40,7 @@ abstract class aNumericReal extends aType
      *
      * @return      Realtype
      */
-    public function min() : Realtype
+    public function getMin() : Realtype
     {
         return $this->valueMin;
     }
@@ -49,7 +49,7 @@ abstract class aNumericReal extends aType
      *
      * @return      Realtype
      */
-    public function max() : Realtype
+    public function getMax() : Realtype
     {
         return $this->valueMax;
     }
@@ -60,13 +60,13 @@ abstract class aNumericReal extends aType
 
     /**
      * Informa se o valor atualmente definido é ``null`` ou se é o mesmo que
-     * ``static::nullEquivalent()``.
+     * ``static::getNullEquivalent()``.
      *
      * @return      bool
      */
     public function isNullEquivalent() : bool
     {
-        return ($this->value !== null && $this->value->value() === static::standart()::nullEquivalent()->value());
+        return ($this->value !== null && $this->value->value() === static::getStandart()::getNullEquivalent()->value());
     }
 
 
@@ -85,7 +85,7 @@ abstract class aNumericReal extends aType
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
+     * valor seja ``null``, retornará o valor definido em ``self::getNullEquivalent``.
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
      *

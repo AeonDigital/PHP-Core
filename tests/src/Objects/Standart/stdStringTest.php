@@ -96,20 +96,20 @@ class stdStringTest extends TestCase
 
     public function test_method_nullEquivalent()
     {
-        $this->assertSame("", stdString::nullEquivalent());
+        $this->assertSame("", stdString::getNullEquivalent());
     }
 
 
 
     public function test_method_min()
     {
-        $this->assertSame(null, stdString::min());
+        $this->assertSame(null, stdString::getMin());
     }
 
 
 
     public function test_method_max()
     {
-        $this->assertSame(null, stdString::max());
+        $this->assertSame(null, stdString::getMax());
     }
 }

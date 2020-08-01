@@ -31,7 +31,7 @@ final class stdDateTime extends aGeneralDateTime implements iDateTime
      *
      * @return      mixed
      */
-    public static function nullEquivalent() : \DateTime
+    public static function getNullEquivalent() : \DateTime
     {
         if (isset(self::$stdNull) === false) {
             self::$stdNull = new \DateTime("0001-01-01 00:00:00");
@@ -43,7 +43,7 @@ final class stdDateTime extends aGeneralDateTime implements iDateTime
      *
      * @return      \DateTime
      */
-    public static function min() : \DateTime
+    public static function getMin() : \DateTime
     {
         if (isset(self::$stdMin) === false) {
             self::$stdMin = new \DateTime("-9999-12-31 23:59:59");
@@ -55,7 +55,7 @@ final class stdDateTime extends aGeneralDateTime implements iDateTime
      *
      * @return      \DateTime
      */
-    public static function max() : \DateTime
+    public static function getMax() : \DateTime
     {
         if (isset(self::$stdMax) === false) {
             self::$stdMax = new \DateTime("9999-12-31 23:59:59");

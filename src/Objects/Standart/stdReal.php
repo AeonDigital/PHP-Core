@@ -30,7 +30,7 @@ final class stdReal extends aNumericReal implements iReal
      *
      * @return      Realtype
      */
-    public static function min() : Realtype
+    public static function getMin() : Realtype
     {
         if (isset(self::$stdMin) === false) {
             self::$stdMin = new Realtype("-999999999999999999999999999999999999");
@@ -42,7 +42,7 @@ final class stdReal extends aNumericReal implements iReal
      *
      * @return      Realtype
      */
-    public static function max() : Realtype
+    public static function getMax() : Realtype
     {
         if (isset(self::$stdMax) === false) {
             self::$stdMax = new Realtype("999999999999999999999999999999999999");

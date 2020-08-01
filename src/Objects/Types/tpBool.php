@@ -31,7 +31,7 @@ class tpBool extends aType implements iBool
      *
      * @return      string
      */
-    public static function standart() : string
+    public static function getStandart() : string
     {
         return stdBool::class;
     }
@@ -46,7 +46,7 @@ class tpBool extends aType implements iBool
      *
      * @return      ?bool
      */
-    public function default() : ?bool
+    public function getDefault() : ?bool
     {
         return $this->valueDefault;
     }
@@ -57,7 +57,7 @@ class tpBool extends aType implements iBool
      *
      * @return      mixed
      */
-    public function min()
+    public function getMin()
     {
         return null;
     }
@@ -68,7 +68,7 @@ class tpBool extends aType implements iBool
      *
      * @return      mixed
      */
-    public function max()
+    public function getMax()
     {
         return null;
     }
@@ -90,7 +90,7 @@ class tpBool extends aType implements iBool
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
+     * valor seja ``null``, retornará o valor definido em ``self::getNullEquivalent``.
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
      *

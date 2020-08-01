@@ -47,7 +47,7 @@ class stdByteTest extends TestCase
 
     public function test_method_validate()
     {
-        $this->assertEquals(0, stdByte::nullEquivalent());
+        $this->assertEquals(0, stdByte::getNullEquivalent());
 
         $validateTrue = [
             -128, 10, 0, 56, 127
@@ -105,20 +105,20 @@ class stdByteTest extends TestCase
 
     public function test_method_nullEquivalent()
     {
-        $this->assertSame(0, stdByte::nullEquivalent());
+        $this->assertSame(0, stdByte::getNullEquivalent());
     }
 
 
 
     public function test_method_min()
     {
-        $this->assertSame(-128, stdByte::min());
+        $this->assertSame(-128, stdByte::getMin());
     }
 
 
 
     public function test_method_max()
     {
-        $this->assertSame(127, stdByte::max());
+        $this->assertSame(127, stdByte::getMax());
     }
 }

@@ -97,20 +97,20 @@ class stdBoolTest extends TestCase
 
     public function test_method_nullEquivalent()
     {
-        $this->assertSame(false, stdBool::nullEquivalent());
+        $this->assertSame(false, stdBool::getNullEquivalent());
     }
 
 
 
     public function test_method_min()
     {
-        $this->assertSame(null, stdBool::min());
+        $this->assertSame(null, stdBool::getMin());
     }
 
 
 
     public function test_method_max()
     {
-        $this->assertSame(null, stdBool::max());
+        $this->assertSame(null, stdBool::getMax());
     }
 }

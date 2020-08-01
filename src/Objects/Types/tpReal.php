@@ -31,7 +31,7 @@ class tpReal extends aNumericReal implements iReal
      *
      * @return      string
      */
-    public static function standart() : string
+    public static function getStandart() : string
     {
         return stdReal::class;
     }

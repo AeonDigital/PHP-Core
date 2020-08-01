@@ -98,20 +98,20 @@ class stdGenericTest extends TestCase
 
     public function test_method_nullEquivalent()
     {
-        $this->assertSame(null, stdGeneric::nullEquivalent());
+        $this->assertSame(null, stdGeneric::getNullEquivalent());
     }
 
 
 
     public function test_method_min()
     {
-        $this->assertSame(null, stdGeneric::min());
+        $this->assertSame(null, stdGeneric::getMin());
     }
 
 
 
     public function test_method_max()
     {
-        $this->assertSame(null, stdGeneric::max());
+        $this->assertSame(null, stdGeneric::getMax());
     }
 }

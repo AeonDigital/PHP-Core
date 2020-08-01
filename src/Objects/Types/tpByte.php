@@ -31,7 +31,7 @@ class tpByte extends aNumericInteger implements iByte
      *
      * @return      string
      */
-    public static function standart() : string
+    public static function getStandart() : string
     {
         return stdByte::class;
     }

@@ -19,9 +19,9 @@ class tpGeneralDateTime extends TestCase
 
     public function test_instance()
     {
-        $this->assertSame(DateTime::class, tpDateTime::standart()::TYPE);
-        $this->assertSame(true, tpDateTime::standart()::IS_CLASS);
-        $this->assertSame(true, tpDateTime::standart()::HAS_LIMIT_RANGE);
+        $this->assertSame(DateTime::class, tpDateTime::getStandart()::TYPE);
+        $this->assertSame(true, tpDateTime::getStandart()::IS_CLASS);
+        $this->assertSame(true, tpDateTime::getStandart()::HAS_LIMIT_RANGE);
 
 
 
@@ -29,10 +29,10 @@ class tpGeneralDateTime extends TestCase
 
         // Testes de inicialização
         $obj = new tpDateTime();
-        $this->assertSame(tpDateTime::standart()::TYPE, $obj->getType());
-        $this->assertSame(null, $obj->default());
-        $this->assertSame("-9999-12-31 23:59:59", $obj->min()->format("Y-m-d H:i:s"));
-        $this->assertSame("9999-12-31 23:59:59", $obj->max()->format("Y-m-d H:i:s"));
+        $this->assertSame(tpDateTime::getStandart()::TYPE, $obj->getType());
+        $this->assertSame(null, $obj->getDefault());
+        $this->assertSame("-9999-12-31 23:59:59", $obj->getMin()->format("Y-m-d H:i:s"));
+        $this->assertSame("9999-12-31 23:59:59", $obj->getMax()->format("Y-m-d H:i:s"));
 
         $this->assertTrue($obj->isUndefined());
         $this->assertFalse($obj->isAllowNull());
