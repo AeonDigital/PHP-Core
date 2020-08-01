@@ -223,11 +223,11 @@ abstract class aStandart implements iStandart
      */
     protected static function stdTryParseForThisType($v)
     {
-        if (static::TYPE === "iGeneric") {
+        $toType = static::stdGetToolsTryParserForThisType();
+        if (static::TYPE === "iGeneric" || $toType === "") {
             return ((\is_object($v) === true) ? $v : null);
         }
         else {
-            $toType = static::stdGetToolsTryParserForThisType();
             return Tools::$toType($v);
         }
     }

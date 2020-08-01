@@ -42,8 +42,10 @@
             <file>src/Objects/Types/tpGeneralDateTime.php</file>
             <file>src/Objects/Types/tpStringTest.php</file>
             <file>src/Objects/Types/tpGenericTest.php</file>
+            <file>src/Objects/Types/tpTypeTest.php</file>
 
             <file>src/Objects/Types/tpTypeArrayTest.php</file>
+
 
 
 

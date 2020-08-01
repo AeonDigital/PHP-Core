@@ -419,6 +419,9 @@ abstract class aType implements iType
         if ($this->set($value) === false) {
             $this->set($this->valueMin);
         }
+        if ($this->value === null && $this->allowNull === false && $this->valueDefault !== null) {
+            $this->value = $this->valueDefault;
+        }
 
         $this->undefined = $undefined;
         $this->readonly = $readonly;

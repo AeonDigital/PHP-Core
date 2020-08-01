@@ -69,11 +69,11 @@ class tpGenericTest extends TestCase
         $this->assertFalse($obj->isNullOrEquivalent());
         $this->assertSame($valueDefault, $obj->get());
 
-        // Passando "null" o valor será definido como o "nullEquivalent".
+        // Passando "null" o valor será definido como o "default".
         $obj = new tpGeneric(null, false, true, false, $valueDefault, null, null, null, "DateTime");
-        $this->assertTrue($obj->isNullEquivalent());
-        $this->assertTrue($obj->isNullOrEquivalent());
-        $this->assertSame(null, $obj->get());
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertFalse($obj->isNullOrEquivalent());
+        $this->assertSame($valueDefault, $obj->get());
 
 
         // Teste de inicialização com um tipo arbitrário para "default" e que

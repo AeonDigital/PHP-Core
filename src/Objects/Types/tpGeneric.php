@@ -11,6 +11,7 @@ use AeonDigital\Objects\Standart\stdGeneric as stdGeneric;
 
 
 
+
 /**
  * Classe concreta para criação de tipos genéricos em tempo de execução.
  *
@@ -204,9 +205,9 @@ class tpGeneric extends aType implements iGeneric
         $valueMin = undefined,
         $valueMax = undefined,
         ?int $valueLength = null,
-        string $type
+        string $type = ""
     ) {
-        $this->type = $type;
+        $this->type = (($this->type === "") ? $type : $this->type);
         parent::__construct(
             $value,
             $allowNull,
