@@ -145,6 +145,7 @@ trait TypeArray
         $v
     ) : bool {
         if ($this->locked === true) {
+            $this->lastSetError = "error.obj.array.locked";
             return false;
         }
         else {
@@ -170,7 +171,9 @@ trait TypeArray
      */
     public function unsetValue(string $key) : bool
     {
+        $this->lastSetError = "";
         if ($this->locked === true) {
+            $this->lastSetError = "error.obj.array.locked";
             return false;
         }
         else {
@@ -178,7 +181,10 @@ trait TypeArray
                 unset($this->valueArray[$this->useKey($key)]);
                 return true;
             }
-            return false;
+            else {
+                $this->lastSetError = "error.obj.array.key.does.not.exists";
+                return false;
+            }
         }
     }
     /**
@@ -261,8 +267,15 @@ trait TypeArray
      */
     public function clean() : bool
     {
-        $this->valueArray = [];
-        return true;
+        $this->lastSetError = "";
+        if ($this->locked === true) {
+            $this->lastSetError = "error.obj.array.locked";
+            return false;
+        }
+        else {
+            $this->valueArray = [];
+            return true;
+        }
     }
 
 
