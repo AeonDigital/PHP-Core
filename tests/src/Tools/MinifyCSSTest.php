@@ -2,9 +2,9 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Tools\MinifyCSS as MinifyCSS;
+use AeonDigital\Tools\MinifyCSS as MinifyCSS;
 
-require_once __DIR__ . "/../../../phpunit.php";
+require_once __DIR__ . "/../../phpunit.php";
 
 
 

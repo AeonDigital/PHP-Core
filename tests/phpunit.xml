@@ -21,12 +21,6 @@
             <file>src/Objects/ToolsTests.php</file>
             <file>src/Objects/Traits/MainCheckArgumentExceptionTest.php</file>
 
-            <file>src/Objects/Tools/ImageTests.php</file>
-            <file>src/Objects/Tools/JSONTests.php</file>
-            <file>src/Objects/Tools/MinifyCSSTest.php</file>
-            <file>src/Objects/Tools/MinifyJSTest.php</file>
-            <file>src/Objects/Tools/ZipTest.php</file>
-
 
             <file>src/Objects/Standart/stdGenericTest.php</file>
             <file>src/Objects/Standart/stdBoolTest.php</file>
@@ -87,6 +81,14 @@
             <file>src/DataFormat/patterns/world/dates/WeekTest.php</file>
 
 
+
+
+
+            <file>src/Tools/ImageTests.php</file>
+            <file>src/Tools/JSONTests.php</file>
+            <file>src/Tools/MinifyCSSTest.php</file>
+            <file>src/Tools/MinifyJSTest.php</file>
+            <file>src/Tools/ZipTest.php</file>
 
             <!--
                 próximo passo:

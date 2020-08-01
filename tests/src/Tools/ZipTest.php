@@ -2,9 +2,9 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Tools\Zip as Zip;
+use AeonDigital\Tools\Zip as Zip;
 
-require_once __DIR__ . "/../../../phpunit.php";
+require_once __DIR__ . "/../../phpunit.php";
 
 
 

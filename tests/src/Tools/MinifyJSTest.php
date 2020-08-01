@@ -2,9 +2,9 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Tools\MinifyJS as MinifyJS;
+use AeonDigital\Tools\MinifyJS as MinifyJS;
 
-require_once __DIR__ . "/../../../phpunit.php";
+require_once __DIR__ . "/../../phpunit.php";
 
 
 

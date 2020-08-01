@@ -1,7 +1,7 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Tools;
+namespace AeonDigital\Tools;
 
 
 
@@ -15,7 +15,7 @@ namespace AeonDigital\Objects\Tools;
 /**
  * Coleção de métodos estáticos para minificar arquivos CSS.
  *
- * @package     AeonDigital\Objects
+ * @package     AeonDigital\Tools
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
