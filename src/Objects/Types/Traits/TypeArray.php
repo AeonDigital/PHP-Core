@@ -177,14 +177,8 @@ trait TypeArray
             return false;
         }
         else {
-            if ($this->hasValue($key) === true) {
-                unset($this->valueArray[$this->useKey($key)]);
-                return true;
-            }
-            else {
-                $this->lastSetError = "error.obj.array.key.does.not.exists";
-                return false;
-            }
+            unset($this->valueArray[$this->useKey($key)]);
+            return true;
         }
     }
     /**
@@ -258,12 +252,46 @@ trait TypeArray
 
 
     /**
+     * Permite inserir multiplos dados de uma única vez no ``array``.
+     *
+     * @param       array $values
+     *              ``array associativo`` contendo os novos valores a serem definidos.
+     *
+     * @return      bool
+     *              Retornará ``true`` caso TODOS os novos valores sejam adicionados.
+     *              Em caso de falha irá parar o processo e NENHUM item passado será
+     *              mantido na instância.
+     *              O motivo do erro poderá ser visto em ``self::getLastSetError()``.
+     */
+    public function insert(array $values) : bool
+    {
+        if (\count($values) > 0) {
+            $r = true;
+            foreach ($values as $k => $v) {
+                if ($r === true) {
+                    $r = $this->setValue($k, $v);
+                }
+            }
+
+            if ($r === false) {
+                foreach ($values as $k => $v) {
+                    unset($this->valueArray[$this->useKey($k)]);
+                }
+            }
+            $this->value = null;
+            return $r;
+        }
+        else {
+            $this->value = null;
+            return false;
+        }
+    }
+    /**
      * Limpa totalmente o ``array`` eliminando toda informação armazenada no momento.
      *
      * @return      bool
-     *              Retornará ``true`` caso a exclusão dos dados tenha sido executada com sucesso
-     *              e ``false`` caso ocorra algum erro em algum dos itens.
-     *              Neste caso, o ``array`` poderá ficará pela metade.
+     *              Retornará ``true`` caso a exclusão dos dados tenha sido executada
+     *              com sucesso.
      */
     public function clean() : bool
     {
@@ -352,12 +380,9 @@ trait TypeArray
         );
 
         $this->caseSensitive = $caseSensitive;
-        if (\is_array($value) && \count($value) > 0) {
-            foreach ($value as $k => $v) {
-                $this->setValue($k, $v);
-            }
+        if (\is_array($value) === true) {
+            $this->insert($value);
         }
-        $this->value = null;
     }
 
 

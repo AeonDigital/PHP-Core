@@ -99,6 +99,7 @@ class tpTypeArrayTest extends TestCase
         $this->assertSame(1, $obj->getValue("first"));
         $this->assertSame(undefined, $obj->getValue("sec"));
         $this->assertTrue($obj->unsetValue("first"));
+        $this->assertTrue($obj->unsetValue("undef"));
         $this->assertFalse($obj->hasValue("first"));
 
 
@@ -156,8 +157,18 @@ class tpTypeArrayTest extends TestCase
         $obj["P_10"] = null;
         $this->assertSame(8, count($obj));
         $this->assertTrue($obj->isLocked());
+
+
+
+        // Teste de inicialização com um valor no construtor
+        $obj = new tpByteArray([
+            "f1" => 1,
+            "f2" => 2,
+            "f3" => 3,
+            "f4" => 4,
+            "f5" => 5,
+        ]);
+        $this->assertSame(5, count($obj));
+
     }
-
-
-
 }
