@@ -2,17 +2,17 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Tools\MinifyJS as MinifyJS;
+use AeonDigital\Objects\Tools\MinifyCSS as MinifyCSS;
 
-require_once __DIR__ . "/../../phpunit.php";
-
-
+require_once __DIR__ . "/../../../phpunit.php";
 
 
 
 
 
-class MinifyJSTest extends TestCase
+
+
+class MinifyCSSTest extends TestCase
 {
 
 
@@ -21,11 +21,11 @@ class MinifyJSTest extends TestCase
 
     public function test_method_minifyCode()
     {
-        $original = file_get_contents(__DIR__ . "/files/minifyJS_original1.js");
-        $final = file_get_contents(__DIR__ . "/files/minifyJS_final1.js");
+        $original = file_get_contents(__DIR__ . "/files/minifyCSS_original1.css");
+        $final = file_get_contents(__DIR__ . "/files/minifyCSS_final1.css");
 
 
-        $minify = MinifyJS::getMinifyCode($original);
+        $minify = MinifyCSS::minifyCode($original);
         $this->assertSame($final, $minify);
     }
 
@@ -34,13 +34,13 @@ class MinifyJSTest extends TestCase
     public function test_method_minifyFiles()
     {
         $filesToMinify = [
-            __DIR__ . "/files/minifyJS_original1.js",
-            __DIR__ . "/files/minifyJS_original2.js"
+            __DIR__ . "/files/minifyCSS_original1.css",
+            __DIR__ . "/files/minifyCSS_original2.css"
         ];
-        $final = file_get_contents(__DIR__ . "/files/minifyJS_final2.js");
+        $final = file_get_contents(__DIR__ . "/files/minifyCSS_final2.css");
 
 
-        $minify = MinifyJS::getMinifyFiles($filesToMinify);
+        $minify = MinifyCSS::minifyFiles($filesToMinify);
 
         // Converte a versão minificada e a versão final em um array
         // levando em conta o formato UTF-8
@@ -51,32 +51,32 @@ class MinifyJSTest extends TestCase
         // Confirma que o número de caracteres é o mesmo
         $this->assertSame(count($chrMinify), count($chrFinal));
         $this->assertSame($final, $minify);
-    }
+}
 
 
 
     public function test_method_createMinifyFile()
     {
         $filesToMinify = [
-            __DIR__ . "/files/minifyJS_original1.js",
-            __DIR__ . "/files/minifyJS_original2.js"
+            __DIR__ . "/files/minifyCSS_original1.css",
+            __DIR__ . "/files/minifyCSS_original2.css"
         ];
-        $final = file_get_contents(__DIR__ . "/files/minifyJS_final2.js");
+        $final = file_get_contents(__DIR__ . "/files/minifyCSS_final2.css");
 
 
         // Remove qualquer arquivo previamente existente.
-        $finalFile = __DIR__ . "/files/minifyJS_final3.js";
+        $finalFile = __DIR__ . "/files/minifyCSS_final3.css";
         if (file_exists($finalFile)) {
             unlink($finalFile);
         }
 
 
         // Gera um novo arquivo minificado
-        $r = MinifyJS::createMinifyFile($filesToMinify, $finalFile);
+        $r = MinifyCSS::createMinifyFile($filesToMinify, $finalFile);
         $this->assertTrue($r);
         $this->assertTrue(file_exists($finalFile));
 
-        $minify = file_get_contents(__DIR__ . "/files/minifyJS_final3.js");
+        $minify = file_get_contents(__DIR__ . "/files/minifyCSS_final3.css");
         $this->assertSame($final, $minify);
     }
 }

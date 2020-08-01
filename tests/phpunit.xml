@@ -21,6 +21,12 @@
             <file>src/Objects/ToolsTests.php</file>
             <file>src/Objects/Traits/MainCheckArgumentExceptionTest.php</file>
 
+            <file>src/Objects/Tools/ImageTests.php</file>
+            <file>src/Objects/Tools/JSONTests.php</file>
+            <file>src/Objects/Tools/MinifyCSSTest.php</file>
+            <file>src/Objects/Tools/MinifyJSTest.php</file>
+            <file>src/Objects/Tools/ZipTest.php</file>
+
 
             <file>src/Objects/Standart/stdGenericTest.php</file>
             <file>src/Objects/Standart/stdBoolTest.php</file>
@@ -49,25 +55,6 @@
 
 
 
-            <!--file>src/Objects/ArrayOf/ArrayOfObjectsTests.php</file-->
-
-
-            <!--file>src/Tools/ToolsTests.php</file>
-            <file>src/Tools/ImageTests.php</file>
-            <file>src/Tools/JSONTests.php</file>
-            <file>src/Tools/MinifyCSSTest.php</file>
-            <file>src/Tools/MinifyJSTest.php</file>
-            <file>src/Tools/ZipTest.php</file>
-
-
-            <file>src/Collection/BasicCollectionTest.php</file>
-            <file>src/Collection/ProtectedCollectionTest.php</file>
-            <file>src/Collection/AppendOnlyCollectionTest.php</file>
-            <file>src/Collection/ReadOnlyCollectionTest.php</file>
-            <file>src/Collection/CaseInsensitiveCollectionTest.php</file>
-            <file>src/Collection/CollectionTest.php</file>
-            <file>src/Collection/TypeListTest.php</file>
-
 
             <file>src/DataFormat/patterns/brasil/CNPJTest.php</file>
             <file>src/DataFormat/patterns/brasil/CPFTest.php</file>
@@ -79,13 +66,11 @@
             <file>src/DataFormat/patterns/brasil/dates/MonthTest.php</file>
             <file>src/DataFormat/patterns/brasil/dates/WeekTest.php</file>
 
-
             <file>src/DataFormat/patterns/eua/NumberTest.php</file>
             <file>src/DataFormat/patterns/eua/PhoneTest.php</file>
             <file>src/DataFormat/patterns/eua/ZipCodeTest.php</file>
             <file>src/DataFormat/patterns/eua/dates/DateTest.php</file>
             <file>src/DataFormat/patterns/eua/dates/DateTimeTest.php</file>
-
 
             <file>src/DataFormat/patterns/world/ColorTest.php</file>
             <file>src/DataFormat/patterns/world/EmailTest.php</file>
@@ -100,6 +85,27 @@
             <file>src/DataFormat/patterns/world/dates/MonthTest.php</file>
             <file>src/DataFormat/patterns/world/dates/TimeTest.php</file>
             <file>src/DataFormat/patterns/world/dates/WeekTest.php</file>
+
+
+
+            <!--
+                próximo passo:
+                - as interfaces "collection" morrerão mas ainda precisam
+                  constar até que "data model" seja redefinido para o uso
+                  dos tipos definidos por último
+
+                - trazer de volta o "data format"
+            -->
+            <!--file>src/Collection/BasicCollectionTest.php</file>
+            <file>src/Collection/ProtectedCollectionTest.php</file>
+            <file>src/Collection/AppendOnlyCollectionTest.php</file>
+            <file>src/Collection/ReadOnlyCollectionTest.php</file>
+            <file>src/Collection/CaseInsensitiveCollectionTest.php</file>
+            <file>src/Collection/CollectionTest.php</file>
+            <file>src/Collection/TypeListTest.php</file>
+
+
+
 
 
             <file>src/DataModel/t01FieldTest.php</file>

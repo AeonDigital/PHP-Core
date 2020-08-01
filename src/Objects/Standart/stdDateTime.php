@@ -15,7 +15,7 @@ use AeonDigital\Objects\Standart\Abstracts\aGeneralDateTime as aGeneralDateTime;
 /**
  * Define um ``Standart`` para o tipo ``DateTime``.
  *
- * @package     AeonDigital\Objects\Standart
+ * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT

@@ -16,7 +16,7 @@ use AeonDigital\Objects\Tools as Tools;
  * Coleção de métodos que tem como função prover às classes implementadoras um formato padronizado
  * para verificação de argumentos e mensagens de erro para quando os mesmos forem disparados.
  *
- * @package     AeonDigital\Objects\Traits
+ * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT

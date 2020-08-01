@@ -15,7 +15,7 @@ use AeonDigital\Objects\Tools as Tools;
 /**
  * Classe abstrata básica para a criação de ``Standart``.
  *
- * @package     AeonDigital\Objects\Standart
+ * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT

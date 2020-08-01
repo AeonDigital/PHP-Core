@@ -15,7 +15,7 @@ use AeonDigital\Objects\Standart\Abstracts\aNumericInteger as aNumericInteger;
 /**
  * Define um ``Standart`` para o tipo ``byte`` (inteiro de 8 bits).
  *
- * @package     AeonDigital\Objects\Standart
+ * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT

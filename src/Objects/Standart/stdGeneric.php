@@ -15,7 +15,7 @@ use AeonDigital\Objects\Standart\Abstracts\aStandart as aStandart;
 /**
  * Define um ``Standart`` para tipos ``object`` definidos em ``runtime``.
  *
- * @package     AeonDigital\Objects\Standart
+ * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
