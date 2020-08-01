@@ -306,13 +306,13 @@ trait TypeArray
      *              tamanho máximo (em caracteres) que um valor do tipo ``string``
      *              pode ter.
      *
-     * @param       bool $caseSensitive
-     *              Informa se as chaves de valores devem ser tratadas de forma
-     *              ``case-sensitive``.
-     *
      * @param       string $type
      *              Informa a namespace completa da classe ou interface que os valores
      *              a serem usados por esta instância deverão possuir.
+     *
+     * @param       bool $caseSensitive
+     *              Informa se as chaves de valores devem ser tratadas de forma
+     *              ``case-sensitive``.
      */
     function __construct(
         $value = [],
@@ -323,8 +323,8 @@ trait TypeArray
         $valueMin = undefined,
         $valueMax = undefined,
         ?int $valueLength = null,
-        bool $caseSensitive = true,
-        string $type = ""
+        string $type = "",
+        bool $caseSensitive = true
     ) {
         parent::__construct(
             undefined,

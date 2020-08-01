@@ -472,6 +472,7 @@ abstract class aType implements iType
             ((\key_exists("valueMax", $cfg) === true)       ? $cfg["valueMax"]      : undefined),
             ((\key_exists("length", $cfg) === true)         ? $cfg["length"]        : null),
             ((\key_exists("type", $cfg) === true)           ? $cfg["type"]          : null),
+            ((\key_exists("caseSensitive", $cfg) === true)  ? $cfg["caseSensitive"] : true),
         );
     }
 }
