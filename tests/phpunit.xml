@@ -16,7 +16,7 @@
             <!--
                 Defina aqui cada arquivo de testes que será utilizado.
             -->
-            <file>src/global_functionsTests.php</file>
+            <!--file>src/global_functionsTests.php</file>
             <file>src/Objects/RealtypeTests.php</file>
             <file>src/Objects/ToolsTests.php</file>
             <file>src/Objects/Traits/MainCheckArgumentExceptionTest.php</file>
@@ -88,7 +88,7 @@
             <file>src/Tools/JSONTests.php</file>
             <file>src/Tools/MinifyCSSTest.php</file>
             <file>src/Tools/MinifyJSTest.php</file>
-            <file>src/Tools/ZipTest.php</file>
+            <file>src/Tools/ZipTest.php</file-->
 
             <!--
                 próximo passo:
