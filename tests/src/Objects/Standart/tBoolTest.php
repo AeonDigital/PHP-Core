@@ -147,22 +147,16 @@ class tBoolTest extends TestCase
 
 
 
-    public function test_method_nullEquivalent()
-    {
-        $this->assertSame(false, tBool::getNullEquivalent());
-    }
-
-
-
     public function test_method_min()
     {
         $this->assertSame(null, tBool::getMin());
     }
-
-
-
     public function test_method_max()
     {
         $this->assertSame(null, tBool::getMax());
+    }
+    public function test_method_nullEquivalent()
+    {
+        $this->assertSame(false, tBool::getNullEquivalent());
     }
 }

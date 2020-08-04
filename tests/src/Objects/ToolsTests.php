@@ -394,7 +394,7 @@ class ToolsTests extends TestCase
             $this->assertNull($dTemp);
         }
     }
-    public function test_method_toRealtype()
+    public function test_method_toReal()
     {
         $convertTrue = [
             1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.999999, 2,
@@ -409,12 +409,12 @@ class ToolsTests extends TestCase
 
 
         for ($i = 0; $i < count($convertTrue); $i++) {
-            $result = Tools::toRealtype($convertTrue[$i]);
+            $result = Tools::toReal($convertTrue[$i]);
             $this->assertEquals($result->value(), strval($resultConvert[$i]));
         }
 
         for ($i = 0; $i < count($convertFalse); $i++) {
-            $result = Tools::toRealtype($convertFalse[$i]);
+            $result = Tools::toReal($convertFalse[$i]);
             $this->assertNull($result);
         }
     }

@@ -16,13 +16,17 @@
             <!--
                 Defina aqui cada arquivo de testes que será utilizado.
             -->
-            <!--file>src/global_functionsTests.php</file>
+            <file>src/global_functionsTests.php</file>
             <file>src/Objects/RealtypeTests.php</file>
             <file>src/Objects/ToolsTests.php</file>
-            <file>src/Objects/Traits/MainCheckArgumentExceptionTest.php</file-->
+            <file>src/Objects/Traits/MainCheckArgumentExceptionTest.php</file>
 
 
             <file>src/Objects/Standart/tBoolTest.php</file>
+            <file>src/Objects/Standart/tNumericIntegerTest.php</file>
+            <file>src/Objects/Standart/tNumericFloagintTest.php</file>
+            <file>src/Objects/Standart/tNumericRealTest.php</file>
+            <file>src/Objects/Standart/tDateTimeTest.php</file>
             <!--file>src/Objects/Standart/stdGenericTest.php</file>
             <file>src/Objects/Standart/stdBoolTest.php</file>
             <file>src/Objects/Standart/stdByteTest.php</file>

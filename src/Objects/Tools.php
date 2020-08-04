@@ -599,7 +599,7 @@ class Tools
      * @return      ?Realtype
      *              Retornará ``null`` caso não seja possível efetuar a conversão.
      */
-    public static function toRealtype($o) : ?Realtype
+    public static function toReal($o) : ?Realtype
     {
         if (Realtype::isValidRealtype($o) === true) {
             return new Realtype($o);
