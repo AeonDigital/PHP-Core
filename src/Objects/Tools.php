@@ -203,7 +203,7 @@ class Tools
      *
      * @return      bool
      */
-    public static function isRealtype($o) : bool
+    public static function isReal($o) : bool
     {
         return (\is_a($o, Realtype::class) === true);
     }

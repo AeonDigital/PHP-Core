@@ -19,10 +19,11 @@
             <!--file>src/global_functionsTests.php</file>
             <file>src/Objects/RealtypeTests.php</file>
             <file>src/Objects/ToolsTests.php</file>
-            <file>src/Objects/Traits/MainCheckArgumentExceptionTest.php</file>
+            <file>src/Objects/Traits/MainCheckArgumentExceptionTest.php</file-->
 
 
-            <file>src/Objects/Standart/stdGenericTest.php</file>
+            <file>src/Objects/Standart/tBoolTest.php</file>
+            <!--file>src/Objects/Standart/stdGenericTest.php</file>
             <file>src/Objects/Standart/stdBoolTest.php</file>
             <file>src/Objects/Standart/stdByteTest.php</file>
             <file>src/Objects/Standart/stdDateTimeTest.php</file>

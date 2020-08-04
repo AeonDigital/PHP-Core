@@ -13,7 +13,7 @@ use AeonDigital\Objects\Tools as Tools;
 
 
 /**
- * Classe abstrata básica para a criação de ``Standart``.
+ * Classe abstrata básica para a criação de tipos ``Standart``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
@@ -36,18 +36,19 @@ abstract class aStandart implements iStandart
      */
     public static function toString($v) : ?string
     {
-        if (static::TYPE === "iGeneric") {
+        $s = null;
+        if (static::TYPE === "iPGeneric") {
             if (\is_object($v) === true && \method_exists($v, "__toString") === true) {
-                return (string)$v;
+                $s = (string)$v;
             }
         }
         else {
             if (static::validate($v) === true) {
                 if (static::TYPE === "Bool") { $v = Tools::toBool($v); }
-                return Tools::toString($v);
+                $s = Tools::toString($v);
             }
         }
-        return null;
+        return $s;
     }
 
 
@@ -57,32 +58,22 @@ abstract class aStandart implements iStandart
      * Verifica se o valor indicado pode ser convertido e usado como um valor válido
      * dentro das definições deste tipo.
      *
-     * A não ser que seja explicitado o contrário, o valor ``null`` não será aceito.
-     *
      * @param       mixed $v
      *              Valor que será verificado.
      *
-     * @param       bool $allowNull
-     *              Quando ``true`` indica que o valor ``null`` é válido para este tipo.
-     *
      * @return      bool
      */
-    public static function validate(
-        $v,
-        bool $allowNull = false
-    ) : bool {
-        if ($v === null && $allowNull === true) {
-            return true;
+    static function validate($v) : bool
+    {
+        $r = false;
+        if ($v === null && static::NULLABLE === true) {
+            $r = true;
         }
         else {
             $n = static::stdTryParseForThisType($v);
-            if ($n === null) {
-                return false;
-            }
-            else {
-                return ((static::HAS_LIMIT_RANGE === false) ? true : static::validateRange($n));
-            }
+            $r = (($n === null) ? false : static::validateRange($n));
         }
+        return $r;
     }
 
 
@@ -97,15 +88,6 @@ abstract class aStandart implements iStandart
      * @param       mixed $v
      *              Valor que será convertido.
      *
-     * @param       bool $allowNull
-     *              Quando ``true`` indica que o valor ``null`` é válido para este tipo
-     *              e não será convertido.
-     *
-     * @param       bool $nullEquivalent
-     *              Quando ``true``, converterá ``null`` para o valor existente em
-     *              ``static::getNullEquivalent()``. Se ``$allowNull`` for definido esta opção
-     *              será ignorada.
-     *
      * @param       string $err
      *              Código do erro da validação.
      *
@@ -113,15 +95,13 @@ abstract class aStandart implements iStandart
      */
     public static function parseIfValidate(
         $v,
-        bool $allowNull = false,
-        bool $nullEquivalent = false,
         string &$err = ""
     ) {
         $err = "";
 
         if ($v === null) {
-            if ($allowNull === false) {
-                if ($nullEquivalent === true) {
+            if (static::NULLABLE === false) {
+                if (static::toString($v) === static::NULL_EQUIVALENT) {
                     $v = static::getNullEquivalent();
                 }
                 else {
@@ -165,7 +145,25 @@ abstract class aStandart implements iStandart
      */
     protected static function validateRange($v) : bool
     {
-        return (static::HAS_LIMIT_RANGE === false || ($v >= static::getMin() && $v <= static::getMax()));
+        $r = (static::HAS_LIMIT === false || (static::MIN === null && static::MAX === null));
+        if ($r === false) {
+            $min = static::getMin();
+            $max = static::getMax();
+
+            if (static::TYPE === "String") {
+                $len = \mb_strlen($v);
+                $r = (($min === null || $len >= $min) && ($max === null || $len <= $max));
+            }
+            else {
+                if (static::TYPE === "AeonDigital\Objects\Realtype") {
+                    $r = ($v->isGreaterOrEqualAs($min) === true && $v->isLessOrEqualAs($max) === true);
+                }
+                else {
+                    $r = ($v >= $min && $v <= $max);
+                }
+            }
+        }
+        return $r;
     }
     /**
      * Retorna o nome do método a ser usado para efetuar a tentativa de conversão
@@ -201,7 +199,7 @@ abstract class aStandart implements iStandart
                 break;
 
             case "AeonDigital\Objects\Realtype":
-                $r = "toRealtype";
+                $r = "toReal";
                 break;
 
             case "String":
@@ -223,12 +221,28 @@ abstract class aStandart implements iStandart
      */
     protected static function stdTryParseForThisType($v)
     {
+        $r = null;
+
         $toType = static::stdGetToolsTryParserForThisType();
-        if (static::TYPE === "iGeneric" || $toType === "") {
-            return ((\is_object($v) === true) ? $v : null);
+        if ($toType === "") {
+            if (static::IS_CLASS === true && \is_object($v) === true) {
+                if (\is_a($v, static::TYPE) === true) {
+                    $r = $v;
+                }
+                else {
+                    $className = \get_class($v);
+                    $interfaces = \class_implements($className);
+
+                    if ($interfaces !== false && \in_array(static::TYPE, $interfaces) === true) {
+                        $r = $v;
+                    }
+                }
+            }
         }
         else {
-            return Tools::$toType($v);
+            $r = Tools::$toType($v);
         }
+
+        return $r;
     }
 }

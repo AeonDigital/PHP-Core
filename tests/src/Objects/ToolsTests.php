@@ -166,17 +166,17 @@ class ToolsTests extends TestCase
             $this->assertFalse(Tools::isDateTime($bFalse[$i]));
         }
     }
-    public function test_method_isRealtype()
+    public function test_method_isReal()
     {
         $bTrue = [new Realtype("12232.43445")];
         $bFalse = [null, true, false, -1, 0, 1, 12.33];
 
         for ($i = 0; $i < count($bTrue); $i++) {
-            $this->assertTrue(Tools::isRealtype($bTrue[$i]));
+            $this->assertTrue(Tools::isReal($bTrue[$i]));
         }
 
         for ($i = 0; $i < count($bFalse); $i++) {
-            $this->assertFalse(Tools::isRealtype($bFalse[$i]));
+            $this->assertFalse(Tools::isReal($bFalse[$i]));
         }
     }
 
