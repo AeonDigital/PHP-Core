@@ -22,22 +22,14 @@
             <file>src/Objects/Traits/MainCheckArgumentExceptionTest.php</file>
 
 
-            <file>src/Objects/Standart/tBoolTest.php</file>
-            <file>src/Objects/Standart/tNumericIntegerTest.php</file>
-            <file>src/Objects/Standart/tNumericFloagintTest.php</file>
-            <file>src/Objects/Standart/tNumericRealTest.php</file>
-            <file>src/Objects/Standart/tDateTimeTest.php</file>
+            <file>src/Objects/Standart/stBoolTest.php</file>
+            <file>src/Objects/Standart/stNumericIntegerTest.php</file>
+            <file>src/Objects/Standart/stNumericFloagintTest.php</file>
+            <file>src/Objects/Standart/stNumericRealTest.php</file>
+            <file>src/Objects/Standart/stDateTimeTest.php</file>
+            <file>src/Objects/Standart/stStringTest.php</file>
             <!--file>src/Objects/Standart/stdGenericTest.php</file>
-            <file>src/Objects/Standart/stdBoolTest.php</file>
-            <file>src/Objects/Standart/stdByteTest.php</file>
-            <file>src/Objects/Standart/stdDateTimeTest.php</file>
-            <file>src/Objects/Standart/stdDoubleTest.php</file>
-            <file>src/Objects/Standart/stdFloatTest.php</file>
-            <file>src/Objects/Standart/stdIntTest.php</file>
-            <file>src/Objects/Standart/stdLongTest.php</file>
-            <file>src/Objects/Standart/stdRealTest.php</file>
-            <file>src/Objects/Standart/stdShortTest.php</file>
-            <file>src/Objects/Standart/stdStringTest.php</file>
+
 
 
             <file>src/Objects/Types/tpBoolTest.php</file>

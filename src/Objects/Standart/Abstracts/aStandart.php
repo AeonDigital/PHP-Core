@@ -66,8 +66,8 @@ abstract class aStandart implements iStandart
     static function validate($v) : bool
     {
         $r = false;
-        if ($v === null && static::NULLABLE === true) {
-            $r = true;
+        if ($v === null) {
+            $r = (static::NULLABLE === true);
         }
         else {
             $n = static::stdTryParseForThisType($v);
@@ -101,12 +101,7 @@ abstract class aStandart implements iStandart
 
         if ($v === null) {
             if (static::NULLABLE === false) {
-                if (static::toString($v) === static::NULL_EQUIVALENT) {
-                    $v = static::getNullEquivalent();
-                }
-                else {
-                    $err = "error.obj.type.not.allow.null";
-                }
+                $err = "error.obj.type.not.allow.null";
             }
         }
         else {
@@ -152,7 +147,7 @@ abstract class aStandart implements iStandart
 
             if (static::TYPE === "String") {
                 $len = \mb_strlen($v);
-                $r = (($min === null || $len >= $min) && ($max === null || $len <= $max));
+                $r = (($min === null || $len >= $min) && ($max === null || $max === 0 || $len <= $max));
             }
             else {
                 if (static::TYPE === "AeonDigital\Objects\Realtype") {
