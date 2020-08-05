@@ -221,7 +221,7 @@ abstract class aStandart implements iStandart
         $toType = static::stdGetToolsTryParserForThisType();
         if ($toType === "") {
             if (static::IS_CLASS === true && \is_object($v) === true) {
-                if (\is_a($v, static::TYPE) === true) {
+                if (static::TYPE === "iPGeneric" || \is_a($v, static::TYPE) === true) {
                     $r = $v;
                 }
                 else {
