@@ -3,9 +3,9 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Types;
 
-use AeonDigital\Interfaces\Objects\Types\iDateTime as iDateTime;
-use AeonDigital\Objects\Types\Abstracts\aGeneralDateTime as aGeneralDateTime;
-use AeonDigital\Objects\Standart\stdDateTime as stdDateTime;
+use AeonDigital\Interfaces\Objects\Types\iBool as iBool;
+use AeonDigital\Objects\Types\Abstracts\aBBool as aBBool;
+use AeonDigital\Objects\Standart\SType\stBool as stBool;
 
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Standart\stdDateTime as stdDateTime;
 
 
 /**
- * Classe concreta para o tipo ``DateTime``.
+ * Tipo ``Bool``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class tpDateTime extends aGeneralDateTime implements iDateTime
+class tpBool extends aBBool implements iBool
 {
 
 
@@ -33,15 +33,10 @@ class tpDateTime extends aGeneralDateTime implements iDateTime
      */
     public static function getStandart() : string
     {
-        return stdDateTime::class;
+        return stBool::class;
     }
-
-
-
-
-
     /**
-     * Retorna uma instância definida com as propriedades definidas no
+     * Retorna uma instância definida com as propriedades indicadas no
      * ``array`` de configuração.
      *
      * @param       array $cfg

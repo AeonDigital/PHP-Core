@@ -116,6 +116,6 @@ class tpType extends aType implements iiType
      */
     public static function fromArray(array $cfg) : self
     {
-        return static::tpFromArray(self::class, $cfg);
+        return static::sttFromArray(self::class, $cfg);
     }
 }

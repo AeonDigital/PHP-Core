@@ -1,11 +1,11 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Types;
+namespace AeonDigital\Objects\Types\Abstracts;
 
-use AeonDigital\Interfaces\Objects\Types\iBool as iBool;
 use AeonDigital\Objects\Types\Abstracts\aType as aType;
-use AeonDigital\Objects\Standart\stdBool as stdBool;
+
+
 
 
 
@@ -13,33 +13,28 @@ use AeonDigital\Objects\Standart\stdBool as stdBool;
 
 
 /**
- * Classe concreta para o tipo ``bool``.
+ * Extende a classe ``aType`` para atender a interface ``iBBool``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class tpBool extends aType implements iBool
+abstract class aBBool extends aType
 {
 
 
 
     /**
-     * Retorna o namespace completo da classe ``Standart`` que
-     * define esta instância.
+     * Retorna o valor indicado em ``NULL_EQUIVALENT`` convertido para
+     * o tipo nativo.
      *
-     * @return      string
+     * @return      bool
      */
-    public static function getStandart() : string
+    public function getNullEquivalent() : bool
     {
-        return stdBool::class;
+        return $this->getStandart()::getNullEquivalent();
     }
-
-
-
-
-
     /**
      * Valor padrão a ser definido para este tipo de instância caso nenhum valor válido
      * tenha sido explicitamente definido.
@@ -52,32 +47,36 @@ class tpBool extends aType implements iBool
     }
     /**
      * Retorna o menor valor aceitável para esta instância.
+     *
      * Quando ``null`` indica que não há limites definidos ou que isto não se aplica
      * para o tipo indicado.
+     * Em tipos ``String`` informa o menor número de caracteres que um valor deve ter.
      *
-     * @return      mixed
+     * @return      ?bool
      */
-    public function getMin()
+    public function getMin() : ?bool
     {
-        return null;
+        return $this->valueMin;
     }
     /**
-     * Retorna o menor valor aceitável para esta instância.
+     * Retorna o maior valor aceitável para esta instância.
+     *
      * Quando ``null`` indica que não há limites definidos ou que isto não se aplica
      * para o tipo indicado.
+     * Em tipos ``String`` informa o maior número de caracteres que um valor deve ter.
      *
-     * @return      mixed
+     * @return      ?bool
      */
-    public function getMax()
+    public function getMax() : ?bool
     {
-        return null;
+        return $this->valueMax;
     }
 
 
 
 
 
-    /**
+     /**
      * Retorna o valor atualmente definido para a instância atual.
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
@@ -90,33 +89,12 @@ class tpBool extends aType implements iBool
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::getNullEquivalent``.
-     *
-     * Usado apenas em casos onde ``self::isIterable() = false``.
+     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
      *
      * @return      bool
      */
     public function getNotNull() : bool
     {
         return parent::sttGetNotNull();
-    }
-
-
-
-
-
-    /**
-     * Retorna uma instância definida com as propriedades definidas no
-     * ``array`` de configuração.
-     *
-     * @param       array $cfg
-     *              Array associativo contendo as configurações para a
-     *              definição da instância resultante.
-     *
-     * @return      iType
-     */
-    public static function fromArray(array $cfg) : self
-    {
-        return static::tpFromArray(self::class, $cfg);
     }
 }

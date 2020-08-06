@@ -137,7 +137,13 @@ abstract class aType implements iType
 
 
     //
-    // Implementados em classes intermediárias ou nas concretas
+    // Implementados em classes concretas
+    //
+    // static function getStandart();
+    // static function fromArray();
+    //
+    // Implementadas em classes intermediárias
+    //
     // function getNullEquivalent();
     // function getDefault();
     // function getMin();
@@ -481,7 +487,7 @@ abstract class aType implements iType
      *
      * @return      iType
      */
-    protected static function tpFromArray(string $useType, array $cfg) : iType
+    protected static function sttFromArray(string $useType, array $cfg) : iType
     {
         return new $useType(
             ((\key_exists("value", $cfg) === true)          ? $cfg["value"]         : undefined),

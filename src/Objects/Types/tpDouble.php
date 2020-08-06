@@ -52,6 +52,6 @@ class tpDouble extends aNumericFloating implements iDouble
      */
     public static function fromArray(array $cfg) : self
     {
-        return static::tpFromArray(self::class, $cfg);
+        return static::sttFromArray(self::class, $cfg);
     }
 }
