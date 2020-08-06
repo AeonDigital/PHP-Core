@@ -35,47 +35,40 @@ abstract class aType implements iType
 
 
     /**
-     * Valor padrão para uma instância recém criada e que não recebeu
-     * um valor explicitamente definido.
+     * Valor padrão a ser definido para este tipo de instância caso nenhum
+     * valor válido tenha sido explicitamente definido.
      *
      * @var         mixed
      */
     protected $valueDefault = null;
     /**
-     * Menor valor aceitável para um tipo numérico ou comparável.
+     * Retorna o menor valor aceitável para esta instância.
      *
-     * @var         int|float|Realtype|\DateTime $min
+     * @var         ?int|float|Realtype|\DateTime $min
      */
     protected $valueMin = null;
     /**
-     * Maior valor aceitável para um tipo numérico ou comparável.
+     * Retorna o maior valor aceitável para esta instância.
      *
-     * @var         int|float|Realtype|\DateTime $max
+     * @var         ?int|float|Realtype|\DateTime $max
      */
     protected $valueMax = null;
-    /**
-     * Tamanho máximo que um valor do tipo ``string`` pode possuir
-     * em número de caracteres.
-     * ``null`` indica que não há limites.
-     *
-     * @var         ?int
-     */
-    protected ?int $valueLength = null;
 
 
 
 
 
     /**
-     * Namespace completa da classe que está sendo implementada nesta instância.
+     * Namespace completo da classe usada por esta instância.
      *
      * @var         string
      */
     protected string $type = "";
     /**
      * Retorna o namespace completo da classe usada por esta instância.
+     *
      * Em classes de tipo invariável retornará o mesmo resultado obtido pelo
-     * método ``static::getStandart()``.
+     * método ``static::standart()``.
      *
      * @return      string
      */
@@ -95,7 +88,7 @@ abstract class aType implements iType
      */
     protected bool $iterable = false;
     /**
-     * Informa quando o tipo de valor aceito é do tipo ``iterable``.
+     * Informa quando tratar-se de uma instância que lida com ``arrays`` de valores.
      *
      * @return      bool
      */
@@ -109,16 +102,113 @@ abstract class aType implements iType
 
 
     /**
-     * Retorna o tamanho máximo (em caracteres) que um valor do tipo ``string`` pode ter.
-     * O valor ``null`` indica que não existe tal limitação.
-     * Esta configuação funciona apenas em casos de tipo ``string``.
+     * Informa se esta instância aceita ``null`` como válido.
+     * Mesmo valor encontrado na constante ``NULLABLE`` do ``Standart`` utilizado.
+     *
+     * @return      bool
+     */
+    public function isAllowNull() : bool
+    {
+        return $this->getStandart()::NULLABLE;
+    }
+    /**
+     * Informa se esta instância é ``readonly``.
+     * Mesmo valor encontrado na constante ``READONLY`` do ``Standart`` utilizado.
+     *
+     * @return      bool
+     */
+    public function isReadOnly() : bool
+    {
+        return $this->getStandart()::READONLY;
+    }
+    /**
+     * Informa se esta instância aceita ``""`` como um valor válido.
+     * Mesmo valor encontrado na constante ``EMPTY`` do ``Standart`` utilizado.
+     *
+     * @return      ?bool
+     */
+    public function isAllowEmpty() : ?bool
+    {
+        return $this->getStandart()::EMPTY;
+    }
+
+
+
+
+
+    //
+    // Implementados em classes intermediárias ou nas concretas
+    // function getNullEquivalent();
+    // function getDefault();
+    // function getMin();
+    // function getMax();
+    // function get();
+    // function getNotNull();
+    //
+
+
+
+
+
+    /**
+     * Em tipos ``String`` retorna o maior número de caracteres aceitável para validar
+     * o valor. Trata-se do mesmo número indicado em ``self::getMax()``
      *
      * @return      ?int
      */
     public function getLength() : ?int
     {
-        return $this->valueLength;
+        $r = null;
+        if ($this->getStandart()::TYPE === "String") {
+            $r = $this->getStandart()::getMax();
+        }
+        return $r;
     }
+
+
+
+
+    protected ?array $enumerator = null;
+    /**
+     * Retorna um ``array`` com a coleção de valores que este campo está apto a assumir.
+     * Os valores aqui pré-definidos devem seguir as regras de validade especificadas.
+     *
+     * @param       bool $onlyValues
+     *              Quando ``true``, retorna um ``array`` unidimensional contendo apenas
+     *              os valores sem seus respectivos ``labels``.
+     *
+     * @return      ?array
+     */
+    public function getEnumerator(bool $onlyValues = false) : ?array
+    {
+        return static::sttGetEnumerator($this->enumerator, $onlyValues);
+    }
+    /**
+     * Resolução ``static`` para ``self::getEnumerator()``.
+     *
+     * @param       ?array $enumerator
+     * @param       bool $onlyValues
+     *
+     * @return      ?array
+     */
+    protected static function sttGetEnumerator(
+        ?array $enumerator,
+        bool $onlyValues = false
+    ) : ? array {
+        $arr = $enumerator;
+        if ($enumerator !== null && $onlyValues === true) {
+            $nArr = [];
+            foreach ($arr as $enum) {
+                if (\is_array($enum) === true) {
+                    $nArr[] = $enum[0];
+                }
+            }
+            $arr = $nArr;
+        }
+        return $arr;
+    }
+
+
 
 
 
@@ -129,8 +219,8 @@ abstract class aType implements iType
      *
      * @var         bool
      */
-    protected $undefined = true;
-    /**
+    protected bool $undefined = true;
+     /**
      * Retornará ``true`` enquanto nenhum valor for definido para
      * esta instância de forma explicita.
      *
@@ -141,70 +231,20 @@ abstract class aType implements iType
         return $this->undefined;
     }
     /**
-     * Indica se esta instância aceita ``null`` como válido.
-     *
-     * @var         bool
-     */
-    protected bool $allowNull = false;
-    /**
-     * Informa se esta instância aceita ``null`` como válido.
-     *
-     * @return      bool
-     */
-    public function isAllowNull() : bool
-    {
-        return $this->allowNull;
-    }
-    /**
-     * Indica se esta instância aceita ``""`` como válido.
-     *
-     * @var         bool
-     */
-    protected bool $allowEmpty = false;
-    /**
-     * Informa se esta instância aceita ``""`` como um valor válido.
-     * Esta configuação funciona apenas em casos de tipo ``string``.
-     *
-     * @return      bool
-     */
-    public function isAllowEmpty() : bool
-    {
-        return $this->allowEmpty;
-    }
-    /**
-     * Indica se esta instância é ``readonly``.
-     *
-     * @var         bool
-     */
-    protected bool $readonly = false;
-    /**
-     * Informa se esta instância é ``readonly``.
-     *
-     * Quando ``true``, após a criação da instância nenhum outro valor poderá
-     * ser definido para a mesma
-     *
-     * @return      bool
-     */
-    public function isReadOnly() : bool
-    {
-        return $this->readonly;
-    }
-
-
-
-    /**
-     * Informa se o valor atualmente definido é o mesmo que ``static::getNullEquivalent()``.
+     * Informa se o valor atualmente definido é o mesmo que ``NULL_EQUIVALENT``.
      * Retornará ``false`` caso o valor seja ``null``.
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
-     * Se ``isIterable = true`` deve retornar sempre ``false``.
+     * Se ``isIterable = true`` deve retornar ``false``.
      *
      * @return      bool
      */
     public function isNullEquivalent() : bool
     {
-        if ($this->isIterable() === true) { return false; }
-        return ($this->value === static::getStandart()::getNullEquivalent());
+        return static::sttCheckNullEquivalent(
+            $this->value, $this->iterable, true,
+            static::getStandart()::getNullEquivalent()
+        );
     }
     /**
      * Informa se o valor atualmente definido é ``null`` ou se é o mesmo que
@@ -217,8 +257,37 @@ abstract class aType implements iType
      */
     public function isNullOrEquivalent() : bool
     {
-        if ($this->isIterable() === true) { return false; }
-        return (($this->value === null) || $this->isNullEquivalent() === true);
+        return static::sttCheckNullEquivalent(
+            $this->value, $this->iterable, false,
+            static::getStandart()::getNullEquivalent()
+        );
+    }
+    /**
+     * Resolução ``static`` para ``self::isNullEquivalent()`` e ``self::isNullOrEquivalent()``.
+     *
+     * @param       bool $isIterable
+     * @param       bool $strictNull
+     * @param       mixed $nullEquivalent
+     *
+     * @return      bool
+     */
+    protected static function sttCheckNullEquivalent(
+        $value,
+        bool $isIterable,
+        bool $strictNull,
+        $nullEquivalent
+    ) : bool {
+        if ($isIterable === true) {
+            return false;
+        }
+        else {
+            if ($strictNull === true) {
+                return ($value === $nullEquivalent);
+            }
+            else {
+                return (($value === null) || ($value === $nullEquivalent));
+            }
+        }
     }
 
 
@@ -234,7 +303,7 @@ abstract class aType implements iType
     protected string $lastSetError = "";
     /**
      * Retorna o último código de erro encontrado ao tentar definir um valor
-     * para a instância. ``""`` será retornado caso não tenha havido erros.
+     * para a instância. ``""`` será retornado caso não existam erros.
      *
      * @return      string
      */
@@ -258,73 +327,46 @@ abstract class aType implements iType
         $r = false;
         $this->lastSetError = "";
 
-        if ($this->readonly === true) {
-            $this->lastSetError = "error.obj.type.readonly";
-        }
-        else {
-            $n = static::getStandart()::parseIfValidate($v, $this->allowNull, false, $this->lastSetError);
-            if ($this->lastSetError === "") {
-                if (static::getStandart()::TYPE === "String" && $n !== null) {
-                    if ($n === "") {
-                        if ($this->allowEmpty === false) {
-                            if ($this->allowNull === true) { $n = null; }
-                            else { $this->lastSetError = "error.obj.type.not.allow.empty"; }
-                        }
-                    }
-                    else {
-                        if ($this->valueLength !== null && \mb_strlen($n) > $this->valueLength) {
-                            $this->lastSetError = "error.obj.max.length.exceeded";
-                        }
-                    }
-                }
-
+        if ($this->iterable === false) {
+            if ($this->isReadOnly() === true && $this->undefined === true) {
+                $this->lastSetError = "error.obj.type.readonly";
+            }
+            else {
+                $n = static::getStandart()::parseIfValidate(
+                    $v, $this->lastSetError, self::getMin(), self::getMax()
+                );
                 if ($this->lastSetError === "") {
-                    if ($this->validateRange($n) === false) {
-                        $this->lastSetError = "error.obj.out.of.range";
-                    }
-                    else {
-                        $r = true;
-                        $this->value = $n;
-                        $this->undefined = false;
-                    }
+                    $r = true;
+                    $this->value = $n;
+                    $this->undefined = false;
                 }
             }
         }
 
         return $r;
     }
+
+
+
+
+
     /**
-     * Retorna o valor atualmente definido para a instância atual.
+     * Resolução ``static`` para ``self::get()``.
      *
      * @return      mixed
      */
-    protected function stdGet()
+    protected function sttGet()
     {
         return $this->value;
     }
     /**
-     * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``static::getNullEquivalent()``.
+     * Resolução ``static`` para ``self::getNotNull()``.
      *
      * @return      mixed
      */
-    protected function stdGetNotNull()
+    protected function sttGetNotNull()
     {
         return ($this->value ?? static::getStandart()::getNullEquivalent());
-    }
-    /**
-     * Verifica se o valor informado está entre o intervalo definido para este tipo.
-     *
-     * @param       mixed $v
-     *              Valor que será verificado.
-     *
-     * @return      bool
-     */
-    protected function validateRange($v) : bool
-    {
-        return ($v === null || static::getStandart()::HAS_LIMIT_RANGE === false ||
-            ($v >= $this->valueMin && $v <= $this->valueMax)
-        );
     }
 
 
@@ -341,23 +383,12 @@ abstract class aType implements iType
      *
      * @param       mixed $value
      *              Valor inicial da instância.
-     *              Se for passado ``undefined`` irá iniciar a instância com o valor definido
-     *              em ``$valueDefault`` mas caso este não esteja definido também irá usar ``null``
-     *              se este for um valor aceitável.
-     *              Caso ``null`` não seja aceitável, usará o valor equivalente encontrado em
+     *              Se for passado ``undefined`` irá iniciar a instância com o valor
+     *              definido em ``$valueDefault`` mas caso este não esteja definido
+     *              também irá usar ``null`` se este for um valor aceitável.
+     *              Caso ``null`` não seja aceitável, usará o valor equivalente encontrado
      *              em ``static::getNullEquivalent()``.
      *              Em último caso tentará definir a instância com o valor de ``self::getMin()``.
-     *
-     * @param       bool $allowNull
-     *              Quando ``true`` esta instância aceitará ``null`` como um valor válido.
-     *
-     * @param       bool $allowEmpty
-     *              Quando ``true`` esta instância aceitará ``""`` como um valor válido.
-     *              Esta configuação funciona apenas em casos de tipo ``string``.
-     *
-     * @param       bool $readonly
-     *              Quando ``true`` indica que esta instância não poderá ter seu valor
-     *              alterado após a inicialização.
      *
      * @param       mixed $valueDefault
      *              Valor padrão a ser definido para este tipo de instância caso nenhum
@@ -365,66 +396,50 @@ abstract class aType implements iType
      *              Se não for definido, ``null`` será usado.
      *
      * @param       int|float|Realtype|\DateTime $valueMin
-     *              Indica o menor valor aceitável para um tipo numérico ou comparável.
-     *              Se não for definido usará o valor existente em ``min`` da classe
+     *              Menor valor aceitável para esta instância.
+     *              Se não for definido usará o valor existente em ``MIN`` da classe
      *              ``Standart`` original.
      *
      * @param       int|float|Realtype|\DateTime $valueMax
-     *              Indica o maior valor aceitável para um tipo numérico ou comparável.
-     *              Se não for definido usará o valor existente em ``max`` da classe
+     *              Maior valor aceitável para esta instância.
+     *              Se não for definido usará o valor existente em ``MAX`` da classe
      *              ``Standart`` original.
-     *
-     * @param       ?int $valueLength
-     *              tamanho máximo (em caracteres) que um valor do tipo ``string``
-     *              pode ter.
      */
     function __construct(
         $value = undefined,
-        bool $allowNull = false,
-        bool $allowEmpty = true,
-        bool $readonly = false,
         $valueDefault = null,
-        $valueMin = undefined,
-        $valueMax = undefined,
-        ?int $valueLength = null
+        $valueMin = null,
+        $valueMax = null
     ) {
         $this->type = (($this->type === "") ? static::getStandart()::TYPE : $this->type);
-        $this->allowNull = $allowNull;
-        $this->valueDefault = (($valueDefault === undefined) ? null : $valueDefault);
+        $this->valueDefault = $valueDefault;
 
-        if (static::getStandart()::HAS_LIMIT_RANGE === true) {
-            $this->valueMin = (($valueMin === undefined || $valueMin === null) ? static::getStandart()::getMin() : $valueMin);
-            $this->valueMax = (($valueMax === undefined || $valueMax === null) ? static::getStandart()::getMax() : $valueMax);
+        if (static::getStandart()::HAS_LIMIT === true) {
+            $this->valueMin = $valueMin ?? static::getStandart()::getMin();
+            $this->valueMax = $valueMax ?? static::getStandart()::getMax();
         }
-        if (static::getStandart()::TYPE === "String") {
-            $this->allowEmpty = $allowEmpty;
-            $this->valueLength = $valueLength;
-        }
-
 
         $undefined = ($value === undefined);
         if ($value === undefined || $value === "") {
             if ($valueDefault === null) {
-                $value = (($allowNull === true) ? null : static::getStandart()::getNullEquivalent());
+                $value = (($this->isAllowNull() === true) ? null : static::getStandart()::getNullEquivalent());
             }
             else {
                 $value = $valueDefault;
             }
         }
         elseif ($value === null) {
-            $value = (($allowNull === true) ? null : static::getStandart()::getNullEquivalent());
+            $value = (($this->isAllowNull() === true) ? null : static::getStandart()::getNullEquivalent());
         }
 
 
         if ($this->set($value) === false) {
-            $this->set($this->valueMin);
+            $this->set($this->getMin());
         }
-        if ($this->value === null && $this->allowNull === false && $this->valueDefault !== null) {
+        if ($this->value === null && $this->isAllowNull() === false && $this->valueDefault !== null) {
             $this->value = $this->valueDefault;
         }
-
         $this->undefined = $undefined;
-        $this->readonly = $readonly;
     }
 
 
@@ -441,17 +456,20 @@ abstract class aType implements iType
      */
     public function toString() : string
     {
-        if ($this->isIterable() === true) { return ""; }
-
-        $v = $this->value;
-        if (static::getStandart()::TYPE === "Bool") { $v = Tools::toBool($v); }
-        return Tools::toString($v);
+        if ($this->isIterable() === true) {
+            return "";
+        }
+        else {
+            $v = $this->value;
+            if (static::getStandart()::TYPE === "Bool") { $v = Tools::toBool($v); }
+            return Tools::toString($v);
+        }
     }
 
 
 
     /**
-     * Retorna uma instância definida com as propriedades definidas no
+     * Retorna uma instância definida com as propriedades indicadas no
      * ``array`` de configuração.
      *
      * @param       string $useType
@@ -467,13 +485,9 @@ abstract class aType implements iType
     {
         return new $useType(
             ((\key_exists("value", $cfg) === true)          ? $cfg["value"]         : undefined),
-            ((\key_exists("allowNull", $cfg) === true)      ? $cfg["allowNull"]     : false),
-            ((\key_exists("allowEmpty", $cfg) === true)     ? $cfg["allowEmpty"]    : true),
-            ((\key_exists("readonly", $cfg) === true)       ? $cfg["readonly"]      : false),
             ((\key_exists("valueDefault", $cfg) === true)   ? $cfg["valueDefault"]  : null),
             ((\key_exists("valueMin", $cfg) === true)       ? $cfg["valueMin"]      : undefined),
             ((\key_exists("valueMax", $cfg) === true)       ? $cfg["valueMax"]      : undefined),
-            ((\key_exists("length", $cfg) === true)         ? $cfg["length"]        : null),
             ((\key_exists("type", $cfg) === true)           ? $cfg["type"]          : null),
             ((\key_exists("caseSensitive", $cfg) === true)  ? $cfg["caseSensitive"] : true),
         );

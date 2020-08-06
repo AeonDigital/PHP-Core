@@ -13,15 +13,28 @@ use AeonDigital\Objects\Types\Abstracts\aType as aType;
 
 
 /**
- * Extende a classe ``aType`` para atender a interface ``iNumericFloating``.
+ * Extende a classe ``aType`` para atender a interface ``iBNumericFloating``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aNumericFloating extends aType
+abstract class aBNumericFloating extends aType
 {
+
+
+
+    /**
+     * Retorna o valor indicado em ``NULL_EQUIVALENT`` convertido para
+     * o tipo nativo.
+     *
+     * @return      float
+     */
+    public function getNullEquivalent() : float
+    {
+        return $this->getStandart()::getNullEquivalent();
+    }
 
 
 
@@ -36,7 +49,11 @@ abstract class aNumericFloating extends aType
         return $this->valueDefault;
     }
     /**
-     * Retorna o menor valor possível para este tipo.
+     * Retorna o menor valor aceitável para esta instância.
+     *
+     * Quando ``null`` indica que não há limites definidos ou que isto não se aplica
+     * para o tipo indicado.
+     * Em tipos ``String`` informa o menor número de caracteres que um valor deve ter.
      *
      * @return      float
      */
@@ -45,7 +62,11 @@ abstract class aNumericFloating extends aType
         return $this->valueMin;
     }
     /**
-     * Retorna o maior valor possível para este tipo.
+     * Retorna o maior valor aceitável para esta instância.
+     *
+     * Quando ``null`` indica que não há limites definidos ou que isto não se aplica
+     * para o tipo indicado.
+     * Em tipos ``String`` informa o maior número de caracteres que um valor deve ter.
      *
      * @return      float
      */
@@ -58,7 +79,7 @@ abstract class aNumericFloating extends aType
 
 
 
-    /**
+     /**
      * Retorna o valor atualmente definido para a instância atual.
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
@@ -67,18 +88,16 @@ abstract class aNumericFloating extends aType
      */
     public function get() : ?float
     {
-        return parent::stdGet();
+        return parent::sttGet();
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::getNullEquivalent``.
-     *
-     * Usado apenas em casos onde ``self::isIterable() = false``.
+     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
      *
      * @return      float
      */
     public function getNotNull() : float
     {
-        return parent::stdGetNotNull();
+        return parent::sttGetNotNull();
     }
 }

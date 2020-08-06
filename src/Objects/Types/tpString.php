@@ -86,7 +86,7 @@ class tpString extends aType implements iString
      */
     public function get() : ?string
     {
-        return parent::stdGet();
+        return parent::sttGet();
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
@@ -98,7 +98,7 @@ class tpString extends aType implements iString
      */
     public function getNotNull() : string
     {
-        return parent::stdGetNotNull();
+        return parent::sttGetNotNull();
     }
 
 

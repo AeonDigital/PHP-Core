@@ -254,7 +254,7 @@ class stStringTest extends TestCase
             "", undefined, new stdClass()
         ];
         $convertFalseError = [
-            "error.obj.value.out.of.range", "error.obj.type.unexpected", "error.obj.type.unexpected"
+            "error.obj.type.not.allow.empty", "error.obj.type.unexpected", "error.obj.type.unexpected"
         ];
 
 

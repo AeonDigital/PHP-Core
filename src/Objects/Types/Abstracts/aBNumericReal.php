@@ -13,15 +13,28 @@ use AeonDigital\Objects\Realtype as Realtype;
 
 
 /**
- * Extende a classe ``aType`` para atender a interface ``iNumericReal``.
+ * Extende a classe ``aType`` para atender a interface ``iBNumericReal``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aNumericReal extends aType
+abstract class aBNumericReal extends aType
 {
+
+
+
+    /**
+     * Retorna o valor indicado em ``NULL_EQUIVALENT`` convertido para
+     * o tipo nativo.
+     *
+     * @return      Realtype
+     */
+    public function getNullEquivalent() : Realtype
+    {
+        return $this->getStandart()::getNullEquivalent();
+    }
 
 
 
@@ -36,7 +49,11 @@ abstract class aNumericReal extends aType
         return $this->valueDefault;
     }
     /**
-     * Retorna o menor valor possível para este tipo.
+     * Retorna o menor valor aceitável para esta instância.
+     *
+     * Quando ``null`` indica que não há limites definidos ou que isto não se aplica
+     * para o tipo indicado.
+     * Em tipos ``String`` informa o menor número de caracteres que um valor deve ter.
      *
      * @return      Realtype
      */
@@ -45,7 +62,11 @@ abstract class aNumericReal extends aType
         return $this->valueMin;
     }
     /**
-     * Retorna o maior valor possível para este tipo.
+     * Retorna o maior valor aceitável para esta instância.
+     *
+     * Quando ``null`` indica que não há limites definidos ou que isto não se aplica
+     * para o tipo indicado.
+     * Em tipos ``String`` informa o maior número de caracteres que um valor deve ter.
      *
      * @return      Realtype
      */
@@ -58,21 +79,7 @@ abstract class aNumericReal extends aType
 
 
 
-    /**
-     * Informa se o valor atualmente definido é ``null`` ou se é o mesmo que
-     * ``static::getNullEquivalent()``.
-     *
-     * @return      bool
-     */
-    public function isNullEquivalent() : bool
-    {
-        return ($this->value !== null && $this->value->value() === static::getStandart()::getNullEquivalent()->value());
-    }
-
-
-
-
-    /**
+     /**
      * Retorna o valor atualmente definido para a instância atual.
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
@@ -81,38 +88,16 @@ abstract class aNumericReal extends aType
      */
     public function get() : ?Realtype
     {
-        return parent::stdGet();
+        return parent::sttGet();
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
-     * valor seja ``null``, retornará o valor definido em ``self::getNullEquivalent``.
-     *
-     * Usado apenas em casos onde ``self::isIterable() = false``.
+     * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
      *
      * @return      Realtype
      */
     public function getNotNull() : Realtype
     {
-        return parent::stdGetNotNull();
-    }
-
-
-
-
-
-    /**
-     * Verifica se o valor informado está entre o intervalo definido para este tipo.
-     *
-     * @param       mixed $v
-     *              Valor que será verificado.
-     *
-     * @return      bool
-     */
-    protected function validateRange($v) : bool
-    {
-        return ($v === null ||
-            ($v->isGreaterOrEqualAs($this->valueMin) === true &&
-            $v->isLessOrEqualAs($this->valueMax) === true)
-        );
+        return parent::sttGetNotNull();
     }
 }

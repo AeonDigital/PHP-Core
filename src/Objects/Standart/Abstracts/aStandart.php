@@ -91,14 +91,21 @@ abstract class aStandart implements iStandart
      * @param       string $err
      *              Código do erro da validação.
      *
+     * @param       mixed $min
+     *              Valor mínimo aceitável.
+     *
+     * @param       mixed $max
+     *              Valor máximo aceitável.
+     *
      * @return      mixed
      */
     public static function parseIfValidate(
         $v,
-        string &$err = ""
+        string &$err = "",
+        $min = null,
+        $max = null
     ) {
         $err = "";
-
         if ($v === null) {
             if (static::NULLABLE === false) {
                 $err = "error.obj.type.not.allow.null";
@@ -109,10 +116,7 @@ abstract class aStandart implements iStandart
             if ($n === null) {
                 $err = "error.obj.type.unexpected";
             } else {
-                if (static::validateRange($n) === false) {
-                    $err = "error.obj.value.out.of.range";
-                }
-                else {
+                if (static::validateRange($n, $err, $min, $max) === true) {
                     $v = $n;
                 }
             }
@@ -136,18 +140,44 @@ abstract class aStandart implements iStandart
      * @param       mixed $v
      *              Valor que será verificado.
      *
+     * @param       string $err
+     *              Código do erro da validação.
+     *
+     * @param       mixed $min
+     *              Valor mínimo aceitável.
+     *
+     * @param       mixed $max
+     *              Valor máximo aceitável.
+     *
      * @return      bool
      */
-    protected static function validateRange($v) : bool
-    {
+    protected static function validateRange(
+        $v,
+        string &$err = "",
+        $min = null,
+        $max = null
+    ) : bool {
         $r = (static::HAS_LIMIT === false || (static::MIN === null && static::MAX === null));
         if ($r === false) {
-            $min = static::getMin();
-            $max = static::getMax();
+            $min = ($min ?? static::getMin());
+            $max = ($max ?? static::getMax());
 
             if (static::TYPE === "String") {
-                $len = \mb_strlen($v);
-                $r = (($min === null || $len >= $min) && ($max === null || $max === 0 || $len <= $max));
+                if ($v === "" && static::EMPTY === false) {
+                    $err = "error.obj.type.not.allow.empty";
+                }
+                else {
+                    $len = \mb_strlen($v);
+                    if ($min > 0 && $len < $min) {
+                        $err = "error.obj.min.length.expected";
+                    }
+                    elseif ($max > 0 && $len > $max) {
+                        $err = "error.obj.max.length.exceeded";
+                    }
+                    else {
+                        $r = true;
+                    }
+                }
             }
             else {
                 if (static::TYPE === "AeonDigital\Objects\Realtype") {
@@ -156,6 +186,7 @@ abstract class aStandart implements iStandart
                 else {
                     $r = ($v >= $min && $v <= $max);
                 }
+                $err = (($r === true) ? "" : "error.obj.value.out.of.range");
             }
         }
         return $r;

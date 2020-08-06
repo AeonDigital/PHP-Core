@@ -130,7 +130,7 @@ class tpGeneric extends aType implements iGeneric
      */
     public function get()
     {
-        return parent::stdGet();
+        return parent::sttGet();
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
@@ -140,7 +140,7 @@ class tpGeneric extends aType implements iGeneric
      */
     public function getNotNull()
     {
-        return parent::stdGetNotNull();
+        return parent::sttGetNotNull();
     }
 
 

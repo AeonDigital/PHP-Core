@@ -87,7 +87,7 @@ class tpType extends aType implements iiType
      */
     public function get() : ?iType
     {
-        return parent::stdGet();
+        return parent::sttGet();
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
@@ -99,7 +99,7 @@ class tpType extends aType implements iiType
      */
     public function getNotNull() : iType
     {
-        return parent::stdGetNotNull();
+        return parent::sttGetNotNull();
     }
 
 

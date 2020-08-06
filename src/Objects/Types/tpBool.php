@@ -86,7 +86,7 @@ class tpBool extends aType implements iBool
      */
     public function get() : ?bool
     {
-        return parent::stdGet();
+        return parent::sttGet();
     }
     /**
      * Retorna o valor atualmente definido para a instância atual mas caso o
@@ -98,7 +98,7 @@ class tpBool extends aType implements iBool
      */
     public function getNotNull() : bool
     {
-        return parent::stdGetNotNull();
+        return parent::sttGetNotNull();
     }
 
 
