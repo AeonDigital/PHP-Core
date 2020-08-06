@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types;
 
 use AeonDigital\Objects\Types\Abstracts\aBool as aBool;
-use AeonDigital\Objects\Standart\SType\stRONBool as stClass;
+use AeonDigital\Objects\Standart\SType\stROBool as stClass;
 
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Standart\SType\stRONBool as stClass;
 
 
 /**
- * Tipo ``ReadOnly Nullable Bool``.
+ * Tipo ``ReadOnly Bool``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class tpRONBool extends aBool
+class tROBool extends aBool
 {
 
 

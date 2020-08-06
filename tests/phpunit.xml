@@ -32,7 +32,7 @@
 
 
 
-            <file>src/Objects/Types/tpBoolTest.php</file>
+            <file>src/Objects/Types/tBoolTest.php</file>
             <!--file>src/Objects/Types/tpNumericIntegerTest.php</file>
             <file>src/Objects/Types/tpNumericFloatingTest.php</file>
             <file>src/Objects/Types/tpNumericRealTest.php</file>

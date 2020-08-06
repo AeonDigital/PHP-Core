@@ -158,7 +158,7 @@ abstract class aType implements iType
 
     /**
      * Em tipos ``String`` retorna o maior número de caracteres aceitável para validar
-     * o valor. Trata-se do mesmo número indicado em ``self::getMax()``
+     * o valor. Trata-se do mesmo número indicado em ``$this->getMax()``
      *
      * @return      ?int
      */
@@ -190,7 +190,7 @@ abstract class aType implements iType
         return static::sttGetEnumerator($this->enumerator, $onlyValues);
     }
     /**
-     * Resolução ``static`` para ``self::getEnumerator()``.
+     * Resolução ``static`` para ``$this->getEnumerator()``.
      *
      * @param       ?array $enumerator
      * @param       bool $onlyValues
@@ -240,7 +240,7 @@ abstract class aType implements iType
      * Informa se o valor atualmente definido é o mesmo que ``NULL_EQUIVALENT``.
      * Retornará ``false`` caso o valor seja ``null``.
      *
-     * Usado apenas em casos onde ``self::isIterable() = false``.
+     * Usado apenas em casos onde ``$this->isIterable() = false``.
      * Se ``isIterable = true`` deve retornar ``false``.
      *
      * @return      bool
@@ -256,7 +256,7 @@ abstract class aType implements iType
      * Informa se o valor atualmente definido é ``null`` ou se é o mesmo que
      * ``static::getNullEquivalent()``.
      *
-     * Usado apenas em casos onde ``self::isIterable() = false``.
+     * Usado apenas em casos onde ``$this->isIterable() = false``.
      * Se ``isIterable = true`` deve retornar sempre ``false``.
      *
      * @return      bool
@@ -269,7 +269,7 @@ abstract class aType implements iType
         );
     }
     /**
-     * Resolução ``static`` para ``self::isNullEquivalent()`` e ``self::isNullOrEquivalent()``.
+     * Resolução ``static`` para ``$this->isNullEquivalent()`` e ``$this->isNullOrEquivalent()``.
      *
      * @param       bool $isIterable
      * @param       bool $strictNull
@@ -323,7 +323,7 @@ abstract class aType implements iType
     /**
      * Define um novo valor para a instância.
      *
-     * Usado apenas em casos onde ``self::isIterable() = false``.
+     * Usado apenas em casos onde ``$this->isIterable() = false``.
      *
      * @param       mixed $v
      *              Valor a ser atribuido.
@@ -334,12 +334,12 @@ abstract class aType implements iType
         $this->lastSetError = "";
 
         if ($this->iterable === false) {
-            if ($this->isReadOnly() === true && $this->undefined === true) {
+            if ($this->isReadOnly() === true && $this->undefined === false) {
                 $this->lastSetError = "error.obj.type.readonly";
             }
             else {
                 $n = static::getStandart()::parseIfValidate(
-                    $v, $this->lastSetError, self::getMin(), self::getMax()
+                    $v, $this->lastSetError, $this->getMin(), $this->getMax()
                 );
                 if ($this->lastSetError === "") {
                     $r = true;
@@ -357,7 +357,7 @@ abstract class aType implements iType
 
 
     /**
-     * Resolução ``static`` para ``self::get()``.
+     * Resolução ``static`` para ``$this->get()``.
      *
      * @return      mixed
      */
@@ -366,7 +366,7 @@ abstract class aType implements iType
         return $this->value;
     }
     /**
-     * Resolução ``static`` para ``self::getNotNull()``.
+     * Resolução ``static`` para ``$this->getNotNull()``.
      *
      * @return      mixed
      */
@@ -389,17 +389,10 @@ abstract class aType implements iType
      *
      * @param       mixed $value
      *              Valor inicial da instância.
-     *              Se for passado ``undefined`` irá iniciar a instância com o valor
-     *              definido em ``$valueDefault`` mas caso este não esteja definido
-     *              também irá usar ``null`` se este for um valor aceitável.
-     *              Caso ``null`` não seja aceitável, usará o valor equivalente encontrado
-     *              em ``static::getNullEquivalent()``.
-     *              Em último caso tentará definir a instância com o valor de ``self::getMin()``.
      *
      * @param       mixed $valueDefault
      *              Valor padrão a ser definido para este tipo de instância caso nenhum
      *              valor válido tenha sido explicitamente definido.
-     *              Se não for definido, ``null`` será usado.
      *
      * @param       int|float|Realtype|\DateTime $valueMin
      *              Menor valor aceitável para esta instância.
@@ -425,7 +418,7 @@ abstract class aType implements iType
             $this->valueMax = $valueMax ?? static::getStandart()::getMax();
         }
 
-        $undefined = ($value === undefined);
+        $undefined = ($value === undefined || $value === null || $value === "");
         if ($value === undefined || $value === "") {
             if ($valueDefault === null) {
                 $value = (($this->isAllowNull() === true) ? null : static::getStandart()::getNullEquivalent());
@@ -455,7 +448,7 @@ abstract class aType implements iType
     /**
      * Converte o valor atualmente definido para uma ``string``.
      *
-     * Usado apenas em casos onde ``self::isIterable() = false``.
+     * Usado apenas em casos onde ``$this->isIterable() = false``.
      * Se ``isIterable = true`` deve retornar sempre ``""``.
      *
      * @return      string
@@ -492,8 +485,8 @@ abstract class aType implements iType
         return new $useType(
             ((\key_exists("value", $cfg) === true)          ? $cfg["value"]         : undefined),
             ((\key_exists("valueDefault", $cfg) === true)   ? $cfg["valueDefault"]  : null),
-            ((\key_exists("valueMin", $cfg) === true)       ? $cfg["valueMin"]      : undefined),
-            ((\key_exists("valueMax", $cfg) === true)       ? $cfg["valueMax"]      : undefined),
+            ((\key_exists("valueMin", $cfg) === true)       ? $cfg["valueMin"]      : null),
+            ((\key_exists("valueMax", $cfg) === true)       ? $cfg["valueMax"]      : null),
             ((\key_exists("type", $cfg) === true)           ? $cfg["type"]          : null),
             ((\key_exists("caseSensitive", $cfg) === true)  ? $cfg["caseSensitive"] : true),
         );
