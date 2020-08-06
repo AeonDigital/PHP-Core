@@ -21,7 +21,7 @@ class tpStringTest extends TestCase
     {
         $this->assertSame("String", tpString::getStandart()::TYPE);
         $this->assertSame(false, tpString::getStandart()::IS_CLASS);
-        $this->assertSame(false, tpString::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(false, tpString::getStandart()::HAS_LIMIT);
 
 
         // Testes de inicialização

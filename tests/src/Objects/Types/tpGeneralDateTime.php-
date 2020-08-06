@@ -21,7 +21,7 @@ class tpGeneralDateTime extends TestCase
     {
         $this->assertSame(DateTime::class, tpDateTime::getStandart()::TYPE);
         $this->assertSame(true, tpDateTime::getStandart()::IS_CLASS);
-        $this->assertSame(true, tpDateTime::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(true, tpDateTime::getStandart()::HAS_LIMIT);
 
 
 

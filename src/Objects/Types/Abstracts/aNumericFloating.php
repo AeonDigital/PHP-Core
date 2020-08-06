@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types\Abstracts;
 
 use AeonDigital\Objects\Types\Abstracts\aType as aType;
-use AeonDigital\Objects\Realtype as Realtype;
+use AeonDigital\Interfaces\Objects\Types\iNumericFloating as iNumericFloating;
 
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Realtype as Realtype;
 
 
 /**
- * Extende a classe ``aType`` para atender a interface ``iBNumericReal``.
+ * Extende a classe ``aType`` para atender a interface ``iNumericFloating``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aBNumericReal extends aType
+abstract class aNumericFloating extends aType implements iNumericFloating
 {
 
 
@@ -29,9 +29,9 @@ abstract class aBNumericReal extends aType
      * Retorna o valor indicado em ``NULL_EQUIVALENT`` convertido para
      * o tipo nativo.
      *
-     * @return      Realtype
+     * @return      float
      */
-    public function getNullEquivalent() : Realtype
+    public function getNullEquivalent() : float
     {
         return $this->getStandart()::getNullEquivalent();
     }
@@ -42,9 +42,9 @@ abstract class aBNumericReal extends aType
      * Valor padrão a ser definido para este tipo de instância caso nenhum valor válido
      * tenha sido explicitamente definido.
      *
-     * @return      ?Realtype
+     * @return      ?float
      */
-    public function getDefault() : ?Realtype
+    public function getDefault() : ?float
     {
         return $this->valueDefault;
     }
@@ -55,9 +55,9 @@ abstract class aBNumericReal extends aType
      * para o tipo indicado.
      * Em tipos ``String`` informa o menor número de caracteres que um valor deve ter.
      *
-     * @return      Realtype
+     * @return      float
      */
-    public function getMin() : Realtype
+    public function getMin() : float
     {
         return $this->valueMin;
     }
@@ -68,9 +68,9 @@ abstract class aBNumericReal extends aType
      * para o tipo indicado.
      * Em tipos ``String`` informa o maior número de caracteres que um valor deve ter.
      *
-     * @return      Realtype
+     * @return      float
      */
-    public function getMax() : Realtype
+    public function getMax() : float
     {
         return $this->valueMax;
     }
@@ -84,9 +84,9 @@ abstract class aBNumericReal extends aType
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
      *
-     * @return      ?Realtype
+     * @return      ?float
      */
-    public function get() : ?Realtype
+    public function get() : ?float
     {
         return parent::sttGet();
     }
@@ -94,9 +94,9 @@ abstract class aBNumericReal extends aType
      * Retorna o valor atualmente definido para a instância atual mas caso o
      * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
      *
-     * @return      Realtype
+     * @return      float
      */
-    public function getNotNull() : Realtype
+    public function getNotNull() : float
     {
         return parent::sttGetNotNull();
     }

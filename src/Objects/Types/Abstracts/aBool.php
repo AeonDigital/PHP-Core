@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types\Abstracts;
 
 use AeonDigital\Objects\Types\Abstracts\aType as aType;
-
+use AeonDigital\Interfaces\Objects\Types\iBool as iBool;
 
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Types\Abstracts\aType as aType;
 
 
 /**
- * Extende a classe ``aType`` para atender a interface ``iBBool``.
+ * Extende a classe ``aType`` para atender a interface ``iBool``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aBBool extends aType
+abstract class aBool extends aType implements iBool
 {
 
 

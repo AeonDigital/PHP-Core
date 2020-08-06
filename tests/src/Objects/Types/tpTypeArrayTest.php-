@@ -25,43 +25,43 @@ class tpTypeArrayTest extends TestCase
     public function test_static() {
         $this->assertSame("Bool", tpBoolArray::getStandart()::TYPE);
         $this->assertSame(false, tpBoolArray::getStandart()::IS_CLASS);
-        $this->assertSame(false, tpBoolArray::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(false, tpBoolArray::getStandart()::HAS_LIMIT);
 
         $this->assertSame("Byte", tpByteArray::getStandart()::TYPE);
         $this->assertSame(false, tpByteArray::getStandart()::IS_CLASS);
-        $this->assertSame(true, tpByteArray::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(true, tpByteArray::getStandart()::HAS_LIMIT);
 
         $this->assertSame("Short", tpShortArray::getStandart()::TYPE);
         $this->assertSame(false, tpShortArray::getStandart()::IS_CLASS);
-        $this->assertSame(true, tpShortArray::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(true, tpShortArray::getStandart()::HAS_LIMIT);
 
         $this->assertSame("Int", tpIntArray::getStandart()::TYPE);
         $this->assertSame(false, tpIntArray::getStandart()::IS_CLASS);
-        $this->assertSame(true, tpIntArray::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(true, tpIntArray::getStandart()::HAS_LIMIT);
 
         $this->assertSame("Long", tpLongArray::getStandart()::TYPE);
         $this->assertSame(false, tpLongArray::getStandart()::IS_CLASS);
-        $this->assertSame(true, tpLongArray::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(true, tpLongArray::getStandart()::HAS_LIMIT);
 
         $this->assertSame("Float", tpFloatArray::getStandart()::TYPE);
         $this->assertSame(false, tpFloatArray::getStandart()::IS_CLASS);
-        $this->assertSame(true, tpFloatArray::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(true, tpFloatArray::getStandart()::HAS_LIMIT);
 
         $this->assertSame("Double", tpDoubleArray::getStandart()::TYPE);
         $this->assertSame(false, tpDoubleArray::getStandart()::IS_CLASS);
-        $this->assertSame(true, tpDoubleArray::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(true, tpDoubleArray::getStandart()::HAS_LIMIT);
 
         $this->assertSame("AeonDigital\Objects\Realtype", tpRealArray::getStandart()::TYPE);
         $this->assertSame(true, tpRealArray::getStandart()::IS_CLASS);
-        $this->assertSame(true, tpRealArray::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(true, tpRealArray::getStandart()::HAS_LIMIT);
 
         $this->assertSame("DateTime", tpDateTimeArray::getStandart()::TYPE);
         $this->assertSame(true, tpDateTimeArray::getStandart()::IS_CLASS);
-        $this->assertSame(true, tpDateTimeArray::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(true, tpDateTimeArray::getStandart()::HAS_LIMIT);
 
         $this->assertSame("String", tpStringArray::getStandart()::TYPE);
         $this->assertSame(false, tpStringArray::getStandart()::IS_CLASS);
-        $this->assertSame(false, tpStringArray::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(false, tpStringArray::getStandart()::HAS_LIMIT);
     }
 
 

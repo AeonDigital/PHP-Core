@@ -21,7 +21,7 @@ class tpGenericTest extends TestCase
     {
         $this->assertSame("iGeneric", tpGeneric::getStandart()::TYPE);
         $this->assertSame(true, tpGeneric::getStandart()::IS_CLASS);
-        $this->assertSame(false, tpGeneric::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(false, tpGeneric::getStandart()::HAS_LIMIT);
 
 
         $valueDefault = new \DateTime("2020-01-01 00:00:00");

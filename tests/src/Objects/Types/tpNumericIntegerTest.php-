@@ -21,19 +21,19 @@ class tpNumericIntegerTest extends TestCase
     {
         $this->assertSame("Byte", tpByte::getStandart()::TYPE);
         $this->assertSame(false, tpByte::getStandart()::IS_CLASS);
-        $this->assertSame(true, tpByte::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(true, tpByte::getStandart()::HAS_LIMIT);
 
         $this->assertSame("Short", tpShort::getStandart()::TYPE);
         $this->assertSame(false, tpShort::getStandart()::IS_CLASS);
-        $this->assertSame(true, tpShort::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(true, tpShort::getStandart()::HAS_LIMIT);
 
         $this->assertSame("Int", tpInt::getStandart()::TYPE);
         $this->assertSame(false, tpInt::getStandart()::IS_CLASS);
-        $this->assertSame(true, tpInt::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(true, tpInt::getStandart()::HAS_LIMIT);
 
         $this->assertSame("Long", tpLong::getStandart()::TYPE);
         $this->assertSame(false, tpLong::getStandart()::IS_CLASS);
-        $this->assertSame(true, tpLong::getStandart()::HAS_LIMIT_RANGE);
+        $this->assertSame(true, tpLong::getStandart()::HAS_LIMIT);
 
 
 

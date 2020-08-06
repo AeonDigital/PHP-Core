@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types\Abstracts;
 
 use AeonDigital\Objects\Types\Abstracts\aType as aType;
-
+use AeonDigital\Interfaces\Objects\Types\iNumericInteger as iNumericInteger;
 
 
 
@@ -20,7 +20,7 @@ use AeonDigital\Objects\Types\Abstracts\aType as aType;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aBNumericInteger extends aType
+abstract class aNumericInteger extends aType implements iNumericInteger
 {
 
 

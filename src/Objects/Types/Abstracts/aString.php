@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types\Abstracts;
 
 use AeonDigital\Objects\Types\Abstracts\aType as aType;
-
+use AeonDigital\Interfaces\Objects\Types\iString as iString;
 
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Types\Abstracts\aType as aType;
 
 
 /**
- * Extende a classe ``aType`` para atender a interface ``iBNumericFloating``.
+ * Extende a classe ``aType`` para atender a interface ``iString``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aBNumericFloating extends aType
+abstract class aString extends aType implements iString
 {
 
 
@@ -29,22 +29,19 @@ abstract class aBNumericFloating extends aType
      * Retorna o valor indicado em ``NULL_EQUIVALENT`` convertido para
      * o tipo nativo.
      *
-     * @return      float
+     * @return      string
      */
-    public function getNullEquivalent() : float
+    public function getNullEquivalent() : string
     {
         return $this->getStandart()::getNullEquivalent();
     }
-
-
-
     /**
      * Valor padrão a ser definido para este tipo de instância caso nenhum valor válido
      * tenha sido explicitamente definido.
      *
-     * @return      ?float
+     * @return      ?string
      */
-    public function getDefault() : ?float
+    public function getDefault() : ?string
     {
         return $this->valueDefault;
     }
@@ -55,9 +52,9 @@ abstract class aBNumericFloating extends aType
      * para o tipo indicado.
      * Em tipos ``String`` informa o menor número de caracteres que um valor deve ter.
      *
-     * @return      float
+     * @return      ?int
      */
-    public function getMin() : float
+    public function getMin() : ?int
     {
         return $this->valueMin;
     }
@@ -68,9 +65,9 @@ abstract class aBNumericFloating extends aType
      * para o tipo indicado.
      * Em tipos ``String`` informa o maior número de caracteres que um valor deve ter.
      *
-     * @return      float
+     * @return      ?int
      */
-    public function getMax() : float
+    public function getMax() : ?int
     {
         return $this->valueMax;
     }
@@ -84,9 +81,9 @@ abstract class aBNumericFloating extends aType
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
      *
-     * @return      ?float
+     * @return      ?string
      */
-    public function get() : ?float
+    public function get() : ?string
     {
         return parent::sttGet();
     }
@@ -94,9 +91,9 @@ abstract class aBNumericFloating extends aType
      * Retorna o valor atualmente definido para a instância atual mas caso o
      * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
      *
-     * @return      float
+     * @return      string
      */
-    public function getNotNull() : float
+    public function getNotNull() : string
     {
         return parent::sttGetNotNull();
     }

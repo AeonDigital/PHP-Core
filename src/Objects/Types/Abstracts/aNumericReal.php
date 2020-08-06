@@ -4,8 +4,8 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types\Abstracts;
 
 use AeonDigital\Objects\Types\Abstracts\aType as aType;
-
-
+use AeonDigital\Interfaces\Objects\Types\iNumericReal as iNumericReal;
+use AeonDigital\Objects\Realtype as Realtype;
 
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Types\Abstracts\aType as aType;
 
 
 /**
- * Extende a classe ``aType`` para atender a interface ``iBDateTime``.
+ * Extende a classe ``aType`` para atender a interface ``iNumericReal``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aBDateTime extends aType
+abstract class aNumericReal extends aType implements iNumericReal
 {
 
 
@@ -29,9 +29,9 @@ abstract class aBDateTime extends aType
      * Retorna o valor indicado em ``NULL_EQUIVALENT`` convertido para
      * o tipo nativo.
      *
-     * @return      \DateTime
+     * @return      Realtype
      */
-    public function getNullEquivalent() : \DateTime
+    public function getNullEquivalent() : Realtype
     {
         return $this->getStandart()::getNullEquivalent();
     }
@@ -42,9 +42,9 @@ abstract class aBDateTime extends aType
      * Valor padrão a ser definido para este tipo de instância caso nenhum valor válido
      * tenha sido explicitamente definido.
      *
-     * @return      ?\DateTime
+     * @return      ?Realtype
      */
-    public function getDefault() : ?\DateTime
+    public function getDefault() : ?Realtype
     {
         return $this->valueDefault;
     }
@@ -55,9 +55,9 @@ abstract class aBDateTime extends aType
      * para o tipo indicado.
      * Em tipos ``String`` informa o menor número de caracteres que um valor deve ter.
      *
-     * @return      \DateTime
+     * @return      Realtype
      */
-    public function getMin() : \DateTime
+    public function getMin() : Realtype
     {
         return $this->valueMin;
     }
@@ -68,9 +68,9 @@ abstract class aBDateTime extends aType
      * para o tipo indicado.
      * Em tipos ``String`` informa o maior número de caracteres que um valor deve ter.
      *
-     * @return      \DateTime
+     * @return      Realtype
      */
-    public function getMax() : \DateTime
+    public function getMax() : Realtype
     {
         return $this->valueMax;
     }
@@ -84,9 +84,9 @@ abstract class aBDateTime extends aType
      *
      * Usado apenas em casos onde ``self::isIterable() = false``.
      *
-     * @return      ?\DateTime
+     * @return      ?Realtype
      */
-    public function get() : ?\DateTime
+    public function get() : ?Realtype
     {
         return parent::sttGet();
     }
@@ -94,9 +94,9 @@ abstract class aBDateTime extends aType
      * Retorna o valor atualmente definido para a instância atual mas caso o
      * valor seja ``null``, retornará o valor definido em ``self::nullEquivalent``.
      *
-     * @return      \DateTime
+     * @return      Realtype
      */
-    public function getNotNull() : \DateTime
+    public function getNotNull() : Realtype
     {
         return parent::sttGetNotNull();
     }
