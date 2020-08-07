@@ -296,14 +296,19 @@ abstract class aType implements iType
                 }
             }
             else {
-                if ($strictNull === true) {
-                    return (static::getStandart()::toString($value) === static::getStandart()::NULL_EQUIVALENT);
+                if (static::getStandart()::TYPE === "iPGeneric") {
+                    return ($value === null);
                 }
                 else {
-                    return (
-                        $value === null ||
-                        static::getStandart()::toString($value) === static::getStandart()::NULL_EQUIVALENT
-                    );
+                    if ($strictNull === true) {
+                        return (static::getStandart()::toString($value) === static::getStandart()::NULL_EQUIVALENT);
+                    }
+                    else {
+                        return (
+                            $value === null ||
+                            static::getStandart()::toString($value) === static::getStandart()::NULL_EQUIVALENT
+                        );
+                    }
                 }
             }
         }

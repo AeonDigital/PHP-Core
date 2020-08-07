@@ -3,7 +3,7 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Standart\Abstracts;
 
-use AeonDigital\Interfaces\Objects\Standart\Primitive\iPGeneric as iPGeneric;
+use AeonDigital\Interfaces\Objects\Standart\Primitive\iPClass as iPClass;
 use AeonDigital\Objects\Standart\Abstracts\aStandart as aStandart;
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Standart\Abstracts\aStandart as aStandart;
 
 
 /**
- * ``Abstract Standart Generic``.
+ * ``Abstract Standart Class``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aGeneric extends aStandart implements iPGeneric
+abstract class aClass extends aStandart implements iPClass
 {
 
 
@@ -55,7 +55,7 @@ abstract class aGeneric extends aStandart implements iPGeneric
      *
      * @return      mixed
      */
-    public static function getNullEquivalent()
+    public static function getNullEquivalent() : mixed
     {
         return static::NULL_EQUIVALENT;
     }
