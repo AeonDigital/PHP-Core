@@ -3,9 +3,9 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Types;
 
-use AeonDigital\Interfaces\Objects\Types\iDateTime as iDateTime;
-use AeonDigital\Objects\Types\Abstracts\aGeneralDateTime as aGeneralDateTime;
-use AeonDigital\Objects\Standart\stdDateTime as stdDateTime;
+use AeonDigital\Objects\Types\Abstracts\aNumericInteger as aNumericInteger;
+use AeonDigital\Objects\Standart\SType\stROLong as stClass;
+
 
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Standart\stdDateTime as stdDateTime;
 
 
 /**
- * Classe concreta para o tipo ``DateTime``.
+ * Tipo ``ReadOnly Signed Long``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class tpDateTime extends aGeneralDateTime implements iDateTime
+class tROLong extends aNumericInteger
 {
 
 
@@ -33,15 +33,10 @@ class tpDateTime extends aGeneralDateTime implements iDateTime
      */
     public static function getStandart() : string
     {
-        return stdDateTime::class;
+        return stClass::class;
     }
-
-
-
-
-
     /**
-     * Retorna uma instância definida com as propriedades definidas no
+     * Retorna uma instância definida com as propriedades indicadas no
      * ``array`` de configuração.
      *
      * @param       array $cfg

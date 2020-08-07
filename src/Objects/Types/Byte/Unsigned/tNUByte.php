@@ -3,9 +3,9 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Types;
 
-use AeonDigital\Interfaces\Objects\Types\iLong as iLong;
 use AeonDigital\Objects\Types\Abstracts\aNumericInteger as aNumericInteger;
-use AeonDigital\Objects\Standart\stdLong as stdLong;
+use AeonDigital\Objects\Standart\SType\stNUByte as stClass;
+
 
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Standart\stdLong as stdLong;
 
 
 /**
- * Classe concreta para o tipo ``long`` (inteiro de 16 bits).
+ * Tipo ``Nullable Unsigned Byte``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class tpLong extends aNumericInteger implements iLong
+class tNUByte extends aNumericInteger
 {
 
 
@@ -33,15 +33,10 @@ class tpLong extends aNumericInteger implements iLong
      */
     public static function getStandart() : string
     {
-        return stdLong::class;
+        return stClass::class;
     }
-
-
-
-
-
     /**
-     * Retorna uma instância definida com as propriedades definidas no
+     * Retorna uma instância definida com as propriedades indicadas no
      * ``array`` de configuração.
      *
      * @param       array $cfg

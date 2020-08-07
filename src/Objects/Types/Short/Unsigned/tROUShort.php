@@ -3,9 +3,9 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Types;
 
-use AeonDigital\Interfaces\Objects\Types\iFloat as iFloat;
-use AeonDigital\Objects\Types\Abstracts\aNumericFloating as aNumericFloating;
-use AeonDigital\Objects\Standart\stdFloat as stdFloat;
+use AeonDigital\Objects\Types\Abstracts\aNumericInteger as aNumericInteger;
+use AeonDigital\Objects\Standart\SType\stROUShort as stClass;
+
 
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Standart\stdFloat as stdFloat;
 
 
 /**
- * Classe concreta para o tipo ``float`` (flutuante de 32 bits).
+ * Tipo ``ReadOnly Unsigned Short``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class tpFloat extends aNumericFloating implements iFloat
+class tROUShort extends aNumericInteger
 {
 
 
@@ -33,15 +33,10 @@ class tpFloat extends aNumericFloating implements iFloat
      */
     public static function getStandart() : string
     {
-        return stdFloat::class;
+        return stClass::class;
     }
-
-
-
-
-
     /**
-     * Retorna uma instância definida com as propriedades definidas no
+     * Retorna uma instância definida com as propriedades indicadas no
      * ``array`` de configuração.
      *
      * @param       array $cfg

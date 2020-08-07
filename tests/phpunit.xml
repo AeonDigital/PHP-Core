@@ -28,13 +28,13 @@
             <file>src/Objects/Standart/stNumericRealTest.php</file>
             <file>src/Objects/Standart/stDateTimeTest.php</file>
             <file>src/Objects/Standart/stStringTest.php</file>
-            <file>src/Objects/Standart/stGenericTest.php</file-->>
+            <file>src/Objects/Standart/stGenericTest.php</file-->
 
 
 
             <file>src/Objects/Types/tBoolTest.php</file>
-            <!--file>src/Objects/Types/tpNumericIntegerTest.php</file>
-            <file>src/Objects/Types/tpNumericFloatingTest.php</file>
+            <file>src/Objects/Types/tNumericIntegerTest.php</file>
+            <!--file>src/Objects/Types/tpNumericFloatingTest.php</file>
             <file>src/Objects/Types/tpNumericRealTest.php</file>
             <file>src/Objects/Types/tpGeneralDateTime.php</file>
             <file>src/Objects/Types/tpStringTest.php</file>

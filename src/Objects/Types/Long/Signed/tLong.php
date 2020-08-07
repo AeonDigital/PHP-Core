@@ -3,9 +3,9 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Types;
 
-use AeonDigital\Interfaces\Objects\Types\iByte as iByte;
 use AeonDigital\Objects\Types\Abstracts\aNumericInteger as aNumericInteger;
-use AeonDigital\Objects\Standart\stdByte as stdByte;
+use AeonDigital\Objects\Standart\SType\stLong as stClass;
+
 
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Standart\stdByte as stdByte;
 
 
 /**
- * Classe concreta para o tipo ``byte`` (inteiro de 8 bits).
+ * Tipo ``Signed Long``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class tpByte extends aNumericInteger implements iByte
+class tLong extends aNumericInteger
 {
 
 
@@ -33,15 +33,10 @@ class tpByte extends aNumericInteger implements iByte
      */
     public static function getStandart() : string
     {
-        return stdByte::class;
+        return stClass::class;
     }
-
-
-
-
-
     /**
-     * Retorna uma instância definida com as propriedades definidas no
+     * Retorna uma instância definida com as propriedades indicadas no
      * ``array`` de configuração.
      *
      * @param       array $cfg

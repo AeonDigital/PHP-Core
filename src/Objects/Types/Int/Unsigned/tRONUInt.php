@@ -3,9 +3,9 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Types;
 
-use AeonDigital\Interfaces\Objects\Types\iShort as iShort;
 use AeonDigital\Objects\Types\Abstracts\aNumericInteger as aNumericInteger;
-use AeonDigital\Objects\Standart\stdShort as stdShort;
+use AeonDigital\Objects\Standart\SType\stRONUInt as stClass;
+
 
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Objects\Standart\stdShort as stdShort;
 
 
 /**
- * Classe concreta para o tipo ``short`` (inteiro de 16 bits).
+ * Tipo ``ReadOnly Nullable Unsigned Int``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class tpShort extends aNumericInteger implements iShort
+class tRONUInt extends aNumericInteger
 {
 
 
@@ -33,15 +33,10 @@ class tpShort extends aNumericInteger implements iShort
      */
     public static function getStandart() : string
     {
-        return stdShort::class;
+        return stClass::class;
     }
-
-
-
-
-
     /**
-     * Retorna uma instância definida com as propriedades definidas no
+     * Retorna uma instância definida com as propriedades indicadas no
      * ``array`` de configuração.
      *
      * @param       array $cfg
