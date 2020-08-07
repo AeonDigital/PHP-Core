@@ -38,6 +38,8 @@ abstract class aNumericReal extends aType implements iNumericReal
 
 
 
+
+
     /**
      * Valor padrão a ser definido para este tipo de instância caso nenhum valor válido
      * tenha sido explicitamente definido.
@@ -46,6 +48,9 @@ abstract class aNumericReal extends aType implements iNumericReal
      */
     public function getDefault() : ?Realtype
     {
+        if ($this->valueDefault !== null && \is_a($this->valueDefault, Realtype::class) === false) {
+            $this->valueDefault = new Realtype($this->valueDefault);
+        }
         return $this->valueDefault;
     }
     /**
@@ -59,6 +64,9 @@ abstract class aNumericReal extends aType implements iNumericReal
      */
     public function getMin() : Realtype
     {
+        if ($this->valueMin !== null && \is_a($this->valueMin, Realtype::class) === false) {
+            $this->valueMin = new Realtype($this->valueMin);
+        }
         return $this->valueMin;
     }
     /**
@@ -72,6 +80,9 @@ abstract class aNumericReal extends aType implements iNumericReal
      */
     public function getMax() : Realtype
     {
+        if ($this->valueMax !== null && \is_a($this->valueMax, Realtype::class) === false) {
+            $this->valueMax = new Realtype($this->valueMax);
+        }
         return $this->valueMax;
     }
 

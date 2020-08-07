@@ -287,11 +287,24 @@ abstract class aType implements iType
             return false;
         }
         else {
-            if ($strictNull === true) {
-                return ($value === $nullEquivalent);
+            if (static::getStandart()::IS_CLASS === false) {
+                if ($strictNull === true) {
+                    return ($value === $nullEquivalent);
+                }
+                else {
+                    return ($value === null || $value === $nullEquivalent);
+                }
             }
             else {
-                return (($value === null) || ($value === $nullEquivalent));
+                if ($strictNull === true) {
+                    return (static::getStandart()::toString($value) === static::getStandart()::NULL_EQUIVALENT);
+                }
+                else {
+                    return (
+                        $value === null ||
+                        static::getStandart()::toString($value) === static::getStandart()::NULL_EQUIVALENT
+                    );
+                }
             }
         }
     }
