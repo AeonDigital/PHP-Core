@@ -46,6 +46,9 @@ abstract class aDateTime extends aType implements iDateTime
      */
     public function getDefault() : ?\DateTime
     {
+        if ($this->valueDefault !== null && \is_a($this->valueDefault, \DateTime::class) === false) {
+            $this->valueDefault = new \DateTime($this->valueDefault);
+        }
         return $this->valueDefault;
     }
     /**
@@ -59,6 +62,9 @@ abstract class aDateTime extends aType implements iDateTime
      */
     public function getMin() : \DateTime
     {
+        if ($this->valueMin !== null && \is_a($this->valueMin, \DateTime::class) === false) {
+            $this->valueMin = new \DateTime($this->valueMin);
+        }
         return $this->valueMin;
     }
     /**
@@ -72,6 +78,9 @@ abstract class aDateTime extends aType implements iDateTime
      */
     public function getMax() : \DateTime
     {
+        if ($this->valueMax !== null && \is_a($this->valueMax, \DateTime::class) === false) {
+            $this->valueMax = new \DateTime($this->valueMax);
+        }
         return $this->valueMax;
     }
 

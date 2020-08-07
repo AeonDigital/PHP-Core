@@ -15,7 +15,7 @@
         <testsuite name="AeonDigital-PHP-Core">
             <!--
                 Defina aqui cada arquivo de testes que será utilizado.
-
+            -->
             <file>src/global_functionsTests.php</file>
             <file>src/Objects/RealtypeTests.php</file>
             <file>src/Objects/ToolsTests.php</file>
@@ -28,7 +28,7 @@
             <file>src/Objects/Standart/stNumericRealTest.php</file>
             <file>src/Objects/Standart/stDateTimeTest.php</file>
             <file>src/Objects/Standart/stStringTest.php</file>
-            <file>src/Objects/Standart/stGenericTest.php</file-->
+            <file>src/Objects/Standart/stGenericTest.php</file>
 
 
 
@@ -36,9 +36,9 @@
             <file>src/Objects/Types/tNumericIntegerTest.php</file>
             <file>src/Objects/Types/tNumericFloatingTest.php</file>
             <file>src/Objects/Types/tNumericRealTest.php</file>
-            <!--file>src/Objects/Types/tGeneralDateTime.php</file>
+            <file>src/Objects/Types/tDateTimeTest.php</file>
             <file>src/Objects/Types/tStringTest.php</file>
-            <file>src/Objects/Types/tGenericTest.php</file>
+            <!--file>src/Objects/Types/tGenericTest.php</file>
             <file>src/Objects/Types/tTypeTest.php</file>
 
             <file>src/Objects/Types/tTypeArrayTest.php</file>

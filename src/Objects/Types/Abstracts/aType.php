@@ -166,7 +166,7 @@ abstract class aType implements iType
     {
         $r = null;
         if ($this->getStandart()::TYPE === "String") {
-            $r = $this->getStandart()::getMax();
+            $r = $this->getMax();
         }
         return $r;
     }
@@ -204,7 +204,7 @@ abstract class aType implements iType
         $arr = $enumerator;
         if ($enumerator !== null && $onlyValues === true) {
             $nArr = [];
-            foreach ($arr as $enum) {
+            foreach ($enumerator as $enum) {
                 if (\is_array($enum) === true) {
                     $nArr[] = $enum[0];
                 }
@@ -352,7 +352,9 @@ abstract class aType implements iType
             }
             else {
                 $n = static::getStandart()::parseIfValidate(
-                    $v, $this->lastSetError, $this->getMin(), $this->getMax()
+                    $v, $this->lastSetError,
+                    $this->getMin(), $this->getMax(),
+                    $this->getEnumerator(true)
                 );
                 if ($this->lastSetError === "") {
                     $r = true;
@@ -416,19 +418,44 @@ abstract class aType implements iType
      *              Maior valor aceitável para esta instância.
      *              Se não for definido usará o valor existente em ``MAX`` da classe
      *              ``Standart`` original.
+     *
+     * @param       ?array $enumerator
+     *              Coleção de valores que este campo está apto a assumir.
+     *
+     * O ``array`` pode ser unidimensional ou multidimensional, no caso de ser
+     * multidimensional, cada entrada deverá ser um novo ``array`` com 2 posições onde a
+     * primeira será o valor real do campo e o segundo, um ``label`` para o mesmo.
+     *
+     * Para o valor dos dados aceitáveis use sempre representações em ``string``.
+     *
+     * ``` php
+     *      // Exemplo de definição
+     *      $arr = [
+     *          ["RS", "Rio Grande do Sul"],
+     *          ["SC", "Santa Catarina"],
+     *          ["PR", "Paraná"]
+     *      ];
+     * ```
      */
     function __construct(
         $value = undefined,
         $valueDefault = null,
         $valueMin = null,
-        $valueMax = null
+        $valueMax = null,
+        ?array $enumerator = null
     ) {
         $this->type = (($this->type === "") ? static::getStandart()::TYPE : $this->type);
-        $this->valueDefault = $valueDefault;
+        $this->valueDefault = (($valueDefault === undefined) ? null : $valueDefault);
+        $this->enumerator = $enumerator;
 
         if (static::getStandart()::HAS_LIMIT === true) {
             $this->valueMin = $valueMin ?? static::getStandart()::getMin();
             $this->valueMax = $valueMax ?? static::getStandart()::getMax();
+
+            if (static::getStandart()::TYPE === "String") {
+                if ($this->valueMin === 0) { $this->valueMin = null; }
+                if ($this->valueMax === 0) { $this->valueMax = null; }
+            }
         }
 
         $undefined = ($value === undefined || $value === null || $value === "");

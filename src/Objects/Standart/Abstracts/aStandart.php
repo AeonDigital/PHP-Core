@@ -97,13 +97,17 @@ abstract class aStandart implements iStandart
      * @param       mixed $max
      *              Valor máximo aceitável.
      *
+     * @param       ?array $enumerator
+     *              Coleção de valores aceitáveis (use apenas strings).
+     *
      * @return      mixed
      */
     public static function parseIfValidate(
         $v,
         string &$err = "",
         $min = null,
-        $max = null
+        $max = null,
+        ?array $enumerator = null
     ) {
         $err = "";
         if ($v === null) {
@@ -117,7 +121,12 @@ abstract class aStandart implements iStandart
                 $err = "error.obj.type.unexpected";
             } else {
                 if (static::validateRange($n, $err, $min, $max) === true) {
-                    $v = $n;
+                    if ($enumerator !== null && \in_array(Tools::toString($n), $enumerator) === false) {
+                        $err = "error.obj.value.not.in.enumerator";
+                    }
+                    else {
+                        $v = $n;
+                    }
                 }
             }
         }
@@ -157,11 +166,11 @@ abstract class aStandart implements iStandart
         $min = null,
         $max = null
     ) : bool {
-        $r = (static::HAS_LIMIT === false || (static::MIN === null && static::MAX === null));
-        if ($r === false) {
-            $min = ($min ?? static::getMin());
-            $max = ($max ?? static::getMax());
+        $min = ($min ?? static::getMin());
+        $max = ($max ?? static::getMax());
 
+        $r = (static::HAS_LIMIT === false || ($min === null && $max === null));
+        if ($r === false) {
             if (static::TYPE === "String") {
                 if ($v === "" && static::EMPTY === false) {
                     $err = "error.obj.type.not.allow.empty";
@@ -169,10 +178,10 @@ abstract class aStandart implements iStandart
                 else {
                     $len = \mb_strlen($v);
                     if ($min > 0 && $len < $min) {
-                        $err = "error.obj.min.length.expected";
+                        $err = "error.obj.value.min.length.expected";
                     }
                     elseif ($max > 0 && $len > $max) {
-                        $err = "error.obj.max.length.exceeded";
+                        $err = "error.obj.value.max.length.exceeded";
                     }
                     else {
                         $r = true;

@@ -34,7 +34,7 @@ final class stdDateTime extends aGeneralDateTime implements iDateTime
     public static function getNullEquivalent() : \DateTime
     {
         if (isset(self::$stdNull) === false) {
-            self::$stdNull = new \DateTime("0001-01-01 00:00:00");
+            self::$stdNull = new \DateTime("0000-01-01 00:00:00");
         }
         return self::$stdNull;
     }
