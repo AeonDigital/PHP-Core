@@ -102,12 +102,14 @@ class tGenericTest extends TestCase
         // Feito com uma instância "allowNull"
         $obj = new tNGeneric("DateTime");
         $this->assertTrue($obj->isUndefined());
+        $this->assertFalse($obj->isDefined());
         $this->assertNull($obj->get());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
 
         $this->assertTrue($obj->set($nDT));
         $this->assertFalse($obj->isUndefined());
+        $this->assertTrue($obj->isDefined());
         $this->assertSame("", $obj->getLastSetError());
         $this->assertSame($nDT, $obj->get());
 

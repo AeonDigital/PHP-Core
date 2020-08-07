@@ -221,7 +221,7 @@ abstract class aType implements iType
 
 
     /**
-     * Indica se esta instância já recebeu algum valor válido de forma explicita.
+     * Indica se esta instância ainda não recebeu algum valor válido de forma explicita.
      *
      * @var         bool
      */
@@ -235,6 +235,16 @@ abstract class aType implements iType
     public function isUndefined() : bool
     {
         return $this->undefined;
+    }
+     /**
+     * Retornará ``true`` a partir do momento em que um valor for
+     * explicitamente definido e aceito para esta instância.
+     *
+     * @return      bool
+     */
+    public function isDefined() : bool
+    {
+        return !$this->undefined;
     }
     /**
      * Informa se o valor atualmente definido é o mesmo que ``NULL_EQUIVALENT``.
