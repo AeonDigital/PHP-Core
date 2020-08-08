@@ -39,9 +39,9 @@
             <file>src/Objects/Types/tDateTimeTest.php</file>
             <file>src/Objects/Types/tStringTest.php</file>
             <file>src/Objects/Types/tGenericTest.php</file>
-            <!--file>src/Objects/Types/tTypeTest.php</file>
+            <file>src/Objects/Types/tTypeTest.php</file>
 
-            <file>src/Objects/Types/tTypeArrayTest.php</file>
+            <!--file>src/Objects/Types/tTypeArrayTest.php</file>
 
 
 

@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Standart\SType;
 
 use AeonDigital\Interfaces\Objects\Standart\SType\iRONType as iRONType;
-use AeonDigital\Objects\Standart\Abstracts\aType as aType;
+use AeonDigital\Objects\Standart\Abstracts\aClass as aClass;
 
 
 
@@ -20,6 +20,6 @@ use AeonDigital\Objects\Standart\Abstracts\aType as aType;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-final class stRONType extends aType implements iRONType
+final class stRONType extends aClass implements iRONType
 {
 }

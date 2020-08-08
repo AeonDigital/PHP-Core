@@ -55,7 +55,7 @@ abstract class aClass extends aStandart implements iPClass
      *
      * @return      mixed
      */
-    public static function getNullEquivalent() : mixed
+    public static function getNullEquivalent()
     {
         return static::NULL_EQUIVALENT;
     }

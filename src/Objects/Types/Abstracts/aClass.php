@@ -5,7 +5,7 @@ namespace AeonDigital\Objects\Types\Abstracts;
 
 use AeonDigital\Interfaces\Objects\iType as iType;
 use AeonDigital\Objects\Types\Abstracts\aType as aType;
-use AeonDigital\Interfaces\Objects\Types\iGeneric as iGeneric;
+
 
 
 
@@ -14,14 +14,14 @@ use AeonDigital\Interfaces\Objects\Types\iGeneric as iGeneric;
 
 
 /**
- * Extende a classe ``aType`` para atender a interface ``iGeneric``.
+ * Extende a classe ``aType`` para implementar tipos ``Class``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aGeneric extends aType implements iGeneric
+abstract class aClass extends aType
 {
 
 

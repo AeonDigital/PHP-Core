@@ -306,19 +306,34 @@ abstract class aType implements iType
                 }
             }
             else {
-                if (static::getStandart()::TYPE === "iPGeneric") {
-                    return ($value === null);
-                }
-                else {
-                    if ($strictNull === true) {
-                        return (static::getStandart()::toString($value) === static::getStandart()::NULL_EQUIVALENT);
-                    }
-                    else {
-                        return (
-                            $value === null ||
-                            static::getStandart()::toString($value) === static::getStandart()::NULL_EQUIVALENT
-                        );
-                    }
+
+                switch (static::getStandart()::TYPE) {
+                    case "Bool":
+                    case "Byte":
+                    case "Short":
+                    case "Int":
+                    case "Long":
+                    case "Float":
+                    case "Double":
+                    case "AeonDigital\Objects\Realtype":
+                    case "DateTime":
+                    case "String":
+                        if ($strictNull === true) {
+                            return (static::getStandart()::toString($value) === static::getStandart()::NULL_EQUIVALENT);
+                        }
+                        else {
+                            return (
+                                $value === null ||
+                                static::getStandart()::toString($value) === static::getStandart()::NULL_EQUIVALENT
+                            );
+                        }
+                        break;
+
+                    case "iPGeneric":
+                    case "AeonDigital\Interfaces\Objects\iType":
+                    default:
+                        return ($value === null);
+                        break;
                 }
             }
         }

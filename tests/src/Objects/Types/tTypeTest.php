@@ -3,7 +3,7 @@ declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\Objects\Types\{
-    tGeneric, tNGeneric, tROGeneric, tRONGeneric
+    tType, tNType, tROType, tRONType, tString
 };
 
 require_once __DIR__ . "/../../../phpunit.php";
@@ -14,22 +14,25 @@ require_once __DIR__ . "/../../../phpunit.php";
 
 
 
-class tGenericTest extends TestCase
+class tTypeTest extends TestCase
 {
 
 
 
     public function test_instance()
     {
-        $this->assertSame("iPGeneric", tGeneric::getStandart()::TYPE);
-        $this->assertSame(true, tGeneric::getStandart()::IS_CLASS);
-        $this->assertSame(false, tGeneric::getStandart()::HAS_LIMIT);
+        $this->assertSame("AeonDigital\Interfaces\Objects\iType", tType::getStandart()::TYPE);
+        $this->assertSame(true, tType::getStandart()::IS_CLASS);
+        $this->assertSame(false, tType::getStandart()::HAS_LIMIT);
 
 
 
         // Testes Not Nullable
-        $obj = new tGeneric(undefined, "DateTime");
-        $this->assertSame("DateTime", $obj->getType());
+        $tValue01 = new tString("Instância Filha 01");
+        $tValue02 = new tString("Instância Filha 02");
+
+        $obj = new tType();
+        $this->assertSame("AeonDigital\Interfaces\Objects\iType", $obj->getType());
         $this->assertFalse($obj->isIterable());
         $this->assertFalse($obj->isAllowNull());
         $this->assertFalse($obj->isReadOnly());
@@ -55,23 +58,21 @@ class tGenericTest extends TestCase
         $this->assertSame("error.obj.type.not.allow.null", $obj->getLastSetError());
         $this->assertSame(null, $obj->get());
 
-        $this->assertTrue($obj->set(new \DateTime("2020-01-01 00:00:00")));
+        $this->assertTrue($obj->set($tValue01));
         $this->assertSame("", $obj->getLastSetError());
-        $this->assertSame("2020-01-01 00:00:00", $obj->get()->format("Y-m-d H:i:s"));
+        $this->assertSame($tValue01, $obj->get());
 
 
         // Define um valor no construtor
-        $nDT = new DateTime();
-
-        $obj = new tGeneric($nDT, "DateTime");
+        $obj = new tType($tValue01);
         $this->assertFalse($obj->isUndefined());
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertFalse($obj->isNullOrEquivalent());
-        $this->assertSame($nDT, $obj->get());
+        $this->assertSame($tValue01, $obj->get());
 
 
         // "null" no construtor
-        $obj = new tGeneric(null, "DateTime");
+        $obj = new tType(null);
         $this->assertTrue($obj->isUndefined());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
@@ -83,7 +84,7 @@ class tGenericTest extends TestCase
         // Testes Nullable
 
         // Passando "undefined" o valor será definido como "null".
-        $obj = new tNGeneric(undefined, "DateTime");
+        $obj = new tNType(undefined);
         $this->assertTrue($obj->isUndefined());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
@@ -91,7 +92,7 @@ class tGenericTest extends TestCase
 
 
         // Passando "null" o valor será definido como "null".
-        $obj = new tNGeneric(null, "DateTime");
+        $obj = new tNType(null);
         $this->assertTrue($obj->isUndefined());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
@@ -100,18 +101,18 @@ class tGenericTest extends TestCase
 
         // Teste de alteração de valor atualmetne setado.
         // Feito com uma instância "allowNull"
-        $obj = new tNGeneric(undefined, "DateTime");
+        $obj = new tNType();
         $this->assertTrue($obj->isUndefined());
         $this->assertFalse($obj->isDefined());
         $this->assertNull($obj->get());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
 
-        $this->assertTrue($obj->set($nDT));
+        $this->assertTrue($obj->set($tValue02));
         $this->assertFalse($obj->isUndefined());
         $this->assertTrue($obj->isDefined());
         $this->assertSame("", $obj->getLastSetError());
-        $this->assertSame($nDT, $obj->get());
+        $this->assertSame($tValue02, $obj->get());
 
         $this->assertTrue($obj->set(null));
         $this->assertSame("", $obj->getLastSetError());
@@ -130,23 +131,22 @@ class tGenericTest extends TestCase
 
         // Teste de uma instância do tipo "readonly", ou seja, uma instância que
         // não permite a alteração de seu valor após "isUndefined = false"
-        $obj = new tROGeneric($nDT, "DateTime");
+        $obj = new tROType($tValue02);
         $this->assertFalse($obj->isUndefined());
-        $this->assertSame($nDT, $obj->get());
+        $this->assertSame($tValue02, $obj->get());
 
-        $this->assertFalse($obj->set(false));
+        $this->assertFalse($obj->set($tValue01));
         $this->assertSame("error.obj.type.readonly", $obj->getLastSetError());
-        $this->assertSame($nDT, $obj->get());
+        $this->assertSame($tValue02, $obj->get());
 
 
 
-        $obj = tGeneric::fromArray([
-            "type"  => "DateTime",
-            "value" => $nDT
+        $obj = tType::fromArray([
+            "value" => $tValue02
         ]);
         $this->assertFalse($obj->isUndefined());
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertFalse($obj->isNullOrEquivalent());
-        $this->assertSame($nDT, $obj->get());
+        $this->assertSame($tValue02, $obj->get());
     }
 }
