@@ -15,7 +15,7 @@
         <testsuite name="AeonDigital-PHP-Core">
             <!--
                 Defina aqui cada arquivo de testes que será utilizado.
-
+            -->
             <file>src/global_functionsTests.php</file>
             <file>src/Objects/RealtypeTests.php</file>
             <file>src/Objects/ToolsTests.php</file>
@@ -31,7 +31,6 @@
             <file>src/Objects/Standart/stGenericTest.php</file>
 
 
-
             <file>src/Objects/Types/tBoolTest.php</file>
             <file>src/Objects/Types/tNumericIntegerTest.php</file>
             <file>src/Objects/Types/tNumericFloatingTest.php</file>
@@ -39,7 +38,7 @@
             <file>src/Objects/Types/tDateTimeTest.php</file>
             <file>src/Objects/Types/tStringTest.php</file>
             <file>src/Objects/Types/tGenericTest.php</file>
-            <file>src/Objects/Types/tTypeTest.php</file>-->
+            <file>src/Objects/Types/tTypeTest.php</file>
 
             <file>src/Objects/Types/tTypeArrayTest.php</file>
 
@@ -47,7 +46,7 @@
 
 
 
-            <!--file>src/DataFormat/patterns/brasil/CNPJTest.php</file>
+            <file>src/DataFormat/patterns/brasil/CNPJTest.php</file>
             <file>src/DataFormat/patterns/brasil/CPFTest.php</file>
             <file>src/DataFormat/patterns/brasil/NumberTest.php</file>
             <file>src/DataFormat/patterns/brasil/PhoneTest.php</file>
@@ -85,27 +84,13 @@
             <file>src/Tools/JSONTests.php</file>
             <file>src/Tools/MinifyCSSTest.php</file>
             <file>src/Tools/MinifyJSTest.php</file>
-            <file>src/Tools/ZipTest.php</file-->
+            <file>src/Tools/ZipTest.php</file>
 
             <!--
                 próximo passo:
                 - as interfaces "collection" morrerão mas ainda precisam
                   constar até que "data model" seja redefinido para o uso
                   dos tipos definidos por último
-
-                - trazer de volta o "data format"
-            -->
-            <!--file>src/Collection/BasicCollectionTest.php</file>
-            <file>src/Collection/ProtectedCollectionTest.php</file>
-            <file>src/Collection/AppendOnlyCollectionTest.php</file>
-            <file>src/Collection/ReadOnlyCollectionTest.php</file>
-            <file>src/Collection/CaseInsensitiveCollectionTest.php</file>
-            <file>src/Collection/CollectionTest.php</file>
-            <file>src/Collection/TypeListTest.php</file>
-
-
-
-
 
             <file>src/DataModel/t01FieldTest.php</file>
             <file>src/DataModel/t02FieldCollectionTest.php</file>
