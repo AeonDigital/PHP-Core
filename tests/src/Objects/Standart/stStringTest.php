@@ -100,7 +100,7 @@ class stStringTest extends TestCase
         $this->assertSame(true, stNEString::HAS_LIMIT);
         $this->assertSame("1", stNEString::MIN);
         $this->assertSame(null, stNEString::MAX);
-        $this->assertSame("∅", stNEString::NULL_EQUIVALENT);
+        $this->assertSame(" ", stNEString::NULL_EQUIVALENT);
     }
     public function test_stNNEString_constants()
     {
@@ -116,7 +116,7 @@ class stStringTest extends TestCase
         $this->assertSame(true, stNNEString::HAS_LIMIT);
         $this->assertSame("1", stNNEString::MIN);
         $this->assertSame(null, stNNEString::MAX);
-        $this->assertSame("∅", stNNEString::NULL_EQUIVALENT);
+        $this->assertSame(" ", stNNEString::NULL_EQUIVALENT);
     }
     public function test_stRONEString_constants()
     {
@@ -132,7 +132,7 @@ class stStringTest extends TestCase
         $this->assertSame(true, stRONEString::HAS_LIMIT);
         $this->assertSame("1", stRONEString::MIN);
         $this->assertSame(null, stRONEString::MAX);
-        $this->assertSame("∅", stRONEString::NULL_EQUIVALENT);
+        $this->assertSame(" ", stRONEString::NULL_EQUIVALENT);
     }
     public function test_stRONNEString_constants()
     {
@@ -148,7 +148,7 @@ class stStringTest extends TestCase
         $this->assertSame(true, stRONNEString::HAS_LIMIT);
         $this->assertSame("1", stRONNEString::MIN);
         $this->assertSame(null, stRONNEString::MAX);
-        $this->assertSame("∅", stRONNEString::NULL_EQUIVALENT);
+        $this->assertSame(" ", stRONNEString::NULL_EQUIVALENT);
     }
 
 
@@ -318,9 +318,9 @@ class stStringTest extends TestCase
         $this->assertSame("", stNString::getNullEquivalent());
         $this->assertSame("", stROString::getNullEquivalent());
         $this->assertSame("", stRONString::getNullEquivalent());
-        $this->assertSame("∅", stNEString::getNullEquivalent());
-        $this->assertSame("∅", stNNEString::getNullEquivalent());
-        $this->assertSame("∅", stRONEString::getNullEquivalent());
-        $this->assertSame("∅", stRONNEString::getNullEquivalent());
+        $this->assertSame(" ", stNEString::getNullEquivalent());
+        $this->assertSame(" ", stNNEString::getNullEquivalent());
+        $this->assertSame(" ", stRONEString::getNullEquivalent());
+        $this->assertSame(" ", stRONNEString::getNullEquivalent());
     }
 }

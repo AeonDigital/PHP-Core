@@ -197,7 +197,7 @@ class tStringTest extends TestCase
         $this->assertSame("notEmpty", $obj->get());
 
         $obj = new tNEString("");
-        $this->assertSame("", $obj->get());
+        $this->assertSame(" ", $obj->get());
 
 
 
