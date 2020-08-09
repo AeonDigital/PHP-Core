@@ -15,7 +15,7 @@
         <testsuite name="AeonDigital-PHP-Core">
             <!--
                 Defina aqui cada arquivo de testes que será utilizado.
-            -->
+
             <file>src/global_functionsTests.php</file>
             <file>src/Objects/RealtypeTests.php</file>
             <file>src/Objects/ToolsTests.php</file>
@@ -39,15 +39,15 @@
             <file>src/Objects/Types/tDateTimeTest.php</file>
             <file>src/Objects/Types/tStringTest.php</file>
             <file>src/Objects/Types/tGenericTest.php</file>
-            <file>src/Objects/Types/tTypeTest.php</file>
+            <file>src/Objects/Types/tTypeTest.php</file>-->
 
-            <!--file>src/Objects/Types/tTypeArrayTest.php</file>
-
-
+            <file>src/Objects/Types/tTypeArrayTest.php</file>
 
 
 
-            <file>src/DataFormat/patterns/brasil/CNPJTest.php</file>
+
+
+            <!--file>src/DataFormat/patterns/brasil/CNPJTest.php</file>
             <file>src/DataFormat/patterns/brasil/CPFTest.php</file>
             <file>src/DataFormat/patterns/brasil/NumberTest.php</file>
             <file>src/DataFormat/patterns/brasil/PhoneTest.php</file>
