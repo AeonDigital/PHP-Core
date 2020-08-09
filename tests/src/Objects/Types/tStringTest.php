@@ -196,6 +196,9 @@ class tStringTest extends TestCase
         $this->assertSame("error.obj.type.not.allow.empty", $obj->getLastSetError());
         $this->assertSame("notEmpty", $obj->get());
 
+        $obj = new tNEString("");
+        $this->assertSame("", $obj->get());
+
 
 
         // Teste de uma instância em que "allowEmpty" é "false" e
@@ -208,6 +211,10 @@ class tStringTest extends TestCase
 
         $this->assertFalse($obj->set(""));
         $this->assertSame("error.obj.type.not.allow.empty", $obj->getLastSetError());
+        $this->assertSame(null, $obj->get());
+
+
+        $obj = new tNNEString("");
         $this->assertSame(null, $obj->get());
 
 
