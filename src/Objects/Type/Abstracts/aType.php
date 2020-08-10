@@ -5,7 +5,7 @@ namespace AeonDigital\Objects\Types\Abstracts;
 
 use AeonDigital\Interfaces\Objects\iType as iType;
 use AeonDigital\Objects\Tools as Tools;
-
+use AeonDigital\Objects\BObject as BObject;
 
 
 
@@ -20,7 +20,7 @@ use AeonDigital\Objects\Tools as Tools;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-abstract class aType implements iType
+abstract class aType extends BObject implements iType
 {
 
 
@@ -370,6 +370,8 @@ abstract class aType implements iType
      *
      * @param       mixed $v
      *              Valor a ser atribuido.
+     *
+     * @return      bool
      */
     public function set($v) : bool
     {

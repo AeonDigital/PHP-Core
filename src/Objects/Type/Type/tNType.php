@@ -5,7 +5,7 @@ namespace AeonDigital\Objects\Types;
 
 use AeonDigital\Objects\Types\Abstracts\aClass as aClass;
 use AeonDigital\Objects\Standart\SType\stNType as stClass;
-
+use AeonDigital\Interfaces\Objects\iType as iType;
 
 
 
@@ -56,7 +56,7 @@ class tNType extends aClass
      *
      * @return      iType
      */
-    public static function fromArray(array $cfg) : self
+    public static function fromArray(array $cfg) : iType
     {
         return static::sttFromArray(self::class, $cfg);
     }

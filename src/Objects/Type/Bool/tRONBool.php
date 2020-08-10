@@ -5,7 +5,7 @@ namespace AeonDigital\Objects\Types;
 
 use AeonDigital\Objects\Types\Abstracts\aBool as aBool;
 use AeonDigital\Objects\Standart\SType\stRONBool as stClass;
-
+use AeonDigital\Interfaces\Objects\iType as iType;
 
 
 
@@ -45,7 +45,7 @@ class tRONBool extends aBool
      *
      * @return      iType
      */
-    public static function fromArray(array $cfg) : self
+    public static function fromArray(array $cfg) : iType
     {
         return static::sttFromArray(self::class, $cfg);
     }

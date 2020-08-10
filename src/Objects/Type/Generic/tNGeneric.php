@@ -5,7 +5,7 @@ namespace AeonDigital\Objects\Types;
 
 use AeonDigital\Objects\Types\Abstracts\aGeneric as aGeneric;
 use AeonDigital\Objects\Standart\SType\stNGeneric as stClass;
-
+use AeonDigital\Interfaces\Objects\iType as iType;
 
 
 
@@ -45,7 +45,7 @@ class tNGeneric extends aGeneric
      *
      * @return      iType
      */
-    public static function fromArray(array $cfg) : self
+    public static function fromArray(array $cfg) : iType
     {
         return static::sttFromArray(self::class, $cfg);
     }

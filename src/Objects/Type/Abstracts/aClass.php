@@ -12,7 +12,6 @@ use AeonDigital\Objects\Types\Abstracts\aType as aType;
 
 
 
-
 /**
  * Extende a classe ``aType`` para implementar tipos ``Class``.
  *

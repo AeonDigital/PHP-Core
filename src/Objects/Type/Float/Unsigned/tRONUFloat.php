@@ -5,7 +5,7 @@ namespace AeonDigital\Objects\Types;
 
 use AeonDigital\Objects\Types\Abstracts\aNumericFloating as aNumericFloating;
 use AeonDigital\Objects\Standart\SType\stRONUFloat as stClass;
-
+use AeonDigital\Interfaces\Objects\iType as iType;
 
 
 
@@ -45,7 +45,7 @@ class tRONUFloat extends aNumericFloating
      *
      * @return      iType
      */
-    public static function fromArray(array $cfg) : self
+    public static function fromArray(array $cfg) : iType
     {
         return static::sttFromArray(self::class, $cfg);
     }
