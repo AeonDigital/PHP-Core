@@ -1,7 +1,7 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Data;
+namespace AeonDigital\Objects\Data\Field;
 
 use AeonDigital\Objects\Types\tRONReal as tRONReal;
 use AeonDigital\Interfaces\Objects\Data\iField as iField;
