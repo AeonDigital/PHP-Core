@@ -23,4 +23,5 @@ use AeonDigital\Interfaces\Objects\Data\iField as iField;
 class fRONUShort extends tRONUShort implements iField
 {
     use \AeonDigital\Objects\Traits\FieldMethods;
+    use \AeonDigital\Objects\Traits\FieldCommomConstructor;
 }

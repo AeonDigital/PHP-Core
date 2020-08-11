@@ -230,6 +230,9 @@ abstract class aType extends BObject implements iType
                 if (\is_array($enum) === true) {
                     $nArr[] = $enum[0];
                 }
+                else {
+                    $nArr[] = $enum;
+                }
             }
             $arr = $nArr;
         }

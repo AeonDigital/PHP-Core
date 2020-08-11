@@ -53,9 +53,22 @@ class t01FieldTest extends TestCase
 
 
 
-        //$obj = new fStringArray([], null, null, null, ["v1", "v2", "v3", "v4"]);
-        //$this->assertTrue(is_a($obj, fStringArray::class));
+        $obj = new fStringArray("fieldName", "", [], null, null, null, ["v1", "v2", "v3", "v4"]);
+        $this->assertTrue(is_a($obj, fStringArray::class));
+        $this->assertSame("fieldName", $obj->getName());
+        $this->assertSame("", $obj->getDescription());
+        $this->assertTrue($obj->isCurrentFieldStateValid());
+        $this->assertSame("valid", $obj->getCurrentFieldState());
 
+        $this->assertTrue($obj->setKeyValue("p1", "v1"));
+        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertTrue($obj->isCurrentFieldStateValid());
+        $this->assertSame("valid", $obj->getCurrentFieldState());
+
+        $this->assertFalse($obj->setKeyValue("p2", "v11"));
+        $this->assertSame("error.obj.value.not.in.enumerator", $obj->getLastValidateError());
+        $this->assertFalse($obj->isCurrentFieldStateValid());
+        $this->assertSame(["p1" => "valid", "p2" => "error.obj.value.not.in.enumerator"], $obj->getCurrentFieldState());
     }
 
 

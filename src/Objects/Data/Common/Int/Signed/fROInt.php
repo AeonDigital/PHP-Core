@@ -23,4 +23,5 @@ use AeonDigital\Interfaces\Objects\Data\iField as iField;
 class fROInt extends tROInt implements iField
 {
     use \AeonDigital\Objects\Traits\FieldMethods;
+    use \AeonDigital\Objects\Traits\FieldCommomConstructor;
 }

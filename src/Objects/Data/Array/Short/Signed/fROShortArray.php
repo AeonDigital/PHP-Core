@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Data\Field;
 
 use AeonDigital\Objects\Types\tROShortArray as tROShortArray;
-use AeonDigital\Interfaces\Objects\Data\iField as iField;
+use AeonDigital\Interfaces\Objects\Data\iFieldArray as iFieldArray;
 
 
 
@@ -20,7 +20,8 @@ use AeonDigital\Interfaces\Objects\Data\iField as iField;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class fROShortArray extends tROShortArray implements iField
+class fROShortArray extends tROShortArray implements iFieldArray
 {
     use \AeonDigital\Objects\Traits\FieldMethods;
+    use \AeonDigital\Objects\Traits\FieldArrayConstructor;
 }
