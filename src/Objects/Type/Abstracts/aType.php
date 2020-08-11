@@ -791,8 +791,7 @@ abstract class aType extends BObject implements iType
             ((\key_exists("valueMin", $cfg) === true)       ? $cfg["valueMin"]      : null),
             ((\key_exists("valueMax", $cfg) === true)       ? $cfg["valueMax"]      : null),
             ((\key_exists("enumerator", $cfg) === true)     ? $cfg["enumerator"]    : null),
-            ((\key_exists("inputFormat", $cfg) === true)    ? $cfg["inputFormat"]   : null),
-            ((\key_exists("type", $cfg) === true)           ? $cfg["type"]          : null)
+            ((\key_exists("inputFormat", $cfg) === true)    ? $cfg["inputFormat"]   : null)
         );
     }
 }

@@ -1,0 +1,26 @@
+<?php
+declare (strict_types=1);
+
+namespace AeonDigital\Objects\Data;
+
+use AeonDigital\Objects\Types\tULong as tULong;
+use AeonDigital\Interfaces\Objects\Data\iField as iField;
+
+
+
+
+
+
+
+/**
+ * Campo ``Unsigned Long``.
+ *
+ * @package     AeonDigital\Objects
+ * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
+ * @copyright   2020, Rianna Cantarelli
+ * @license     MIT
+ */
+class fULong extends tULong implements iField
+{
+    use \AeonDigital\Objects\Traits\FieldMethods;
+}
