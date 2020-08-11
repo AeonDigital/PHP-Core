@@ -3,6 +3,7 @@ declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\Objects\Data\Field\fBool as fBool;
+use AeonDigital\Objects\Data\Field\fStringArray as fStringArray;
 
 require_once __DIR__ . "/../../../phpunit.php";
 
@@ -49,6 +50,12 @@ class t01FieldTest extends TestCase
         ]);
         $this->assertTrue(is_a($obj, fBool::class));
         $this->assertSame("checked", $obj->getName());
+
+
+
+        //$obj = new fStringArray([], null, null, null, ["v1", "v2", "v3", "v4"]);
+        //$this->assertTrue(is_a($obj, fStringArray::class));
+
     }
 
 
