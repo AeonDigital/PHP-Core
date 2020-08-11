@@ -23,4 +23,5 @@ use AeonDigital\Interfaces\Objects\iTypeArray as iTypeArray;
 class tTypeArray extends tType implements iTypeArray
 {
     use \AeonDigital\Objects\Traits\TypeArray;
+    use \AeonDigital\Objects\Traits\TypeArrayConstructor;
 }

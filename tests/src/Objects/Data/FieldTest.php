@@ -28,7 +28,11 @@ class t01FieldTest extends TestCase
         $this->assertTrue(is_a($obj, Field::class));
         $this->assertTrue($obj->isReadOnly());
         $this->assertTrue($obj->isDefined());
-        $this->assertSame("String", $obj->get()->getType());
+        //$this->assertSame("String", $obj->get()->getType());
+        $this->assertSame("", $obj->get());
+
+        // Criar wrappers para os métodos que entende-se que devem lidar com "get/set" dos valores.
+        // Criar um método que seja capaz de retornar o tipo real do campo [seria um wrapper para o getType?].
 
 
         /*$obj = new DataField([

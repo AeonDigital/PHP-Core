@@ -23,4 +23,5 @@ use AeonDigital\Interfaces\Objects\iTypeArray as iTypeArray;
 class tRONByteArray extends tRONByte implements iTypeArray
 {
     use \AeonDigital\Objects\Traits\TypeArray;
+    use \AeonDigital\Objects\Traits\TypeArrayConstructor;
 }

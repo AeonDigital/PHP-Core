@@ -46,17 +46,17 @@ class tGenericTest extends TestCase
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
 
-        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastSetError());
+        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastValidateError());
         $this->assertSame(null, $obj->get());
         $this->assertSame(null, $obj->getNotNull());
         $this->assertSame("", $obj->toString());
 
         $this->assertFalse($obj->set(null));
-        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastSetError());
+        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastValidateError());
         $this->assertSame(null, $obj->get());
 
         $this->assertTrue($obj->set(new \DateTime("2020-01-01 00:00:00")));
-        $this->assertSame("", $obj->getLastSetError());
+        $this->assertSame("", $obj->getLastValidateError());
         $this->assertSame("2020-01-01 00:00:00", $obj->get()->format("Y-m-d H:i:s"));
 
 
@@ -110,17 +110,17 @@ class tGenericTest extends TestCase
         $this->assertTrue($obj->set($nDT));
         $this->assertFalse($obj->isUndefined());
         $this->assertTrue($obj->isDefined());
-        $this->assertSame("", $obj->getLastSetError());
+        $this->assertSame("", $obj->getLastValidateError());
         $this->assertSame($nDT, $obj->get());
 
         $this->assertTrue($obj->set(null));
-        $this->assertSame("", $obj->getLastSetError());
+        $this->assertSame("", $obj->getLastValidateError());
         $this->assertSame(null, $obj->get());
 
         // Tenta setar um valor inválido e verifica que a mensagem de erro
         // informa a natureza do mesmo alem do valor ser mantido o mesmo.
         $this->assertFalse($obj->set("2"));
-        $this->assertSame("error.obj.type.unexpected", $obj->getLastSetError());
+        $this->assertSame("error.obj.type.unexpected", $obj->getLastValidateError());
         $this->assertSame(null, $obj->get());
 
 
@@ -135,7 +135,7 @@ class tGenericTest extends TestCase
         $this->assertSame($nDT, $obj->get());
 
         $this->assertFalse($obj->set(false));
-        $this->assertSame("error.obj.type.readonly", $obj->getLastSetError());
+        $this->assertSame("error.obj.type.readonly", $obj->getLastValidateError());
         $this->assertSame($nDT, $obj->get());
 
 

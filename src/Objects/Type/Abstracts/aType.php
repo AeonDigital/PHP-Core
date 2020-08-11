@@ -26,11 +26,21 @@ abstract class aType extends BObject implements iType
 
 
     /**
-     * Valor da instância.
+     * Valor atual da instância.
+     *
+     * Se existir um ``inputFormat`` definido, aplicará o formato definido
+     * para o valor atualmente setado (exceto se for ``null``).
      *
      * @var         mixed
      */
     protected $value = null;
+    /**
+     * Valor atual da instância no mesmo tipo e formato que foi passado
+     * para o método ``set``.
+     *
+     * @var         mixed
+     */
+    protected $valueRaw = null;
 
 
 
@@ -53,6 +63,19 @@ abstract class aType extends BObject implements iType
      * @var         ?int|float|Realtype|\DateTime $max
      */
     protected $valueMax = null;
+    /**
+     * coleção de valores que este campo está apto a assumir.
+     *
+     * @var         ?array
+     */
+    protected ?array $enumerator = null;
+    /**
+     * Array associativo que armazena as principais funções que uma definição de formato
+     * de entrada deve ter.
+     *
+     * @var         ?array
+     */
+    protected ?array $inputFormat = null;
 
 
 
@@ -174,7 +197,6 @@ abstract class aType extends BObject implements iType
 
 
 
-    protected ?array $enumerator = null;
     /**
      * Retorna um ``array`` com a coleção de valores que este campo está apto a assumir.
      * Os valores aqui pré-definidos devem seguir as regras de validade especificadas.
@@ -187,7 +209,7 @@ abstract class aType extends BObject implements iType
      */
     public function getEnumerator(bool $onlyValues = false) : ?array
     {
-        return static::protectedGetEnumerator($this->enumerator, $onlyValues);
+        return static::sttGetEnumerator($this->enumerator, $onlyValues);
     }
     /**
      * Resolução ``static`` para ``$this->getEnumerator()``.
@@ -197,7 +219,7 @@ abstract class aType extends BObject implements iType
      *
      * @return      ?array
      */
-    protected static function protectedGetEnumerator(
+    protected static function sttGetEnumerator(
         ?array $enumerator,
         bool $onlyValues = false
     ) : ? array {
@@ -215,6 +237,115 @@ abstract class aType extends BObject implements iType
     }
 
 
+
+    /**
+     * Retorna o nome da classe que determina o formato de entrada que o valor a ser
+     * armazenado pode assumir
+     * **OU**
+     * retorna o nome de uma instrução especial de transformação de caracteres para
+     * campos do tipo ``string``.
+     *
+     * @return      ?string
+     */
+    public function getInputFormat() : ?string
+    {
+        return (($this->inputFormat === null) ? null : $this->inputFormat["name"]);
+    }
+    /**
+     * Define um formato para a informação armazenada neste campo.
+     *
+     * @param       ?array|?string $inputFormat
+     *              Nome completo de uma classe que implemente a interface
+     *              ``AeonDigital\DataFormat\Interfaces\iFormat`` OU
+     *               ``array associativo`` compatível com o exemplo abaixo.
+     *
+     * ``` php
+     *      $arr = [
+     *          // string   Nome deste tipo de transformação.
+     *          "name" => ,
+     *
+     *          // int      Tamanho mínimo que uma string pode ter para ser aceita por este formato.
+     *          "minLength" => ,
+     *
+     *          // int      Tamanho máximo que uma string pode ter para ser aceita por este formato.
+     *          "maxLength" => ,
+     *
+     *          // callable Função que valida a string para o tipo de formatação a ser definida.
+     *          "check" => ,
+     *
+     *          // callable Função que remove a formatação padrão.
+     *          "removeFormat" => ,
+     *
+     *          // callable Função que efetivamente formata a string para seu formato final.
+     *          "format" => ,
+     *
+     *          // callable Função que converte o valor para seu formato de armazenamento.
+     *          "storageFormat" =>
+     *      ];
+     * ```
+     *
+     * @return      ?array
+     *              Retorna um ``array associativo`` com os dados informados ou ``null``
+     *              caso as informações passadas não sejam válidas.
+     */
+    protected static function sttInputFormat($inputFormat) : ?array
+    {
+        $r = null;
+
+        if (\is_array($inputFormat) === true) {
+            if (\key_exists("name", $inputFormat) === true &&
+                \key_exists("minLength", $inputFormat) === true &&
+                ($inputFormat["minLength"] === null || $inputFormat["minLength"] >= 0) &&
+                \key_exists("maxLength", $inputFormat) === true &&
+                ($inputFormat["maxLength"] === null || $inputFormat["maxLength"] >= 0) &&
+                \key_exists("check", $inputFormat) === true &&
+                \is_callable($inputFormat["check"]) === true &&
+                \key_exists("removeFormat", $inputFormat) === true &&
+                \is_callable($inputFormat["removeFormat"]) === true &&
+                \key_exists("format", $inputFormat) === true &&
+                \is_callable($inputFormat["format"]) === true &&
+                \key_exists("storageFormat", $inputFormat) === true &&
+                \is_callable($inputFormat["storageFormat"]) === true
+            ) {
+                if (($inputFormat["minLength"] !== null && $inputFormat["maxLength"] !== null) &&
+                    ($inputFormat["minLength"] <= $inputFormat["maxLength"])) {
+                    $r = [
+                        "name"          => \strtoupper($inputFormat["name"]),
+                        "minLength"     => (
+                            ($inputFormat["minLength"] === null) ? null : (int)$inputFormat["minLength"]),
+                        "maxLength"     => (
+                            ($inputFormat["maxLength"] === null) ? null : (int)$inputFormat["maxLength"]),
+                        "check"         => $inputFormat["check"],
+                        "removeFormat"  => $inputFormat["removeFormat"],
+                        "format"        => $inputFormat["format"],
+                        "storageFormat" => $inputFormat["storageFormat"]
+                    ];
+                }
+            }
+        }
+        elseif (\is_string($inputFormat) === true) {
+            if (\class_exists($inputFormat) === false) {
+                $inputFormat = "AeonDigital\\DataFormat\\Patterns\\" . \str_replace(".", "\\", $inputFormat);
+            }
+
+            $interfaces = \class_implements($inputFormat);
+            if(\is_array($interfaces) === true &&
+                \in_array("AeonDigital\\Interfaces\\DataFormat\\iFormat", $interfaces))
+            {
+                $r = [
+                    "name"          => $inputFormat,
+                    "minLength"     => $inputFormat::MinLength,
+                    "maxLength"     => $inputFormat::MaxLength,
+                    "check"         => $inputFormat . "::check",
+                    "removeFormat"  => $inputFormat . "::removeFormat",
+                    "format"        => $inputFormat . "::format",
+                    "storageFormat" => $inputFormat . "::storageFormat"
+                ];
+            }
+        }
+
+        return $r;
+    }
 
 
 
@@ -349,17 +480,39 @@ abstract class aType extends BObject implements iType
      *
      * @var         string
      */
-    protected string $lastSetError = "";
+    protected string $lastValidateError = "";
     /**
-     * Retorna o último código de erro encontrado ao tentar definir um valor
+     * Verifica se o valor indicado satisfaz os critérios de aceitação para este campo.
+     *
+     * @param       mixed $v
+     *              Valor que será testado.
+     *
+     * @return      bool
+     */
+    public function validateValue($v) : bool
+    {
+        $this->lastValidateError = "";
+
+        static::getStandart()::parseIfValidate(
+            $v, $this->lastValidateError,
+            $this->getMin(), $this->getMax(),
+            $this->getEnumerator(true),
+            $this->inputFormat
+        );
+
+        return ($this->lastValidateError === "");
+    }
+    /**
+     * Retorna o último código de erro encontrado ao tentar definir ou validar um valor
      * para a instância. ``""`` será retornado caso não existam erros.
      *
      * @return      string
      */
-    public function getLastSetError() : string
+    public function getLastValidateError() : string
     {
-        return $this->lastSetError;
+        return $this->lastValidateError;
     }
+
 
 
 
@@ -386,20 +539,25 @@ abstract class aType extends BObject implements iType
     protected function protectedSet($v) : bool
     {
         $r = false;
-        $this->lastSetError = "";
+        $this->lastValidateError = "";
 
         if ($this->isReadOnly() === true && $this->undefined === false) {
-            $this->lastSetError = "error.obj.type.readonly";
+            $this->lastValidateError = "error.obj.type.readonly";
         }
         else {
             $n = static::getStandart()::parseIfValidate(
-                $v, $this->lastSetError,
+                $v, $this->lastValidateError,
                 $this->getMin(), $this->getMax(),
-                $this->getEnumerator(true)
+                $this->getEnumerator(true),
+                $this->inputFormat
             );
-            if ($this->lastSetError === "") {
+
+            if ($this->lastValidateError === "") {
                 $r = true;
-                $this->value = $n;
+                $this->value = (
+                    (($n === null) ? null : (($this->inputFormat === null) ? $n : $this->inputFormat["format"]($n)))
+                );
+                $this->valueRaw = $v;
                 $this->undefined = false;
             }
         }
@@ -414,6 +572,11 @@ abstract class aType extends BObject implements iType
     /**
      * Retorna o valor atualmente definido para a instância atual.
      *
+     * Se existir um ``inputFormat`` definido, aplicará o formato definido
+     * para o valor atualmente setado (exceto se for ``null``).
+     *
+     * Usado apenas em casos onde ``$this->isIterable() = false``.
+     *
      * @return      mixed
      */
     protected function protectedGet()
@@ -424,12 +587,40 @@ abstract class aType extends BObject implements iType
      * Retorna o valor atualmente definido para a instância atual mas caso o
      * valor seja ``null``, retornará o valor definido em ``NULL_EQUIVALENT``.
      *
+     * Se existir um ``inputFormat`` definido, aplicará o formato definido
+     * para o valor atualmente setado (exceto se for ``null``).
+     *
+     * Usado apenas em casos onde ``$this->isIterable() = false``.
+     *
      * @return      mixed
      */
     protected function protectedGetNotNull()
     {
         return ($this->value ?? static::getStandart()::getNullEquivalent());
     }
+    /**
+     * Retorna o valor atualmente definido em seu formato de armazenamento.
+     *
+     * Apenas terá um efeito se um ``inputFormat`` estiver definido, caso contrário
+     * retornará o mesmo valor existente em ``get``.
+     *
+     * @return      mixed
+     */
+    public function getStorageValue()
+    {
+        return (($this->inputFormat === null) ? $this->value : $this->inputFormat["storageFormat"]($this->value));
+    }
+    /**
+     * Retorna o valor atualmente definido em seu formato ``raw`` que é aquele
+     * que foi passado na execução do método ``set``.
+     *
+     * @return      mixed
+     */
+    public function getRawValue()
+    {
+        return $this->valueRaw;
+    }
+
 
 
 
@@ -477,17 +668,49 @@ abstract class aType extends BObject implements iType
      *          ["PR", "Paraná"]
      *      ];
      * ```
+     *
+     * @param       ?array|?string $inputFormat
+     *              Nome completo de uma classe que implemente a interface
+     *              ``AeonDigital\DataFormat\Interfaces\iFormat`` OU
+     *              ``array associativo`` compatível com o exemplo abaixo.
+     *
+     * ``` php
+     *      $arr = [
+     *          // string   Nome deste tipo de transformação.
+     *          "name" => ,
+     *
+     *          // int      Tamanho mínimo que uma string pode ter para ser aceita por este formato.
+     *          "minLength" => ,
+     *
+     *          // int      Tamanho máximo que uma string pode ter para ser aceita por este formato.
+     *          "maxLength" => ,
+     *
+     *          // callable Função que valida a string para o tipo de formatação a ser definida.
+     *          "check" => ,
+     *
+     *          // callable Função que remove a formatação padrão.
+     *          "removeFormat" => ,
+     *
+     *          // callable Função que efetivamente formata a string para seu formato final.
+     *          "format" => ,
+     *
+     *          // callable Função que converte o valor para seu formato de armazenamento.
+     *          "storageFormat" =>
+     *      ];
+     * ```
      */
     function __construct(
         $value = undefined,
         $valueDefault = null,
         $valueMin = null,
         $valueMax = null,
-        ?array $enumerator = null
+        ?array $enumerator = null,
+        $inputFormat = null
     ) {
         $this->type = (($this->type === "") ? static::getStandart()::TYPE : $this->type);
         $this->valueDefault = (($valueDefault === undefined) ? null : $valueDefault);
         $this->enumerator = $enumerator;
+        $this->inputFormat = static::sttInputFormat($inputFormat);
 
         if (static::getStandart()::HAS_LIMIT === true) {
             $this->valueMin = $valueMin ?? static::getStandart()::getMin();
@@ -496,29 +719,28 @@ abstract class aType extends BObject implements iType
             if (static::getStandart()::TYPE === "String") {
                 if ($this->valueMin === 0) { $this->valueMin = null; }
                 if ($this->valueMax === 0) { $this->valueMax = null; }
+
+                if ($this->inputFormat !== null) {
+                    $this->valueMin === $this->inputFormat["minLength"];
+                    $this->valueMax === $this->inputFormat["maxLength"];
+                }
             }
         }
 
         $undefined = ($value === undefined || $value === null || $value === "");
+        $realDefault = (($this->isAllowNull() === true) ? null : static::getStandart()::getNullEquivalent());
         if ($value === undefined || $value === "") {
-            if ($valueDefault === null) {
-                $value = (($this->isAllowNull() === true) ? null : static::getStandart()::getNullEquivalent());
-            }
-            else {
-                $value = $valueDefault;
-            }
+            $value = (($valueDefault === null) ? $realDefault : $valueDefault);
         }
         elseif ($value === null) {
-            $value = (($this->isAllowNull() === true) ? null : static::getStandart()::getNullEquivalent());
+            $value = $realDefault;
         }
 
 
         if ($this->set($value) === false) {
-            $this->set($this->getMin());
+            $this->value = $realDefault;
         }
-        if ($this->value === null && $this->isAllowNull() === false && $this->valueDefault !== null) {
-            $this->value = $this->valueDefault;
-        }
+
         $this->undefined = $undefined;
     }
 
@@ -568,8 +790,9 @@ abstract class aType extends BObject implements iType
             ((\key_exists("valueDefault", $cfg) === true)   ? $cfg["valueDefault"]  : null),
             ((\key_exists("valueMin", $cfg) === true)       ? $cfg["valueMin"]      : null),
             ((\key_exists("valueMax", $cfg) === true)       ? $cfg["valueMax"]      : null),
-            ((\key_exists("type", $cfg) === true)           ? $cfg["type"]          : null),
-            ((\key_exists("caseSensitive", $cfg) === true)  ? $cfg["caseSensitive"] : true),
+            ((\key_exists("enumerator", $cfg) === true)     ? $cfg["enumerator"]    : null),
+            ((\key_exists("inputFormat", $cfg) === true)    ? $cfg["inputFormat"]   : null),
+            ((\key_exists("type", $cfg) === true)           ? $cfg["type"]          : null)
         );
     }
 }

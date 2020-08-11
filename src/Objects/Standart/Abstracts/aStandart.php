@@ -100,6 +100,9 @@ abstract class aStandart implements iStandart
      * @param       ?array $enumerator
      *              Coleção de valores aceitáveis (use apenas strings).
      *
+     * @param       ?array $inputFormat
+     *              Regras especiais de validação.
+     *
      * @return      mixed
      */
     public static function parseIfValidate(
@@ -107,7 +110,8 @@ abstract class aStandart implements iStandart
         string &$err = "",
         $min = null,
         $max = null,
-        ?array $enumerator = null
+        ?array $enumerator = null,
+        $inputFormat = null
     ) {
         $err = "";
         if ($v === null) {
@@ -120,7 +124,25 @@ abstract class aStandart implements iStandart
             if ($n === null) {
                 $err = "error.obj.type.unexpected";
             } else {
-                if (static::validateRange($n, $err, $min, $max) === true) {
+                if ($inputFormat !== null) {
+                    $check = null;
+                    if (\is_array($inputFormat) === true) {
+                        $min = $inputFormat["minLength"];
+                        $max = $inputFormat["maxLength"];
+                        $check = $inputFormat["check"];
+                    }
+                    else {
+                        $min = $inputFormat::MinLength;
+                        $max = $inputFormat::MaxLength;
+                        $check = $inputFormat . "::check";
+                    }
+
+                    if ($check($n) === false) {
+                        $err = "error.obj.value.invalid.input.format";
+                    }
+                }
+
+                if ($err === "" && static::validateRange($n, $err, $min, $max) === true) {
                     if ($enumerator !== null && \in_array(Tools::toString($n), $enumerator) === false) {
                         $err = "error.obj.value.not.in.enumerator";
                     }

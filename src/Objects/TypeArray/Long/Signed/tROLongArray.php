@@ -23,4 +23,5 @@ use AeonDigital\Interfaces\Objects\iTypeArray as iTypeArray;
 class tROLongArray extends tROLong implements iTypeArray
 {
     use \AeonDigital\Objects\Traits\TypeArray;
+    use \AeonDigital\Objects\Traits\TypeArrayConstructor;
 }

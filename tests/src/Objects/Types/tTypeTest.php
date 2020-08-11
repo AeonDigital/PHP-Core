@@ -49,17 +49,17 @@ class tTypeTest extends TestCase
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
 
-        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastSetError());
+        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastValidateError());
         $this->assertSame(null, $obj->get());
         $this->assertSame(null, $obj->getNotNull());
         $this->assertSame("", $obj->toString());
 
         $this->assertFalse($obj->set(null));
-        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastSetError());
+        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastValidateError());
         $this->assertSame(null, $obj->get());
 
         $this->assertTrue($obj->set($tValue01));
-        $this->assertSame("", $obj->getLastSetError());
+        $this->assertSame("", $obj->getLastValidateError());
         $this->assertSame($tValue01, $obj->get());
 
 
@@ -111,17 +111,17 @@ class tTypeTest extends TestCase
         $this->assertTrue($obj->set($tValue02));
         $this->assertFalse($obj->isUndefined());
         $this->assertTrue($obj->isDefined());
-        $this->assertSame("", $obj->getLastSetError());
+        $this->assertSame("", $obj->getLastValidateError());
         $this->assertSame($tValue02, $obj->get());
 
         $this->assertTrue($obj->set(null));
-        $this->assertSame("", $obj->getLastSetError());
+        $this->assertSame("", $obj->getLastValidateError());
         $this->assertSame(null, $obj->get());
 
         // Tenta setar um valor inválido e verifica que a mensagem de erro
         // informa a natureza do mesmo alem do valor ser mantido o mesmo.
         $this->assertFalse($obj->set("2"));
-        $this->assertSame("error.obj.type.unexpected", $obj->getLastSetError());
+        $this->assertSame("error.obj.type.unexpected", $obj->getLastValidateError());
         $this->assertSame(null, $obj->get());
 
 
@@ -136,7 +136,7 @@ class tTypeTest extends TestCase
         $this->assertSame($tValue02, $obj->get());
 
         $this->assertFalse($obj->set($tValue01));
-        $this->assertSame("error.obj.type.readonly", $obj->getLastSetError());
+        $this->assertSame("error.obj.type.readonly", $obj->getLastValidateError());
         $this->assertSame($tValue02, $obj->get());
 
 

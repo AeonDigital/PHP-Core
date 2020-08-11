@@ -155,40 +155,42 @@ class tTypeArrayTest extends TestCase
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertFalse($obj->isNullOrEquivalent());
 
-        $this->assertSame("", $obj->getLastSetError());
+        $this->assertSame("", $obj->getLastValidateError());
         $this->assertSame(0, $obj->get());
         $this->assertSame(0, $obj->getNotNull());
         $this->assertSame("", $obj->toString());
 
         $this->assertFalse($obj->set(null));
-        $this->assertSame("", $obj->getLastSetError());
+        $this->assertSame("", $obj->getLastValidateError());
         $this->assertSame(0, $obj->get());
 
 
 
 
         // Teste dos métodos específicos para uso como um array
-        $obj = new tNByteArray(null, false);
+        $obj = new tNByteArray(null);
+        $this->assertTrue($obj->setCaseInsensitive());
+        $this->assertFalse($obj->setCaseInsensitive());
         $this->assertFalse($obj->isCaseSensitive());
         $this->assertFalse($obj->isLocked());
-        $this->assertFalse($obj->hasValue("first"));
-        $this->assertTrue($obj->setValue("first", 1));
-        $this->assertTrue($obj->hasValue("first"));
-        $this->assertSame(1, $obj->getValue("first"));
-        $this->assertSame(undefined, $obj->getValue("sec"));
-        $this->assertTrue($obj->unsetValue("first"));
-        $this->assertTrue($obj->unsetValue("undef"));
-        $this->assertFalse($obj->hasValue("first"));
+        $this->assertFalse($obj->hasKeyValue("first"));
+        $this->assertTrue($obj->setKeyValue("first", 1));
+        $this->assertTrue($obj->hasKeyValue("first"));
+        $this->assertSame(1, $obj->getKeyValue("first"));
+        $this->assertSame(undefined, $obj->getKeyValue("sec"));
+        $this->assertTrue($obj->unsetKeyValue("first"));
+        $this->assertTrue($obj->unsetKeyValue("undef"));
+        $this->assertFalse($obj->hasKeyValue("first"));
 
 
-        $this->assertTrue($obj->setValue("PROP1", 1));
-        $this->assertTrue($obj->setValue("PROP2", 2));
-        $this->assertTrue($obj->setValue("prop3", null));
-        $this->assertTrue($obj->setValue("PrOP4", 4));
+        $this->assertTrue($obj->setKeyValue("PROP1", 1));
+        $this->assertTrue($obj->setKeyValue("PROP2", 2));
+        $this->assertTrue($obj->setKeyValue("prop3", null));
+        $this->assertTrue($obj->setKeyValue("PrOP4", 4));
         $this->assertTrue(isset($obj["prop4"]));
         $this->assertSame(4, $obj->count());
 
-        $notNull = $obj->getValuesNotNull();
+        $notNull = $obj->getKeyValuesNotNull();
         $this->assertTrue(is_a($notNull, tNByteArray::class));
         $this->assertSame(3, $notNull->count());
 
@@ -255,12 +257,12 @@ class tTypeArrayTest extends TestCase
 
     public function test_generic()
     {
-        $obj = new tGenericArray(null, true, "DateTime");
+        $obj = new tGenericArray([], "DateTime");
         $this->assertSame("DateTime", $obj->getType());
 
         $nDT = new \DateTime();
-        $this->assertTrue($obj->setValue("first", $nDT));
-        $this->assertFalse($obj->setValue("last", "not DateTime"));
+        $this->assertTrue($obj->setKeyValue("first", $nDT));
+        $this->assertFalse($obj->setKeyValue("last", "not DateTime"));
     }
 
 
@@ -276,9 +278,44 @@ class tTypeArrayTest extends TestCase
         $prop2 = new \AeonDigital\Objects\Types\tByte(10);
         $prop3 = new \AeonDigital\Objects\Types\tString("initial");
 
-        $this->assertTrue($obj->setValue("prop1", $prop1));
-        $this->assertTrue($obj->setValue("prop2", $prop2));
-        $this->assertTrue($obj->setValue("prop3", $prop3));
-        $this->assertFalse($obj->setValue("prop4", new \DateTime()));
+        $this->assertTrue($obj->setKeyValue("prop1", $prop1));
+        $this->assertTrue($obj->setKeyValue("prop2", $prop2));
+        $this->assertTrue($obj->setKeyValue("prop3", $prop3));
+        $this->assertFalse($obj->setKeyValue("prop4", new \DateTime()));
     }
+
+
+
+    public function test_string_inputformat()
+    {
+        $obj = new tStringArray([], null, null, null, null, "AeonDigital\\DataFormat\\Patterns\\Brasil\\ZipCode");
+        $this->assertSame("String", tStringArray::getStandart()::TYPE);
+        $this->assertSame("String", $obj->getType());
+
+        $this->assertTrue($obj->setKeyValue("prop1", "11.111111"));
+        $this->assertFalse($obj->setKeyValue("prop2", "9988877a"));
+        $this->assertSame("error.obj.value.invalid.input.format", $obj->getLastValidateError());
+        $this->assertTrue($obj->setKeyValue("prop2", "22222-222"));
+        $this->assertTrue($obj->setKeyValue("prop3", "33.333333"));
+        $this->assertTrue($obj->setKeyValue("prop4", "44.444-444"));
+
+        $this->assertSame("11.111-111", $obj->getKeyValue("prop1"));
+        $this->assertSame("11111111", $obj->getStorageKeyValue("prop1"));
+        $this->assertSame("11.111111", $obj->getRawKeyValue("prop1"));
+
+        $this->assertSame([
+            "prop1" => "11111111",
+            "prop2" => "22222222",
+            "prop3" => "33333333",
+            "prop4" => "44444444",
+        ], $obj->toArray(true, false, true));
+
+        $this->assertSame([
+            "prop1" => "11.111111",
+            "prop2" => "22222-222",
+            "prop3" => "33.333333",
+            "prop4" => "44.444-444",
+        ], $obj->toArray(true, false, false, true));
+    }
+
 }

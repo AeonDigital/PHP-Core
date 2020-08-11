@@ -102,125 +102,6 @@ class Field extends tROType implements iField
 
 
     /**
-     * Array associativo que armazena as principais funções que uma definição de formato
-     * de entrada deve ter.
-     *
-     * @var         ?array
-     */
-    private ?array $inputFormat = null;
-    /**
-     * Define um formato para a informação armazenada neste campo.
-     *
-     * A classe informada deve implementar a interface
-     * ``AeonDigital\DataFormat\Interfaces\iFormat``
-     * **OU**
-     * pode ser passado um ``array`` conforme as definições especificadas abaixo:
-     *
-     * ``` php
-     *      $arr = [
-     *          // string   Nome deste tipo de transformação.
-     *          "name" => ,
-     *
-     *          // int      Tamanho máximo que uma string pode ter para ser aceita por este formato.
-     *          "length" => ,
-     *
-     *          // callable Função que valida a string para o tipo de formatação a ser definida.
-     *          "check" => ,
-     *
-     *          // callable Função que remove a formatação padrão.
-     *          "removeFormat" => ,
-     *
-     *          // callable Função que efetivamente formata a string para seu formato final.
-     *          "format" => ,
-     *
-     *          // callable Função que converte o valor para seu formato de armazenamento.
-     *          "storageFormat" =>
-     *      ];
-     * ```
-     *
-     * @param       ?array|?string $if
-     *              Nome completo da classe a ser usada.
-     *
-     * @return      void
-     *
-     * @throws      \InvalidArgumentException
-     *              Caso a classe indicada não seja válida.
-     */
-    private function setInputFormat($if) : void
-    {
-        if (\is_array($if) === true) {
-            $this->mainCheckForInvalidArgumentException(
-                "inputFormat", $if,
-                [
-                    [
-                        "validate" => "has array assoc required keys",
-                        "requiredKeys" => [
-                            "name"          => ["is string not empty"],
-                            "length"        => ["is integer greather than zero or null"],
-                            "check"         => ["is callable"],
-                            "removeFormat"  => ["is callable"],
-                            "format"        => ["is callable"],
-                            "storageFormat" => ["is callable"]
-                        ]
-                    ]
-                ]
-            );
-
-
-            $this->inputFormat = [
-                "name"          => \strtoupper($if["name"]),
-                "length"        => (($if["length"] === null) ? null : (int)$if["length"]),
-                "check"         => $if["check"],
-                "removeFormat"  => $if["removeFormat"],
-                "format"        => $if["format"],
-                "storageFormat" => $if["storageFormat"]
-            ];
-        }
-        elseif (is_string($if) === true) {
-            if (\class_exists($if) === false) {
-                $if = "AeonDigital\\DataFormat\\Patterns\\" . \str_replace(".", "\\", $if);
-            }
-
-            $this->mainCheckForInvalidArgumentException(
-                "inputFormat", $if, [
-                    "is class exists",
-                    [
-                        "validate" => "is class implements interface",
-                        "interface" => "AeonDigital\\Interfaces\\DataFormat\\iFormat"
-                    ]
-                ]
-            );
-
-
-            $this->inputFormat = [
-                "name"          => $if,
-                "length"        => $if::MaxLength,
-                "check"         => $if . "::check",
-                "removeFormat"  => $if . "::removeFormat",
-                "format"        => $if . "::format",
-                "storageFormat" => $if . "::storageFormat"
-            ];
-        }
-    }
-    /**
-     * Retorna o nome da classe que determina o formato de entrada que o valor a ser
-     * armazenado pode assumir
-     * **OU**
-     * retorna o nome de uma instrução especial de transformação de caracteres para
-     * campos do tipo ``string``.
-     *
-     * @return      ?string
-     */
-    public function getInputFormat() : ?string
-    {
-        return (($this->inputFormat === null) ? null : $this->inputFormat["name"]);
-    }
-
-
-
-
-
-    /**
      * Armazena o estado atual de validade do campo com relação a seu valor definido e
      * seus critérios de funcionamento.
      *
@@ -283,7 +164,7 @@ class Field extends tROType implements iField
      */
     protected $fieldState_ValidateState = "valid";
     /**
-     * Retorna o código de estado da última validação realizada.
+     * Retorna o código de estado da última validação realizada. ***
      *
      * @return      string|array
      */
@@ -297,7 +178,7 @@ class Field extends tROType implements iField
 
 
     /**
-     * Verifica se o valor indicado satisfaz os critérios de aceitação para este campo.
+     * Verifica se o valor indicado satisfaz os critérios de aceitação para este campo. ***
      *
      * @param       mixed $v
      *              Valor que será testado.
@@ -314,7 +195,7 @@ class Field extends tROType implements iField
 
 
     /**
-     * Retorna o valor atual deste campo em seu formato de armazenamento.
+     * Retorna o valor atual deste campo em seu formato de armazenamento. ***
      *
      * @return      mixed
      */
@@ -328,7 +209,7 @@ class Field extends tROType implements iField
 
 
     /**
-     * Retorna o valor que está definido para este campo assim como ele foi passado em
+     * Retorna o valor que está definido para este campo assim como ele foi passado em ***
      * ``setValue()``.
      *
      * @return      mixed
@@ -340,6 +221,10 @@ class Field extends tROType implements iField
 
 
 
+    public function get()
+    {
+        return $this->value->get();
+    }
 
 
 
@@ -450,7 +335,7 @@ class Field extends tROType implements iField
         $readOnly   = (($readOnly === true) ? "RO" : "");
         $allowNull  = (($allowNull === true) ? "N" : "");
         $unsigned   = (($unsigned === true) ? "U" : "");
-        $allowEmpty = (($allowEmpty === true) ? "NE" : "");
+        $allowEmpty = (($allowEmpty === false) ? "NE" : "");
 
         // Identifica qual instância ``iType`` deve ser gerada para armazenar os valores
         // deste campo.

@@ -45,6 +45,32 @@ trait TypeArray
      */
     protected bool $caseSensitive = true;
     /**
+     * Configura o ``array`` para que suas chaves tornem-se ``case-insensitive``.
+     * Deve poder ser acionado apenas 1 vez.
+     *
+     * @return      bool
+     */
+    public function setCaseInsensitive() : bool
+    {
+        if ($this->caseSensitive === true) {
+            $this->caseSensitive = false;
+
+            $arr = [];
+            foreach ($this->valueArray as $key => $val) {
+                $k = $this->useKey($key);
+                if (\key_exists($k, $arr) === false) {
+                    $arr[$k] = $val;
+                }
+            }
+            $this->valueArray = $arr;
+
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    /**
      * Informa se as chaves de valores devem ser tratadas de forma
      * ``case-sensitive`` (padrão).
      *
@@ -114,7 +140,7 @@ trait TypeArray
      *
      * @return      bool
      */
-    public function hasValue(string $key) : bool
+    public function hasKeyValue(string $key) : bool
     {
         return \key_exists($this->useKey($key), $this->valueArray);
     }
@@ -131,22 +157,24 @@ trait TypeArray
      *              Retornará ``true`` caso o valor tenha sido aceito e ``false``
      *              caso contrário.
      */
-    public function setValue(
+    public function setKeyValue(
         string $key,
         $v
     ) : bool {
         if ($this->locked === true) {
-            $this->lastSetError = "error.obj.array.locked";
+            $this->lastValidateError = "error.obj.array.locked";
             return false;
         }
         else {
             $r = $this->protectedSet($v);
             if ($r === true) {
                 $this->valueArray[$this->useKey($key)] = [
-                    "key"   => $key,
-                    "value" => $this->value
+                    "key"       => $key,
+                    "value"     => $this->value,
+                    "valueRaw"  => $this->valueRaw
                 ];
                 $this->value = null;
+                $this->valueRaw = null;
             }
             return $r;
         }
@@ -160,11 +188,11 @@ trait TypeArray
      * @return      bool
      *              Retornará ``true`` apenas se a chave existir e for removida.
      */
-    public function unsetValue(string $key) : bool
+    public function unsetKeyValue(string $key) : bool
     {
-        $this->lastSetError = "";
+        $this->lastValidateError = "";
         if ($this->locked === true) {
-            $this->lastSetError = "error.obj.array.locked";
+            $this->lastValidateError = "error.obj.array.locked";
             return false;
         }
         else {
@@ -180,12 +208,42 @@ trait TypeArray
      *
      * @return      mixed
      */
-    public function getValue(string $key)
+    public function getKeyValue(string $key)
     {
-        if ($this->hasValue($key) === true) {
-            return $this->valueArray[$this->useKey($key)]["value"];
+        return (($this->hasKeyValue($key) === true) ? $this->valueArray[$this->useKey($key)]["value"] : undefined);
+    }
+    /**
+     * Retorna o valor definido para a chave especificada em seu formato de
+     * armazenamento.
+     *
+     * Apenas terá um efeito se um ``inputFormat`` estiver definido, caso contrário
+     * retornará o mesmo valor existente em ``get``.
+     *
+     * @param       string $key
+     *              Chave do valor que deve ser retornado.
+     *
+     * @return      mixed
+     */
+    public function getStorageKeyValue(string $key)
+    {
+        $v = $this->getKeyValue($key);
+        if ($v !== undefined && $this->inputFormat !== null) {
+            $v = $this->inputFormat["storageFormat"]($v);
         }
-        return undefined;
+        return $v;
+    }
+    /**
+     * Retorna o valor definido para a chave especificada em seu formato ``raw``
+     * que é aquele que foi passado na execução do método ``set``.
+     *
+     * @param       string $key
+     *              Chave do valor que deve ser retornado.
+     *
+     * @return      mixed
+     */
+    public function getRawKeyValue(string $key)
+    {
+        return (($this->hasKeyValue($key) === true) ? $this->valueArray[$this->useKey($key)]["valueRaw"] : undefined);
     }
 
 
@@ -199,12 +257,12 @@ trait TypeArray
      *
      * @return      self
      */
-    public function getValuesNotNull() : self
+    public function getKeyValuesNotNull() : self
     {
         $arr = clone $this;
         foreach ($arr as $key => $val) {
             if ($val === null) {
-                $arr->unsetValue($key);
+                $arr->unsetKeyValue($key);
             }
         }
         return $arr;
@@ -220,18 +278,41 @@ trait TypeArray
      * @param       bool $notNull
      *              Retornará no ``array`` resultante apenas os itens que não são ``null``.
      *
+     * @param       bool $storageFormat
+     *              Retornará no ``array`` resultante os valores em seus respectivos formatos
+     *              de armazenamento.
+     *
+     * @param       bool $rawFormat
+     *              Retornará no ``array`` resultante os valores em seus respectivos formatos
+     *              ``raw``. A configuração ``$storageFormat`` deve se sobrepor a esta caso
+     *              ambas sejam definidas como ``true``.
+     *
      * @return      array
      *              Retorna um ``array associativo`` ou ``[]`` caso a coleção esteja vazia.
      */
     public function toArray(
         bool $originalKeys = false,
-        bool $notNull = false
+        bool $notNull = false,
+        bool $storageFormat = false,
+        bool $rawFormat = false
     ) : array {
         $arr = [];
+
         foreach ($this->valueArray as $key => $val) {
             if ($notNull === false || ($notNull === true && $val["value"] !== null)) {
                 $k = (($originalKeys === true) ? $val["key"] : $key);
-                $arr[$k] = $val["value"];
+                $v = $val["value"];
+
+                if ($storageFormat === true) {
+                    if ($this->inputFormat !== null) {
+                        $v = $this->inputFormat["storageFormat"]($v);
+                    }
+                }
+                elseif ($rawFormat === true) {
+                    $v = $val["valueRaw"];
+                }
+
+                $arr[$k] = $v;
             }
         }
         return $arr;
@@ -251,13 +332,13 @@ trait TypeArray
      *              Retornará ``true`` caso TODOS os novos valores sejam adicionados.
      *              Em caso de falha irá parar o processo e NENHUM item passado será
      *              mantido na instância.
-     *              O motivo do erro poderá ser visto em ``$this->getLastSetError()``.
+     *              O motivo do erro poderá ser visto em ``$this->getLastValidateError()``.
      */
     public function insert(?iterable $values) : bool
     {
-        $this->lastSetError = "";
+        $this->lastValidateError = "";
         if ($this->locked === true) {
-            $this->lastSetError = "error.obj.array.locked";
+            $this->lastValidateError = "error.obj.array.locked";
             return false;
         }
         else {
@@ -265,7 +346,7 @@ trait TypeArray
                 $r = true;
                 foreach ($values as $k => $v) {
                     if ($r === true) {
-                        $r = $this->setValue((string)$k, $v);
+                        $r = $this->setKeyValue((string)$k, $v);
                     }
                 }
 
@@ -291,9 +372,9 @@ trait TypeArray
      */
     public function clean() : bool
     {
-        $this->lastSetError = "";
+        $this->lastValidateError = "";
         if ($this->locked === true) {
-            $this->lastSetError = "error.obj.array.locked";
+            $this->lastValidateError = "error.obj.array.locked";
             return false;
         }
         else {
@@ -302,42 +383,6 @@ trait TypeArray
         }
     }
 
-
-
-
-
-
-    /**
-     * Inicia uma nova instância.
-     *
-     * @param       ?iterable $value
-     *              Valor inicial da instância.
-     *
-     * @param       bool $caseSensitive
-     *              Informa se as chaves de valores devem ser tratadas de forma
-     *              ``case-sensitive``.
-     *
-     * @param       string $type
-     *              Informa a namespace completa da classe ou interface que os valores
-     *              a serem usados por esta instância deverão possuir.
-     *              Usado apenas em tipos ``Generic``.
-     */
-    function __construct(
-        ?iterable $value = [],
-        bool $caseSensitive = true,
-        string $type = ""
-    ) {
-        if ($this instanceof iGeneric) {
-            parent::__construct(undefined, $type);
-        }
-        else {
-            parent::__construct(undefined);
-        }
-
-        $this->iterable = true;
-        $this->caseSensitive = $caseSensitive;
-        $this->insert($value);
-    }
 
 
 
@@ -360,7 +405,7 @@ trait TypeArray
      */
     public function offsetExists($key) : bool
     {
-        return $this->hasValue((string)$key);
+        return $this->hasKeyValue((string)$key);
     }
     /**
      * Retorna o valor definido para a chave especificada.
@@ -372,7 +417,7 @@ trait TypeArray
      */
     public function offsetGet($key)
     {
-        return $this->getValue((string)$key);
+        return $this->getKeyValue((string)$key);
     }
     /**
      * Define um novo valor para a instância.
@@ -387,7 +432,7 @@ trait TypeArray
      */
     public function offsetSet($key, $v)
     {
-        $this->setValue((string)$key, $v);
+        $this->setKeyValue((string)$key, $v);
     }
     /**
      * Remove do ``array`` o item da chave especificada.
@@ -400,7 +445,7 @@ trait TypeArray
      */
     public function offsetUnset($key)
     {
-        $this->unsetValue((string)$key);
+        $this->unsetKeyValue((string)$key);
     }
 
 

@@ -273,6 +273,28 @@ class stStringTest extends TestCase
         // Nullable
         $this->assertSame(null, stNEString::parseIfValidate(null));
         $this->assertSame(null, stNNEString::parseIfValidate(null));
+
+
+
+
+
+
+        // String Not Nullable Empty with InputFormat
+        $err = "";
+        $result = stString::parseIfValidate(
+            "invalid brasil zipcode", $err, null, null, null,
+            "AeonDigital\\DataFormat\\Patterns\\Brasil\\ZipCode"
+        );
+        $this->assertSame("invalid brasil zipcode", $result);
+        $this->assertSame("error.obj.value.invalid.input.format", $err);
+
+        $err = "";
+        $result = stString::parseIfValidate(
+            "96080150", $err, null, null, null,
+            "AeonDigital\\DataFormat\\Patterns\\Brasil\\ZipCode"
+        );
+        $this->assertSame("96080150", $result);
+        $this->assertSame("", $err);
     }
 
 
