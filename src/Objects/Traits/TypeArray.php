@@ -56,10 +56,10 @@ trait TypeArray
             $this->caseSensitive = false;
 
             $arr = [];
-            foreach ($this->valueArray as $key => $val) {
+            foreach ($this->valueArray as $key => $data) {
                 $k = $this->useKey($key);
                 if (\key_exists($k, $arr) === false) {
-                    $arr[$k] = $val;
+                    $arr[$k] = $data;
                 }
             }
             $this->valueArray = $arr;
@@ -176,6 +176,8 @@ trait TypeArray
                 $this->value = null;
                 $this->valueRaw = null;
             }
+
+            $this->protectedRegisterArraySetState($key, $v, $this->lastValidateError);
             return $r;
         }
     }
@@ -197,6 +199,7 @@ trait TypeArray
         }
         else {
             unset($this->valueArray[$this->useKey($key)]);
+            $this->protectedUnregisterArraySetState($key);
             return true;
         }
     }
@@ -250,6 +253,37 @@ trait TypeArray
 
 
 
+    /**
+     * Responsável por registrar internamente o estado da última tentativa de
+     * definir um novo valor para um campo do tipo ``array``.
+     *
+     * @param       string $key
+     *              Chave.
+     *
+     * @param       mixed $v
+     *              Valor.
+     *
+     * @param       string $err
+     *              Resultado da validação.
+     *
+     * @return      void
+     */
+    protected function protectedRegisterArraySetState(string $key, $val, string $err) : void { }
+    /**
+     * Responsável por remover o registro do estado de um campo.
+     * Usado em caso de remoção total do key/value da coleção atual.
+     *
+     * @param       string $key
+     *              Chave.
+     *
+     * @return      void
+     */
+    protected function protectedUnregisterArraySetState(string $key) : void { }
+
+
+
+
+
 
     /**
      * Retorna um objeto do mesmo tipo do atual contendo exclusivamente as chaves e
@@ -298,10 +332,10 @@ trait TypeArray
     ) : array {
         $arr = [];
 
-        foreach ($this->valueArray as $key => $val) {
-            if ($notNull === false || ($notNull === true && $val["value"] !== null)) {
-                $k = (($originalKeys === true) ? $val["key"] : $key);
-                $v = $val["value"];
+        foreach ($this->valueArray as $key => $data) {
+            if ($notNull === false || ($notNull === true && $data["value"] !== null)) {
+                $k = (($originalKeys === true) ? $data["key"] : $key);
+                $v = $data["value"];
 
                 if ($storageFormat === true) {
                     if ($this->inputFormat !== null) {
@@ -309,7 +343,7 @@ trait TypeArray
                     }
                 }
                 elseif ($rawFormat === true) {
-                    $v = $val["valueRaw"];
+                    $v = $data["valueRaw"];
                 }
 
                 $arr[$k] = $v;
@@ -353,9 +387,11 @@ trait TypeArray
                 if ($r === false) {
                     foreach ($values as $k => $v) {
                         unset($this->valueArray[$this->useKey($k)]);
+                        $this->protectedUnregisterArraySetState($k);
                     }
                 }
                 $this->value = null;
+                $this->valueRaw = null;
                 return $r;
             }
             else {
@@ -513,5 +549,4 @@ trait TypeArray
     {
         return \count($this->valueArray);
     }
-
 }

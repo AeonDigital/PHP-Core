@@ -352,6 +352,16 @@ abstract class aType extends BObject implements iType
 
 
     /**
+     * Retornará ``true`` caso o valor atualmente definido esteja em conformidade
+     * com todos os critérios de validação para este campo.
+     *
+     * @return      bool
+     */
+    public function isValid() : bool
+    {
+        return ($this->isIterable === true || $this->validateValue($this->value) === true);
+    }
+    /**
      * Indica se esta instância ainda não recebeu algum valor válido de forma explicita.
      *
      * @var         bool
@@ -562,8 +572,25 @@ abstract class aType extends BObject implements iType
             }
         }
 
+        $this->protectedRegisterSetState($v, $this->lastValidateError);
         return $r;
     }
+
+
+
+    /**
+     * Responsável por registrar internamente o estado da última tentativa de
+     * definir um novo valor para esta instância.
+     *
+     * @param       mixed $val
+     *              Valor.
+     *
+     * @param       string $err
+     *              Resultado da validação.
+     *
+     * @return      void
+     */
+    protected function protectedRegisterSetState($val, string $err) : void { }
 
 
 

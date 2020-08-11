@@ -2,7 +2,7 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Data\fBool as fBool;
+use AeonDigital\Objects\Data\Field\fBool as fBool;
 
 require_once __DIR__ . "/../../../phpunit.php";
 
@@ -31,15 +31,15 @@ class t01FieldTest extends TestCase
 
         $this->assertTrue($obj->set(true));
         $this->assertSame("", $obj->getLastValidateError());
-        $this->assertTrue($obj->isValidState());
-        $this->assertSame("valid", $obj->getCurrentState());
+        $this->assertTrue($obj->isCurrentFieldStateValid());
+        $this->assertSame("valid", $obj->getCurrentFieldState());
         $this->assertSame(true, $obj->get());
 
 
         $this->assertFalse($obj->set("invalid"));
         $this->assertSame("error.obj.type.unexpected", $obj->getLastValidateError());
-        $this->assertTrue($obj->isValidState());
-        $this->assertSame("valid", $obj->getCurrentState());
+        $this->assertFalse($obj->isCurrentFieldStateValid());
+        $this->assertSame("error.obj.type.unexpected", $obj->getCurrentFieldState());
         $this->assertSame(true, $obj->get());
 
 
