@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types;
 
 use AeonDigital\Objects\Types\Abstracts\aDateTime as aDateTime;
-use AeonDigital\Objects\Standart\SType\stNDateTime as stClass;
+use AeonDigital\Objects\Standart\Commom\scNDateTime as scClass;
 use AeonDigital\Interfaces\Objects\iType as iType;
 
 
@@ -33,7 +33,7 @@ class tNDateTime extends aDateTime
      */
     public static function getStandart() : string
     {
-        return stClass::class;
+        return scClass::class;
     }
     /**
      * Retorna uma instância definida com as propriedades indicadas no

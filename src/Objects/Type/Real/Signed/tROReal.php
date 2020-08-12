@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types;
 
 use AeonDigital\Objects\Types\Abstracts\aNumericReal as aNumericReal;
-use AeonDigital\Objects\Standart\SType\stROReal as stClass;
+use AeonDigital\Objects\Standart\Commom\scROReal as scClass;
 use AeonDigital\Interfaces\Objects\iType as iType;
 
 
@@ -33,7 +33,7 @@ class tROReal extends aNumericReal
      */
     public static function getStandart() : string
     {
-        return stClass::class;
+        return scClass::class;
     }
     /**
      * Retorna uma instância definida com as propriedades indicadas no

@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types;
 
 use AeonDigital\Objects\Types\Abstracts\aGeneric as aGeneric;
-use AeonDigital\Objects\Standart\SType\stGeneric as stClass;
+use AeonDigital\Objects\Standart\Commom\scGeneric as scClass;
 use AeonDigital\Interfaces\Objects\iType as iType;
 
 
@@ -33,7 +33,7 @@ class tGeneric extends aGeneric
      */
     public static function getStandart() : string
     {
-        return stClass::class;
+        return scClass::class;
     }
     /**
      * Retorna uma instância definida com as propriedades indicadas no

@@ -15,20 +15,20 @@
         <testsuite name="AeonDigital-PHP-Core">
             <!--
                 Defina aqui cada arquivo de testes que será utilizado.
-            -->
+-->
             <file>src/global_functionsTests.php</file>
             <file>src/Objects/RealtypeTests.php</file>
             <file>src/Objects/ToolsTests.php</file>
             <file>src/Objects/Traits/MainCheckArgumentExceptionTest.php</file>
 
 
-            <file>src/Objects/Standart/stBoolTest.php</file>
-            <file>src/Objects/Standart/stNumericIntegerTest.php</file>
-            <file>src/Objects/Standart/stNumericFloagintTest.php</file>
-            <file>src/Objects/Standart/stNumericRealTest.php</file>
-            <file>src/Objects/Standart/stDateTimeTest.php</file>
-            <file>src/Objects/Standart/stStringTest.php</file>
-            <file>src/Objects/Standart/stGenericTest.php</file>
+            <file>src/Objects/Standart/scBoolTest.php</file>
+            <file>src/Objects/Standart/scNumericIntegerTest.php</file>
+            <file>src/Objects/Standart/scNumericFloagintTest.php</file>
+            <file>src/Objects/Standart/scNumericRealTest.php</file>
+            <file>src/Objects/Standart/scDateTimeTest.php</file>
+            <file>src/Objects/Standart/scStringTest.php</file>
+            <file>src/Objects/Standart/scGenericTest.php</file>
 
 
             <file>src/Objects/Types/tBoolTest.php</file>

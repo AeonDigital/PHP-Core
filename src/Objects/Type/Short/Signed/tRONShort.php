@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types;
 
 use AeonDigital\Objects\Types\Abstracts\aNumericInteger as aNumericInteger;
-use AeonDigital\Objects\Standart\SType\stRONShort as stClass;
+use AeonDigital\Objects\Standart\Commom\scRONShort as scClass;
 use AeonDigital\Interfaces\Objects\iType as iType;
 
 
@@ -33,7 +33,7 @@ class tRONShort extends aNumericInteger
      */
     public static function getStandart() : string
     {
-        return stClass::class;
+        return scClass::class;
     }
     /**
      * Retorna uma instância definida com as propriedades indicadas no

@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types;
 
 use AeonDigital\Objects\Types\Abstracts\aClass as aClass;
-use AeonDigital\Objects\Standart\SType\stRONType as stClass;
+use AeonDigital\Objects\Standart\Commom\scRONType as scClass;
 use AeonDigital\Interfaces\Objects\iType as iType;
 
 
@@ -33,7 +33,7 @@ class tRONType extends aClass
      */
     public static function getStandart() : string
     {
-        return stClass::class;
+        return scClass::class;
     }
     /**
      * Inicia uma nova instância.
