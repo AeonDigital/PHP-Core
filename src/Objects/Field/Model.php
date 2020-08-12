@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Data;
 
 use AeonDigital\Objects\Types\Commom\tROType as tROType;
-use AeonDigital\Interfaces\Objects\Data\iModel as iModel;
+use AeonDigital\Interfaces\Objects\iModel as iModel;
 
 
 

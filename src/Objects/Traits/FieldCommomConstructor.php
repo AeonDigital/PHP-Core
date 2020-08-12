@@ -3,7 +3,7 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Traits;
 
-use AeonDigital\Interfaces\Objects\Data\iField as iField;
+use AeonDigital\Interfaces\Objects\iField as iField;
 
 
 

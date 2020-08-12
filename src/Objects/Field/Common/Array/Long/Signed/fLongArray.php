@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Field\Commom;
 
 use AeonDigital\Objects\Types\Commom\tLongArray as tLongArray;
-use AeonDigital\Interfaces\Objects\Data\iFieldArray as iFieldArray;
+use AeonDigital\Interfaces\Objects\iFieldArray as iFieldArray;
 
 
 

@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Field\Commom;
 
 use AeonDigital\Objects\Types\Commom\tInt as tInt;
-use AeonDigital\Interfaces\Objects\Data\iField as iField;
+use AeonDigital\Interfaces\Objects\iField as iField;
 
 
 
