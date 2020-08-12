@@ -2,7 +2,7 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Types\{
+use AeonDigital\Objects\Types\Commom\{
     tFloat, tNFloat, tROFloat, tRONFloat, tUFloat, tNUFloat, tROUFloat, tRONUFloat,
     tDouble, tNDouble, tRODouble, tRONDouble, tUDouble, tNUDouble, tROUDouble, tRONUDouble,
 };

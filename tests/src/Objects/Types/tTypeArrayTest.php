@@ -2,7 +2,7 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Types\{
+use AeonDigital\Objects\Types\Commom\{
     tBoolArray, tNBoolArray, tROBoolArray, tRONBoolArray,
     tByteArray, tNByteArray, tROByteArray, tRONByteArray,
     tUByteArray, tNUByteArray, tROUByteArray, tRONUByteArray,
@@ -21,6 +21,8 @@ use AeonDigital\Objects\Types\{
     tDateTimeArray, tNDateTimeArray, tRODateTimeArray, tRONDateTimeArray,
     tStringArray, tNStringArray, tROStringArray, tRONStringArray,
     tNEStringArray, tNNEStringArray, tRONEStringArray, tRONNEStringArray,
+};
+use AeonDigital\Objects\Types\Complex\{
     tGenericArray, tNGenericArray, tROGenericArray, tRONGenericArray,
     tTypeArray, tNTypeArray, tROTypeArray, tRONTypeArray,
 };
@@ -107,19 +109,12 @@ class tTypeArrayTest extends TestCase
                 "prefix" => ["t", "tN", "tRO", "tRON", "tNE", "tNNE", "tRONE", "tRONNE"],
                 "value" => ["initial"],
             ],
-            "Generic" => [
-                "TYPE" => "iPGeneric",
-                "IS_CLASS" => true,
-                "HAS_LIMIT" => false,
-                "prefix" => ["t", "tN", "tRO", "tRON"],
-                "value" => ["2020-01-01 00:00:00"],
-            ],
         ];
 
 
         foreach ($types as $typeName => $rules) {
             foreach ($rules["prefix"] as $prefix) {
-                $cName = "AeonDigital\\Objects\\Types\\" . $prefix . $typeName . "Array";
+                $cName = "AeonDigital\\Objects\\Types\\Commom\\" . $prefix . $typeName . "Array";
                 $this->assertSame($rules["TYPE"],       $cName::getStandart()::TYPE);
                 $this->assertSame($rules["IS_CLASS"],   $cName::getStandart()::IS_CLASS);
                 $this->assertSame($rules["HAS_LIMIT"],  $cName::getStandart()::HAS_LIMIT);
@@ -274,9 +269,9 @@ class tTypeArrayTest extends TestCase
         $this->assertSame("AeonDigital\\Interfaces\\Objects\\iType", $obj->getType());
 
 
-        $prop1 = new \AeonDigital\Objects\Types\tBool(true);
-        $prop2 = new \AeonDigital\Objects\Types\tByte(10);
-        $prop3 = new \AeonDigital\Objects\Types\tString("initial");
+        $prop1 = new \AeonDigital\Objects\Types\Commom\tBool(true);
+        $prop2 = new \AeonDigital\Objects\Types\Commom\tByte(10);
+        $prop3 = new \AeonDigital\Objects\Types\Commom\tString("initial");
 
         $this->assertTrue($obj->setKeyValue("prop1", $prop1));
         $this->assertTrue($obj->setKeyValue("prop2", $prop2));

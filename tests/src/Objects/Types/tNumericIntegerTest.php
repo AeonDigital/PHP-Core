@@ -2,7 +2,7 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Types\{
+use AeonDigital\Objects\Types\Commom\{
     tByte, tNByte, tROByte, tRONByte, tUByte, tNUByte, tROUByte, tRONUByte,
     tShort, tNShort, tROShort, tRONShort, tUShort, tNUShort, tROUShort, tRONUShort,
     tInt, tNInt, tROInt, tRONInt, tUInt, tNUInt, tROUInt, tRONUInt,

@@ -2,7 +2,7 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Types\{
+use AeonDigital\Objects\Types\Complex\{
     tGeneric, tNGeneric, tROGeneric, tRONGeneric
 };
 

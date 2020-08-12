@@ -2,9 +2,10 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Types\{
-    tType, tNType, tROType, tRONType, tString
+use AeonDigital\Objects\Types\Complex\{
+    tType, tNType, tROType, tRONType
 };
+use AeonDigital\Objects\Types\Commom\tString as tString;
 
 require_once __DIR__ . "/../../../phpunit.php";
 

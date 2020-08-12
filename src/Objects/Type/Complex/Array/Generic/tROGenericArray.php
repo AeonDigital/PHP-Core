@@ -1,9 +1,9 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Types;
+namespace AeonDigital\Objects\Types\Complex;
 
-use AeonDigital\Objects\Types\tROGeneric as tROGeneric;
+use AeonDigital\Objects\Types\Complex\tROGeneric as tROGeneric;
 use AeonDigital\Interfaces\Objects\iTypeArray as iTypeArray;
 
 

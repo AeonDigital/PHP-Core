@@ -2,7 +2,7 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Types\{
+use AeonDigital\Objects\Types\Commom\{
     tString, tNString, tROString, tRONString, tNEString, tNNEString, tRONEString, tRONNEString
 };
 

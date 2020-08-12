@@ -2,8 +2,8 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Data\Field\fBool as fBool;
-use AeonDigital\Objects\Data\Field\fStringArray as fStringArray;
+use AeonDigital\Objects\Field\Commom\fBool as fBool;
+use AeonDigital\Objects\Field\Commom\fStringArray as fStringArray;
 
 require_once __DIR__ . "/../../../phpunit.php";
 

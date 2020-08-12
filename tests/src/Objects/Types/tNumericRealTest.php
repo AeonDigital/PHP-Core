@@ -2,7 +2,7 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Types\{
+use AeonDigital\Objects\Types\Commom\{
     tReal, tNReal, tROReal, tRONReal, tUReal, tNUReal, tROUReal, tRONUReal,
 };
 use AeonDigital\Objects\Realtype as Realtype;

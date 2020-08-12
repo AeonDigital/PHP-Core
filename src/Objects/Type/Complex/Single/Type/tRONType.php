@@ -1,7 +1,7 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Types;
+namespace AeonDigital\Objects\Types\Complex;
 
 use AeonDigital\Objects\Types\Abstracts\aClass as aClass;
 use AeonDigital\Objects\Standart\Complex\scRONType as scClass;

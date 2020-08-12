@@ -1,9 +1,9 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Types;
+namespace AeonDigital\Objects\Types\Complex;
 
-use AeonDigital\Objects\Types\tNGeneric as tNGeneric;
+use AeonDigital\Objects\Types\Complex\tNGeneric as tNGeneric;
 use AeonDigital\Interfaces\Objects\iTypeArray as iTypeArray;
 
 
