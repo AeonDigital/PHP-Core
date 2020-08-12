@@ -3,7 +3,7 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Data;
 
-use AeonDigital\Objects\Types\Commom\tROType as tROType;
+use AeonDigital\Objects\Field\Complex\fROFieldArray as fROFieldArray;
 use AeonDigital\Interfaces\Objects\iModel as iModel;
 
 
@@ -20,7 +20,7 @@ use AeonDigital\Interfaces\Objects\iModel as iModel;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class Model extends tROType implements iModel
+class Model extends fROFieldArray implements iModel
 {
     // Fazer agir como um modelo de tipos simples primeiro.
     // Depois, criar um tipo ``iType`` que use ``iModel``

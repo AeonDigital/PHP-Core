@@ -1,9 +1,9 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Field\Commom;
+namespace AeonDigital\Objects\Field\Complex;
 
-use AeonDigital\Objects\Types\Commom\tRONFieldArray as tRONFieldArray;
+use AeonDigital\Objects\Types\Complex\tRONFieldArray as tRONFieldArray;
 use AeonDigital\Interfaces\Objects\iFieldArray as iFieldArray;
 
 

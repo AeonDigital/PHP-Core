@@ -1,9 +1,9 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Field\Commom;
+namespace AeonDigital\Objects\Field\Complex;
 
-use AeonDigital\Objects\Types\Commom\tNFieldArray as tNFieldArray;
+use AeonDigital\Objects\Types\Complex\tNFieldArray as tNFieldArray;
 use AeonDigital\Interfaces\Objects\iFieldArray as iFieldArray;
 
 
