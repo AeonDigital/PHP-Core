@@ -3,8 +3,8 @@ declare (strict_types=1);
 
 namespace AeonDigital\Objects\Types;
 
-use AeonDigital\Objects\Types\Abstracts\aGeneric as aGeneric;
-use AeonDigital\Objects\Standart\Complex\scROGeneric as scClass;
+use AeonDigital\Objects\Types\Abstracts\aClass as aClass;
+use AeonDigital\Objects\Standart\Complex\scROType as scClass;
 use AeonDigital\Interfaces\Objects\iType as iType;
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Interfaces\Objects\iType as iType;
 
 
 /**
- * Tipo ``ReadOnly Generic``.
+ * Tipo ``ReadOnly Field``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class tROGeneric extends aGeneric
+class tROField extends aClass
 {
 
 
@@ -34,6 +34,17 @@ class tROGeneric extends aGeneric
     public static function getStandart() : string
     {
         return scClass::class;
+    }
+    /**
+     * Inicia uma nova instância.
+     *
+     * @param       mixed $value
+     *              Valor inicial da instância.
+     */
+    function __construct(
+        $value = undefined
+    ) {
+        parent::__construct($value, "AeonDigital\Interfaces\Objects\iType");
     }
     /**
      * Retorna uma instância definida com as propriedades indicadas no

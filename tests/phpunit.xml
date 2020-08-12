@@ -15,7 +15,7 @@
         <testsuite name="AeonDigital-PHP-Core">
             <!--
                 Defina aqui cada arquivo de testes que será utilizado.
--->
+            -->
             <file>src/global_functionsTests.php</file>
             <file>src/Objects/RealtypeTests.php</file>
             <file>src/Objects/ToolsTests.php</file>

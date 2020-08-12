@@ -1,9 +1,9 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Standart\Commom;
+namespace AeonDigital\Objects\Standart\Complex;
 
-use AeonDigital\Interfaces\Objects\Standart\Commom\iNType as iNType;
+use AeonDigital\Interfaces\Objects\Standart\Complex\iNType as iNType;
 use AeonDigital\Objects\Standart\Abstracts\aClass as aClass;
 
 

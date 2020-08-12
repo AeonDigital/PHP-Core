@@ -2,10 +2,10 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Objects\Standart\Commom\scGeneric as scGeneric;
-use AeonDigital\Objects\Standart\Commom\scNGeneric as scNGeneric;
-use AeonDigital\Objects\Standart\Commom\scROGeneric as scROGeneric;
-use AeonDigital\Objects\Standart\Commom\scRONGeneric as scRONGeneric;
+use AeonDigital\Objects\Standart\Complex\scGeneric as scGeneric;
+use AeonDigital\Objects\Standart\Complex\scNGeneric as scNGeneric;
+use AeonDigital\Objects\Standart\Complex\scROGeneric as scROGeneric;
+use AeonDigital\Objects\Standart\Complex\scRONGeneric as scRONGeneric;
 
 require_once __DIR__ . "/../../../phpunit.php";
 

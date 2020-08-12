@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types;
 
 use AeonDigital\Objects\Types\Abstracts\aClass as aClass;
-use AeonDigital\Objects\Standart\Commom\scROType as scClass;
+use AeonDigital\Objects\Standart\Complex\scROType as scClass;
 use AeonDigital\Interfaces\Objects\iType as iType;
 
 

@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types;
 
 use AeonDigital\Objects\Types\Abstracts\aGeneric as aGeneric;
-use AeonDigital\Objects\Standart\Commom\scNGeneric as scClass;
+use AeonDigital\Objects\Standart\Complex\scNGeneric as scClass;
 use AeonDigital\Interfaces\Objects\iType as iType;
 
 

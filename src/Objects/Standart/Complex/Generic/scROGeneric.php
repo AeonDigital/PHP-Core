@@ -1,9 +1,9 @@
 <?php
 declare (strict_types=1);
 
-namespace AeonDigital\Objects\Standart\Commom;
+namespace AeonDigital\Objects\Standart\Complex;
 
-use AeonDigital\Interfaces\Objects\Standart\Commom\iROGeneric as iROGeneric;
+use AeonDigital\Interfaces\Objects\Standart\Complex\iROGeneric as iROGeneric;
 use AeonDigital\Objects\Standart\Abstracts\aGeneric as aGeneric;
 
 
