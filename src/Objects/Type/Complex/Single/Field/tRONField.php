@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace AeonDigital\Objects\Types\Complex;
 
 use AeonDigital\Objects\Types\Abstracts\aClass as aClass;
-use AeonDigital\Objects\Standart\Complex\scROField as scClass;
+use AeonDigital\Objects\Standart\Complex\scRONField as scClass;
 use AeonDigital\Interfaces\Objects\iField as iField;
 
 
@@ -13,14 +13,14 @@ use AeonDigital\Interfaces\Objects\iField as iField;
 
 
 /**
- * Tipo ``ReadOnly Field``.
+ * Tipo ``ReadOnly Nullable Field``.
  *
  * @package     AeonDigital\Objects
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class tROField extends aClass
+class tRONField extends aClass
 {
 
 
