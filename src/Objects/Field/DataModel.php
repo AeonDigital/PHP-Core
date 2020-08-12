@@ -228,4 +228,159 @@ class DataModel extends fROFieldArray implements iDataModel
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Verifica se o valor indicado satisfaz os critérios de validação dos campos em
+     * comum que ele tenha com o presente modelo de dados.
+     *
+     * Falhará sempre que forem definidos nomes de campos inexistentes no atual modelo
+     * de dados.
+     *
+     * O estado da validação contendo os detalhes da mesma pode ser obtido com o
+     * método ``getCurrentFieldState``.
+     *
+     * @param       ?iterable $values
+     *              Objeto com os valores a serem testados.
+     *
+     * @param       bool $checkAll
+     *              Quando ``true`` apenas confirmará a validade da coleção de valores
+     *              se com os mesmos for possível preencher todos os campos obrigatórios
+     *              deste modelo de dados. Campos não declarados mas que possuem um
+     *              valor padrão definido **SEMPRE** passarão neste tipo de validação.
+     *
+     * @return      bool
+     */
+    public function validateValues(?iterable $values, bool $checkAll = false) : bool
+    {
+
+    }
+
+
+
+
+
+    /**
+     * Permite definir o valor de inúmeros campos do modelo de dados a partir de um
+     * objeto compatível.
+     *
+     * Apenas acolherá os valores passados caso tal definição torne o modelo como um
+     * todo válido.
+     *
+     * @param       ?iterable $values
+     *              Objeto com os valores a serem testados.
+     *
+     * @param       bool $checkAll
+     *              Quando ``true`` apenas confirmará a validade da coleção de valores
+     *              se com os mesmos for possível preencher todos os campos obrigatórios
+     *              deste modelo de dados. Campos não declarados mas que possuem um
+     *              valor padrão definido **SEMPRE** passarão neste tipo de validação.
+     *
+     * @return      bool
+     *              Retornará ``true`` caso os valores passados tornem o modelo válido.
+     */
+    public function setValues(?iterable $values, bool $checkAll = false) : bool
+    {
+
+    }
+    /**
+     * Retorna um ``array`` associativo contendo todos os campos do modelo de dados e
+     * seus respectivos valores atualmente definidos.
+     *
+     * @return      array
+     */
+    public function getValues() : array
+    {
+
+    }
+    /**
+     * Retorna um ``array`` associativo contendo todos os campos do modelo de dados e seus
+     * respectivos valores atualmente definidos usando seus formatos de armazenamento.
+     *
+     * @return      array
+     */
+    public function getStorageValues() : array
+    {
+
+    }
+    /**
+     * Retorna um ``array`` associativo contendo todos os campos do modelo de dados e seus
+     * respectivos valores atualmente definidos em seus formatos ``raw``.
+     *
+     * @return      array
+     */
+    public function getRawValues() : array
+    {
+
+    }
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Inicia um novo modelo de dados.
+     *
+     * @param       string $name
+     *              Nome do modelo de dados.
+     *
+     * @param       string $description
+     *              Descrição.
+     *
+     * @param       iterable $fields
+     *              Campos que esta instância terá.
+     *
+     * @throws      \InvalidArgumentException
+     *              Caso algum valor passado não seja válido.
+     */
+    function __construct(
+        string $name,
+        string $description,
+        iterable $fields
+    ) {
+        \preg_match("/^[a-zA-Z0-9_]+$/", $name, $fnd);
+        if (\count($fnd) === 0) {
+            $err = "Invalid value defined for \"name\". Expected string that matches the ``a-zA-Z0-9_`` pattern. Given: [ $name ]";
+            throw new \InvalidArgumentException($err);
+        }
+        $this->name = $name;
+        $this->description = $description;
+        parent::__construct($fields);
+    }
+
+
+
+
+
+    /**
+     * Retorna uma instância definida com as propriedades indicadas no
+     * ``array`` de configuração.
+     *
+     * @param       array $cfg
+     *              Array associativo contendo as configurações para a
+     *              definição da instância resultante.
+     *
+     * @return      iDataModel
+     */
+    public static function fromArray(array $cfg) : iDataModel
+    {
+        return new self(
+            ((\key_exists("name", $cfg) === true)           ? $cfg["name"]          : ""),
+            ((\key_exists("description", $cfg) === true)    ? $cfg["description"]   : ""),
+            ((\key_exists("fields", $cfg) === true)         ? $cfg["fields"]         : [])
+        );
+    }
 }

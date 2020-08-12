@@ -7,7 +7,7 @@ use AeonDigital\Objects\Standart\Commom\scNBool as scNBool;
 use AeonDigital\Objects\Standart\Commom\scROBool as scROBool;
 use AeonDigital\Objects\Standart\Commom\scRONBool as scRONBool;
 
-require_once __DIR__ . "/../../../phpunit.php";
+require_once __DIR__ . "/../../../../phpunit.php";
 
 
 

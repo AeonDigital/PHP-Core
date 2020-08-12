@@ -3,37 +3,37 @@ declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\Objects\Types\Complex\{
-    tType, tNType, tROType, tRONType
+    tField, tNField, tROField, tRONField
 };
-use AeonDigital\Objects\Types\Commom\tString as tString;
+use AeonDigital\Objects\Field\Commom\fString as fString;
 
-require_once __DIR__ . "/../../../phpunit.php";
-
-
+require_once __DIR__ . "/../../../../phpunit.php";
 
 
 
 
 
-class tTypeTest extends TestCase
+
+
+class tFieldTest extends TestCase
 {
 
 
 
     public function test_instance()
     {
-        $this->assertSame("AeonDigital\Interfaces\Objects\iType", tType::getStandart()::TYPE);
-        $this->assertSame(true, tType::getStandart()::IS_CLASS);
-        $this->assertSame(false, tType::getStandart()::HAS_LIMIT);
+        $this->assertSame("AeonDigital\Interfaces\Objects\iField", tField::getStandart()::TYPE);
+        $this->assertSame(true, tField::getStandart()::IS_CLASS);
+        $this->assertSame(false, tField::getStandart()::HAS_LIMIT);
 
 
 
         // Testes Not Nullable
-        $tValue01 = new tString("Instância Filha 01");
-        $tValue02 = new tString("Instância Filha 02");
+        $tValue01 = new fString("name1");
+        $tValue02 = new fString("name2");
 
-        $obj = new tType();
-        $this->assertSame("AeonDigital\Interfaces\Objects\iType", $obj->getType());
+        $obj = new tField();
+        $this->assertSame("AeonDigital\Interfaces\Objects\iField", $obj->getType());
         $this->assertFalse($obj->isIterable());
         $this->assertFalse($obj->isAllowNull());
         $this->assertFalse($obj->isReadOnly());
@@ -65,7 +65,7 @@ class tTypeTest extends TestCase
 
 
         // Define um valor no construtor
-        $obj = new tType($tValue01);
+        $obj = new tField($tValue01);
         $this->assertFalse($obj->isUndefined());
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertFalse($obj->isNullOrEquivalent());
@@ -73,7 +73,7 @@ class tTypeTest extends TestCase
 
 
         // "null" no construtor
-        $obj = new tType(null);
+        $obj = new tField(null);
         $this->assertTrue($obj->isUndefined());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
@@ -85,7 +85,7 @@ class tTypeTest extends TestCase
         // Testes Nullable
 
         // Passando "undefined" o valor será definido como "null".
-        $obj = new tNType(undefined);
+        $obj = new tNField(undefined);
         $this->assertTrue($obj->isUndefined());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
@@ -93,7 +93,7 @@ class tTypeTest extends TestCase
 
 
         // Passando "null" o valor será definido como "null".
-        $obj = new tNType(null);
+        $obj = new tNField(null);
         $this->assertTrue($obj->isUndefined());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
@@ -102,7 +102,7 @@ class tTypeTest extends TestCase
 
         // Teste de alteração de valor atualmetne setado.
         // Feito com uma instância "allowNull"
-        $obj = new tNType();
+        $obj = new tNField();
         $this->assertTrue($obj->isUndefined());
         $this->assertFalse($obj->isDefined());
         $this->assertNull($obj->get());
@@ -132,7 +132,7 @@ class tTypeTest extends TestCase
 
         // Teste de uma instância do tipo "readonly", ou seja, uma instância que
         // não permite a alteração de seu valor após "isUndefined = false"
-        $obj = new tROType($tValue02);
+        $obj = new tROField($tValue02);
         $this->assertFalse($obj->isUndefined());
         $this->assertSame($tValue02, $obj->get());
 
@@ -142,7 +142,7 @@ class tTypeTest extends TestCase
 
 
 
-        $obj = tType::fromArray([
+        $obj = tField::fromArray([
             "value" => $tValue02
         ]);
         $this->assertFalse($obj->isUndefined());

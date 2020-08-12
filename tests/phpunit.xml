@@ -22,32 +22,39 @@
             <file>src/Objects/Traits/MainCheckArgumentExceptionTest.php</file>
 
 
-            <file>src/Objects/Standart/scBoolTest.php</file>
-            <file>src/Objects/Standart/scNumericIntegerTest.php</file>
-            <file>src/Objects/Standart/scNumericFloagintTest.php</file>
-            <file>src/Objects/Standart/scNumericRealTest.php</file>
-            <file>src/Objects/Standart/scDateTimeTest.php</file>
-            <file>src/Objects/Standart/scStringTest.php</file>
-            <file>src/Objects/Standart/scGenericTest.php</file>
+            <file>src/Objects/Standart/Commom/scBoolTest.php</file>
+            <file>src/Objects/Standart/Commom/scNumericIntegerTest.php</file>
+            <file>src/Objects/Standart/Commom/scNumericFloagintTest.php</file>
+            <file>src/Objects/Standart/Commom/scNumericRealTest.php</file>
+            <file>src/Objects/Standart/Commom/scDateTimeTest.php</file>
+            <file>src/Objects/Standart/Commom/scStringTest.php</file>
+
+            <file>src/Objects/Standart/Complex/scTypeTest.php</file>
+            <file>src/Objects/Standart/Complex/scFieldTest.php</file>
+            <file>src/Objects/Standart/Complex/scGenericTest.php</file>
 
 
-            <file>src/Objects/Types/tBoolTest.php</file>
-            <file>src/Objects/Types/tNumericIntegerTest.php</file>
-            <file>src/Objects/Types/tNumericFloatingTest.php</file>
-            <file>src/Objects/Types/tNumericRealTest.php</file>
-            <file>src/Objects/Types/tDateTimeTest.php</file>
-            <file>src/Objects/Types/tStringTest.php</file>
-            <file>src/Objects/Types/tGenericTest.php</file>
-            <file>src/Objects/Types/tTypeTest.php</file>
+            <file>src/Objects/Types/Commom/tBoolTest.php</file>
+            <file>src/Objects/Types/Commom/tNumericIntegerTest.php</file>
+            <file>src/Objects/Types/Commom/tNumericFloatingTest.php</file>
+            <file>src/Objects/Types/Commom/tNumericRealTest.php</file>
+            <file>src/Objects/Types/Commom/tDateTimeTest.php</file>
+            <file>src/Objects/Types/Commom/tStringTest.php</file>
 
-            <file>src/Objects/Types/tTypeArrayTest.php</file>
+            <file>src/Objects/Types/Complex/tTypeTest.php</file>
+            <file>src/Objects/Types/Complex/tFieldTest.php</file>
+            <file>src/Objects/Types/Complex/tGenericTest.php</file>
 
-            <file>src/Objects/Data/FieldTest.php</file>
-
-
+            <file>src/Objects/Types/Array/tTypeArrayTest.php</file>
 
 
-            <!--
+            <file>src/Objects/Field/FieldTest.php</file>
+            <!--<file>src/Objects/Field/DataModelTest.php</file>
+
+
+
+
+
             <file>src/DataFormat/patterns/brasil/CNPJTest.php</file>
             <file>src/DataFormat/patterns/brasil/CPFTest.php</file>
             <file>src/DataFormat/patterns/brasil/NumberTest.php</file>

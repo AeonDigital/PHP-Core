@@ -5,7 +5,7 @@ namespace AeonDigital\Objects\Types\Complex;
 
 use AeonDigital\Objects\Types\Abstracts\aClass as aClass;
 use AeonDigital\Objects\Standart\Complex\scField as scClass;
-use AeonDigital\Interfaces\Objects\iField as iField;
+use AeonDigital\Interfaces\Objects\iType as iType;
 
 
 
@@ -54,9 +54,9 @@ class tField extends aClass
      *              Array associativo contendo as configurações para a
      *              definição da instância resultante.
      *
-     * @return      iField
+     * @return      iType
      */
-    public static function fromArray(array $cfg) : iField
+    public static function fromArray(array $cfg) : iType
     {
         return static::sttFromArray(self::class, $cfg);
     }

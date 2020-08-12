@@ -3,42 +3,42 @@ declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\Objects\Types\Commom\{
-    tReal, tNReal, tROReal, tRONReal, tUReal, tNUReal, tROUReal, tRONUReal,
+    tBool, tNBool, tROBool, tRONBool
 };
-use AeonDigital\Objects\Realtype as Realtype;
 
-require_once __DIR__ . "/../../../phpunit.php";
-
+require_once __DIR__ . "/../../../../phpunit.php";
 
 
 
 
 
-class tNumericRealTest extends TestCase
+
+
+class tBoolTest extends TestCase
 {
 
 
 
     public function test_instance()
     {
-        $this->assertSame(Realtype::class, tReal::getStandart()::TYPE);
-        $this->assertSame(true, tReal::getStandart()::IS_CLASS);
-        $this->assertSame(true, tReal::getStandart()::HAS_LIMIT);
+        $this->assertSame("Bool", tBool::getStandart()::TYPE);
+        $this->assertSame(false, tBool::getStandart()::IS_CLASS);
+        $this->assertSame(false, tBool::getStandart()::HAS_LIMIT);
 
 
 
         // Testes Not Nullable
-        $obj = new tReal();
-        $this->assertSame(tReal::getStandart()::TYPE, $obj->getType());
+        $obj = new tBool();
+        $this->assertSame(tBool::getStandart()::TYPE, $obj->getType());
         $this->assertFalse($obj->isIterable());
         $this->assertFalse($obj->isAllowNull());
         $this->assertFalse($obj->isReadOnly());
         $this->assertNull($obj->isAllowEmpty());
-        $this->assertSame("0", $obj->getNullEquivalent()->value());
+        $this->assertSame(false, $obj->getNullEquivalent());
 
         $this->assertSame(null, $obj->getDefault());
-        $this->assertSame("-999999999999999999999999999999999999", $obj->getMin()->value());
-        $this->assertSame("999999999999999999999999999999999999", $obj->getMax()->value());
+        $this->assertSame(null, $obj->getMin());
+        $this->assertSame(null, $obj->getMax());
         $this->assertSame(null, $obj->getLength());
         $this->assertSame(null, $obj->getEnumerator());
 
@@ -47,49 +47,49 @@ class tNumericRealTest extends TestCase
         $this->assertTrue($obj->isNullOrEquivalent());
 
         $this->assertSame("", $obj->getLastValidateError());
-        $this->assertSame("0", $obj->get()->value());
-        $this->assertSame("0", $obj->getNotNull()->value());
+        $this->assertSame(false, $obj->get());
+        $this->assertSame(false, $obj->getNotNull());
         $this->assertSame("0", $obj->toString());
 
         $this->assertFalse($obj->set(null));
         $this->assertSame("error.obj.type.not.allow.null", $obj->getLastValidateError());
-        $this->assertSame("0", $obj->get()->value());
+        $this->assertSame(false, $obj->get());
 
-        $this->assertTrue($obj->set(1));
+        $this->assertTrue($obj->set(true));
         $this->assertSame("", $obj->getLastValidateError());
-        $this->assertSame("1", $obj->get()->value());
+        $this->assertSame(true, $obj->get());
 
 
         // Define um valor no construtor
-        $obj = new tReal(1);
+        $obj = new tBool(true);
         $this->assertFalse($obj->isUndefined());
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertFalse($obj->isNullOrEquivalent());
-        $this->assertSame("1", $obj->get()->value());
+        $this->assertSame(true, $obj->get());
 
 
         // "undefined" no construtor e "default" definido
-        $obj = new tReal(undefined, 1);
+        $obj = new tBool(undefined, true);
         $this->assertTrue($obj->isUndefined());
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertFalse($obj->isNullOrEquivalent());
-        $this->assertSame("1", $obj->get()->value());
+        $this->assertSame(true, $obj->get());
 
 
         // "null" no construtor, sem default
-        $obj = new tReal(null);
+        $obj = new tBool(null);
         $this->assertTrue($obj->isUndefined());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
-        $this->assertSame("0", $obj->get()->value());
+        $this->assertSame(false, $obj->get());
 
 
         // "null" no construtor e "default" definido
-        $obj = new tReal(null, 1);
+        $obj = new tBool(null, true);
         $this->assertTrue($obj->isUndefined());
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
-        $this->assertSame("0", $obj->get()->value());
+        $this->assertSame(false, $obj->get());
 
 
 
@@ -99,15 +99,15 @@ class tNumericRealTest extends TestCase
         // Teste de inicialização com um tipo arbitrário para "default" e que
         // aceita "null" como válido.
         // Passando "undefined" o valor será definido como o "default"
-        $obj = new tNReal(undefined, 10);
+        $obj = new tNBool(undefined, true);
         $this->assertTrue($obj->isUndefined());
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertFalse($obj->isNullOrEquivalent());
-        $this->assertSame("10", $obj->get()->value());
+        $this->assertSame(true, $obj->get());
 
 
         // Passando "null" o valor será definido como "null".
-        $obj = new tNReal(null, 10);
+        $obj = new tNBool(null, true);
         $this->assertTrue($obj->isUndefined());
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
@@ -116,26 +116,26 @@ class tNumericRealTest extends TestCase
 
         // Teste de alteração de valor atualmetne setado.
         // Feito com uma instância "allowNull"
-        $obj = new tNReal(null);
+        $obj = new tNBool(null);
         $this->assertTrue($obj->isUndefined());
         $this->assertNull($obj->get());
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
 
-        $this->assertTrue($obj->set(10.11));
+        $this->assertTrue($obj->set(true));
         $this->assertFalse($obj->isUndefined());
         $this->assertSame("", $obj->getLastValidateError());
-        $this->assertSame("10.11", $obj->get()->value());
+        $this->assertSame(true, $obj->get());
 
-        $this->assertTrue($obj->set(-10.22));
+        $this->assertTrue($obj->set(false));
         $this->assertSame("", $obj->getLastValidateError());
-        $this->assertSame("-10.22", $obj->get()->value());
+        $this->assertSame(false, $obj->get());
 
         // Tenta setar um valor inválido e verifica que a mensagem de erro
         // informa a natureza do mesmo alem do valor ser mantido o mesmo.
-        $this->assertFalse($obj->set("invalid"));
+        $this->assertFalse($obj->set("2"));
         $this->assertSame("error.obj.type.unexpected", $obj->getLastValidateError());
-        $this->assertSame("-10.22", $obj->get()->value());
+        $this->assertSame(false, $obj->get());
 
 
 
@@ -144,37 +144,22 @@ class tNumericRealTest extends TestCase
 
         // Teste de uma instância do tipo "readonly", ou seja, uma instância que
         // não permite a alteração de seu valor após "isUndefined = false"
-        $obj = new tROReal(10);
+        $obj = new tROBool(true);
         $this->assertFalse($obj->isUndefined());
-        $this->assertSame("10", $obj->get()->value());
+        $this->assertSame(true, $obj->get());
 
-        $this->assertFalse($obj->set(-10));
+        $this->assertFalse($obj->set(false));
         $this->assertSame("error.obj.type.readonly", $obj->getLastValidateError());
-        $this->assertSame("10", $obj->get()->value());
+        $this->assertSame(true, $obj->get());
 
 
 
-
-        // Testes Min Max
-        $obj = new tReal(undefined, null, 10, 100);
-        $this->assertTrue($obj->isUndefined());
-        $this->assertTrue($obj->isNullEquivalent());
-        $this->assertTrue($obj->isNullOrEquivalent());
-        $this->assertSame("0", $obj->get()->value());
-        $this->assertTrue($obj->set(100));
-        $this->assertSame("100", $obj->get()->value());
-
-
-        $this->assertFalse($obj->set(101));
-        $this->assertSame("error.obj.value.out.of.range", $obj->getLastValidateError());
-        $this->assertSame("100", $obj->get()->value());
-
-        $this->assertFalse($obj->set(-1));
-        $this->assertSame("error.obj.value.out.of.range", $obj->getLastValidateError());
-        $this->assertSame("100", $obj->get()->value());
-
-        $this->assertTrue($obj->set(50));
-        $this->assertSame("", $obj->getLastValidateError());
-        $this->assertSame("50", $obj->get()->value());
+        $obj = tBool::fromArray([
+            "value" => true
+        ]);
+        $this->assertFalse($obj->isUndefined());
+        $this->assertFalse($obj->isNullEquivalent());
+        $this->assertFalse($obj->isNullOrEquivalent());
+        $this->assertSame(true, $obj->get());
     }
 }

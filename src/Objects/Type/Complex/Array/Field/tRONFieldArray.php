@@ -22,6 +22,6 @@ use AeonDigital\Interfaces\Objects\iFieldArray as iFieldArray;
  */
 class tRONFieldArray extends tRONField implements iFieldArray
 {
-    use \AeonDigital\Objects\Traits\FieldArray;
-    use \AeonDigital\Objects\Traits\FieldArrayConstructor;
+    use \AeonDigital\Objects\Traits\TypeArray;
+    use \AeonDigital\Objects\Traits\TypeArrayConstructor;
 }

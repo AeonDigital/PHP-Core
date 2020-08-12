@@ -34,7 +34,7 @@ trait FieldArrayConstructor
      * @param       string $description
      *              Descrição do campo (opcional).
      *
-     * @param       mixed $value
+     * @param       ?iterable $value
      *              Valor inicial da instância.
      *
      * @param       mixed $valueDefault

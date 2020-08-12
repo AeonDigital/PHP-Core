@@ -27,7 +27,7 @@ use AeonDigital\Objects\Types\Complex\{
     tTypeArray, tNTypeArray, tROTypeArray, tRONTypeArray,
 };
 
-require_once __DIR__ . "/../../../phpunit.php";
+require_once __DIR__ . "/../../../../phpunit.php";
 
 
 

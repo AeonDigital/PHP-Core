@@ -7,7 +7,7 @@ use AeonDigital\Objects\Standart\Complex\scNGeneric as scNGeneric;
 use AeonDigital\Objects\Standart\Complex\scROGeneric as scROGeneric;
 use AeonDigital\Objects\Standart\Complex\scRONGeneric as scRONGeneric;
 
-require_once __DIR__ . "/../../../phpunit.php";
+require_once __DIR__ . "/../../../../phpunit.php";
 
 
 

@@ -9,7 +9,7 @@ use AeonDigital\Objects\Standart\Commom\
     };
 
 
-require_once __DIR__ . "/../../../phpunit.php";
+require_once __DIR__ . "/../../../../phpunit.php";
 
 
 

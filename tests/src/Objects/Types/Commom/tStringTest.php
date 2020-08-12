@@ -6,7 +6,7 @@ use AeonDigital\Objects\Types\Commom\{
     tString, tNString, tROString, tRONString, tNEString, tNNEString, tRONEString, tRONNEString
 };
 
-require_once __DIR__ . "/../../../phpunit.php";
+require_once __DIR__ . "/../../../../phpunit.php";
 
 
 

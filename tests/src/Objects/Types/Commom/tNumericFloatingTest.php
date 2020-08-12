@@ -7,7 +7,7 @@ use AeonDigital\Objects\Types\Commom\{
     tDouble, tNDouble, tRODouble, tRONDouble, tUDouble, tNUDouble, tROUDouble, tRONUDouble,
 };
 
-require_once __DIR__ . "/../../../phpunit.php";
+require_once __DIR__ . "/../../../../phpunit.php";
 
 
 
