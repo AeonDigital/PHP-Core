@@ -378,9 +378,13 @@ trait TypeArray
         else {
             if ($values !== null && \count($values) > 0) {
                 $r = true;
+                $firstReadOnlyInsert = ($this->isReadOnly() === true && $this->undefined === true);
                 foreach ($values as $k => $v) {
                     if ($r === true) {
                         $r = $this->setKeyValue((string)$k, $v);
+                        if ($firstReadOnlyInsert === true) {
+                            $this->undefined = true;
+                        }
                     }
                 }
 
@@ -390,6 +394,10 @@ trait TypeArray
                         $this->protectedUnregisterArraySetState($k);
                     }
                 }
+                else {
+                    $this->undefined = false;
+                }
+
                 $this->value = null;
                 $this->valueRaw = null;
                 return $r;

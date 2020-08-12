@@ -47,7 +47,7 @@ trait FieldMethods
      *
      * @var         string
      */
-    private string $description = "";
+    protected string $description = "";
     /**
      * Retorna a descrição de uso/funcionalidade do campo.
      *
@@ -56,6 +56,37 @@ trait FieldMethods
     public function getDescription() : string
     {
         return $this->description;
+    }
+
+
+
+
+
+    /**
+     * Indica se o campo é do tipo modelo de dados.
+     */
+    protected bool $isModel = false;
+    /**
+     * Indica quando o campo é um modelo de dados.
+     *
+     * @return      bool
+     */
+    public function isDataModel() : bool
+    {
+        return $this->isModel;
+    }
+    /**
+     * Indica se o campo é um array de modelo de dados.
+     */
+    protected bool $isModelCollection = false;
+    /**
+     * Indica quando o campo é um array de modelos de dados.
+     *
+     * @return      bool
+     */
+    public function isDataModelCollection() : bool
+    {
+        return $this->isModelCollection;
     }
 
 
