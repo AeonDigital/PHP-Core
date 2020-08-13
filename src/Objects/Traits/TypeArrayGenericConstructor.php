@@ -27,7 +27,7 @@ trait TypeArrayGenericConstructor
     /**
      * Inicia uma nova instância.
      *
-     * @param       ?iterable $value
+     * @param       iterable $value
      *              Valor inicial da instância.
      *
      * @param       string $type
@@ -35,7 +35,7 @@ trait TypeArrayGenericConstructor
      *              a serem usados por esta instância deverão possuir.
      */
     function __construct(
-        ?iterable $value = [],
+        iterable $value = [],
         string $type
     ) {
         parent::__construct(undefined, $type);

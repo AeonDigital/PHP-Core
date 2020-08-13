@@ -41,6 +41,13 @@ abstract class aType extends BObject implements iType
      * @var         mixed
      */
     protected $valueRaw = null;
+    /**
+     * Indica quando a instância está definida com um valor considerado
+     * válido dentro dos seus critérios de aceite.
+     *
+     * @var         bool
+     */
+    protected bool $valueValid = false;
 
 
 
@@ -76,6 +83,23 @@ abstract class aType extends BObject implements iType
      * @var         ?array
      */
     protected ?array $inputFormat = null;
+
+
+
+    /**
+     * Armazena o estado da última tentativa de definição de um valor
+     * para a instância atual.
+     *
+     * @var         string
+     */
+    protected string $lastSetState = "valid";
+    /**
+     * Armazena o estado da última tentativa de validação de um valor
+     * usando esta instância.
+     *
+     * @var         string
+     */
+    protected string $lastValidateState = "valid";
 
 
 
@@ -358,11 +382,13 @@ abstract class aType extends BObject implements iType
      * Retornará ``true`` caso o valor atualmente definido esteja em conformidade
      * com todos os critérios de validação para este campo.
      *
+     * Seu valor apenas deve ser levado em conta para campos simples.
+     *
      * @return      bool
      */
     public function isValid() : bool
     {
-        return ($this->isIterable === true || $this->validateValue($this->value) === true);
+        return ($this->iterable === true || $this->valueValid === true);
     }
     /**
      * Indica se esta instância ainda não recebeu algum valor válido de forma explicita.
@@ -488,13 +514,6 @@ abstract class aType extends BObject implements iType
 
 
     /**
-     * Armazena o último erro encontrado ao tentar definir um valor para
-     * esta instância.
-     *
-     * @var         string
-     */
-    protected string $lastValidateError = "";
-    /**
      * Verifica se o valor indicado satisfaz os critérios de aceitação para este campo.
      *
      * @param       mixed $v
@@ -504,26 +523,30 @@ abstract class aType extends BObject implements iType
      */
     public function validateValue($v) : bool
     {
-        $this->lastValidateError = "";
-
         static::getStandart()::parseIfValidate(
-            $v, $this->lastValidateError,
+            $v, $this->lastValidateState,
             $this->getMin(), $this->getMax(),
             $this->getEnumerator(true),
             $this->inputFormat
         );
 
-        return ($this->lastValidateError === "");
+        if ($this->lastValidateState === "") {
+            $this->lastValidateState = "valid";
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     /**
-     * Retorna o último código de erro encontrado ao tentar definir ou validar um valor
-     * para a instância. ``""`` será retornado caso não existam erros.
+     * Retorna o último código de validação definido.
+     * Retornará ``valid`` caso não existam erros.
      *
      * @return      string
      */
-    public function getLastValidateError() : string
+    public function getLastValidateState() : string
     {
-        return $this->lastValidateError;
+        return $this->lastValidateState;
     }
 
 
@@ -544,6 +567,16 @@ abstract class aType extends BObject implements iType
         return (($this->iterable === false) ? $this->protectedSet($v) : false);
     }
     /**
+     * Retorna o último código validação da última ação ``set``.
+     * Retornará ``valid`` caso não existam erros.
+     *
+     * @return      string
+     */
+    public function getLastSetState() : string
+    {
+        return $this->lastSetState;
+    }
+    /**
      * Define um novo valor para a instância internamente.
      *
      * @param       mixed $v
@@ -552,48 +585,32 @@ abstract class aType extends BObject implements iType
     protected function protectedSet($v) : bool
     {
         $r = false;
-        $this->lastValidateError = "";
+        $this->lastSetState = "valid";
 
         if ($this->isReadOnly() === true && $this->undefined === false) {
-            $this->lastValidateError = "error.obj.type.readonly";
+            $this->lastSetState = "error.obj.type.readonly";
         }
         else {
             $n = static::getStandart()::parseIfValidate(
-                $v, $this->lastValidateError,
+                $v, $this->lastSetState,
                 $this->getMin(), $this->getMax(),
                 $this->getEnumerator(true),
                 $this->inputFormat
             );
 
-            if ($this->lastValidateError === "") {
+            if ($this->lastSetState === "") {
                 $r = true;
                 $this->value = (
                     (($n === null) ? null : (($this->inputFormat === null) ? $n : $this->inputFormat["format"]($n)))
                 );
                 $this->valueRaw = $v;
                 $this->undefined = false;
+                $this->valueValid = true;
+                $this->lastSetState = "valid";
             }
         }
-
-        $this->protectedRegisterSetState($v, $this->lastValidateError);
         return $r;
     }
-
-
-
-    /**
-     * Responsável por registrar internamente o estado da última tentativa de
-     * definir um novo valor para esta instância.
-     *
-     * @param       mixed $val
-     *              Valor.
-     *
-     * @param       string $err
-     *              Resultado da validação.
-     *
-     * @return      void
-     */
-    protected function protectedRegisterSetState($val, string $err) : void { }
 
 
 

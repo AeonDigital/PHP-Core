@@ -27,7 +27,7 @@ trait TypeArrayConstructor
     /**
      * Inicia uma nova instância.
      *
-     * @param       ?iterable $value
+     * @param       iterable $value
      *              Valor inicial da instância.
      *
      * @param       mixed $valueDefault
@@ -94,7 +94,7 @@ trait TypeArrayConstructor
      * ```
      */
     function __construct(
-        ?iterable $value = [],
+        iterable $value = [],
         $valueDefault = null,
         $valueMin = null,
         $valueMax = null,

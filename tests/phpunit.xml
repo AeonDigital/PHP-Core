@@ -49,8 +49,8 @@
 
 
             <file>src/Objects/Field/FieldTest.php</file>
-            <!--<file>src/Objects/Field/DataModelTest.php</file>
-
+            <file>src/Objects/Field/DataModelTest.php</file>
+            <!--
 
 
 

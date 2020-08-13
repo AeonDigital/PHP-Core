@@ -43,17 +43,17 @@ class tStringTest extends TestCase
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
 
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("", $obj->get());
         $this->assertSame("", $obj->getNotNull());
         $this->assertSame("", $obj->toString());
 
         $this->assertFalse($obj->set(null));
-        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastValidateError());
+        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastSetState());
         $this->assertSame("", $obj->get());
 
         $this->assertTrue($obj->set("1"));
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("1", $obj->get());
 
 
@@ -121,17 +121,17 @@ class tStringTest extends TestCase
 
         $this->assertTrue($obj->set("10"));
         $this->assertFalse($obj->isUndefined());
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("10", $obj->get());
 
         $this->assertTrue($obj->set("-10"));
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("-10", $obj->get());
 
         // Tenta setar um valor inválido e verifica que a mensagem de erro
         // informa a natureza do mesmo alem do valor ser mantido o mesmo.
         $this->assertFalse($obj->set(new \stdClass()));
-        $this->assertSame("error.obj.type.unexpected", $obj->getLastValidateError());
+        $this->assertSame("error.obj.type.unexpected", $obj->getLastSetState());
         $this->assertSame("-10", $obj->get());
 
 
@@ -146,7 +146,7 @@ class tStringTest extends TestCase
         $this->assertSame("10", $obj->get());
 
         $this->assertFalse($obj->set("-10"));
-        $this->assertSame("error.obj.type.readonly", $obj->getLastValidateError());
+        $this->assertSame("error.obj.type.readonly", $obj->getLastSetState());
         $this->assertSame("10", $obj->get());
 
 
@@ -166,15 +166,15 @@ class tStringTest extends TestCase
 
 
         $this->assertFalse($obj->set("invalid value set; exceed"));
-        $this->assertSame("error.obj.value.max.length.exceeded", $obj->getLastValidateError());
+        $this->assertSame("error.obj.value.max.length.exceeded", $obj->getLastSetState());
         $this->assertSame("valid value", $obj->get());
 
         $this->assertFalse($obj->set("inv"));
-        $this->assertSame("error.obj.value.min.length.expected", $obj->getLastValidateError());
+        $this->assertSame("error.obj.value.min.length.expected", $obj->getLastSetState());
         $this->assertSame("valid value", $obj->get());
 
         $this->assertTrue($obj->set("valid again"));
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("valid again", $obj->get());
 
 
@@ -193,7 +193,7 @@ class tStringTest extends TestCase
         $this->assertSame("notEmpty", $obj->get());
 
         $this->assertFalse($obj->set(""));
-        $this->assertSame("error.obj.type.not.allow.empty", $obj->getLastValidateError());
+        $this->assertSame("error.obj.type.not.allow.empty", $obj->getLastSetState());
         $this->assertSame("notEmpty", $obj->get());
 
         $obj = new tNEString("");
@@ -210,7 +210,7 @@ class tStringTest extends TestCase
         $this->assertSame(null, $obj->get());
 
         $this->assertFalse($obj->set(""));
-        $this->assertSame("error.obj.type.not.allow.empty", $obj->getLastValidateError());
+        $this->assertSame("error.obj.type.not.allow.empty", $obj->getLastSetState());
         $this->assertSame(null, $obj->get());
 
 
@@ -248,11 +248,11 @@ class tStringTest extends TestCase
         $this->assertSame(["val1", "val2", "val3"], $obj->getEnumerator(true));
 
         $this->assertFalse($obj->set("invalid"));
-        $this->assertSame("error.obj.value.not.in.enumerator", $obj->getLastValidateError());
+        $this->assertSame("error.obj.value.not.in.enumerator", $obj->getLastSetState());
         $this->assertSame("", $obj->get());
 
         $this->assertTrue($obj->set("val2"));
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("val2", $obj->get());
 
 
@@ -268,18 +268,20 @@ class tStringTest extends TestCase
         $obj = new tString(undefined, null, null, null, null, "Brasil.ZipCode");
         $this->assertSame("AeonDigital\\DataFormat\\Patterns\\Brasil\\ZipCode", $obj->getInputFormat());
         $this->assertFalse($obj->set("invalid zipcode"));
-        $this->assertSame("error.obj.value.invalid.input.format", $obj->getLastValidateError());
+        $this->assertSame("error.obj.value.invalid.input.format", $obj->getLastSetState());
+        $this->assertSame("valid", $obj->getLastValidateState());
         $this->assertSame("", $obj->get());
 
         $this->assertFalse($obj->validateValue("11111"));
-        $this->assertSame("error.obj.value.invalid.input.format", $obj->getLastValidateError());
+        $this->assertSame("error.obj.value.invalid.input.format", $obj->getLastValidateState());
 
         $this->assertTrue($obj->validateValue("96080150"));
         $this->assertTrue($obj->validateValue("96.080-150"));
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastValidateState());
 
         $this->assertTrue($obj->set("96080-150"));
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
+        $this->assertSame("valid", $obj->getLastValidateState());
         $this->assertSame("96.080-150", $obj->get());
         $this->assertSame("96080150", $obj->getStorageValue());
         $this->assertSame("96080-150", $obj->getRawValue());

@@ -46,17 +46,17 @@ class tNumericRealTest extends TestCase
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
 
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("0", $obj->get()->value());
         $this->assertSame("0", $obj->getNotNull()->value());
         $this->assertSame("0", $obj->toString());
 
         $this->assertFalse($obj->set(null));
-        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastValidateError());
+        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastSetState());
         $this->assertSame("0", $obj->get()->value());
 
         $this->assertTrue($obj->set(1));
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("1", $obj->get()->value());
 
 
@@ -124,17 +124,17 @@ class tNumericRealTest extends TestCase
 
         $this->assertTrue($obj->set(10.11));
         $this->assertFalse($obj->isUndefined());
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("10.11", $obj->get()->value());
 
         $this->assertTrue($obj->set(-10.22));
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("-10.22", $obj->get()->value());
 
         // Tenta setar um valor inválido e verifica que a mensagem de erro
         // informa a natureza do mesmo alem do valor ser mantido o mesmo.
         $this->assertFalse($obj->set("invalid"));
-        $this->assertSame("error.obj.type.unexpected", $obj->getLastValidateError());
+        $this->assertSame("error.obj.type.unexpected", $obj->getLastSetState());
         $this->assertSame("-10.22", $obj->get()->value());
 
 
@@ -149,7 +149,7 @@ class tNumericRealTest extends TestCase
         $this->assertSame("10", $obj->get()->value());
 
         $this->assertFalse($obj->set(-10));
-        $this->assertSame("error.obj.type.readonly", $obj->getLastValidateError());
+        $this->assertSame("error.obj.type.readonly", $obj->getLastSetState());
         $this->assertSame("10", $obj->get()->value());
 
 
@@ -166,15 +166,15 @@ class tNumericRealTest extends TestCase
 
 
         $this->assertFalse($obj->set(101));
-        $this->assertSame("error.obj.value.out.of.range", $obj->getLastValidateError());
+        $this->assertSame("error.obj.value.out.of.range", $obj->getLastSetState());
         $this->assertSame("100", $obj->get()->value());
 
         $this->assertFalse($obj->set(-1));
-        $this->assertSame("error.obj.value.out.of.range", $obj->getLastValidateError());
+        $this->assertSame("error.obj.value.out.of.range", $obj->getLastSetState());
         $this->assertSame("100", $obj->get()->value());
 
         $this->assertTrue($obj->set(50));
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("50", $obj->get()->value());
     }
 }

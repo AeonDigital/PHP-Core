@@ -33,16 +33,12 @@ class FieldTest extends TestCase
         $this->assertSame("description", $obj->getDescription());
 
         $this->assertTrue($obj->set(true));
-        $this->assertSame("", $obj->getLastValidateError());
-        $this->assertTrue($obj->isCurrentFieldStateValid());
-        $this->assertSame("valid", $obj->getCurrentFieldState());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame(true, $obj->get());
 
 
         $this->assertFalse($obj->set("invalid"));
-        $this->assertSame("error.obj.type.unexpected", $obj->getLastValidateError());
-        $this->assertFalse($obj->isCurrentFieldStateValid());
-        $this->assertSame("error.obj.type.unexpected", $obj->getCurrentFieldState());
+        $this->assertSame("error.obj.type.unexpected", $obj->getLastSetState());
         $this->assertSame(true, $obj->get());
 
 
@@ -59,18 +55,20 @@ class FieldTest extends TestCase
         $this->assertTrue(is_a($obj, fStringArray::class));
         $this->assertSame("fieldName", $obj->getName());
         $this->assertSame("", $obj->getDescription());
-        $this->assertTrue($obj->isCurrentFieldStateValid());
-        $this->assertSame("valid", $obj->getCurrentFieldState());
 
         $this->assertTrue($obj->setKeyValue("p1", "v1"));
-        $this->assertSame("", $obj->getLastValidateError());
-        $this->assertTrue($obj->isCurrentFieldStateValid());
-        $this->assertSame("valid", $obj->getCurrentFieldState());
+        $this->assertSame("valid", $obj->getLastSetState());
 
         $this->assertFalse($obj->setKeyValue("p2", "v11"));
-        $this->assertSame("error.obj.value.not.in.enumerator", $obj->getLastValidateError());
-        $this->assertFalse($obj->isCurrentFieldStateValid());
-        $this->assertSame(["p1" => "valid", "p2" => "error.obj.value.not.in.enumerator"], $obj->getCurrentFieldState());
+        $this->assertSame("error.obj.value.not.in.enumerator", $obj->getLastSetState());
+        $this->assertSame(["p1" => "v1"], $obj->toArray());
+
+
+        $this->assertTrue($obj->setKeyValue("p3", "v3"));
+        $this->assertSame("valid", $obj->getLastSetState());
+
+        $this->assertFalse($obj->validateValue("v22"));
+        $this->assertSame("error.obj.value.not.in.enumerator", $obj->getLastValidateState());
     }
 
 

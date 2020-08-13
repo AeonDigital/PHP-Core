@@ -150,20 +150,22 @@ class tTypeArrayTest extends TestCase
         $this->assertFalse($obj->isNullEquivalent());
         $this->assertFalse($obj->isNullOrEquivalent());
 
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
+        $this->assertSame("valid", $obj->getLastValidateState());
         $this->assertSame(0, $obj->get());
         $this->assertSame(0, $obj->getNotNull());
         $this->assertSame("", $obj->toString());
 
         $this->assertFalse($obj->set(null));
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
+        $this->assertSame("valid", $obj->getLastValidateState());
         $this->assertSame(0, $obj->get());
 
 
 
 
         // Teste dos métodos específicos para uso como um array
-        $obj = new tNByteArray(null);
+        $obj = new tNByteArray();
         $this->assertTrue($obj->setCaseInsensitive());
         $this->assertFalse($obj->setCaseInsensitive());
         $this->assertFalse($obj->isCaseSensitive());
@@ -177,6 +179,13 @@ class tTypeArrayTest extends TestCase
         $this->assertTrue($obj->unsetKeyValue("undef"));
         $this->assertFalse($obj->hasKeyValue("first"));
 
+        $this->assertFalse($obj->setKeyValue("invalid", "inv"));
+        $this->assertSame("error.obj.type.unexpected", $obj->getLastSetState());
+        $this->assertSame("valid", $obj->getLastValidateState());
+
+        $this->assertFalse($obj->validateValue(1000));
+        $this->assertSame("error.obj.type.unexpected", $obj->getLastSetState());
+        $this->assertSame("error.obj.value.out.of.range", $obj->getLastValidateState());
 
         $this->assertTrue($obj->setKeyValue("PROP1", 1));
         $this->assertTrue($obj->setKeyValue("PROP2", 2));
@@ -289,7 +298,7 @@ class tTypeArrayTest extends TestCase
 
         $this->assertTrue($obj->setKeyValue("prop1", "11.111111"));
         $this->assertFalse($obj->setKeyValue("prop2", "9988877a"));
-        $this->assertSame("error.obj.value.invalid.input.format", $obj->getLastValidateError());
+        $this->assertSame("error.obj.value.invalid.input.format", $obj->getLastSetState());
         $this->assertTrue($obj->setKeyValue("prop2", "22222-222"));
         $this->assertTrue($obj->setKeyValue("prop3", "33.333333"));
         $this->assertTrue($obj->setKeyValue("prop4", "44.444-444"));

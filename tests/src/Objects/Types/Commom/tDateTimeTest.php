@@ -44,17 +44,17 @@ class tDateTimeTest extends TestCase
         $this->assertTrue($obj->isNullEquivalent());
         $this->assertTrue($obj->isNullOrEquivalent());
 
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("0000-01-01 00:00:00", $obj->get()->format("Y-m-d H:i:s"));
         $this->assertSame("0000-01-01 00:00:00", $obj->getNotNull()->format("Y-m-d H:i:s"));
         $this->assertSame("0000-01-01 00:00:00", $obj->toString());
 
         $this->assertFalse($obj->set(null));
-        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastValidateError());
+        $this->assertSame("error.obj.type.not.allow.null", $obj->getLastSetState());
         $this->assertSame("0000-01-01 00:00:00", $obj->get()->format("Y-m-d H:i:s"));
 
         $this->assertTrue($obj->set("2020-02-02 22:22:22"));
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("2020-02-02 22:22:22", $obj->get()->format("Y-m-d H:i:s"));
 
 
@@ -122,17 +122,17 @@ class tDateTimeTest extends TestCase
 
         $this->assertTrue($obj->set("2020-02-02 22:22:22"));
         $this->assertFalse($obj->isUndefined());
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("2020-02-02 22:22:22", $obj->get()->format("Y-m-d H:i:s"));
 
         $this->assertTrue($obj->set("1010-01-01 11:11:11"));
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("1010-01-01 11:11:11", $obj->get()->format("Y-m-d H:i:s"));
 
         // Tenta setar um valor inválido e verifica que a mensagem de erro
         // informa a natureza do mesmo alem do valor ser mantido o mesmo.
         $this->assertFalse($obj->set("invalid"));
-        $this->assertSame("error.obj.type.unexpected", $obj->getLastValidateError());
+        $this->assertSame("error.obj.type.unexpected", $obj->getLastSetState());
         $this->assertSame("1010-01-01 11:11:11", $obj->get()->format("Y-m-d H:i:s"));
 
 
@@ -147,7 +147,7 @@ class tDateTimeTest extends TestCase
         $this->assertSame("1010-01-01 11:11:11", $obj->get()->format("Y-m-d H:i:s"));
 
         $this->assertFalse($obj->set("2020-02-02 22:22:22"));
-        $this->assertSame("error.obj.type.readonly", $obj->getLastValidateError());
+        $this->assertSame("error.obj.type.readonly", $obj->getLastSetState());
         $this->assertSame("1010-01-01 11:11:11", $obj->get()->format("Y-m-d H:i:s"));
 
 
@@ -164,15 +164,15 @@ class tDateTimeTest extends TestCase
 
 
         $this->assertFalse($obj->set("2020-01-01 00:00:21"));
-        $this->assertSame("error.obj.value.out.of.range", $obj->getLastValidateError());
+        $this->assertSame("error.obj.value.out.of.range", $obj->getLastSetState());
         $this->assertSame("2020-01-01 00:00:20", $obj->get()->format("Y-m-d H:i:s"));
 
         $this->assertFalse($obj->set("2020-01-01 00:00:10"));
-        $this->assertSame("error.obj.value.out.of.range", $obj->getLastValidateError());
+        $this->assertSame("error.obj.value.out.of.range", $obj->getLastSetState());
         $this->assertSame("2020-01-01 00:00:20", $obj->get()->format("Y-m-d H:i:s"));
 
         $this->assertTrue($obj->set("2020-01-01 00:00:15"));
-        $this->assertSame("", $obj->getLastValidateError());
+        $this->assertSame("valid", $obj->getLastSetState());
         $this->assertSame("2020-01-01 00:00:15", $obj->get()->format("Y-m-d H:i:s"));
     }
 }

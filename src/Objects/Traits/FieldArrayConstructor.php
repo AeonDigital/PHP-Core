@@ -34,7 +34,7 @@ trait FieldArrayConstructor
      * @param       string $description
      *              Descrição do campo (opcional).
      *
-     * @param       ?iterable $value
+     * @param       mixed $value
      *              Valor inicial da instância.
      *
      * @param       mixed $valueDefault
@@ -105,7 +105,7 @@ trait FieldArrayConstructor
     function __construct(
         string $name,
         string $description = "",
-        ?iterable $value = [],
+        iterable $value = [],
         $valueDefault = null,
         $valueMin = null,
         $valueMax = null,
