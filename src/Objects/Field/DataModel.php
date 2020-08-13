@@ -587,12 +587,26 @@ class DataModel extends fROFieldArray implements iDataModel
                 $enumerator     = \iterable_check_default($fieldData, "enumerator", null);
                 $inputFormat    = \iterable_check_default($fieldData, "inputFormat", null);
 
-                $nsClass    = "\\AeonDigital\\Objects\\Field\\Commom\\f";
+
+                $classNS    = "Commom";
                 $classRO    = (($readOnly === true)     ? "RO"  : "");
                 $classN     = (($allowNull === true)    ? "N"   : "");
                 $classE     = (($allowEmpty === false)  ? "NE"  : "");
                 $classU     = (($unsigned === true)     ? "U"   : "");
-                $nsClass    = $nsClass . $classRO . $classN . $classU . $classE . $type;
+                $classArray = "";
+
+
+                if (\key_exists("modelName", $fieldData) === true) {
+                    $type       = "Field";
+                    $classNS    = "Complex";
+                    $classArray = ((\strpos($fieldData["modelName"], "[]") === false) ? "" : "Array");
+                    $readOnly   = false;
+                    $allowEmpty = true;
+                    $unsigned   = false;
+                }
+
+                $nsClass = "\\AeonDigital\\Objects\\Field\\$classNS\\f";
+                $nsClass .= $classRO . $classN . $classU . $classE . $type . $classArray;
 
                 $fField = new $nsClass(
                     $name, $description, undefined, $default, $min, $max, $enumerator, $inputFormat
