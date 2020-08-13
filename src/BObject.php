@@ -46,15 +46,6 @@ abstract class BObject
         throw new \RuntimeException("Unable to use \"__get\" method.");
     }
     /**
-     * Desabilita a função mágica ``__isset``.
-     *
-     * @codeCoverageIgnore
-     */
-    public function __isset($name)
-    {
-        throw new \RuntimeException("Unable to use \"__isset\" method.");
-    }
-    /**
      * Desabilita a função mágica ``__unset``.
      *
      * @codeCoverageIgnore
