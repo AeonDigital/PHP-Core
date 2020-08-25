@@ -135,7 +135,7 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
         }
 
         if (\is_a($v, "\DateTime") === true) {
-            return Tools::toDateTimeString($v, $aux, $dateMask);
+            return Tools::toDateTimeString($v, "Y-m-d H:i:s", $dateMask);
         } elseif ($aux !== null && \is_numeric($v) === false) {
             return Tools::toDateTimeString($v, $aux, $dateMask);
         } else {
