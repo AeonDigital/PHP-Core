@@ -110,7 +110,7 @@ final class Phone extends aStringFormat
             if (\mb_strlen($v) === 10) {
                 return "(" . \mb_substr($v, 0, 2) . ") " . \mb_substr($v, 2, 4) . "." . \mb_substr($v, 6, 4);
             } elseif (\mb_strlen($v) === 11) {
-                return "(" . \mb_substr($v, 0, 2) . ") " . \mb_substr($v, 2, 3) . "." . \mb_substr($v, 5, 3) . "." . \mb_substr($v, 8, 3);
+                return "(" . \mb_substr($v, 0, 2) . ") " . \mb_substr($v, 2, 5) . "." . \mb_substr($v, 7, 4);
             }
         }
 
