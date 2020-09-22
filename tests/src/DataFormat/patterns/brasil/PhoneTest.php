@@ -99,7 +99,7 @@ class BrasilPhoneTest extends TestCase
 
     public function test_method_format()
     {
-        $this->assertSame("(00) 999.888.777", Phone::format("00999888777"));
+        $this->assertSame("(00) 99999.8888", Phone::format("00999998888"));
         $this->assertSame("(00) 9988.7766", Phone::format("0099887766"));
         $this->assertSame(null, Phone::format("009988776"));
         $this->assertSame(null, Phone::format("009998887776"));
@@ -110,7 +110,7 @@ class BrasilPhoneTest extends TestCase
 
     public function test_method_removeFormat()
     {
-        $this->assertSame("00999888777", Phone::removeFormat("(00) 999.888.777"));
+        $this->assertSame("00999998888", Phone::removeFormat("(00) 99999.8888"));
         $this->assertSame("0099887766", Phone::removeFormat("(00) 99.88.77.66"));
         $this->assertSame(null, Phone::removeFormat(null));
     }
@@ -119,7 +119,7 @@ class BrasilPhoneTest extends TestCase
 
     public function test_method_storageFormat()
     {
-        $this->assertSame("00999888777", Phone::storageFormat("(00) 999.888.777"));
+        $this->assertSame("00999998888", Phone::storageFormat("(00) 99999.8888"));
         $this->assertSame(null, Phone::storageFormat("(00) aaa.bbb.ccc"));
     }
 }
