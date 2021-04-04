@@ -236,13 +236,19 @@ abstract class aModel extends BObject implements iModel
      * Retorna um ``array`` contendo o nome de cada um dos campos existentes neste
      * modelo de dados.
      *
+     * @param       bool $getReferences
+     *              Quando ``true`` retornará todos os campos existentes.
+     *              Quando ``false`` não trará os campos que são do tipo ``reference``.
+     *
      * @return      array
      */
-    public function getFieldNames() : array
+    public function getFieldNames(bool $getReferences = true) : array
     {
         $r = [];
         foreach ($this->fieldsCollection as $fieldName => $field) {
-            $r[] = $field->getName();
+            if ($getReferences === true || ($getReferences === false && $field->isReference() === false)) {
+                $r[] = $field->getName();
+            }
         }
         return $r;
     }
