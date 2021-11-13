@@ -132,11 +132,28 @@ class global_functionsTest extends TestCase
     // Cria uma coleção de diretórios aninhados e adiciona alguns arquivos no
     // nível mais interno para que testes possam ser feitos com estes recursos.
     //
-    private function provider_createResources()
+    private function provider_createResources($clean = false)
     {
         $tgtDir = __DIR__ . DS . "one";
+        if (is_dir($tgtDir) === true && $clean === true) {
+            $tmpDir = $tgtDir . DS . "two" . DS . "tree";
+            $removeFiles = [
+                "file1.txt", "file2.txt", "file3.txt", "_underFile.txt"
+            ];
+            foreach ($removeFiles as $file) {
+                if (is_file($tmpDir . DS . $file) === true) {
+                    unlink($tmpDir . DS . $file);
+                }
+            }
+
+            rmdir($tmpDir);
+            rmdir($tgtDir . DS . "two");
+            rmdir($tgtDir);
+        }
+
+
         if (is_dir($tgtDir) === false) {
-            $this->test_createResourcesToTest(false);
+            $this->test_createResourcesToTest(true);
         }
     }
 
@@ -170,6 +187,7 @@ class global_functionsTest extends TestCase
 
             if (!file_exists($newFilePath)) {
                 file_put_contents($newFilePath, $now->format("Y-m-d H:i:s"));
+                chmod($newFilePath, 0666);
             }
         }
 
@@ -216,7 +234,7 @@ class global_functionsTest extends TestCase
                 foreach ($strNewDirs as $dir) {
                     $atualPath .= DS . $dir;
 
-                    $this->assertEquals(777, fileperms($atualPath));
+                    $this->assertEquals(777, substr(sprintf("%o", fileperms($atualPath)), -4));
                 }
 
 
@@ -224,14 +242,14 @@ class global_functionsTest extends TestCase
                 foreach ($newFiles as $file) {
                     $newFilePath = $atualPath . DS . $file;
 
-                    $this->assertEquals(777, fileperms($newFilePath));
+                    $this->assertEquals(666, substr(sprintf("%o", fileperms($newFilePath)), -4));
                 }
 
 
 
                 // Efetua a alteração
                 $targetPath = __DIR__ . DS . "one";
-                $this->assertTrue(dir_chmod_r($targetPath, 700));
+                $this->assertTrue(dir_chmod_r($targetPath, 0700));
 
 
 
@@ -241,7 +259,7 @@ class global_functionsTest extends TestCase
                 foreach ($strNewDirs as $dir) {
                     $atualPath .= DS . $dir;
 
-                    $this->assertEquals(700, fileperms($atualPath));
+                    $this->assertEquals(700, substr(sprintf("%o", fileperms($atualPath)), -4));
                 }
 
 
@@ -249,7 +267,7 @@ class global_functionsTest extends TestCase
                 foreach ($newFiles as $file) {
                     $newFilePath = $atualPath . DS . $file;
 
-                    $this->assertEquals(700, fileperms($newFilePath));
+                    $this->assertEquals(700, substr(sprintf("%o", fileperms($newFilePath)), -4));
                 }
 
 
