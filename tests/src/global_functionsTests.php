@@ -177,6 +177,7 @@ class global_functionsTest extends TestCase
 
             if (!file_exists($atualPath)) {
                 mkdir($atualPath, 0777);
+                chmod($atualPath, 0777);
             }
         }
 
