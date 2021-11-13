@@ -1446,7 +1446,7 @@ class t01FieldTest extends TestCase
             ]);
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Invalid value defined for \"enumerator\". File does not exists. Given: [ \invalidpath.php ]", $ex->getMessage());
+            $this->assertSame("Invalid value defined for \"enumerator\". File does not exists. Given: [ " . DIRECTORY_SEPARATOR . "invalidpath.php ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
