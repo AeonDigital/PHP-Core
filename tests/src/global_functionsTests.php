@@ -176,7 +176,7 @@ class global_functionsTest extends TestCase
             $atualPath .= DS . $dir;
 
             if (!file_exists($atualPath)) {
-                mkdir($atualPath, 777);
+                mkdir($atualPath, 0777);
             }
         }
 
