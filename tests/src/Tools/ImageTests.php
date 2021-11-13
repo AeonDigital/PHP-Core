@@ -19,7 +19,7 @@ class ImageTest extends TestCase
 
 
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         $ds = DIRECTORY_SEPARATOR;
         $testDir = realpath(__DIR__ . $ds . "files") . $ds;
