@@ -1,7 +1,6 @@
 # Arquivos e Diretórios que devem ser ignorados pelo git
 docs/rest
-tests/cover
+tests/cover*
+tests/.phpunit*
 vendor
 composer.lock
-apphost.config
-dev-notes.md

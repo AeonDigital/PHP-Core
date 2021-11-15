@@ -12,7 +12,7 @@ require_once __DIR__ . "/../phpunit.php";
 
 
 
-class global_functionsTest extends TestCase
+class global_functionsTests extends TestCase
 {
 
 
@@ -221,7 +221,7 @@ class global_functionsTest extends TestCase
         if (strtoupper(substr(PHP_OS, 0, 3)) === "WIN") {
             $this->assertTrue(true);
         } else {
-            $this->provider_createResources();
+            $this->provider_createResources(true);
 
             $strNewDirs = ["one", "two", "tree"];
             $newFiles = ["_underFile.txt", "file1.txt", "file2.txt", "file3.txt"];
@@ -622,38 +622,6 @@ class global_functionsTest extends TestCase
         $subject = "Esta string passará por uma substituição, Será removido \"passará\" por \"passou\".";
         $expected = "Esta string passou por uma substituição, Será removido \"passará\" por \"passou\".";
         $this->assertSame($expected, mb_str_replace_once($search, $replace, $subject));
-    }
-
-
-
-    public function test_method_mb_str_split()
-    {
-        $original = "Hello World";
-        $expected = ["H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d"];
-        $result = mb_str_split($original);
-
-        $this->assertSame($expected, $result);
-
-
-        $original = "Hello World";
-        $expected = ["Hello Wo", "rld"];
-        $result = mb_str_split($original, 8);
-
-        $this->assertSame($expected, $result);
-
-
-        $original = "Acentuação";
-        $expected = ["A", "c", "e", "n", "t", "u", "a", "ç", "ã", "o"];
-        $result = str_split($original);
-
-        $this->assertNotSame($expected, $result);
-
-
-        $original = "Acentuação";
-        $expected = ["A", "c", "e", "n", "t", "u", "a", "ç", "ã", "o"];
-        $result = mb_str_split($original);
-
-        $this->assertSame($expected, $result);
     }
 
 

@@ -1,104 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
-<phpunit
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
-    colors="true" verbose="true" stopOnFailure="false"
-    bootstrap="phpunit.php">
-
-    <!--
-        Todos os endereços de arquivos e diretórios são relativos ao
-        diretório no qual o PHP unit foi iniciado, ou aquele onde está
-        o arquivo de configuração "phpunit.xml".
-    -->
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+        bootstrap="phpunit.php"
+        cacheResultFile=".phpunit.cache/test-results"
+        executionOrder="default"
+        forceCoversAnnotation="false"
+        beStrictAboutCoversAnnotation="true"
+        beStrictAboutOutputDuringTests="true"
+        beStrictAboutTodoAnnotatedTests="true"
+        convertDeprecationsToExceptions="true"
+        failOnRisky="true"
+        failOnWarning="true"
+        verbose="true">
 
     <testsuites>
-        <testsuite name="AeonDigital-PHP-Core">
-            <!--
-                Defina aqui cada arquivo de testes que será utilizado.
-            -->
+        <testsuite name="default">
             <file>src/global_functionsTests.php</file>
             <file>src/Traits/MainCheckArgumentExceptionTest.php</file>
             <file>src/RealTypeTests.php</file>
 
+            <directory>src/Tools</directory>
+            <directory>src/SimpleType</directory>
+            <directory>src/Collection</directory>
 
-            <file>src/Tools/ToolsTests.php</file>
-            <file>src/Tools/ImageTests.php</file>
-            <file>src/Tools/JSONTests.php</file>
-            <file>src/Tools/MinifyCSSTest.php</file>
-            <file>src/Tools/MinifyJSTest.php</file>
-            <file>src/Tools/ZipTest.php</file>
+            <directory>src/DataFormat/patterns/brasil</directory>
+            <directory>src/DataFormat/patterns/eua</directory>
+            <directory>src/DataFormat/patterns/world</directory>
 
-
-            <file>src/SimpleType/stBoolTest.php</file>
-            <file>src/SimpleType/stByteTest.php</file>
-            <file>src/SimpleType/stDateTimeTest.php</file>
-            <file>src/SimpleType/stDoubleTest.php</file>
-            <file>src/SimpleType/stFloatTest.php</file>
-            <file>src/SimpleType/stIntTest.php</file>
-            <file>src/SimpleType/stLongTest.php</file>
-            <file>src/SimpleType/stRealTest.php</file>
-            <file>src/SimpleType/stShortTest.php</file>
-            <file>src/SimpleType/stStringTest.php</file>
-
-
-            <file>src/Collection/BasicCollectionTest.php</file>
-            <file>src/Collection/ProtectedCollectionTest.php</file>
-            <file>src/Collection/AppendOnlyCollectionTest.php</file>
-            <file>src/Collection/ReadOnlyCollectionTest.php</file>
-            <file>src/Collection/CaseInsensitiveCollectionTest.php</file>
-            <file>src/Collection/CollectionTest.php</file>
-            <file>src/Collection/TypeListTest.php</file>
-
-
-            <file>src/DataFormat/patterns/brasil/CNPJTest.php</file>
-            <file>src/DataFormat/patterns/brasil/CPFTest.php</file>
-            <file>src/DataFormat/patterns/brasil/NumberTest.php</file>
-            <file>src/DataFormat/patterns/brasil/PhoneTest.php</file>
-            <file>src/DataFormat/patterns/brasil/ZipCodeTest.php</file>
-            <file>src/DataFormat/patterns/brasil/dates/DateTest.php</file>
-            <file>src/DataFormat/patterns/brasil/dates/DateTimeTest.php</file>
-            <file>src/DataFormat/patterns/brasil/dates/MonthTest.php</file>
-            <file>src/DataFormat/patterns/brasil/dates/WeekTest.php</file>
-
-
-            <file>src/DataFormat/patterns/eua/NumberTest.php</file>
-            <file>src/DataFormat/patterns/eua/PhoneTest.php</file>
-            <file>src/DataFormat/patterns/eua/ZipCodeTest.php</file>
-            <file>src/DataFormat/patterns/eua/dates/DateTest.php</file>
-            <file>src/DataFormat/patterns/eua/dates/DateTimeTest.php</file>
-
-
-            <file>src/DataFormat/patterns/world/ColorTest.php</file>
-            <file>src/DataFormat/patterns/world/EmailTest.php</file>
-            <file>src/DataFormat/patterns/world/LocaleTest.php</file>
-            <file>src/DataFormat/patterns/world/NumberTest.php</file>
-            <file>src/DataFormat/patterns/world/PasswordTest.php</file>
-            <file>src/DataFormat/patterns/world/URLTest.php</file>
-            <file>src/DataFormat/patterns/world/dates/DateTest.php</file>
-            <file>src/DataFormat/patterns/world/dates/DateTimeTest.php</file>
-            <file>src/DataFormat/patterns/world/dates/DateTimeGlobalZoneTest.php</file>
-            <file>src/DataFormat/patterns/world/dates/DateTimeLocalTest.php</file>
-            <file>src/DataFormat/patterns/world/dates/MonthTest.php</file>
-            <file>src/DataFormat/patterns/world/dates/TimeTest.php</file>
-            <file>src/DataFormat/patterns/world/dates/WeekTest.php</file>
-
-
-            <file>src/DataModel/t01FieldTest.php</file>
-            <file>src/DataModel/t02FieldCollectionTest.php</file>
-            <file>src/DataModel/t03ModelTest.php</file>
-            <file>src/DataModel/t04ModelFactory_SimpleFieldsTest.php</file>
-            <file>src/DataModel/t05FieldModelTest.php</file>
-            <file>src/DataModel/t06FieldModelCollectionTest.php</file>
-            <file>src/DataModel/t07ComplexFieldModelCollectionTest.php</file>
+            <directory>src/DataModel</directory>
         </testsuite>
     </testsuites>
-    <filter>
-       <whitelist processUncoveredFilesFromWhitelist="true">
-            <!--
-                Defina aqui cada diretório de projeto que será
-                avaliado em um teste de cobertura.
-            -->
-            <directory>../src</directory>
-        </whitelist>
-    </filter>
+
+    <coverage cacheDirectory=".phpunit.cache/code-coverage"
+            includeUncoveredFiles="false"
+            processUncoveredFiles="false">
+        <include>
+            <directory suffix=".php">../src</directory>
+        </include>
+    </coverage>
 </phpunit>
