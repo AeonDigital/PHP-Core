@@ -1,6 +1,6 @@
 .. rst-class:: phpdoctorst
 
-.. role:: php(code)
+.. role:: php(code)
 	:language: php
 
 
@@ -39,7 +39,7 @@ Methods
 		
 		:Parameters:
 			- ‹ ?string › **$v** |br|
-			  Valor a ser testado.
+			  Valor a ser testado.
 			- ‹ ?array › **$aux** |br|
 			  Dados auxiliares para o processamento.
 
@@ -63,7 +63,7 @@ Methods
 		
 		:Parameters:
 			- ‹ mixed › **$v** |br|
-			  Valor a ser formatado.
+			  Valor a ser formatado.
 			- ‹ ?array › **$aux** |br|
 			  Dados auxiliares para o processamento.
 
@@ -90,7 +90,7 @@ Methods
 		
 		:Parameters:
 			- ‹ ?string › **$v** |br|
-			  Valor a ser ajustado.
+			  Valor a ser ajustado.
 			- ‹ ?array › **$aux** |br|
 			  Dados auxiliares para o processamento.
 

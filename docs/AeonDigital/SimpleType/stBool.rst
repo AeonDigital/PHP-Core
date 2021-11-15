@@ -1,6 +1,6 @@
 .. rst-class:: phpdoctorst
 
-.. role:: php(code)
+.. role:: php(code)
 	:language: php
 
 
@@ -90,7 +90,7 @@ Methods
 		
 		:Parameters:
 			- ‹ mixed › **$v** |br|
-			  Valor que será convertido.
+			  Valor que será convertido.
 			- ‹ ?string › **$err** |br|
 			  Código do erro da validação.
 

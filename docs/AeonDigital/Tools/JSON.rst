@@ -1,6 +1,6 @@
 .. rst-class:: phpdoctorst
 
-.. role:: php(code)
+.. role:: php(code)
 	:language: php
 
 
@@ -81,9 +81,9 @@ Methods
 		
 		:Parameters:
 			- ‹ string › **$absoluteSystemPathToFile** |br|
-			  Caminho completo até o arquivo que será salvo.
+			  Caminho completo até o arquivo que será salvo.
 			- ‹ string | array | \\StdClass › **$JSON** |br|
-			  Objeto que será salvo como um arquivo JSON.
+			  Objeto que será salvo como um arquivo JSON.
 			- ‹ int › **$options** |br|
 			  [Flags](http://php.net/manual/pt_BR/json.constants.php)
 			  para salvar o documento JSON.

@@ -1,6 +1,6 @@
 .. rst-class:: phpdoctorst
 
-.. role:: php(code)
+.. role:: php(code)
 	:language: php
 
 
@@ -116,7 +116,7 @@ Methods
 		
 		:Parameters:
 			- ‹ ?array › **$initialValues** |br|
-			  Valores com os quais a instância deve iniciar.
+			  Valores com os quais a instância deve iniciar.
 			- ‹ bool › **$autoincrement** |br|
 			  Quando ``true`` permite que seja omitido o nome da chave dos valores pois eles
 			  serão definidos internamente conforme fosse um array começando em zero.

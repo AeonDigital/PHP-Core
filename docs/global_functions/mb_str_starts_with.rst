@@ -13,7 +13,7 @@ mb_str_starts_with
 		
 		:Parameters:
 			- ‹ string › **$haystack** |br|
-			  ``String`` original.
+			  ``String`` original.
 			- ‹ string › **$needle** |br|
 			  Caracteres iniciais.
 

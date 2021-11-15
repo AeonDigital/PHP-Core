@@ -13,7 +13,7 @@ numeric_mod
 		
 		:Parameters:
 			- ‹ int | float › **$n** |br|
-			  Valor numérico de entrada.
+			  Valor numérico de entrada.
 			- ‹ int | float › **$div** |br|
 			  Divisor.
 

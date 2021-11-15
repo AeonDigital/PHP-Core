@@ -13,9 +13,9 @@ mb_str_insert
 		
 		:Parameters:
 			- ‹ string › **$str** |br|
-			  Valor de entrada.
+			  Valor de entrada.
 			- ‹ string › **$insert** |br|
-			  ``String`` que será adicionada.
+			  ``String`` que será adicionada.
 			- ‹ int › **$pos** |br|
 			  Posição em que a ``string`` será adicionada.
 			  Se negativo, irá adicionar a nova ``string`` na respectiva posição contando a

@@ -14,9 +14,9 @@ mb_str_replace_once
 		
 		:Parameters:
 			- ‹ string › **$search** |br|
-			  Valor que será substituido na ``string``.
+			  Valor que será substituido na ``string``.
 			- ‹ string › **$replace** |br|
-			  Valor que será adicionado no lugar de ``$search``.
+			  Valor que será adicionado no lugar de ``$search``.
 			- ‹ string › **$subject** |br|
 			  Valor original que será substituído.
 

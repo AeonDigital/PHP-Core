@@ -13,7 +13,7 @@ mb_str_contains
 		
 		:Parameters:
 			- ‹ string › **$str** |br|
-			  Valor de entrada.
+			  Valor de entrada.
 			- ‹ string › **$search** |br|
 			  Valor a ser procurado.
 

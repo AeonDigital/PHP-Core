@@ -14,7 +14,7 @@ array_check_required_keys
 		
 		:Parameters:
 			- ‹ array › **$keys** |br|
-			  Coleção com o nome das chaves obrigatórias.
+			  Coleção com o nome das chaves obrigatórias.
 			- ‹ array › **$array** |br|
 			  ``Array associativo`` que será verificado.
 

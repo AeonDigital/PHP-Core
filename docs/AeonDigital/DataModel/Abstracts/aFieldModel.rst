@@ -1,6 +1,6 @@
 .. rst-class:: phpdoctorst
 
-.. role:: php(code)
+.. role:: php(code)
 	:language: php
 
 
@@ -143,7 +143,7 @@ Methods
 		
 		:Parameters:
 			- ‹ array › **$config** |br|
-			  ``array`` associativo com as configurações para este campo.
+			  ``array`` associativo com as configurações para este campo.
 			- ‹ AeonDigital\\Interfaces\\DataModel\\iModelFactory › **$factory** |br|
 			  Instância de uma fábrica de modelos para ser usada internamente caso a
 			  nova instância represente um campo que utiliza modelos de dados.

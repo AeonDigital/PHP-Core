@@ -1,6 +1,6 @@
 .. rst-class:: phpdoctorst
 
-.. role:: php(code)
+.. role:: php(code)
 	:language: php
 
 
@@ -97,7 +97,7 @@ Methods
 		
 		:Parameters:
 			- ‹ string[] › **$absoluteSystemPathToFiles** |br|
-			  Endereço local dos arquivos que serão minificados.
+			  Endereço local dos arquivos que serão minificados.
 			- ‹ string › **$absoluteSystemPathToMinifiedFile** |br|
 			  Endereço completo onde o arquivo minificado será armazenado.
 

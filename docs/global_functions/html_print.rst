@@ -14,11 +14,11 @@ html_print
 		
 		:Parameters:
 			- ‹ mixed › **$obj** |br|
-			  Objeto que será **impresso**.
+			  Objeto que será **impresso**.
 			- ‹ bool › **$o** |br|
-			  Indica se a tag ``<pre>`` deve receber a propriedade css ``overflow:auto``.
+			  Indica se a tag ``<pre>`` deve receber a propriedade css ``overflow:auto``.
 			- ‹ string › **$w** |br|
-			  Valor da propriedade css ``width`` para definir a largura do objeto ``<pre>``.
+			  Valor da propriedade css ``width`` para definir a largura do objeto ``<pre>``.
 			- ‹ string › **$h** |br|
 			  Valor da propriedade css ``height`` para definir a altura do objeto ``<pre>``.
 

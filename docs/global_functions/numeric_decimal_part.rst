@@ -17,7 +17,7 @@ numeric_decimal_part
 		
 		:Parameters:
 			- ‹ int | float › **$n** |br|
-			  Valor numérico de entrada.
+			  Valor numérico de entrada.
 			- ‹ int › **$l** |br|
 			  Tamanho da parte decimal a ser retornada.
 			  Se não for informado, será usado o valor **2**.

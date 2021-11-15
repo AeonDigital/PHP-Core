@@ -15,7 +15,7 @@ mb_str_ends_with
 		
 		:Parameters:
 			- ‹ string › **$haystack** |br|
-			  ``String`` original.
+			  ``String`` original.
 			- ‹ string › **$needle** |br|
 			  Caracteres finais.
 

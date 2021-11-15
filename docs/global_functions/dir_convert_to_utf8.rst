@@ -18,7 +18,7 @@ dir_convert_to_utf8
 		:Parameters:
 			- ‹ array › **$absoluteSystemPaths** |br|
 			  Caminhos para os recursos que serão convertidos.
-			  Podem ser apontados diretórios ou arquivos.
+			  Podem ser apontados diretórios ou arquivos.
 			- ‹ array › **$validExtensions** |br|
 			  Coleção de extenções válidas para executar a conversão.
 

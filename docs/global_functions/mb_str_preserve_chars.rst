@@ -3,7 +3,7 @@ mb_str_preserve_chars
 =====================
 
 
-.. php:function:: mb_str_preserve_chars( $str, $remove)
+.. php:function:: mb_str_preserve_chars( $str, $preserve)
 	
 		.. rst-class:: phpdoc-description
 		
@@ -14,6 +14,8 @@ mb_str_preserve_chars
 		:Parameters:
 			- ‹ string › **$str** |br|
 			  ``String`` original.
+			- ‹ string › **$preserve** |br|
+			  Coleção de caracteres que serão preservados.
 
 		
 		:Returns: ‹ string ›|br|

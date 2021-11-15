@@ -1,6 +1,6 @@
 .. rst-class:: phpdoctorst
 
-.. role:: php(code)
+.. role:: php(code)
 	:language: php
 
 
@@ -46,19 +46,6 @@ Methods
 		
 			| Desabilita a função mágica ``__sget`` para assegurar a que apenas alterações dentro das
 			| regras definidas para a classe sejam possíveis.
-			
-		
-		
-	
-	
-
-.. rst-class:: public
-
-	.. php:method:: public __isset( $name)
-	
-		.. rst-class:: phpdoc-description
-		
-			| Desabilita a função mágica ``__isset``.
 			
 		
 		

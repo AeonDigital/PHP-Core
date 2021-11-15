@@ -13,9 +13,9 @@ mb_str_remove
 		
 		:Parameters:
 			- ‹ string › **$str** |br|
-			  ``String`` original.
+			  ``String`` original.
 			- ‹ int › **$start** |br|
-			  Posição inicial para inserir a nova ``string``.
+			  Posição inicial para inserir a nova ``string``.
 			- ‹ ?int › **$length** |br|
 			  Tamanho da porção da ``string`` original que será substituída.
 

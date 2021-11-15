@@ -13,12 +13,12 @@ mb_str_last_pos
 		
 		:Parameters:
 			- ‹ string › **$str** |br|
-			  Valor de entrada.
+			  Valor de entrada.
 			- ‹ string › **$search** |br|
-			  Valor que deve ser procurado.
+			  Valor que deve ser procurado.
 			- ‹ int › **$start** |br|
 			  Posição a partir da qual a pesquisa deve ser feita.
 
 		
-		:Returns: ‹ bool | int ›|br|
+		:Returns: ‹ false | int ›|br|
 			  Retornará ``false`` caso a ``string`` não exista.

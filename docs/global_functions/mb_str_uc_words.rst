@@ -15,7 +15,7 @@ mb_str_uc_words
 		
 		:Parameters:
 			- ‹ string › **$string** |br|
-			  ``String`` que será alterada.
+			  ``String`` que será alterada.
 			- ‹ array › **$ignore** |br|
 			  Se definido, deve ser um ``array de strings`` contendo palavras que devem escapar
 			  da transformação.

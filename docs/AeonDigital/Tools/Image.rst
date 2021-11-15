@@ -1,6 +1,6 @@
 .. rst-class:: phpdoctorst
 
-.. role:: php(code)
+.. role:: php(code)
 	:language: php
 
 
@@ -34,10 +34,10 @@ Methods
 		
 		:Parameters:
 			- ‹ string › **$absoluteSystemPathToOriginalImage** |br|
-			  Caminho completo até a imagem.
+			  Caminho completo até a imagem.
 			- ‹ string › **$absoluteSystemPathToNewImage** |br|
 			  Caminho completo até o local onde a nova  imagem será armazenada.
-			  Se não for definido a imagem original será alterada.
+			  Se não for definido a imagem original será alterada.
 			- ‹ string › **$resizeType** |br|
 			  Tipo de ajuste que será feito.
 			  
@@ -54,15 +54,15 @@ Methods
 			  encontra chegar na largura máxima definida em ``$imgMaxWidth``.
 			  
 			  **auto** : redimensiona a imagem até que uma das dimensões encontre um dos
-			  valores máximos definidos por ``$imgMaxWidth`` e ``$imgMaxHeight``.
+			  valores máximos definidos por ``$imgMaxWidth`` e ``$imgMaxHeight``.
 			- ‹ ?int › **$imgMaxWidth** |br|
 			  Largura máxima que a imagem deverá ter.
 			  Se não for definido, este valor será calculado conforme o tipo
-			  ``$resizeType``.
+			  ``$resizeType``.
 			- ‹ ?int › **$imgMaxHeight** |br|
 			  Altura máxima que a imagem deverá ter.
 			  Se não for definido, este valor será calculado conforme o tipo
-			  ``$resizeType``.
+			  ``$resizeType``.
 			- ‹ ?bool › **$imgCrop** |br|
 			  Quando ``true``, irá, após redimencionar a imagem, efetuar um crop(corte)
 			  na imagem resultante e salvará este corte ao invés da imagem como um todo.
@@ -70,16 +70,16 @@ Methods
 			  Para evitar que um crop exceda os limites de uma imagem que será
 			  redimencionada por um método dinâmico (portrait | landscape | auto) é
 			  recomendavel, mas não obrigatório, que esta opção seja usada em conjunto
-			  com o método ``exact``.
+			  com o método ``exact``.
 			- ‹ ?int › **$imgCropWidth** |br|
 			  Largura do crop que será feito.
-			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
+			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
 			- ‹ ?int › **$imgCropHeight** |br|
 			  Altura do crop que será feito.
-			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
+			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
 			- ‹ ?int › **$imgCropX** |br|
 			  Posição no eixo X a partir de onde o corte da imagem deve ocorrer.
-			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
+			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
 			- ‹ ?int › **$imgCropY** |br|
 			  Posição no eixo Y a partir de onde o corte da imagem deve ocorrer.
 			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
@@ -103,10 +103,10 @@ Methods
 		
 		:Parameters:
 			- ‹ string › **$absoluteSystemPathToOriginalImage** |br|
-			  Caminho completo até a imagem.
+			  Caminho completo até a imagem.
 			- ‹ string › **$absoluteSystemPathToNewImage** |br|
 			  Caminho completo até o local onde a nova  imagem será armazenada.
-			  Se não for definido a imagem original será alterada.
+			  Se não for definido a imagem original será alterada.
 			- ‹ string › **$resizeType** |br|
 			  Tipo de ajuste que será feito.
 			  
@@ -123,10 +123,10 @@ Methods
 			  encontra chegar na largura máxima definida em ``$imgMaxWidth``.
 			  
 			  **auto** : redimensiona a imagem até que uma das dimensões encontre um dos
-			  valores máximos definidos por ``$imgMaxWidth`` e ``$imgMaxHeight``.
+			  valores máximos definidos por ``$imgMaxWidth`` e ``$imgMaxHeight``.
 			- ‹ ?int › **$imgMaxWidth** |br|
 			  Largura máxima que a imagem deverá ter.
-			  Se não for definido, este valor será calculado conforme o tipo ``$resizeType``.
+			  Se não for definido, este valor será calculado conforme o tipo ``$resizeType``.
 			- ‹ ?int › **$imgMaxHeight** |br|
 			  Altura máxima que a imagem deverá ter.
 			  Se não for definido, este valor será calculado conforme o tipo ``$resizeType``.
@@ -150,19 +150,19 @@ Methods
 		
 		:Parameters:
 			- ‹ string › **$absoluteSystemPathToOriginalImage** |br|
-			  Caminho completo até a imagem.
+			  Caminho completo até a imagem.
 			- ‹ string › **$absoluteSystemPathToNewImage** |br|
 			  Caminho completo até o local onde a nova  imagem será armazenada.
-			  Se não for definido a imagem original será alterada.
+			  Se não for definido a imagem original será alterada.
 			- ‹ ?int › **$imgCropWidth** |br|
 			  Largura do crop que será feito.
-			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
+			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
 			- ‹ ?int › **$imgCropHeight** |br|
 			  Altura do crop que será feito.
-			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``
+			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``
 			- ‹ ?int › **$imgCropX** |br|
 			  Posição no eixo X a partir de onde o corte da imagem deve ocorrer.
-			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``
+			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``
 			- ‹ ?int › **$imgCropY** |br|
 			  Posição no eixo Y a partir de onde o corte da imagem deve ocorrer.
 			  Apenas surte efeito se ``$resizeType`` for definido como ``crop``

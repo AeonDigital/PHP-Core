@@ -1,6 +1,6 @@
 .. rst-class:: phpdoctorst
 
-.. role:: php(code)
+.. role:: php(code)
 	:language: php
 
 
@@ -219,7 +219,7 @@ Methods
 		
 		:Parameters:
 			- ‹ mixed › **$v** |br|
-			  Valor que será removido.
+			  Valor que será removido.
 			- ‹ bool › **$all** |br|
 			  Quando ``true`` irá remover TODAS as ocorrências do valor indicado.
 

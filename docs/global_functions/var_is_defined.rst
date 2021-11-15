@@ -17,7 +17,7 @@ var_is_defined
 		
 		:Parameters:
 			- ‹ mixed › **$o** |br|
-			  Objeto que será testado.
+			  Objeto que será testado.
 			- ‹ ?string › **$k** |br|
 			  Quando indicado, ``$o`` deve ser um ``array`` ou um objeto ``stdClass`` e ``$k``
 			  será a chave cuja existência e valor será verificado.

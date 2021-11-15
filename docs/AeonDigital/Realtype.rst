@@ -1,6 +1,6 @@
 .. rst-class:: phpdoctorst
 
-.. role:: php(code)
+.. role:: php(code)
 	:language: php
 
 
@@ -201,7 +201,7 @@ Methods
 			                  maior que ``n``.
 			  ``ceil-n``  :   Arredondará para cima todo **digito sensível** que seja igual
 			                  ou maior que ``n`` e para baixo todo **digito sensível** menor
-			                  que ``n``.
+			                  que ``n``.
 			- ‹ AeonDigital\\Realtype › **$sensibility** |br|
 			  A sensibilidade é sempre um valor que indica qual será exatamente o digito que
 			  será sensível ao arredondamento.
@@ -521,7 +521,7 @@ Methods
 		
 		:Parameters:
 			- ‹ AeonDigital\\Realtype › **$v** |br|
-			  Valor que será arredondado.
+			  Valor que será arredondado.
 			- ‹ string › **$roundType** |br|
 			  Indica o tipo de arredondamento que será feito.
 			  Valores inválidos não incorrerão em erros e nem em nenhuma conversão.
@@ -536,7 +536,7 @@ Methods
 			                  maior que ``n``.
 			  ``ceil-n``  :   Arredondará para cima todo **digito sensível** que seja igual
 			                  ou maior que ``n`` e para baixo todo **digito sensível** menor
-			                  que ``n``.
+			                  que ``n``.
 			- ‹ AeonDigital\\Realtype › **$sensibility** |br|
 			  A sensibilidade é sempre um valor que indica qual será exatamente o digito que
 			  será sensível ao arredondamento.
@@ -565,7 +565,7 @@ Methods
 			- ‹ mixed › **$v** |br|
 			  Valor usado para o cálculo.
 			  É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-			  numérica.
+			  numérica.
 			- ‹ ?int › **$dPlaces** |br|
 			  Total de casas decimais a serem levadas em conta.
 			  Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
@@ -591,7 +591,7 @@ Methods
 			- ‹ mixed › **$v** |br|
 			  Valor usado para o cálculo.
 			  É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-			  numérica.
+			  numérica.
 			- ‹ ?int › **$dPlaces** |br|
 			  Total de casas decimais a serem levadas em conta.
 			  Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
@@ -617,7 +617,7 @@ Methods
 			- ‹ mixed › **$v** |br|
 			  Valor usado para o cálculo.
 			  É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-			  numérica.
+			  numérica.
 			- ‹ ?int › **$dPlaces** |br|
 			  Total de casas decimais a serem levadas em conta.
 			  Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
@@ -643,7 +643,7 @@ Methods
 			- ‹ mixed › **$v** |br|
 			  Valor usado para o cálculo.
 			  É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-			  numérica.
+			  numérica.
 			- ‹ ?int › **$dPlaces** |br|
 			  Total de casas decimais a serem levadas em conta.
 			  Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
@@ -669,7 +669,7 @@ Methods
 			- ‹ mixed › **$v** |br|
 			  Valor usado para o cálculo.
 			  É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-			  numérica.
+			  numérica.
 			- ‹ ?int › **$dPlaces** |br|
 			  Total de casas decimais a serem levadas em conta.
 			  Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
@@ -695,7 +695,7 @@ Methods
 			- ‹ mixed › **$v** |br|
 			  Valor usado para o cálculo.
 			  É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-			  numérica.
+			  numérica.
 			- ‹ ?int › **$dPlaces** |br|
 			  Total de casas decimais a serem levadas em conta.
 			  Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
@@ -780,9 +780,9 @@ Methods
 		:Parameters:
 			- ‹ ?int › **$dPlaces** |br|
 			  Total de casas decimais a serem levadas em conta.
-			  Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
+			  Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
 			- ‹ string › **$dec** |br|
-			  Pontuador decimal a ser usado.
+			  Pontuador decimal a ser usado.
 			- ‹ string › **$tho** |br|
 			  Pontuador de milhar a ser usado.
 

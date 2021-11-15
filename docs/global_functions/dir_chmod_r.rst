@@ -13,7 +13,7 @@ dir_chmod_r
 		
 		:Parameters:
 			- ‹ string › **$absoluteSystemPathToDir** |br|
-			  Diretório que terá suas alterações alteradas.
+			  Diretório que terá suas alterações alteradas.
 			- ‹ int › **$permissions** |br|
 			  As permissões que serão setadas.
 

@@ -13,7 +13,7 @@ array_in_ci
 		
 		:Parameters:
 			- ‹ string › **$needle** |br|
-			  Valor que será procurado.
+			  Valor que será procurado.
 			- ‹ array › **$haystack** |br|
 			  ``Array`` onde o valor será procurado.
 

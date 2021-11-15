@@ -13,7 +13,7 @@ mb_str_remove_chars
 		
 		:Parameters:
 			- ‹ string › **$str** |br|
-			  ``String`` original.
+			  ``String`` original.
 			- ‹ string › **$remove** |br|
 			  Coleção de caracterse que serão excluídos..
 

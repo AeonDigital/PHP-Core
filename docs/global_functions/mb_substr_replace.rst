@@ -15,13 +15,13 @@ mb_substr_replace
 		
 		:Parameters:
 			- ‹ string › **$string** |br|
-			  ``String`` original.
+			  ``String`` original.
 			- ‹ string › **$replacement** |br|
-			  ``String`` que será adicionada.
+			  ``String`` que será adicionada.
 			- ‹ int › **$start** |br|
-			  Posição inicial para inserir a nova ``string``.
+			  Posição inicial para inserir a nova ``string``.
 			- ‹ ?int › **$length** |br|
-			  Tamanho da porção da ``string`` original que será substituída.
+			  Tamanho da porção da ``string`` original que será substituída.
 			- ‹ ?string › **$encoding** |br|
 			  Quando usado indica que codificação a ``string`` original está usando.
 

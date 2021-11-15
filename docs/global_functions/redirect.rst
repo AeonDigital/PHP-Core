@@ -15,9 +15,9 @@ redirect
 		
 		:Parameters:
 			- ‹ string › **$url** |br|
-			  URL para onde o ``UA`` será redirecionado.
+			  URL para onde o ``UA`` será redirecionado.
 			- ‹ string › **$httpStatusCode** |br|
-			  Status HTTP que deve ser informado no header.
+			  Status ``Http`` que deve ser informado no header.
 			  O status padrão **HTTP/1.1 302 Found** indica que o redirecionamento é
 			  esperado ou que faz parte do fluxo padrão da aplicação.
 

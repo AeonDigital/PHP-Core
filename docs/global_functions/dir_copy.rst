@@ -13,9 +13,9 @@ dir_copy
 		
 		:Parameters:
 			- ‹ string › **$absoluteSystemPathToDir_source** |br|
-			  Caminho para o diretório de conteúdo que será copiado.
+			  Caminho para o diretório de conteúdo que será copiado.
 			- ‹ string › **$absoluteSystemPathToDir_dest** |br|
-			  Caminho para o diretório de destino.
+			  Caminho para o diretório de destino.
 			- ‹ int › **$permissions** |br|
 			  As permissões que devem ser setadas no novo diretório.
 

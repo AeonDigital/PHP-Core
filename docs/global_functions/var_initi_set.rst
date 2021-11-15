@@ -13,9 +13,9 @@ var_initi_set
 		
 		:Parameters:
 			- ‹ mixed › **$o** |br|
-			  Objeto a ser iniciado.
+			  Objeto a ser iniciado.
 			- ‹ mixed › **$d** |br|
-			  Valor padrão a ser definido.
+			  Valor padrão a ser definido.
 			- ‹ bool › **$u** |br|
 			  Se ``true`` testa apenas se o valor é ``undefined``.
 			  Se ``false`` testa usando ``var_is_defined()``.

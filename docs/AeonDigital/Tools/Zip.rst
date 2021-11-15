@@ -1,6 +1,6 @@
 .. rst-class:: phpdoctorst
 
-.. role:: php(code)
+.. role:: php(code)
 	:language: php
 
 
@@ -34,7 +34,7 @@ Methods
 		
 		:Parameters:
 			- ‹ string[] › **$absoluteSystemPaths** |br|
-			  Coleção de endereços dos arquivos e diretórios que serão zipados.
+			  Coleção de endereços dos arquivos e diretórios que serão zipados.
 			- ‹ string › **$absoluteSystemPathToFile** |br|
 			  Endereço completo onde o novo arquivo zip será gerado.
 
@@ -58,7 +58,7 @@ Methods
 		
 		:Parameters:
 			- ‹ string › **$absoluteSystemPaths** |br|
-			  Endereço completo do arquivo ou diretório que será zipado.
+			  Endereço completo do arquivo ou diretório que será zipado.
 			- ‹ ?string › **$absoluteSystemPathToFile** |br|
 			  Quando definido, deve indicar o local de destino do pacote
 			  gerado e seu respectivo nome.
@@ -84,7 +84,7 @@ Methods
 		
 		:Parameters:
 			- ‹ string › **$absoluteSystemPathToFile** |br|
-			  Caminho completo até o arquivo zipado.
+			  Caminho completo até o arquivo zipado.
 			- ‹ ?string › **$absoluteSystemPathToDir** |br|
 			  Caminho completo até o diretório onde o pacote será descompactado.
 			  Caso não seja definido, criará um diretório no mesmo local onde o
@@ -111,7 +111,7 @@ Methods
 		
 		:Parameters:
 			- ‹ string › **$absoluteSystemPathToFile** |br|
-			  Caminho completo até o arquivo zipado.
+			  Caminho completo até o arquivo zipado.
 			- ‹ array › **$targets** |br|
 			  Array de arrays associativos onde:
 			  
