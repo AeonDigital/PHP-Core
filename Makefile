@@ -135,6 +135,11 @@ docs-extract:
 
 
 #
+# Mostra qual a tag atual do projeto.
+tag:
+	@git describe --abbrev=0 --tags
+
+#
 # Atualiza o 'patch' da tag atualmente definida 
 # para a branch principal 'main'.
 tag-update:
