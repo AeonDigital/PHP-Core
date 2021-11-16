@@ -16,6 +16,7 @@ else
     echo "Efetue o commit das alterações para prosseguir."
     echo ":: git add ."
     echo ":: git commit -m \"message\""
+    echo ":: git push origin main"
   else
     GIT_ATUAL_TAG=$(git describe --abbrev=0 --tags)
     TAG_SPLIT=(${GIT_ATUAL_TAG//-/ })
