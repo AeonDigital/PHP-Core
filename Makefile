@@ -107,3 +107,55 @@ test-cover-html:
 # > make test-cover-file-html file="path/to/tgtFile.php"
 test-cover-file-html:
 	docker exec -it ${CONTAINER_NAME} vendor/bin/phpunit "tests/src/${file}" --whitelist="tests/src/${file}" --coverage-html "tests/cover-file"
+
+
+
+
+
+#
+# Prepara o container para que seja possível exportar a documentação técnica
+# do código fonte para ser compatível com os requisitos do 'ReadTheDocs'.
+# Este comando precisa ser rodado apenas 1 vez para cada novo container.
+docs-prepare-container:
+	apt-get update
+	apt-get install -y python3 python3-pip
+	pip install -U sphinx
+	pip install -U sphinx_rtd_theme
+	pip install -U sphinxcontrib-phpdomain
+	pip install -U recommonmark
+
+#
+# Efetua a extração da documentação técnica para o formato 'rst'.
+docs-extract:
+	./vendor/bin/phpdoc-to-rst generate docs src --public-only
+
+
+
+
+
+#
+# Atualiza o 'patch' da tag atualmente definida 
+# para a branch principal 'main'.
+tag-update:
+	./tag-update.sh "version" "patch"
+
+#
+# Atualiza o 'minor version'  da tag atualmente definida 
+# para a branch principal 'main'.
+tag-update-minor:
+	./tag-update.sh "version" "minor"
+
+#
+# Atualiza o 'major version'  da tag atualmente definida 
+# para a branch principal 'main'.
+tag-update-major:
+	./tag-update.sh "version" "major"
+
+#
+# Atualiza a 'stability' da tag atualmente definida 
+# para a branch principal 'main'.
+#
+# Use o parametro 'stability' para indicar qual será a nova 'stability'.
+# use apenas um dos seguintes valores: 'alpha'; 'beta'; 'cr'; 'r'
+tag-stability:
+	./tag-update.sh "stability" "${stability}"
