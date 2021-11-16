@@ -128,6 +128,7 @@ docs-prepare-container:
 # Efetua a extração da documentação técnica para o formato 'rst'.
 docs-extract:
 	./vendor/bin/phpdoc-to-rst generate docs src --public-only
+	chmod -R 777 docs
 
 
 

@@ -30,6 +30,8 @@ else
     PROJECT_VERSION_PATCH=${VERSION_SPLIT[2]}
     PROJECT_VERSION_STABILITY=("-"${TAG_SPLIT[1]})
 
+    PROJECT_ATUAL_VERSION="${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}"
+
     ISOK=1;
 
     if [ "$1" == "version" ]; then
@@ -71,7 +73,27 @@ else
       echo "Parametros incorretos: [ ${1}; ${2} ]."
       echo "Nenhuma ação foi realizada."
     else
-      NEW_VERSION="v${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}${PROJECT_VERSION_STABILITY}"
+      USE_VERSION="${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}"
+      NEW_VERSION="v${USE_VERSION}${PROJECT_VERSION_STABILITY}"
+
+      #
+      # Verifica se é necessário atualizar o versionamento da documentação exportada
+      CONF="docs/conf.py"
+      if [ -f "${CONF}" ]; then
+        OLD_SHORT_VERSION="project_short_version = '.*'"
+        NEW_SHORT_VERSION="project_short_version = '${USE_VERSION}'"
+        sed -i "s/${OLD_SHORT_VERSION}/${NEW_SHORT_VERSION}/" "${CONF}"
+
+        OLD_FULL_VERSION="project_full_version = '.*'"
+        NEW_FULL_VERSION="project_full_version = '${NEW_VERSION}'"
+        sed -i "s/${OLD_FULL_VERSION}/${NEW_FULL_VERSION}/" "${CONF}"
+
+        if [ $(git status --porcelain | wc -l) -gt "0" ]; then
+          git add .
+          git commit -m "Atualizado para a versão ${NEW_VERSION}"
+          git push origin main
+        fi
+      fi
 
       git tag ${NEW_VERSION}
       git push --tags origin
