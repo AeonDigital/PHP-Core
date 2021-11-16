@@ -48,6 +48,7 @@ Constantes e Funções Globais
     :maxdepth: 6
 
     Constantes <constants>
+    Global Functions <global_functions>
     Array <menu/array>
     DateTime <menu/date>
     Diretórios e Arquivos <menu/dir_file>
