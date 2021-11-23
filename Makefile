@@ -26,7 +26,7 @@ up:
 #
 # Inicia o projeto e prepara o container alvo para a extração da
 # documentação técnica
-up-docs: up docs-prepare-extraction
+up-docs: up docs-config
 
 #
 # Encerra o projeto
@@ -149,15 +149,22 @@ test-cover:
 
 
 #
-# Prepara o container para que seja possível exportar a documentação técnica
-# do código fonte para ser compatível com os requisitos do 'ReadTheDocs'.
-# Este comando precisa ser rodado apenas 1 vez para cada novo container.
-docs-prepare-extraction:
-	docker exec -it ${CONTAINER_WEBSERVER_NAME} apt-get update
-	docker exec -it ${CONTAINER_WEBSERVER_NAME} apt-get install -y python3 python3-pip
-	docker exec -it ${CONTAINER_WEBSERVER_NAME} pip install -U sphinx sphinx_rtd_theme sphinxcontrib-phpdomain recommonmark
-	docker exec -it ${CONTAINER_WEBSERVER_NAME} mkdir -p docs
-	docker exec -it ${CONTAINER_WEBSERVER_NAME} ./vendor/bin/phpdoc-to-rst config
+# Configura a classe de extração de documentação técnica
+# Este comando precisa ser rodado apenas 1 vez para cada novo container e apenas 
+# se o arquivo de configuração ainda não existir.
+#
+# Use o parametro 'force' com o valor 'true' para executar e sobrescrever configurações
+# atualmente existentes.
+#
+# > make docs-config
+# > make docs-config force="true"
+docs-config:
+	if [ ! -f "vendor/aeondigital/phpdoc-to-rst/src/_static/conf.py" ] || [ "${force}" = "true" ]; then \
+		docker exec -it ${CONTAINER_WEBSERVER_NAME} mkdir -p docs; \
+		docker exec -it ${CONTAINER_WEBSERVER_NAME} ./vendor/bin/phpdoc-to-rst config; \
+	else \
+		echo "Configuração para documentação já existe"; \
+	fi;
 
 #
 # Efetua a extração da documentação técnica para o formato 'rst'.
