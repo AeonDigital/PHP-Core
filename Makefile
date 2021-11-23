@@ -200,6 +200,11 @@ tag:
 	git describe --abbrev=0 --tags
 
 #
+# Redefine a tag atualmente vigente para o commit mais recente
+tag-remark:
+	./tag-update.sh "remark"
+
+#
 # Atualiza o 'patch' da tag atualmente definida 
 # para a branch principal 'main'.
 tag-update:
