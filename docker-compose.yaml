@@ -11,3 +11,5 @@ services:
     image: aeondigital/apache-php-7.4:dev
     volumes:
       - .:/var/www/html
+    ports:
+      - 8080:80
