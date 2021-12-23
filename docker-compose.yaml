@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 
 
@@ -13,6 +13,12 @@ services:
     container_name: dev-php-webserver
     image: aeondigital/apache-php-7.4:dev
     volumes:
+      #
+      # Diretórios de arquivos de configuração.
+      # Variáveis de ambiente
+      - ./container-config/apache-php-7.4/etc/.env:/etc/.env
+      #
+      # Aplicação
       - .:/var/www/html
     ports:
       - 8080:80
