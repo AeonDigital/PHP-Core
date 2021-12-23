@@ -1,10 +1,13 @@
-version: '3'
+version: "3"
+
+
 
 #
 # Descrição dos serviços
 services:
 
-  # 
+
+  #
   # Servidor Web
   web-server:
     container_name: dev-php-webserver

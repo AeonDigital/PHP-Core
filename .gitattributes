@@ -7,4 +7,3 @@
 /docker-compose.yaml export-ignore
 /Makefile export-ignore
 /README.md export-ignore
-/tag-update.sh export-ignore

@@ -37,7 +37,7 @@ _______________________________________________________________________________
 
 ## Outras Informações
 
-Confira o [Makefile](Makefile) para conhecer sobre as formas de executar, 
+Confira o [Makefile](Makefile) para conhecer sobre as formas de executar,
 testar, versionar e expor a documentação.
 
 Este e outros projetos **Aeon Digital** utilizam o sistema de [Versionamento
