@@ -23,6 +23,7 @@
 
 /CONTRIBUTORS export-ignore
 /DEV.md export-ignore
+/TODO.md export-ignore
 
 /docker-compose.yaml export-ignore
 /Makefile export-ignore

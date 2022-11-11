@@ -13,7 +13,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "php": ">=7.4",
+    "php": ">=8.2",
     "aeondigital/phpinterfaces": ">=v0.6.2-beta"
   },
   "require-dev": {
