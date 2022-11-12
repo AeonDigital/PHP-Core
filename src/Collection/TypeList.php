@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\Collection;
 
 use AeonDigital\Interfaces\Collection\iTypeList as iTypeList;
 use AeonDigital\Collection\Collection as Collection;
-
 
 
 
@@ -53,7 +53,7 @@ class TypeList extends Collection implements iTypeList
      *
      * @return      bool
      */
-    public function isNullable() : bool
+    public function isNullable(): bool
     {
         return $this->isCollectionNullable;
     }
@@ -80,7 +80,7 @@ class TypeList extends Collection implements iTypeList
      *
      * @return      string
      */
-    public function getType() : string
+    public function getType(): string
     {
         return $this->collectionType;
     }
@@ -151,7 +151,7 @@ class TypeList extends Collection implements iTypeList
      *
      * @return      bool
      */
-    protected function isValidType($value) : bool
+    protected function isValidType(mixed $value): bool
     {
         return $this->validateCollectionTypeValue($this->collectionModelType, $value);
     }
@@ -167,7 +167,7 @@ class TypeList extends Collection implements iTypeList
      *
      * @return      bool
      */
-    protected function validateCollectionTypeValue(array $structure, $value) : bool
+    protected function validateCollectionTypeValue(array $structure, mixed $value): bool
     {
         $r = false;
 
@@ -264,7 +264,7 @@ class TypeList extends Collection implements iTypeList
      *
      * @return      bool
      */
-    protected function isAssoc($o) : bool
+    protected function isAssoc(mixed $o): bool
     {
         if (\is_array($o) && $o !== []) {
             return \array_keys($o) !== \range(0, \count($o) - 1);
@@ -285,7 +285,7 @@ class TypeList extends Collection implements iTypeList
      *
      * @return      string
      */
-    protected function normalizeTypeBeforeParse(string $type) : string
+    protected function normalizeTypeBeforeParse(string $type): string
     {
         $type = \trim(\str_replace(" ", "", $type));
 
@@ -340,7 +340,7 @@ class TypeList extends Collection implements iTypeList
     protected function generateCollectionModelType(
         string $type,
         int $lvl = 0
-    ) : array {
+    ): array {
         $structure = $this->getStructureType($type, $lvl);
 
 
@@ -404,7 +404,7 @@ class TypeList extends Collection implements iTypeList
      *
      * @return      array
      */
-    protected function getStructureType(string $structure, int $lvl) : array
+    protected function getStructureType(string $structure, int $lvl): array
     {
         $structureType = "";
         $dataType = "";
@@ -427,8 +427,10 @@ class TypeList extends Collection implements iTypeList
 
             // Remove os "[]"
             $structure = \substr($structure, 1, (\strlen($structure) - 2));
-            if ($this->isStructureASingleType($structure) === true ||
-                $this->isStructureAnArrayOfTypes($structure, $lvl) === true) {
+            if (
+                $this->isStructureASingleType($structure) === true ||
+                $this->isStructureAnArrayOfTypes($structure, $lvl) === true
+            ) {
                 $dataType = "array-of-types";
             } elseif ($this->isStructureAnAssocArray($structure, $lvl) === true) {
                 $dataType = "array-assoc";
@@ -463,7 +465,7 @@ class TypeList extends Collection implements iTypeList
      *
      * @return      bool
      */
-    protected function isStructureAnCommomArray(string $structure) : bool
+    protected function isStructureAnCommomArray(string $structure): bool
     {
         return (\strpos($structure, "[") === 0 && \strrpos($structure, "]") === (\strlen($structure) - 1));
     }
@@ -489,7 +491,7 @@ class TypeList extends Collection implements iTypeList
      *
      * @return      bool
      */
-    protected function isStructureAnAssocArray(string $structure, int $lvl) : bool
+    protected function isStructureAnAssocArray(string $structure, int $lvl): bool
     {
         $arrow = \strpos($structure, "=>");
         $comma = \strpos($structure, "<$lvl>");
@@ -516,7 +518,7 @@ class TypeList extends Collection implements iTypeList
      *
      * @return      bool
      */
-    protected function isStructureAnArrayOfTypes(string $structure, int $lvl) : bool
+    protected function isStructureAnArrayOfTypes(string $structure, int $lvl): bool
     {
         $arrow = \strpos($structure, "=>");
         $comma = \strpos($structure, "<$lvl>");
@@ -546,12 +548,9 @@ class TypeList extends Collection implements iTypeList
      * @param       string $structure
      *              Estrutura de dados que será testada.
      *
-     * @param       int $lvl
-     *              Nível de complexidade do objeto.
-     *
      * @return      bool
      */
-    protected function isStructureASingleType(string $structure) : bool
+    protected function isStructureASingleType(string $structure): bool
     {
         return (\preg_match("/[=,\[\]><]/", $structure) === 0);
     }
@@ -568,17 +567,17 @@ class TypeList extends Collection implements iTypeList
      *
      * @return      bool
      */
-    protected function validateType(string $type, bool $isKey = false) : bool
+    protected function validateType(string $type, bool $isKey = false): bool
     {
         $r = false;
 
         switch ($type) {
-            // Tipo Qualquer
+                // Tipo Qualquer
             case "mixed":
                 $r = true;
                 break;
 
-            // Tipos escalares
+                // Tipos escalares
             case "?bool":
             case "?int":
             case "?float":

@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\Collection;
 
 use AeonDigital\Interfaces\Collection\iCollection as iCollection;
 use AeonDigital\Collection\BasicCollection as BasicCollection;
-
 
 
 
@@ -47,7 +47,7 @@ class Collection extends BasicCollection implements iCollection
      *
      * @return      array
      */
-    public function toArray(?bool $originalKeys = false) : array
+    public function toArray(?bool $originalKeys = false): array
     {
         return $this->retrieveCollection($originalKeys);
     }
@@ -67,7 +67,7 @@ class Collection extends BasicCollection implements iCollection
      * @throws      \InvalidArgumentException
      *              DEVE ser lançado caso algum dos valores passados seja ``undefined``.
      */
-    public function insert(array $newValues) : bool
+    public function insert(array $newValues): bool
     {
         return $this->insertValues($newValues);
     }
@@ -82,7 +82,7 @@ class Collection extends BasicCollection implements iCollection
      *              e ``false`` caso ocorra algum erro em algum dos itens. Neste caso, a coleção
      *              ficará pela metade.
      */
-    public function clean() : bool
+    public function clean(): bool
     {
         $r = true;
         foreach ($this->retrieveAllKeys() as $k) {

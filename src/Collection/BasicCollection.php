@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\Collection;
 
@@ -144,7 +145,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *              Retorna ``true`` ou ``false`` indicando se a instância implementa a interface
      *              da namespace ``AeonDigital\\Interfaces\\Collection`` de nome passado.
      */
-    protected function isImplement(string $interface) : bool
+    protected function isImplement(string $interface): bool
     {
         $iName = "AeonDigital\\Interfaces\\Collection\\" . $interface;
         return \in_array($iName, \class_implements($this));
@@ -160,7 +161,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *              objetos não permitindo que eles sejam alterados, no entanto os valores uma
      *              vez definidos PODEM ser excluídos.
      */
-    public function isProtected() : bool
+    public function isProtected(): bool
     {
         return $this->isImplement("iProtectedCollection");
     }
@@ -174,7 +175,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *              Quando ``true`` indica que a coleção pode ser apenas incrementada mas jamais
      *              modificada nem reduzida.
      */
-    public function isAppendOnly() : bool
+    public function isAppendOnly(): bool
     {
         return $this->isImplement("iAppendOnlyCollection");
     }
@@ -188,7 +189,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *              Quando ``true`` indica que a coleção não pode ser alterada após ser definida
      *              durante a construção da instância.
      */
-    public function isReadOnly() : bool
+    public function isReadOnly(): bool
     {
         return ($this->isImplement("iReadOnlyCollection") && $this->constructorActive === false);
     }
@@ -202,7 +203,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *              Quando ``true`` indica que os nomes das chaves de cada entrada de dados será
      *              tratado de forma ``case insensitive``, ou seja, ``KeyName = keyname = KEYNAME``.
      */
-    public function isCaseInsensitive() : bool
+    public function isCaseInsensitive(): bool
     {
         return $this->isImplement("iCaseInsensitiveCollection");
     }
@@ -230,7 +231,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * @return      bool
      *              Retorna ``true`` quando a coleção é do tipo ``autoincrement``.
      */
-    public function isAutoIncrement() : bool
+    public function isAutoIncrement(): bool
     {
         return $this->autoIncrementCollection;
     }
@@ -289,7 +290,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * @return      string
      *              Chave no formato de uso interno real.
      */
-    protected function useKey(string $key, $value = null) : string
+    protected function useKey(string $key, mixed $value = null): string
     {
         $useK = (($this->isCaseInsensitive() === false) ? $key : \mb_strtolower($key));
         if ($this->autoIncrementCollection === true) {
@@ -329,7 +330,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * @return      mixed
      *              Valor retornado após a transformação.
      */
-    protected function beforeSet($value, $oldValue = null)
+    protected function beforeSet($value, mixed $oldValue = null): mixed
     {
         $useVal = $value;
         if ($this->isProtected() === true) {
@@ -364,7 +365,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *              propriedade ``messageInvalidValue`` de forma que esta dê informações mais
      *              específicas sobre o motivo da falha e aponte o que era esperado de ser recebido.
      */
-    protected function isValidType($value) : bool
+    protected function isValidType(mixed $value): bool
     {
         return true;
     }
@@ -383,7 +384,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *
      * @return      void
      */
-    protected function afterSet(string $key, $value) : void
+    protected function afterSet(string $key, mixed $value): void
     {
     }
 
@@ -412,7 +413,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * @return      mixed
      *              Valor devidamente transformado, quando necessário.
      */
-    protected function beforeGet(string $key)
+    protected function beforeGet(string $key): mixed
     {
         $useVal = null;
         if ($this->has($key) === true) {
@@ -458,7 +459,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *              Retorna ``true`` caso a chave indicada existir entre os itens da coleção ou
      *              ``false`` se não existir.
      */
-    public function has(string $key) : bool
+    public function has(string $key): bool
     {
         return isset($this->collection[$this->useKey($key)]);
     }
@@ -480,7 +481,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * @return      bool
      *              Retorna ``true`` quando a insersão/atualização do item foi bem sucedido.
      */
-    public function set(string $key, $value) : bool
+    public function set(string $key, mixed $value): bool
     {
         $r = false;
 
@@ -496,8 +497,7 @@ class BasicCollection extends BObject implements iBasicCollection
 
             if ($hasKey === true && ($this->isAppendOnly() === true || $this->isProtected() === true)) {
                 $r = false;
-            }
-            else {
+            } else {
                 $value = $this->beforeSet($value, $oldValue);
 
                 if ($this->isValidType($value) === true) {
@@ -524,11 +524,11 @@ class BasicCollection extends BObject implements iBasicCollection
      * @param       string $key
      *              Nome da chave cujo valor deve ser retornado.
      *
-     * @return      ?mixed
+     * @return      mixed
      *              Valor armazenado na ``collection`` que correspondente a chave passada.
      *              DEVE retornar ``null`` quando a chave de nome indicado não existir.
      */
-    public function get(string $key)
+    public function get(string $key): mixed
     {
         return $this->beforeGet($key);
     }
@@ -546,7 +546,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *              da coleção atual e ``false`` caso por algum motivo não seja possível executar
      *              este método.
      */
-    public function remove(string $key) : bool
+    public function remove(string $key): bool
     {
         $r = false;
 
@@ -623,7 +623,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *
      * @return      bool
      */
-    protected function insertValues(array $values) : bool
+    protected function insertValues(array $values): bool
     {
         $r = true;
         if (\count($values) > 0) {
@@ -644,7 +644,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *
      * @return      void
      */
-    protected function remakeAutoIncrementIndex() : void
+    protected function remakeAutoIncrementIndex(): void
     {
         $nCollection = [];
 
@@ -681,7 +681,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *
      * @return      array
      */
-    protected function retrieveCollection(?bool $originalKeys = false, ?callable $keyTransform = null) : array
+    protected function retrieveCollection(?bool $originalKeys = false, ?callable $keyTransform = null): array
     {
         $r = [];
         foreach ($this->collection as $key => $value) {
@@ -714,7 +714,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *              no ``array collection``.
      *              Retornará ``[]`` se a coleção for vazia.
      */
-    protected function retrieveAllKeys() : array
+    protected function retrieveAllKeys(): array
     {
         return \array_keys($this->collection);
     }
@@ -743,16 +743,16 @@ class BasicCollection extends BObject implements iBasicCollection
      *      if (isset($oCollect["keyName"])) { ... }
      * ```
      *
-     * @param       string $key
+     * @param       mixed $offset
      *              Chave que será verificada.
      *
      * @link        http://php.net/manual/pt_BR/arrayaccess.offsetexists.php
      *
      * @return      bool
      */
-    public function offsetExists($key)
+    public function offsetExists(mixed $offset): bool
     {
-        return $this->has($key);
+        return $this->has($offset);
     }
 
 
@@ -766,16 +766,16 @@ class BasicCollection extends BObject implements iBasicCollection
      *      if ($oCollect["keyName"] == $value) { ... }
      * ```
      *
-     * @param       string $key
+     * @param       mixed $offset
      *              Nome da chave cujo valor deve ser retornado.
      *
      * @link        http://php.net/manual/pt_BR/arrayaccess.offsetget.php
      *
-     * @return      mixed|null
+     * @return      mixed
      */
-    public function offsetGet($key)
+    public function offsetGet(mixed $offset): mixed
     {
-        return $this->get($key);
+        return $this->get($offset);
     }
 
 
@@ -789,7 +789,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *      $oCollect["keyName"] = $value;
      * ```
      *
-     * @param       string $key
+     * @param       mixed $offset
      *              Nome da chave.
      *
      * @param       mixed $value
@@ -799,9 +799,9 @@ class BasicCollection extends BObject implements iBasicCollection
      *
      * @return      void
      */
-    public function offsetSet($key, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
-        $this->set($key, $value);
+        $this->set($offset, $value);
     }
 
 
@@ -815,16 +815,16 @@ class BasicCollection extends BObject implements iBasicCollection
      *      unset($oCollect["keyName"]);
      * ```
      *
-     * @param       string $key
+     * @param       mixed $offset
      *              Nome da chave cujo valor deve ser retornado.
      *
      * @link        http://php.net/manual/pt_BR/arrayaccess.offsetunset.php
      *
-     * @return      mixed|null
+     * @return      void
      */
-    public function offsetUnset($key)
+    public function offsetUnset(mixed $offset): void
     {
-        return $this->remove($key);
+        $this->remove($offset);
     }
 
 
@@ -851,7 +851,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *
      * @return      int
      */
-    public function count()
+    public function count(): int
     {
         return \count($this->collection);
     }
@@ -880,7 +880,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *
      * @return      \Traversable
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->retrieveCollection(false));
     }
