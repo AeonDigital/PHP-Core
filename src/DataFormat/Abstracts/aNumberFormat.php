@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataFormat\Abstracts;
 
 use AeonDigital\Interfaces\DataFormat\iNumberFormat as iNumberFormat;
 use AeonDigital\DataFormat\Abstracts\aStringFormat as aStringFormat;
-
 
 
 
@@ -37,7 +37,7 @@ abstract class aNumberFormat extends aStringFormat implements iNumberFormat
      *
      * @return      bool
      */
-    public static function check(?string $v, ?array $aux = null) : bool
+    public static function check(?string $v, ?array $aux = null): bool
     {
         if (self::formatNumber($v) !== null) {
             return true;
@@ -60,7 +60,7 @@ abstract class aNumberFormat extends aStringFormat implements iNumberFormat
      *
      * @return      ?string
      */
-    public static function format($v, ?array $aux = null) : ?string
+    public static function format(mixed $v, ?array $aux = null): ?string
     {
         if (\is_int($v) === true || \is_float($v) === true || \is_double($v) === true) {
             $v = (string)$v;
@@ -86,7 +86,7 @@ abstract class aNumberFormat extends aStringFormat implements iNumberFormat
      *
      * @return      mixed
      */
-    public static function removeFormat(?string $v, ?array $aux = null)
+    public static function removeFormat(?string $v, ?array $aux = null): mixed
     {
         return self::formatNumber($v, "number");
     }
@@ -116,9 +116,9 @@ abstract class aNumberFormat extends aStringFormat implements iNumberFormat
      *
      *              Quando ``number`` retornará o valor em seu formato numeral (``int`` | ``float``).
      *
-     * @return      ?string|int|float
+     * @return      null|string|int|float
      */
-    protected static function formatNumber(?string $v, string $ret = "string")
+    protected static function formatNumber(?string $v, string $ret = "string"): null|string|int|float
     {
         if ($v !== null) {
             $dec = static::Decimal;
@@ -148,8 +148,10 @@ abstract class aNumberFormat extends aStringFormat implements iNumberFormat
             // E
             // SE
             // O total de caracteres válidos estão entre os limites permitidos...
-            if ($errPlus === false && $errMinus === false && $errTho === false && $errDec === false &&
-                $l1 === $l2 && $cleanN >= static::MinLength && $cleanN <= static::MaxLength) {
+            if (
+                $errPlus === false && $errMinus === false && $errTho === false && $errDec === false &&
+                $l1 === $l2 && $cleanN >= static::MinLength && $cleanN <= static::MaxLength
+            ) {
                 $errPonctuaction = false;
 
 
@@ -258,7 +260,7 @@ abstract class aNumberFormat extends aStringFormat implements iNumberFormat
      *
      * @return      mixed
      */
-    public static function storageFormat(?string $v)
+    public static function storageFormat(?string $v): mixed
     {
         return self::removeFormat($v);
     }

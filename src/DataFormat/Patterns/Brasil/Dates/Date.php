@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataFormat\Patterns\Brasil\Dates;
 
 use AeonDigital\DataFormat\Abstracts\aDateTimeFormat as aDateTimeFormat;
-
 
 
 

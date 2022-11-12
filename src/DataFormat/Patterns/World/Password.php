@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataFormat\Patterns\World;
 
 use AeonDigital\DataFormat\Abstracts\aPasswordFormat as aPasswordFormat;
-
 
 
 
@@ -61,7 +61,7 @@ final class Password extends aPasswordFormat
      *          "MinLength"     => 8
      *
      *          // Número máximo de caracteres para compor uma senha.
-     *          "MaxLength"     => 20
+     *          "MaxLength"     => 128
      *      ];
      * ```
      *
@@ -73,7 +73,7 @@ final class Password extends aPasswordFormat
      *
      * @return      bool
      */
-    public static function check(?string $v, ?array $aux = null) : bool
+    public static function check(?string $v, ?array $aux = null): bool
     {
         if (static::checkPassword($v, $aux) === true || \mb_strlen($v) === 40) {
             return true;
@@ -95,7 +95,7 @@ final class Password extends aPasswordFormat
      *
      * @return      ?string
      */
-    public static function format($v, ?array $aux = null) : ?string
+    public static function format($v, ?array $aux = null): ?string
     {
         if (\is_string($v) === true && static::check($v) === true) {
             if (\mb_strlen($v) === 40) {
@@ -124,7 +124,7 @@ final class Password extends aPasswordFormat
      *
      * @return      mixed
      */
-    public static function removeFormat(?string $v, ?array $aux = null)
+    public static function removeFormat(?string $v, ?array $aux = null): mixed
     {
         if (\is_string($v) === true) {
             return $v;
@@ -146,7 +146,7 @@ final class Password extends aPasswordFormat
      *
      * @return      mixed
      */
-    public static function storageFormat(?string $v)
+    public static function storageFormat(?string $v): mixed
     {
         return self::format($v);
     }

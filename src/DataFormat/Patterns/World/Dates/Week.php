@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataFormat\Patterns\World\Dates;
 
 use AeonDigital\DataFormat\Abstracts\aDateTimeFormat as aDateTimeFormat;
-
 
 
 
@@ -73,7 +73,7 @@ final class Week extends aDateTimeFormat
      *
      * @return      bool
      */
-    public static function check(?string $v, ?array $aux = null) : bool
+    public static function check(?string $v, ?array $aux = null): bool
     {
         if ($v !== null) {
             if (\mb_str_pattern_match($v, self::RegExp) === true && \weekdate_to_array($v) !== null) {
@@ -98,7 +98,7 @@ final class Week extends aDateTimeFormat
      *
      * @return      ?string
      */
-    public static function format($v, ?array $aux = null) : ?string
+    public static function format($v, ?array $aux = null): ?string
     {
         if (\is_string($v) === true && self::check($v) === true) {
             $v = \weekdate_to_datetime($v);
@@ -128,7 +128,7 @@ final class Week extends aDateTimeFormat
      *
      * @return      mixed
      */
-    public static function removeFormat(?string $v, ?array $aux = null)
+    public static function removeFormat(?string $v, ?array $aux = null): mixed
     {
         if (\is_string($v) === true && self::check($v) === true) {
             return \weekdate_to_datetime($v);

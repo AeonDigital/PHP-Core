@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataFormat\Abstracts;
 
 use AeonDigital\Interfaces\DataFormat\iStringFormat as iStringFormat;
-
 
 
 
@@ -27,7 +27,7 @@ abstract class aStringFormat implements iStringFormat
 
 
     /**
-     * Verifica se o valor passado corresponde ao tipo/formato. esperado.
+     * Verifica se o valor passado corresponde ao tipo/formato esperado.
      *
      * @param       ?string $v
      *              Valor a ser testado.
@@ -37,7 +37,7 @@ abstract class aStringFormat implements iStringFormat
      *
      * @return      bool
      */
-    public static function check(?string $v, ?array $aux = null) : bool
+    public static function check(?string $v, ?array $aux = null): bool
     {
         if ($v === null) {
             return false;
@@ -60,7 +60,7 @@ abstract class aStringFormat implements iStringFormat
      *
      * @return      ?string
      */
-    abstract static function format($v, ?array $aux = null) : ?string;
+    abstract static function format(mixed $v, ?array $aux = null): ?string;
 
 
 
@@ -79,7 +79,7 @@ abstract class aStringFormat implements iStringFormat
      *
      * @return      mixed
      */
-    abstract static function removeFormat(?string $v, ?array $aux = null);
+    abstract static function removeFormat(?string $v, ?array $aux = null): mixed;
 
 
 
@@ -95,5 +95,5 @@ abstract class aStringFormat implements iStringFormat
      *
      * @return      mixed
      */
-    abstract static function storageFormat(?string $v);
+    abstract static function storageFormat(?string $v): mixed;
 }

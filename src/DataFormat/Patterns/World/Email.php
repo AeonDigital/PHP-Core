@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataFormat\Patterns\World;
 
 use AeonDigital\DataFormat\Abstracts\aStringFormat as aStringFormat;
-
 
 
 
@@ -66,7 +66,7 @@ final class Email extends aStringFormat
      *
      * @return      ?string
      */
-    public static function format($v, ?array $aux = null) : ?string
+    public static function format($v, ?array $aux = null): ?string
     {
         if (\is_string($v) === true && self::check($v) === true) {
             return \mb_strtolower($v);
@@ -91,7 +91,7 @@ final class Email extends aStringFormat
      *
      * @return      mixed
      */
-    public static function removeFormat(?string $v, ?array $aux = null)
+    public static function removeFormat(?string $v, ?array $aux = null): mixed
     {
         if (\is_string($v) === true && self::check($v) === true) {
             return $v;
@@ -113,7 +113,7 @@ final class Email extends aStringFormat
      *
      * @return      mixed
      */
-    public static function storageFormat(?string $v)
+    public static function storageFormat(?string $v): mixed
     {
         return self::format($v);
     }

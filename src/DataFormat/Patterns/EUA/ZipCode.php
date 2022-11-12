@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataFormat\Patterns\EUA;
 
 use AeonDigital\DataFormat\Abstracts\aStringFormat as aStringFormat;
-
 
 
 
@@ -66,7 +66,7 @@ final class ZipCode extends aStringFormat
      *
      * @return      ?string
      */
-    public static function format($v, ?array $aux = null) : ?string
+    public static function format($v, ?array $aux = null): ?string
     {
         if (self::check($v) === true) {
             $v = \mb_str_preserve_chars($v, "0123456789");
@@ -98,7 +98,7 @@ final class ZipCode extends aStringFormat
      *
      * @return      mixed
      */
-    public static function removeFormat(?string $v, ?array $aux = null)
+    public static function removeFormat(?string $v, ?array $aux = null): mixed
     {
         if (self::check($v) === true) {
             $s = \mb_str_preserve_chars($v, "0123456789");
@@ -125,7 +125,7 @@ final class ZipCode extends aStringFormat
      *
      * @return      mixed
      */
-    public static function storageFormat(?string $v)
+    public static function storageFormat(?string $v): mixed
     {
         return self::removeFormat($v);
     }

@@ -1,12 +1,12 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataFormat\Abstracts;
 
 use AeonDigital\Interfaces\DataFormat\iDateTimeFormat as iDateTimeFormat;
 use AeonDigital\DataFormat\Abstracts\aStringFormat as aStringFormat;
 use AeonDigital\Tools as Tools;
-
 
 
 
@@ -38,7 +38,7 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
      *
      * @return      bool
      */
-    public static function check(?string $v, ?array $aux = null) : bool
+    public static function check(?string $v, ?array $aux = null): bool
     {
         return self::checkDateTime($v, static::RegExp, static::DateMask);
     }
@@ -60,7 +60,7 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
      *
      * @return      bool
      */
-    protected static function checkDateTime(?string $v, string $regExp, string $dateMask) : bool
+    protected static function checkDateTime(?string $v, string $regExp, string $dateMask): bool
     {
         if ($v === null) {
             return false;
@@ -97,7 +97,7 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
      *
      * @return      ?string
      */
-    public static function format($v, ?array $aux = null) : ?string
+    public static function format(mixed $v, ?array $aux = null): ?string
     {
         return self::formatDateTime($v, $aux, static::DateMask);
     }
@@ -108,7 +108,7 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
      * Formata uma ``string`` que representa um ``DateTime`` no formato indicado em ``$aux``
      * para o formato ``$dateMask``.
      *
-     * @param       ?string $v
+     * @param       mixed $v
      *              Valor a ser testado.
      *
      * @param       ?array $aux
@@ -125,7 +125,7 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
      *
      * @return      ?string
      */
-    protected static function formatDateTime($v, ?array $aux = null, string $dateMask) : ?string
+    protected static function formatDateTime(mixed $v, ?array $aux = null, string $dateMask): ?string
     {
         if (\is_array($aux) === true && \count($aux) === 1) {
             $p = (\array_is_assoc($aux) === true) ? "DateMask" : 0;
@@ -167,7 +167,7 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
      *
      * @return      mixed
      */
-    public static function removeFormat(?string $v, ?array $aux = null)
+    public static function removeFormat(?string $v, ?array $aux = null): mixed
     {
         return self::removeFormatOfDateTimeString($v, static::DateMask);
     }
@@ -185,7 +185,7 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
      *
      * @return      ?\DateTime
      */
-    protected static function removeFormatOfDateTimeString(?string $v, string $dateMask) : ?\DateTime
+    protected static function removeFormatOfDateTimeString(?string $v, string $dateMask): ?\DateTime
     {
         if (\is_string($v) === true && self::checkDateTime($v, static::RegExp, $dateMask) === true) {
             if ($dateMask === "H:i:s" || $dateMask === "H:i") {
@@ -212,7 +212,7 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
      *
      * @return      mixed
      */
-    public static function storageFormat(?string $v)
+    public static function storageFormat(?string $v): mixed
     {
         return self::removeFormat($v);
     }

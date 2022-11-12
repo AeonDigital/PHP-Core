@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataFormat\Patterns\Brasil;
 
 use AeonDigital\DataFormat\Abstracts\aStringFormat as aStringFormat;
-
 
 
 
@@ -65,17 +65,19 @@ final class CNPJ extends aStringFormat
      *
      * @return      bool
      */
-    public static function check(?string $v, ?array $aux = null) : bool
+    public static function check(?string $v, ?array $aux = null): bool
     {
         if ($v !== null && \mb_str_pattern_match($v, self::RegExp) === true) {
             $cnpj = \mb_str_preserve_chars($v, "0123456789");
 
             if (\mb_strlen($cnpj) === 14 && \is_numeric($cnpj) === true) {
                 // Se não for nenhum dos padrões inválidos de CNPJ...
-                if ($cnpj !== "00000000000000" && $cnpj !== "11111111111111" && $cnpj !== "22222222222222" &&
+                if (
+                    $cnpj !== "00000000000000" && $cnpj !== "11111111111111" && $cnpj !== "22222222222222" &&
                     $cnpj !== "33333333333333" && $cnpj !== "44444444444444" && $cnpj !== "55555555555555" &&
                     $cnpj !== "66666666666666" && $cnpj !== "77777777777777" && $cnpj !== "88888888888888" &&
-                    $cnpj !== "99999999999999") {
+                    $cnpj !== "99999999999999"
+                ) {
                     $a = [];
                     $b = 0;
                     $c = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
@@ -119,7 +121,7 @@ final class CNPJ extends aStringFormat
      *
      * @return      ?string
      */
-    public static function format($v, ?array $aux = null) : ?string
+    public static function format($v, ?array $aux = null): ?string
     {
         if (self::check($v) === true) {
             $v = \mb_str_preserve_chars($v, "0123456789");
@@ -149,7 +151,7 @@ final class CNPJ extends aStringFormat
      *
      * @return      mixed
      */
-    public static function removeFormat(?string $v, ?array $aux = null)
+    public static function removeFormat(?string $v, ?array $aux = null): mixed
     {
         if (self::check($v) === true) {
             $v = \mb_str_preserve_chars($v, "0123456789");
@@ -176,7 +178,7 @@ final class CNPJ extends aStringFormat
      *
      * @return      mixed
      */
-    public static function storageFormat(?string $v)
+    public static function storageFormat(?string $v): mixed
     {
         return self::removeFormat($v);
     }

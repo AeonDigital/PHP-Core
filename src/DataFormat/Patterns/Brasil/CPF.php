@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataFormat\Patterns\Brasil;
 
 use AeonDigital\DataFormat\Abstracts\aStringFormat as aStringFormat;
-
 
 
 
@@ -65,16 +65,18 @@ final class CPF extends aStringFormat
      *
      * @return      bool
      */
-    public static function check(?string $v, ?array $aux = null) : bool
+    public static function check(?string $v, ?array $aux = null): bool
     {
         if ($v !== null && \mb_str_pattern_match($v, self::RegExp) === true) {
             $cpf = \mb_str_preserve_chars($v, "0123456789");
 
             if (\mb_strlen($cpf) === 11 && \is_numeric($cpf) === true) {
-                if ($cpf !== "00000000000" && $cpf !== "11111111111" && $cpf !== "22222222222" &&
+                if (
+                    $cpf !== "00000000000" && $cpf !== "11111111111" && $cpf !== "22222222222" &&
                     $cpf !== "33333333333" && $cpf !== "44444444444" && $cpf !== "55555555555" &&
                     $cpf !== "66666666666" && $cpf !== "77777777777" && $cpf !== "88888888888" &&
-                    $cpf !== "99999999999") {
+                    $cpf !== "99999999999"
+                ) {
                     // Resgata dígitos especiais
                     $d1 = $cpf[9];
                     $d2 = $cpf[10];
@@ -128,7 +130,7 @@ final class CPF extends aStringFormat
      *
      * @return      ?string
      */
-    public static function format($v, ?array $aux = null) : ?string
+    public static function format($v, ?array $aux = null): ?string
     {
         if (self::check($v) === true) {
             $v = \mb_str_preserve_chars($v, "0123456789");
@@ -158,7 +160,7 @@ final class CPF extends aStringFormat
      *
      * @return      mixed
      */
-    public static function removeFormat(?string $v, ?array $aux = null)
+    public static function removeFormat(?string $v, ?array $aux = null): mixed
     {
         if (self::check($v) === true) {
             $v = \mb_str_preserve_chars($v, "0123456789");
@@ -185,7 +187,7 @@ final class CPF extends aStringFormat
      *
      * @return      mixed
      */
-    public static function storageFormat(?string $v)
+    public static function storageFormat(?string $v): mixed
     {
         return self::removeFormat($v);
     }

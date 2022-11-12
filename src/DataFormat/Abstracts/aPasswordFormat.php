@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataFormat\Abstracts;
 
 use AeonDigital\Interfaces\DataFormat\iPasswordFormat as iPasswordFormat;
 use AeonDigital\DataFormat\Abstracts\aStringFormat as aStringFormat;
-
 
 
 
@@ -42,7 +42,7 @@ abstract class aPasswordFormat extends aStringFormat implements iPasswordFormat
      *
      * @return      int
      */
-    public static function checkStrength(string $v) : int
+    public static function checkStrength(string $v): int
     {
         $iR = 0;
 
@@ -117,7 +117,7 @@ abstract class aPasswordFormat extends aStringFormat implements iPasswordFormat
      *          "MinLength"     => 8
      *
      *          // Número máximo de caracteres para compor uma senha.
-     *          "MaxLength"     => 20
+     *          "MaxLength"     => 128
      *      ];
      * ```
      *
@@ -127,7 +127,7 @@ abstract class aPasswordFormat extends aStringFormat implements iPasswordFormat
      *
      * @return      string
      */
-    public static function generate(?array $cfg = null) : string
+    public static function generate(?array $cfg = null): string
     {
         if ($cfg === null) {
             $cfg = [
@@ -172,7 +172,7 @@ abstract class aPasswordFormat extends aStringFormat implements iPasswordFormat
      *          "MinLength"     => 8
      *
      *          // Número máximo de caracteres para compor uma senha.
-     *          "MaxLength"     => 20
+     *          "MaxLength"     => 128
      *      ];
      * ```
      *
@@ -187,7 +187,7 @@ abstract class aPasswordFormat extends aStringFormat implements iPasswordFormat
      *
      * @return      mixed
      */
-    public static function checkPassword(?string $v, ?array $aux = null, ?string &$err = null) : bool
+    public static function checkPassword(?string $v, ?array $aux = null, ?string &$err = null): bool
     {
         $err = null;
         if ($v === null) {
@@ -227,7 +227,6 @@ abstract class aPasswordFormat extends aStringFormat implements iPasswordFormat
                     $err = "error.df.password.too.long";
                 }
             }
-
         }
 
         return ($err === null);
