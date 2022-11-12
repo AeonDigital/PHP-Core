@@ -23,10 +23,10 @@ class RealtypeTests extends TestCase
     {
         $fail = false;
         try {
-            $obj = new Realtype(null);
+            $obj = new Realtype("invalid");
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Argument must be a valid Realtype. Given: [ ``null`` ]", $ex->getMessage());
+            $this->assertSame("Argument must be a valid Realtype. Given: [ invalid ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }

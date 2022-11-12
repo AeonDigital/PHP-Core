@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @return      bool
  *              Retorna ``true`` caso o valor indicado seja impar.
  */
-function numeric_is_odd(int|float $n): ?bool
+function numeric_is_odd(int|float $n): bool
 {
     return ($n % 2 !== 0);
 }

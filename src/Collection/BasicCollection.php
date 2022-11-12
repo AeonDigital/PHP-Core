@@ -901,7 +901,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * @codeCoverageIgnore
      *
      */
-    public function __set($name, $value)
+    public function __set($name, $value): void
     {
         // Não produz efeito
     }

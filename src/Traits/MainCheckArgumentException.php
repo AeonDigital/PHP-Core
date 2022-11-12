@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\Traits;
 
@@ -64,7 +65,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function getLastArgumentValidateResult() : bool
+    protected function getLastArgumentValidateResult(): bool
     {
         return $this->lastArgumentValidateResult;
     }
@@ -81,11 +82,10 @@ trait MainCheckArgumentException
      *
      * @throws      \InvalidArgumentException
      */
-    private function throwInvalidArgumentException($argValue) : void
+    private function throwInvalidArgumentException($argValue): void
     {
         $this->lastArgumentValidateResult = true;
-        if ($this->invalidArgumentExceptionMessage !== "")
-        {
+        if ($this->invalidArgumentExceptionMessage !== "") {
             $this->lastArgumentValidateResult = false;
 
 
@@ -99,9 +99,11 @@ trait MainCheckArgumentException
 
                 if ($this->showArgumentInExceptionMessage === true) {
                     $strArg = "";
-                    if ($argValue === null) { $strArg = "``null``"; }
-                    elseif ($argValue === 0) { $strArg = "0"; }
-                    else {
+                    if ($argValue === null) {
+                        $strArg = "``null``";
+                    } elseif ($argValue === 0) {
+                        $strArg = "0";
+                    } else {
                         $strArg = \trim(\AeonDigital\Tools::toString($argValue));
                     }
                     if ($strArg !== "") {
@@ -169,10 +171,10 @@ trait MainCheckArgumentException
      */
     protected function mainCheckForInvalidArgumentException(
         string $argName,
-        $argValue,
+        mixed $argValue,
         array $validateRules,
         ?bool $throws = null
-    ) {
+    ): mixed {
         if ($throws !== null) {
             $this->throwsExceptionOnValidateFail = $throws;
         }
@@ -215,9 +217,9 @@ trait MainCheckArgumentException
      */
     protected function checkForInvalidArgumentException(
         string $argName,
-        $argValue,
-        $rules
-    ) {
+        mixed $argValue,
+        string|array $rules
+    ): mixed {
         $this->invalidArgumentExceptionMessage = "";
         $this->customInvalidArgumentExceptionMessage = "";
         $this->showArgumentInExceptionMessage = true;
@@ -238,8 +240,7 @@ trait MainCheckArgumentException
 
         if (\is_string($rules) === true) {
             $validate = $rules;
-        }
-        else {
+        } else {
             $executeBeforeConditions    = $rules["executeBeforeConditions"] ?? null;
             $conditions                 = $rules["conditions"] ?? null;
             $executeBeforeValidate      = $rules["executeBeforeValidate"] ?? null;
@@ -277,8 +278,7 @@ trait MainCheckArgumentException
                     if (\is_string($cond) === true) {
                         $fn = "checkArgument_$cond";
                         $meetsConditions = $this->$fn($validateSubArguments);
-                    }
-                    else {
+                    } else {
                         $meetsConditions = $cond($validateSubArguments);
                     }
                 }
@@ -337,7 +337,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_fail(array $rules) : bool
+    protected function checkArgument_fail(array $rules): bool
     {
         $argName = $rules["argName"];
         $this->invalidArgumentExceptionMessage = "Invalid value defined for \"$argName\".";
@@ -355,7 +355,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_not_null(array $rules) : bool
+    protected function checkArgument_not_null(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -379,7 +379,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_boolean(array $rules) : bool
+    protected function checkArgument_is_boolean(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -403,7 +403,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_string(array $rules) : bool
+    protected function checkArgument_is_string(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -427,7 +427,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_string_not_empty(array $rules) : bool
+    protected function checkArgument_is_string_not_empty(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -455,7 +455,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_string_matches_pattern(array $rules) : bool
+    protected function checkArgument_is_string_matches_pattern(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -468,8 +468,7 @@ trait MainCheckArgumentException
         if (\is_string($argValue) === false) {
             $err = "Invalid value defined for \"$argName\". Expected string that matches the ``$errorShowPattern`` pattern ";
             $r = false;
-        }
-        else {
+        } else {
             \preg_match($patternPregMatch, $argValue, $fnd);
 
             if (\count($fnd) === 0) {
@@ -494,7 +493,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_numeric(array $rules) : bool
+    protected function checkArgument_is_numeric(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -518,7 +517,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_numeric_greather_than_zero(array $rules) : bool
+    protected function checkArgument_is_numeric_greather_than_zero(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -529,8 +528,7 @@ trait MainCheckArgumentException
         if (\is_int($argValue) === false && \is_float($argValue) === false && \is_numeric($argValue) === false) {
             $err = "Invalid value defined for \"$argName\". Expected numeric greather than zero.";
             $r = false;
-        }
-        else {
+        } else {
             if (\floatval($argValue) <= 0) {
                 $err = "Invalid value defined for \"$argName\". Expected numeric greather than zero.";
                 $r = false;
@@ -548,7 +546,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_numeric_greather_than_or_equal_to_zero(array $rules) : bool
+    protected function checkArgument_is_numeric_greather_than_or_equal_to_zero(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -559,8 +557,7 @@ trait MainCheckArgumentException
         if (\is_int($argValue) === false && \is_float($argValue) === false && \is_numeric($argValue) === false) {
             $err = "Invalid value defined for \"$argName\". Expected numeric greather than or equal to zero.";
             $r = false;
-        }
-        else {
+        } else {
             if (\floatval($argValue) < 0) {
                 $err = "Invalid value defined for \"$argName\". Expected numeric greather than or equal to zero.";
                 $r = false;
@@ -583,7 +580,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_integer(array $rules) : bool
+    protected function checkArgument_is_integer(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -607,7 +604,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_integer_greather_than_zero(array $rules) : bool
+    protected function checkArgument_is_integer_greather_than_zero(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -618,8 +615,7 @@ trait MainCheckArgumentException
         if (\is_int($argValue) === false) {
             $err = "Invalid value defined for \"$argName\". Expected integer greather than zero.";
             $r = false;
-        }
-        else {
+        } else {
             if ($argValue <= 0) {
                 $err = "Invalid value defined for \"$argName\". Expected integer greather than zero.";
                 $r = false;
@@ -637,7 +633,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_integer_greather_than_or_equal_to_zero(array $rules) : bool
+    protected function checkArgument_is_integer_greather_than_or_equal_to_zero(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -648,8 +644,7 @@ trait MainCheckArgumentException
         if (\is_int($argValue) === false) {
             $err = "Invalid value defined for \"$argName\". Expected integer greather than or equal to zero.";
             $r = false;
-        }
-        else {
+        } else {
             if ($argValue < 0) {
                 $err = "Invalid value defined for \"$argName\". Expected integer greather than or equal to zero.";
                 $r = false;
@@ -672,7 +667,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_float(array $rules) : bool
+    protected function checkArgument_is_float(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -696,7 +691,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_float_greather_than_zero(array $rules) : bool
+    protected function checkArgument_is_float_greather_than_zero(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -707,8 +702,7 @@ trait MainCheckArgumentException
         if (\is_float($argValue) === false) {
             $err = "Invalid value defined for \"$argName\". Expected float greather than zero.";
             $r = false;
-        }
-        else {
+        } else {
             if ($argValue <= 0) {
                 $err = "Invalid value defined for \"$argName\". Expected float greather than zero.";
                 $r = false;
@@ -726,7 +720,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_float_greather_than_or_equal_to_zero(array $rules) : bool
+    protected function checkArgument_is_float_greather_than_or_equal_to_zero(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -737,8 +731,7 @@ trait MainCheckArgumentException
         if (\is_float($argValue) === false) {
             $err = "Invalid value defined for \"$argName\". Expected float greather than or equal to zero.";
             $r = false;
-        }
-        else {
+        } else {
             if ($argValue < 0) {
                 $err = "Invalid value defined for \"$argName\". Expected float greather than or equal to zero.";
                 $r = false;
@@ -761,7 +754,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_array(array $rules) : bool
+    protected function checkArgument_is_array(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -785,7 +778,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_array_not_empty(array $rules) : bool
+    protected function checkArgument_is_array_not_empty(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -809,7 +802,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_array_assoc(array $rules) : bool
+    protected function checkArgument_is_array_assoc(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -833,7 +826,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_not_array_assoc(array $rules) : bool
+    protected function checkArgument_is_not_array_assoc(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -859,7 +852,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_array_with_x_values(array $rules) : bool
+    protected function checkArgument_is_array_with_x_values(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -888,7 +881,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_has_array_assoc_required_keys(array $rules) : bool
+    protected function checkArgument_has_array_assoc_required_keys(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -903,15 +896,13 @@ trait MainCheckArgumentException
 
         if (\array_is_assoc($argValue) !== true) {
             $err = "Invalid value defined for \"$argName\". Expected an assoc array with the keys \"$strKeys\".";
-        }
-        else {
+        } else {
             foreach ($requiredKeys as $key => $subRules) {
                 if ($r === true) {
                     if (\key_exists($key, $argValue) === false) {
                         $err = "Invalid value defined for \"$argName\". Expected an assoc array with the keys \"$strKeys\".";
                         $r = false;
-                    }
-                    else {
+                    } else {
                         if (\is_array($subRules) === true) {
                             $this->mainCheckForInvalidArgumentException(
                                 $argName . "['$key']",
@@ -945,7 +936,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_foreach_array_child(array $rules) : bool
+    protected function checkArgument_foreach_array_child(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -960,13 +951,14 @@ trait MainCheckArgumentException
                     $r = $foreachChild($key, $value);
                 }
             }
-        }
-        else {
+        } else {
             foreach ($foreachChild as $childRule) {
                 foreach ($argValue as $key => $value) {
                     if ($r === true) {
                         $this->checkForInvalidArgumentException(
-                            $argName . "['$key']", $value, $childRule
+                            $argName . "['$key']",
+                            $value,
+                            $childRule
                         );
                     }
                 }
@@ -990,7 +982,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_allowed_value(array $rules) : bool
+    protected function checkArgument_is_allowed_value(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -1005,8 +997,7 @@ trait MainCheckArgumentException
                 $err = "Invalid value defined for \"$argName\". Expected [ " . \implode(", ", $allowedValues) . " ].";
                 $r = false;
             }
-        }
-        else {
+        } else {
             if (\in_array($argValue, $allowedValues) === false) {
                 $err = "Invalid value defined for \"$argName\". Expected [ " . \implode(", ", $allowedValues) . " ].";
                 $r = false;
@@ -1027,7 +1018,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_allowed_key(array $rules) : bool
+    protected function checkArgument_is_allowed_key(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -1043,8 +1034,7 @@ trait MainCheckArgumentException
                     $err = "Invalid key defined for \"$argName\". Expected keys [ " . \implode(", ", $allowedValues) . " ]. Given: [ $key ].";
                     $r = false;
                 }
-            }
-            else {
+            } else {
                 if (\in_array($key, $allowedValues) === false) {
                     $err = "Invalid key defined for \"$argName\". Expected keys [ " . \implode(", ", $allowedValues) . " ]. Given: [ $key ].";
                     $r = false;
@@ -1071,7 +1061,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_closure(array $rules) : bool
+    protected function checkArgument_closure(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -1096,7 +1086,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_callable(array $rules) : bool
+    protected function checkArgument_is_callable(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -1120,7 +1110,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_class_exists(array $rules) : bool
+    protected function checkArgument_is_class_exists(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -1147,7 +1137,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_class_implements_interface(array $rules) : bool
+    protected function checkArgument_is_class_implements_interface(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -1158,8 +1148,7 @@ trait MainCheckArgumentException
         if (\class_exists($argValue) === false) {
             $err = "Invalid value defined for \"$argName\". Expected Namespace of class thats implements the interface $interface.";
             $r = false;
-        }
-        else {
+        } else {
             $typeReflection = new \ReflectionClass($argValue);
             if ($typeReflection->implementsInterface($interface) === false) {
                 $err = "Invalid value defined for \"$argName\". Expected Namespace of class thats implements the interface $interface.";
@@ -1183,7 +1172,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_resource(array $rules) : bool
+    protected function checkArgument_is_resource(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -1208,7 +1197,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_resource_exists(array $rules) : bool
+    protected function checkArgument_is_resource_exists(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -1233,7 +1222,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_dir_exists(array $rules) : bool
+    protected function checkArgument_is_dir_exists(array $rules): bool
     {
         $r = true;
         $err = "";
@@ -1258,7 +1247,7 @@ trait MainCheckArgumentException
      *
      * @return      bool
      */
-    protected function checkArgument_is_file_exists(array $rules) : bool
+    protected function checkArgument_is_file_exists(array $rules): bool
     {
         $r = true;
         $err = "";

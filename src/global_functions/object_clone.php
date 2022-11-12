@@ -10,7 +10,7 @@ declare(strict_types=1);
  *
  * @return      mixed
  */
-function object_clone($obj)
+function object_clone(mixed $obj): mixed
 {
     if (
         $obj === null ||

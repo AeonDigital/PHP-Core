@@ -945,7 +945,7 @@ abstract class aModel extends BObject implements iModel
      * @param       mixed $value
      *              Valor a ser definido.
      */
-    public function __set($name, $value)
+    public function __set($name, $value): void
     {
         $this->throwErrorIfFieldDoesNotExists($name);
         $this->setFieldValue($name, $value);
@@ -963,7 +963,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      mixed
      */
-    public function __get($name)
+    public function __get($name): mixed
     {
         $useName = $name;
         $isField = false;

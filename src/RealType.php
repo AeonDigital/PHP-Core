@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital;
 
@@ -77,7 +78,7 @@ final class Realtype extends BObject
      *
      * @return      string
      */
-    public function value() : string
+    public function value(): string
     {
         return $this->val;
     }
@@ -86,7 +87,7 @@ final class Realtype extends BObject
      *
      * @return      string
      */
-    public function getIntegerPart() : string
+    public function getIntegerPart(): string
     {
         $parts = \explode(".", $this->val);
         return $parts[0];
@@ -96,14 +97,13 @@ final class Realtype extends BObject
      *
      * @return      string
      */
-    public function getDecimalPart() : string
+    public function getDecimalPart(): string
     {
         $r = "";
         if (\strpos($this->val, ".") !== false) {
             $parts = \explode(".", $this->val);
             $r = $parts[1];
-        }
-        else {
+        } else {
             $r = \str_pad("", static::$globalDecimalPlaces, "0", STR_PAD_LEFT);
         }
 
@@ -115,7 +115,7 @@ final class Realtype extends BObject
      *
      * @return      int
      */
-    public function precision() : int
+    public function precision(): int
     {
         return $this->totalDigits;
     }
@@ -125,9 +125,9 @@ final class Realtype extends BObject
      *
      * @return      int
      */
-    public function integerPlaces() : int
+    public function integerPlaces(): int
     {
-       return $this->totalIntegerDigits;
+        return $this->totalIntegerDigits;
     }
     /**
      * Retorna o total de digitos que são usados para representar a parte decimal do numeral
@@ -135,9 +135,9 @@ final class Realtype extends BObject
      *
      * @return      int
      */
-    public function decimalPlaces() : int
+    public function decimalPlaces(): int
     {
-       return $this->totalDecimalDigits;
+        return $this->totalDecimalDigits;
     }
 
 
@@ -172,9 +172,11 @@ final class Realtype extends BObject
      *
      * @return      void
      */
-    public static function defineGlobalDecimalPlaces(int $v) : void
+    public static function defineGlobalDecimalPlaces(int $v): void
     {
-        if ($v < 0) { $v = 0; }
+        if ($v < 0) {
+            $v = 0;
+        }
         static::$globalDecimalPlaces = $v;
     }
 
@@ -186,7 +188,7 @@ final class Realtype extends BObject
      *
      * @return      int
      */
-    public static function getGlobalDecimalPlaces() : int
+    public static function getGlobalDecimalPlaces(): int
     {
         return static::$globalDecimalPlaces;
     }
@@ -202,7 +204,7 @@ final class Realtype extends BObject
      *
      * @return      int
      */
-    protected function useDecimalPlaces(?int $dPlaces = null) : int
+    protected function useDecimalPlaces(?int $dPlaces = null): int
     {
         return (($dPlaces === null) ? static::$globalDecimalPlaces : (($dPlaces < 0) ? 0 : $dPlaces));
     }
@@ -243,7 +245,7 @@ final class Realtype extends BObject
     /**
      * Define a forma padrão pela qual os valores, quando calculados, serão arredondados.
      *
-     * @param       string $roundType
+     * @param       ?string $roundType
      *              Indica o tipo de arredondamento que será feito.
      *              Valores inválidos não incorrerão em erros e nem em nenhuma conversão.
      *
@@ -268,14 +270,13 @@ final class Realtype extends BObject
      *
      * @return      void
      */
-    public static function defineGlobalRoundType(?string $roundType, ?Realtype $sensibility) : void
+    public static function defineGlobalRoundType(?string $roundType, ?Realtype $sensibility): void
     {
         if (static::isValidRoundType($roundType, $sensibility) === false) {
             static::$globalRoundType = null;
             static::$globalRoundSensibility = null;
             static::$globalRoundDisabled = null;
-        }
-        else {
+        } else {
             static::$globalRoundType = \strtolower($roundType);
             static::$globalRoundSensibility = $sensibility;
             static::$globalRoundDisabled = false;
@@ -293,7 +294,7 @@ final class Realtype extends BObject
      * @return      bool
      *              Retornará ``true`` quando o tipo indicado for válido.
      */
-    protected static function isValidRoundType(?string $roundType, ?Realtype $sensibility) : bool
+    protected static function isValidRoundType(?string $roundType, ?Realtype $sensibility): bool
     {
         $r = false;
         if ($sensibility !== null && $roundType !== null) {
@@ -302,8 +303,7 @@ final class Realtype extends BObject
                 $roundType = \strtolower($roundType);
                 if (\strpos($roundType, "floor") === 0 || \strpos($roundType, "ceil") === 0) {
                     $parts = \explode("-", $roundType);
-                    $r = (
-                        \count($parts) === 1 ||
+                    $r = (\count($parts) === 1 ||
                         (\count($parts) === 2 && \strlen($parts[1]) === 1 && \is_numeric($parts[1]))
                     );
                 }
@@ -316,16 +316,16 @@ final class Realtype extends BObject
      *
      * @return      ?string
      */
-    public static function getRoundType() : ?string
+    public static function getRoundType(): ?string
     {
         return static::$globalRoundType;
     }
     /**
      * Retorna o nível de sensibilidade usada para os arredondamentos.
      *
-     * @return      ?string
+     * @return      ?Realtype
      */
-    public static function getRoundSensibility() : ?Realtype
+    public static function getRoundSensibility(): ?Realtype
     {
         return static::$globalRoundSensibility;
     }
@@ -341,22 +341,27 @@ final class Realtype extends BObject
     /**
      * Inicia um novo objeto ``Realtype`` com o valor indicado.
      *
-     * @param       mixed $v
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma string numérica.
+     * @param       int|float|string|Realtype $v
+     *              Valor inicial.
      *
      * @throws      \InvalidArgumentException
      *              Lançado se o valor inicial indicado não for aceitável para iniciar o objeto.
      */
-    function __construct($v = 0)
+    function __construct(int|float|string|Realtype $v = 0)
     {
-        if ($v === "") { $v = 0; }
+        if ($v === "") {
+            $v = 0;
+        }
         $this->mainCheckForInvalidArgumentException(
-            "v", $v,
+            "v",
+            $v,
             [
                 [
                     "validate"          => "closure",
-                    "closure"           => function ($argValue) { return Realtype::isValidRealtype($argValue); },
-                    "customErrorMessage"=> "Argument must be a valid Realtype."
+                    "closure"           => function ($argValue) {
+                        return Realtype::isValidRealtype($argValue);
+                    },
+                    "customErrorMessage" => "Argument must be a valid Realtype."
                 ]
             ]
         );
@@ -386,7 +391,7 @@ final class Realtype extends BObject
         }
 
         $i = \strlen($this->integerPart);
-        $d = (($this->decimalPart === "0") ? 0 :\strlen($this->decimalPart));
+        $d = (($this->decimalPart === "0") ? 0 : \strlen($this->decimalPart));
         $this->totalDigits = ($i + $d);
         $this->totalIntegerDigits = $i;
         $this->totalDecimalDigits = $d;
@@ -400,12 +405,12 @@ final class Realtype extends BObject
      * Identifica se o valor passado é um ``Realtype`` válido.
      *
      * @param       mixed $v
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma string numérica.
+     *              Valor a ser testado.
      *
      * @return      bool
      *              Retorna ``true`` se o valor passado for válido.
      */
-    static public function isValidRealtype($v) : bool
+    static public function isValidRealtype(mixed $v): bool
     {
         return (
             (\is_int($v) === true || \is_float($v) === true) ||
@@ -425,17 +430,15 @@ final class Realtype extends BObject
     /**
      * Efetua a comparação entre o valor desta instância e o valor indicado.
      *
-     * @param       mixed $v
+     * @param       int|float|string|Realtype $v
      *              Valor usado para comparação.
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-     *              numérica.
      *
      * @return      int
      *              Retornará ``0`` quando os dois operandos são iguais.
      *              ``1`` se a instância atual é maior que o valor passado em ``$v``.
      *              ``-1`` se a instância atual é menor que o valor passado em ``$v``.
      */
-    protected function compareValues($v) : int
+    protected function compareValues(int|float|string|Realtype $v): int
     {
         $d = new Realtype($v);
         $dL = \max($this->decimalPlaces(), $d->decimalPlaces());
@@ -454,16 +457,14 @@ final class Realtype extends BObject
     /**
      * Verifica se o valor atual desta instância é igual ao valor passado para comparação.
      *
-     * @param       mixed $v
+     * @param       int|float|string|Realtype $v
      *              Valor usado para comparação.
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-     *              numérica.
      *
      * @return      bool
      *              Retorna ``true`` se o valor atual desta instância e o valor passado em ``$v``
      *              forem **IDÊNTICOS**.
      */
-    public function isEqualAs($v) : bool
+    public function isEqualAs(int|float|string|Realtype $v): bool
     {
         return ($this->compareValues($v) === 0);
     }
@@ -473,16 +474,14 @@ final class Realtype extends BObject
     /**
      * Verifica se o valor atual desta instância é maior que o valor passado para comparação.
      *
-     * @param       mixed $v
+     * @param       int|float|string|Realtype $v
      *              Valor usado para comparação.
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-     *              numérica.
      *
      * @return      bool
      *              Retornará ``true`` se o valor atual desta instância é **MAIOR** que o valor
      *              indicado em ``$v``.
      */
-    public function isGreaterThan($v) : bool
+    public function isGreaterThan(int|float|string|Realtype $v): bool
     {
         return ($this->compareValues($v) === 1);
     }
@@ -492,16 +491,14 @@ final class Realtype extends BObject
     /**
      * Verifica se o valor atual desta instância é maior ou igual ao valor passado para comparação.
      *
-     * @param       mixed $v
+     * @param       int|float|string|Realtype $v
      *              Valor usado para comparação.
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-     *              numérica.
      *
      * @return      bool
      *              Retornará ``true`` se o valor atual desta instância é **MAIOR** ou **IGUAL**
      *              ao o valor indicado em ``$v``.
      */
-    public function isGreaterOrEqualAs($v) : bool
+    public function isGreaterOrEqualAs(int|float|string|Realtype $v): bool
     {
         $r = $this->compareValues($v);
         return ($r === 0 || $r === 1);
@@ -512,16 +509,14 @@ final class Realtype extends BObject
     /**
      * Verifica se o valor atual desta instância é menor que o valor passado para comparação.
      *
-     * @param       mixed $v
+     * @param       int|float|string|Realtype $v
      *              Valor usado para comparação.
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-     *              numérica.
      *
      * @return      bool
      *              Retornará ``true`` se o valor atual desta instância é **MENOR** que o valor
      *              indicado em ``$v``.
      */
-    public function isLessThan($v) : bool
+    public function isLessThan(int|float|string|Realtype $v): bool
     {
         return ($this->compareValues($v) === -1);
     }
@@ -531,16 +526,14 @@ final class Realtype extends BObject
     /**
      * Verifica se o valor atual desta instância é menor ou igual ao valor passado para comparação.
      *
-     * @param       mixed $v
+     * @param       int|float|string|Realtype $v
      *              Valor usado para comparação.
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-     *              numérica.
      *
      * @return      bool
      *              Retornará ``true`` se o valor atual desta instância é **MENOR** ou **IGUAL**
      *              ao o valor indicado em ``$v``.
      */
-    public function isLessOrEqualAs($v) : bool
+    public function isLessOrEqualAs(int|float|string|Realtype $v): bool
     {
         $r = $this->compareValues($v);
         return ($r === 0 || $r === -1);
@@ -561,7 +554,7 @@ final class Realtype extends BObject
      * @return      bool
      *              Retornará ``true`` se o valor atual desta instância for ``zero``.
      */
-    public function isZero() : bool
+    public function isZero(): bool
     {
         return ($this->compareValues(0) === 0);
     }
@@ -576,7 +569,7 @@ final class Realtype extends BObject
      * @return      bool
      *              Retornará ``true`` se o valor atual desta instância for um número positivo.
      */
-    public function isPositive() : bool
+    public function isPositive(): bool
     {
         return $this->isGreaterOrEqualAs(0);
     }
@@ -591,7 +584,7 @@ final class Realtype extends BObject
      * @return      bool
      *              Retornará ``true`` se o valor atual desta instância for um número negativo.
      */
-    public function isNegative() : bool
+    public function isNegative(): bool
     {
         return $this->isLessThan(0);
     }
@@ -611,7 +604,7 @@ final class Realtype extends BObject
      *
      * @return      Realtype
      */
-    public function toPositive() : Realtype
+    public function toPositive(): Realtype
     {
         $v = \str_replace("-", "", $this->val);
         return new Realtype($v);
@@ -627,7 +620,7 @@ final class Realtype extends BObject
      *
      * @return      Realtype
      */
-    public function toNegative() : Realtype
+    public function toNegative(): Realtype
     {
         if ($this->isZero() === true) {
             return new Realtype(0);
@@ -647,7 +640,7 @@ final class Realtype extends BObject
      *
      * @return      Realtype
      */
-    public function invertSignal() : Realtype
+    public function invertSignal(): Realtype
     {
         if ($this->isZero() === true) {
             return new Realtype(0);
@@ -700,14 +693,14 @@ final class Realtype extends BObject
      * @return      Realtype
      *              Nova instância ``Realtype`` com o resultado do arredondamento indicado.
      */
-    public static function roundTo(Realtype $v, string $roundType, Realtype $sensibility) : Realtype
+    public static function roundTo(Realtype $v, string $roundType, Realtype $sensibility): Realtype
     {
-        $r      = $v;
+        $r = $v;
 
         if (static::isValidRoundType($roundType, $sensibility) === true) {
-            $ip     = \max($v->integerPlaces(), $sensibility->integerPlaces());
-            $dp     = \max($v->decimalPlaces(), $sensibility->decimalPlaces());
-            $roundType = \strtolower($roundType);
+            $ip         = \max($v->integerPlaces(), $sensibility->integerPlaces());
+            $dp         = \max($v->decimalPlaces(), $sensibility->decimalPlaces());
+            $roundType  = \strtolower($roundType);
 
 
             if ($roundType === "floor") {
@@ -726,29 +719,31 @@ final class Realtype extends BObject
                 for ($i = 0; $i < \strlen($strVal); $i++) {
                     if ($strSen[$i] === ".") {
                         $r .= ".";
-                    }
-                    else {
-                        if ($strSen[$i] !== "0") { $useNumber = false; }
+                    } else {
+                        if ($strSen[$i] !== "0") {
+                            $useNumber = false;
+                        }
                         $r .= (($useNumber === true) ? $strVal[$i] : "0");
                     }
                 }
                 $r = new Realtype($r);
-            }
-            else {
+            } else {
                 $useSum = 0;
 
                 if ($roundType === "ceil") {
                     $useSum = 9;
-                }
-                else {
+                } else {
                     if (\strpos($roundType, "ceil-") !== false || \strpos($roundType, "floor-") !== false) {
                         $roundParts = \explode("-", $roundType);
 
                         if (\count($roundParts) === 2) {
                             $max = 0;
 
-                            if ($roundParts[0] === "floor") { $max = 9; }
-                            elseif ($roundParts[0] === "ceil") { $max = 10; }
+                            if ($roundParts[0] === "floor") {
+                                $max = 9;
+                            } elseif ($roundParts[0] === "ceil") {
+                                $max = 10;
+                            }
 
                             $useSum = ($max - ((int)$roundParts[1]));
                         }
@@ -759,8 +754,11 @@ final class Realtype extends BObject
                 if ($useSum > 0) {
                     $useSen = \str_replace("1", (string)$useSum, $sensibility->value());
 
-                    if ($v->isPositive() === true) { $r = $v->sum($useSen, $dp); }
-                    else { $r = $v->sub($useSen, $dp); }
+                    if ($v->isPositive() === true) {
+                        $r = $v->sum($useSen, $dp);
+                    } else {
+                        $r = $v->sub($useSen, $dp);
+                    }
 
                     $r = static::roundTo($r, "floor", $sensibility);
                 }
@@ -778,10 +776,8 @@ final class Realtype extends BObject
      * Efetua todas as operações expostas por esta classe e trata de aplicar arredondamentos
      * quando os parametros globais estiverem especificados para isto.
      *
-     * @param       mixed $v
+     * @param       int|float|string|Realtype $v
      *              Valor usado para o cálculo.
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-     *              numérica.
      *
      * @param       ?int $dPlaces
      *              Total de casas decimais a serem levadas em conta.
@@ -793,26 +789,29 @@ final class Realtype extends BObject
      * @return      Realtype
      *              Nova instância com o resultado da operação.
      */
-    protected function internalCalc($v, ?int $dPlaces = null, string $operator) : Realtype
-    {
+    protected function internalCalc(
+        int|float|string|Realtype $v,
+        ?int $dPlaces = null,
+        string $operator
+    ): Realtype {
         $r = null;
         $d = new Realtype($v);
 
         if (static::$globalRoundType === null || static::$globalRoundDisabled === true) {
             switch ($operator) {
-                case "sum" :
+                case "sum":
                     $r = new Realtype(\bcadd($this->value(), $d->value(), $this->useDecimalPlaces($dPlaces)));
                     break;
-                case "sub" :
+                case "sub":
                     $r = new Realtype(\bcsub($this->value(), $d->value(), $this->useDecimalPlaces($dPlaces)));
                     break;
-                case "mul" :
+                case "mul":
                     $r = new Realtype(\bcmul($this->value(), $d->value(), $this->useDecimalPlaces($dPlaces)));
                     break;
-                case "div" :
+                case "div":
                     $r = new Realtype(\bcdiv($this->value(), $d->value(), $this->useDecimalPlaces($dPlaces)));
                     break;
-                case "mod" :
+                case "mod":
                     $mod = \bcmod($this->value(), $d->value());
                     $r = (($mod === null) ? new Realtype(0) : new Realtype($mod));
                     break;
@@ -823,8 +822,7 @@ final class Realtype extends BObject
                     $r = new Realtype(\bcsqrt($this->value(), $this->useDecimalPlaces($dPlaces)));
                     break;
             }
-        }
-        else {
+        } else {
             $useDp = \max(
                 $this->decimalPlaces(),
                 $d->decimalPlaces(),
@@ -832,23 +830,23 @@ final class Realtype extends BObject
             );
 
             switch ($operator) {
-                case "sum" :
+                case "sum":
                     $r = new Realtype(\bcadd($this->value(), $d->value(), $useDp));
                     break;
-                case "sub" :
+                case "sub":
                     $r = new Realtype(\bcsub($this->value(), $d->value(), $useDp));
                     break;
-                case "mul" :
+                case "mul":
                     $r = new Realtype(\bcmul($this->value(), $d->value(), $useDp));
                     break;
-                case "div" :
+                case "div":
                     $r = new Realtype(\bcdiv($this->value(), $d->value(), $useDp));
                     break;
-                case "mod" :
+                case "mod":
                     $mod = \bcmod($this->value(), $d->value());
                     $r = (($mod === null) ? new Realtype(0) : new Realtype($mod));
                     break;
-                case "pow" :
+                case "pow":
                     $r = new Realtype(\bcpow($this->value(), $d->value(), $useDp));
                     break;
                 case "sqrt":
@@ -880,10 +878,8 @@ final class Realtype extends BObject
     /**
      * Efetua uma adição do valor atual desta instância com o valor indicado.
      *
-     * @param       mixed $v
+     * @param       int|float|string|Realtype $v
      *              Valor usado para o cálculo.
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-     *              numérica.
      *
      * @param       ?int $dPlaces
      *              Total de casas decimais a serem levadas em conta.
@@ -892,8 +888,10 @@ final class Realtype extends BObject
      * @return      Realtype
      *              Nova instância com o resultado desta operação.
      */
-    public function sum($v, ?int $dPlaces = null) : Realtype
-    {
+    public function sum(
+        int|float|string|Realtype $v,
+        ?int $dPlaces = null
+    ): Realtype {
         return $this->internalCalc($v, $dPlaces, "sum");
     }
 
@@ -904,10 +902,8 @@ final class Realtype extends BObject
     /**
      * Efetua uma subtração do valor atual desta instância com o valor indicado.
      *
-     * @param       mixed $v
+     * @param       int|float|string|Realtype $v
      *              Valor usado para o cálculo.
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-     *              numérica.
      *
      * @param       ?int $dPlaces
      *              Total de casas decimais a serem levadas em conta.
@@ -916,8 +912,10 @@ final class Realtype extends BObject
      * @return      Realtype
      *              Nova instância com o resultado desta operação.
      */
-    public function sub($v, ?int $dPlaces = null) : Realtype
-    {
+    public function sub(
+        int|float|string|Realtype $v,
+        ?int $dPlaces = null
+    ): Realtype {
         return $this->internalCalc($v, $dPlaces, "sub");
     }
 
@@ -928,10 +926,8 @@ final class Realtype extends BObject
     /**
      * Efetua uma multiplicação do valor atual desta instância com o valor indicado.
      *
-     * @param       mixed $v
+     * @param       int|float|string|Realtype $v
      *              Valor usado para o cálculo.
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-     *              numérica.
      *
      * @param       ?int $dPlaces
      *              Total de casas decimais a serem levadas em conta.
@@ -940,8 +936,10 @@ final class Realtype extends BObject
      * @return      Realtype
      *              Nova instância com o resultado desta operação.
      */
-    public function mul($v, ?int $dPlaces = null) : Realtype
-    {
+    public function mul(
+        int|float|string|Realtype $v,
+        ?int $dPlaces = null
+    ): Realtype {
         return $this->internalCalc($v, $dPlaces, "mul");
     }
 
@@ -952,10 +950,8 @@ final class Realtype extends BObject
     /**
      * Efetua uma divisão do valor atual desta instância com o valor indicado.
      *
-     * @param       mixed $v
+     * @param       int|float|string|Realtype $v
      *              Valor usado para o cálculo.
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-     *              numérica.
      *
      * @param       ?int $dPlaces
      *              Total de casas decimais a serem levadas em conta.
@@ -964,8 +960,10 @@ final class Realtype extends BObject
      * @return      Realtype
      *              Nova instância com o resultado desta operação.
      */
-    public function div($v, ?int $dPlaces = null) : Realtype
-    {
+    public function div(
+        int|float|string|Realtype $v,
+        ?int $dPlaces = null
+    ): Realtype {
         return $this->internalCalc($v, $dPlaces, "div");
     }
 
@@ -976,10 +974,8 @@ final class Realtype extends BObject
     /**
      * Calcula o módulo da divisão do valor atual desta instância pelo valor indicado.
      *
-     * @param       mixed $v
+     * @param       int|float|string|Realtype $v
      *              Valor usado para o cálculo.
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-     *              numérica.
      *
      * @param       ?int $dPlaces
      *              Total de casas decimais a serem levadas em conta.
@@ -988,8 +984,10 @@ final class Realtype extends BObject
      * @return      Realtype
      *              Nova instância com o resultado desta operação.
      */
-    public function mod($v, ?int $dPlaces = null) : Realtype
-    {
+    public function mod(
+        int|float|string|Realtype $v,
+        ?int $dPlaces = null
+    ): Realtype {
         return $this->internalCalc($v, $dPlaces, "mod");
     }
 
@@ -1000,10 +998,8 @@ final class Realtype extends BObject
     /**
      * Eleva o valor atual desta instância pelo expoente indicado.
      *
-     * @param       mixed $v
+     * @param       int|float|string|Realtype $v
      *              Valor usado para o cálculo.
-     *              É esperado valores ``Realtype``, ``int``, ``float`` ou uma ``string``
-     *              numérica.
      *
      * @param       ?int $dPlaces
      *              Total de casas decimais a serem levadas em conta.
@@ -1012,8 +1008,10 @@ final class Realtype extends BObject
      * @return      Realtype
      *              Nova instância com o resultado desta operação.
      */
-    public function pow($v, ?int $dPlaces = null) : Realtype
-    {
+    public function pow(
+        int|float|string|Realtype $v,
+        ?int $dPlaces = null
+    ): Realtype {
         return $this->internalCalc($v, $dPlaces, "pow");
     }
 
@@ -1031,7 +1029,7 @@ final class Realtype extends BObject
      * @return      Realtype
      *              Raiz quadrada do valor atual desta instância.
      */
-    public function sqrt(?int $dPlaces = null) : Realtype
+    public function sqrt(?int $dPlaces = null): Realtype
     {
         return $this->internalCalc("0", $dPlaces, "sqrt");
     }
@@ -1050,7 +1048,7 @@ final class Realtype extends BObject
      *
      * @return      string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->val;
     }
@@ -1065,7 +1063,7 @@ final class Realtype extends BObject
      * @return      Realtype
      *              Nova instância preenchida com os valores do estado indicado em ``$state``.
      */
-    public static function __set_state($state)
+    public static function __set_state($state): Realtype
     {
         $obj = new Realtype();
 
@@ -1098,7 +1096,7 @@ final class Realtype extends BObject
      * @return      string
      *              Valor atual desta instância formatado conforme definido.
      */
-    public function format(?int $dPlaces = null, string $dec, string $tho) : string
+    public function format(?int $dPlaces = null, string $dec, string $tho): string
     {
         $parts = \explode(".", $this->val);
         $integer = $parts[0];
@@ -1120,7 +1118,7 @@ final class Realtype extends BObject
 
         $revInteger = \strrev($integer);
         $formatestInteger = "";
-        for ($i=0, $k=1; $i < \strlen($revInteger); $i++, $k++) {
+        for ($i = 0, $k = 1; $i < \strlen($revInteger); $i++, $k++) {
             $formatestInteger .= $revInteger[$i];
 
             if (($k % 3) === 0 && ($k < \strlen($revInteger))) {
@@ -1130,7 +1128,10 @@ final class Realtype extends BObject
         $formatestInteger = \strrev($formatestInteger);
 
 
-        if ($dPlaces === 0) { return $formatestInteger; }
-        else { return $formatestInteger . $dec . $decimal; }
+        if ($dPlaces === 0) {
+            return $formatestInteger;
+        } else {
+            return $formatestInteger . $dec . $decimal;
+        }
     }
 }

@@ -13,7 +13,7 @@ declare(strict_types=1);
  *              Retornará o mesmo tipo de objeto inicialmente passado em ``$o``, mas com todos
  *              seus valores convertidos para ``strings`` representáveis em um documento HTML.
  */
-function object_convert_values_to_html_entities($o)
+function object_convert_values_to_html_entities(mixed $o): mixed
 {
     $nO = null;
 

@@ -1,9 +1,9 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital;
 
-use AeonDigital\Tools as Tools;
 
 
 
@@ -31,17 +31,17 @@ abstract class BObject
      *
      * @codeCoverageIgnore
      */
-    public function __set($name, $value)
+    public function __set($name, $value): void
     {
         throw new \RuntimeException("Unable to use \"__set\" method.");
     }
     /**
-     * Desabilita a função mágica ``__sget`` para assegurar a que apenas alterações dentro das
+     * Desabilita a função mágica ``__get`` para assegurar a que apenas alterações dentro das
      * regras definidas para a classe sejam possíveis.
      *
      * @codeCoverageIgnore
      */
-    public function __get($name)
+    public function __get($name): mixed
     {
         throw new \RuntimeException("Unable to use \"__get\" method.");
     }
@@ -50,7 +50,7 @@ abstract class BObject
      *
      * @codeCoverageIgnore
      */
-    public function __unset($name)
+    public function __unset($name): void
     {
         throw new \RuntimeException("Unable to use \"__unset\" method.");
     }
@@ -61,7 +61,7 @@ abstract class BObject
      *
      * @codeCoverageIgnore
      */
-    public function __toString()
+    public function __toString(): string
     {
         throw new \RuntimeException("Unable to use \"__toString\" method.");
     }
@@ -72,7 +72,7 @@ abstract class BObject
      *
      * @codeCoverageIgnore
      */
-    public function __invoke($x)
+    public function __invoke($x): mixed
     {
         throw new \RuntimeException("Unable to use \"__invoke\" method.");
     }
@@ -83,7 +83,7 @@ abstract class BObject
      *
      * @codeCoverageIgnore
      */
-    public static function __set_state($assoc_array)
+    public static function __set_state($assoc_array): object
     {
         throw new \RuntimeException("Unable to use \"__set_state\" method.");
     }

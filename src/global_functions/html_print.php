@@ -20,8 +20,12 @@ declare(strict_types=1);
  *
  * @return      void
  */
-function html_print($obj, bool $o = false, string $w = "", string $h = ""): void
-{
+function html_print(
+    mixed $obj,
+    bool $o = false,
+    string $w = "",
+    string $h = ""
+): void {
     $s = "";
     $styles = [];
 

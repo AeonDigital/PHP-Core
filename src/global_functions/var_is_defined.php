@@ -22,7 +22,7 @@ declare(strict_types=1);
  *              Objetos do tipo ``array`` e ``\stdClass`` retornarão ``true`` SE não forem vazios
  *              quando ``$k`` não for definido.
  */
-function var_is_defined(&$o, ?string $k = null): bool
+function var_is_defined(mixed &$o, ?string $k = null): bool
 {
     $r = false;
 
