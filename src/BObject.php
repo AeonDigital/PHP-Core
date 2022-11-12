@@ -31,7 +31,7 @@ abstract class BObject
      *
      * @codeCoverageIgnore
      */
-    public function __set($name, $value): void
+    public function __set(string $name, mixed $value): void
     {
         throw new \RuntimeException("Unable to use \"__set\" method.");
     }
@@ -41,7 +41,7 @@ abstract class BObject
      *
      * @codeCoverageIgnore
      */
-    public function __get($name): mixed
+    public function __get(string $name): mixed
     {
         throw new \RuntimeException("Unable to use \"__get\" method.");
     }
@@ -50,7 +50,7 @@ abstract class BObject
      *
      * @codeCoverageIgnore
      */
-    public function __unset($name): void
+    public function __unset(string $name): void
     {
         throw new \RuntimeException("Unable to use \"__unset\" method.");
     }
@@ -72,7 +72,7 @@ abstract class BObject
      *
      * @codeCoverageIgnore
      */
-    public function __invoke($x): mixed
+    public function __invoke(mixed $x): mixed
     {
         throw new \RuntimeException("Unable to use \"__invoke\" method.");
     }
@@ -83,7 +83,7 @@ abstract class BObject
      *
      * @codeCoverageIgnore
      */
-    public static function __set_state($assoc_array): object
+    public static function __set_state(array $assoc_array): object
     {
         throw new \RuntimeException("Unable to use \"__set_state\" method.");
     }

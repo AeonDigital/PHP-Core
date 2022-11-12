@@ -383,7 +383,7 @@ class Tools
             }
         } elseif (\is_a($o, "\DateTime") === true) {
             return $o->format("Y-m-d H:i:s");
-        } elseif (\is_string($o) === true && $o !== undefined) {
+        } elseif (\is_string($o) === true) {
             return (string)$o;
         } elseif (\is_array($o) === true) {
             return \implode(" ", $o);

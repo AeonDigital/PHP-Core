@@ -1069,7 +1069,7 @@ final class RealType extends BObject implements iRealType
      * @return      iRealType
      *              Nova instância preenchida com os valores do estado indicado em ``$state``.
      */
-    public static function __set_state($state): iRealType
+    public static function __set_state(array $state): iRealType
     {
         $obj = new RealType();
 

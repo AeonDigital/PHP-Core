@@ -46,11 +46,12 @@ function var_is_defined(mixed &$o, ?string $k = null): bool
                 }
             }
         }
-    } else {
-        if (\is_scalar($o) === true) {
-            $r = ($o !== null && $o !== undefined && $o !== "");
-        }
+    } elseif (\is_scalar($o) === true) {
+        $r = ($o !== null && $o !== "");
+    } elseif ($o !== undefined && is_object($o) === true) {
+        $r = true;
     }
+
 
     return $r;
 }

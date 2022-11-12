@@ -8,7 +8,7 @@ use AeonDigital\Interfaces\DataModel\iModel as iModel;
 use AeonDigital\Interfaces\DataModel\iFieldModel as iFieldModel;
 use AeonDigital\Interfaces\DataModel\iModelFactory as iModelFactory;
 use AeonDigital\DataModel\Abstracts\aField as aField;
-
+use AeonDigital\undefined as undefined;
 
 
 
@@ -386,9 +386,9 @@ abstract class aFieldModel extends aField implements iFieldModel
      * Em campos *collection* será retornado o ``array`` contendo as instâncias que
      * compõe a coleção atual.
      *
-     * @return      string|array|iModel
+     * @return      string|array|iModel|undefined
      */
-    public function getInstanceValue(): string|array|iModel
+    public function getInstanceValue(): string|array|iModel|undefined
     {
         return $this->value;
     }

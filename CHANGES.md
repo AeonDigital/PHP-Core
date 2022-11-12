@@ -1,14 +1,5 @@
-============================================================
-ANTES DE PROSSEGUIR PARA O PRÓXIMO REPOSITÓRIO:
-    - Resolver o que fazer com o 'undefined' ...
-    - verificar todos os 'erros' que o IDE está mostrando. ver se tem forma de resolver.
 
 
-
-
-
-
-============================================================
 Alteração de assinaturas de funções
 array_in_ci         -> in_array_ci              [nome alterado]
 mb_str_contains     -> str_contains             [removido; atualmente é parte do core do PHP a partir da versão 8.0 e já é binary-safe]

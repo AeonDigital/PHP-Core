@@ -898,9 +898,8 @@ class BasicCollection extends BObject implements iBasicCollection
      * regras definidas para a classe sejam possíveis.
      *
      * @codeCoverageIgnore
-     *
      */
-    public function __set($name, $value): void
+    public function __set(string $name, mixed $value): void
     {
         // Não produz efeito
     }

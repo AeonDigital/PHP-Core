@@ -1095,6 +1095,10 @@ class global_functionsTests extends TestCase
         $this->assertTrue(var_is_defined($std, "know"));
 
         $this->assertTrue(var_is_defined($std, "know"));
+
+
+        $dt = new \DateTime();
+        $this->assertTrue(var_is_defined($dt));
     }
 
 
