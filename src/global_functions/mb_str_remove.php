@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Remove uma cadeia de caracteres dentro dos limites indicados.
@@ -19,6 +20,6 @@ function mb_str_remove(
     string $str,
     int $start,
     ?int $length = null
-) : string {
+): string {
     return \mb_substr_replace($str, "", $start, $length);
 }

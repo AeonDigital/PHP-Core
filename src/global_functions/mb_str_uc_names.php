@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Converte para maiúsculas o primeiro caractere de cada parte de uma ``string`` que representa um
@@ -18,13 +19,12 @@ declare (strict_types=1);
  * @return      string
  *              Nova ``string`` modificada.
  */
-function mb_str_uc_names(string $str, string $locale = "", array $ignore = []) : string
+function mb_str_uc_names(string $str, string $locale = "", array $ignore = []): string
 {
     $locale = \mb_strtolower(\str_replace("-", "", $locale));
     if ($locale === "" || \function_exists("mb_str_uc_names_$locale") === false) {
         return \ucfirst(\mb_str_uc_words(\mb_strtolower($str), $ignore));
-    }
-    else {
+    } else {
         $f = "mb_str_uc_names_$locale";
         return $f($str);
     }

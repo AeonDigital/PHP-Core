@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Converte o encode de um arquivo para **UTF-8**.
@@ -13,7 +14,7 @@ declare (strict_types=1);
  * @return      bool
  *              Retornará ``true`` caso o documento seja convertido sem falhas.
  */
-function file_convert_to_utf8(string $absoluteSystemPathToFile) : bool
+function file_convert_to_utf8(string $absoluteSystemPathToFile): bool
 {
     $isOK = false;
 

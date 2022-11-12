@@ -1,16 +1,17 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Retorna um ``DateTime`` conforme parametros passados.
  *
- * @param       ?string|array
+ * @param       string|array
  *              String no formato **week** ou ``array associativo`` com os dados brutos
  *              da data.
  *
  * @return      ?\DateTime
  */
-function weekdate_to_datetime($week) : ?\Datetime
+function weekdate_to_datetime(string|array $week): ?\Datetime
 {
     $r = \weekdate_to_array($week);
 

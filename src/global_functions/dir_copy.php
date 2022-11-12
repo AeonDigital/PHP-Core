@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Copia todo o conteúdo de um diretório para outro local.
@@ -19,8 +20,8 @@ declare (strict_types=1);
 function dir_copy(
     string $absoluteSystemPathToDir_source,
     string $absoluteSystemPathToDir_dest,
-    int $permissions = 700
-) : bool {
+    int $permissions = 0700
+): bool {
 
     $isOK = true;
 

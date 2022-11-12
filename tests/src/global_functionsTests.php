@@ -44,7 +44,7 @@ class global_functionsTests extends TestCase
 
 
 
-    public function test_method_array_in_ci()
+    public function test_method_in_array_ci()
     {
         $testArray = ["Rianna", "Cantarelli", "Schellin", "Aeon", "DIGiTAL"];
 
@@ -53,7 +53,7 @@ class global_functionsTests extends TestCase
 
             $this->assertTrue(in_array($s, $testArray));
             $this->assertFalse(in_array($alter, $testArray));
-            $this->assertTrue(array_in_ci($alter, $testArray));
+            $this->assertTrue(in_array_ci($alter, $testArray));
         }
     }
 
@@ -409,57 +409,11 @@ class global_functionsTests extends TestCase
 
 
 
-    public function test_method_mb_str_contains()
-    {
-        $input = "Mais um framework para PHP.";
-        $search = "work";
-        $expected = true;
-        $result = mb_str_contains($input, $search);
-        $this->assertEquals($result, $expected);
-
-        $search = "less";
-        $expected = false;
-        $result = mb_str_contains($input, $search);
-        $this->assertEquals($result, $expected);
-    }
-
-
-
-
-    public function test_method_mb_str_ends_with()
-    {
-        $strTrue = ["one_sufix", "two_sufix", "tree_sufix"];
-        $strFalse = ["sufix_not", "another_word", "expression_false", "lit"];
-
-
-        foreach ($strTrue as $s) {
-            $this->assertTrue(mb_str_ends_with($s, "sufix"));
-        }
-
-
-        foreach ($strFalse as $s) {
-            $this->assertFalse(mb_str_ends_with($s, "sufix"));
-        }
-    }
-
-
-
     public function test_method_mb_str_insert()
     {
         $input = "Mais um framework para PHP.";
         $result = mb_str_insert($input, "work", 13);
         $expected = "Mais um frameworkwork para PHP.";
-        $this->assertEquals($result, $expected);
-    }
-
-
-
-    public function test_method_mb_str_last_pos()
-    {
-        $input = "Mais um framework para PHP.";
-        $search = "m";
-        $expected = 11;
-        $result = mb_str_last_pos($input, $search);
         $this->assertEquals($result, $expected);
     }
 
@@ -626,24 +580,6 @@ class global_functionsTests extends TestCase
         $subject = "Esta string passará por uma substituição, Será removido \"passará\" por \"passou\".";
         $expected = "Esta string passou por uma substituição, Será removido \"passará\" por \"passou\".";
         $this->assertSame($expected, mb_str_replace_once($search, $replace, $subject));
-    }
-
-
-
-    public function test_method_mb_str_starts_with()
-    {
-        $strTrue = ["prefix_one", "prefix_two", "prefix_tree"];
-        $strFalse = ["not_prefix", "another_word", "expression_false", "lit"];
-
-
-        foreach ($strTrue as $s) {
-            $this->assertTrue(mb_str_starts_with($s, "prefix"));
-        }
-
-
-        foreach ($strFalse as $s) {
-            $this->assertFalse(mb_str_starts_with($s, "prefix"));
-        }
     }
 
 
@@ -826,7 +762,7 @@ class global_functionsTests extends TestCase
         // Este teste coloca a prova (de forma simples) a experiência de
         // tentar obter precisão representativa de números de ponto flutuante
         // (que por padrão não tem esta prerrogativa)
-        // Não tem um objetivo prático além de do teste do "get_decimal_part" mas
+        // Não tem um objetivo prático além de do teste do "numeric_decimal_par" mas
         // serve para explicitar que, se você deseja obter uma precisão maior para
         // seus valores numéricos, precisa encontrar uma outra forma ;)
 
@@ -966,9 +902,6 @@ class global_functionsTests extends TestCase
                 $this->assertNotSame($exp, $str);
             }
         }
-
-
-        $this->assertSame(null, numeric_decimal_part("22.22"));
     }
 
 
@@ -999,16 +932,7 @@ class global_functionsTests extends TestCase
         }
 
 
-        $invalidValues = [
-            undefined, null, []
-        ];
-
-        foreach ($invalidValues as $oVal) {
-            $this->assertNull(numeric_integer_part($oVal));
-        }
-
         $this->assertSame(12, numeric_integer_part(12.998));
-        $this->assertSame(null, numeric_integer_part("12"));
     }
 
 
@@ -1022,8 +946,6 @@ class global_functionsTests extends TestCase
         $this->assertFalse(numeric_is_even(1.0));
         $this->assertTrue(numeric_is_even(2.0));
         $this->assertTrue(numeric_is_even(2.2));
-
-        $this->assertNull(numeric_is_even("1"));
     }
 
 
@@ -1037,8 +959,6 @@ class global_functionsTests extends TestCase
         $this->assertTrue(numeric_is_odd(1.0));
         $this->assertFalse(numeric_is_odd(2.0));
         $this->assertFalse(numeric_is_odd(2.2));
-
-        $this->assertNull(numeric_is_odd("1"));
     }
 
 

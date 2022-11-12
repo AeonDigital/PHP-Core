@@ -254,7 +254,7 @@ trait MainCheckArgumentException
         }
 
         $validate = \str_replace(" ", "_", \mb_strtolower($validate));
-        if (\mb_str_ends_with($validate, "_or_null") === true) {
+        if (\str_ends_with($validate, "_or_null") === true) {
             $validateOrNull = true;
             $validate = \str_replace("_or_null", "", $validate);
         }
@@ -1001,7 +1001,7 @@ trait MainCheckArgumentException
 
 
         if ($caseInsensitive === true) {
-            if (\array_in_ci($argValue, $allowedValues) === false) {
+            if (\in_array_ci($argValue, $allowedValues) === false) {
                 $err = "Invalid value defined for \"$argName\". Expected [ " . \implode(", ", $allowedValues) . " ].";
                 $r = false;
             }
@@ -1039,7 +1039,7 @@ trait MainCheckArgumentException
 
         foreach ($argValue as $key => $value) {
             if ($caseInsensitive === true) {
-                if (\array_in_ci($key, $allowedValues) === false) {
+                if (\in_array_ci($key, $allowedValues) === false) {
                     $err = "Invalid key defined for \"$argName\". Expected keys [ " . \implode(", ", $allowedValues) . " ]. Given: [ $key ].";
                     $r = false;
                 }

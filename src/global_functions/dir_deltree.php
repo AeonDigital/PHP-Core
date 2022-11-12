@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Remove um diretório e todo seu conteúdo.
@@ -10,7 +11,7 @@ declare (strict_types=1);
  * @return      bool
  *              Retornará ``true`` se o diretório alvo for excluído.
  */
-function dir_deltree(string $absoluteSystemPathToDir) : bool
+function dir_deltree(string $absoluteSystemPathToDir): bool
 {
     if (\is_dir($absoluteSystemPathToDir) === true) {
         $allObjects = \array_diff(\scandir($absoluteSystemPathToDir), [".", ".."]);
@@ -19,8 +20,7 @@ function dir_deltree(string $absoluteSystemPathToDir) : bool
             $path = \to_system_path($absoluteSystemPathToDir . "/" . $object);
             if (\is_dir($path) === true) {
                 \dir_deltree($path);
-            }
-            else {
+            } else {
                 \unlink($path);
             }
         }

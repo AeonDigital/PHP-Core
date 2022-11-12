@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Converte todos os arquivos alvo para o encode **UTF-8**.
@@ -19,7 +20,7 @@ declare (strict_types=1);
  *              Retornará ``true`` se TODOS os recursos indicados em ``$absoluteSystemPaths``
  *              existirem e forem corretamente convertidos.
  */
-function dir_convert_to_utf8(array $absoluteSystemPaths, array $validExtensions) : bool
+function dir_convert_to_utf8(array $absoluteSystemPaths, array $validExtensions): bool
 {
     $isOK = false;
 
@@ -39,7 +40,7 @@ function dir_convert_to_utf8(array $absoluteSystemPaths, array $validExtensions)
 
 
     // Se todos os recursos indicados existem...
-    if ($isOK) {
+    if ($isOK === true) {
         foreach ($absoluteSystemPaths as $key => $resource) {
             if ($isOK === true) {
                 // Tratando-se de um arquivo comum...
@@ -59,9 +60,10 @@ function dir_convert_to_utf8(array $absoluteSystemPaths, array $validExtensions)
                     );
 
                     foreach ($childResources as $child) {
-                        if ($isOK === true && \mb_str_ends_with($child, ".") === false &&
-                            \mb_str_ends_with($child, "..") === false)
-                        {
+                        if (
+                            $isOK === true && \str_ends_with($child, ".") === false &&
+                            \str_ends_with($child, "..") === false
+                        ) {
                             if (\is_file($child) === true) {
                                 $ext = \strtolower(\pathinfo($child, PATHINFO_EXTENSION));
 

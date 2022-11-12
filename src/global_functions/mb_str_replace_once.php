@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Substitui apenas a primeira ocorrencia de ``$search`` em ``$subject`` pelo valor
@@ -17,7 +18,7 @@ declare (strict_types=1);
  * @return      string
  *              Nova ``string`` modificada.
  */
-function mb_str_replace_once(string $search, string $replace, string $subject) : string
+function mb_str_replace_once(string $search, string $replace, string $subject): string
 {
     $pos = \strpos($subject, $search);
     if ($pos !== false) {

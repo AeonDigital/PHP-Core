@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * A partir de uma ``string`` de data no formato **week** ou de um objeto ``\DateTime``
@@ -15,14 +16,14 @@ declare (strict_types=1);
  *      ];
  * ```
  *
- * @param       ?string|\DateTime $week
+ * @param       string|\DateTime $week
  *              String ou objeto \DateTime.
  *
  * @return      ?array
  *              Retornará ``null`` se não for possível identificar os componentes
  *              da data.
  */
-function weekdate_to_array($week) : ?array
+function weekdate_to_array(string|\DateTime $week): ?array
 {
     $r = null;
 
@@ -35,7 +36,7 @@ function weekdate_to_array($week) : ?array
                 " ",
                 \str_replace(["w", "W", "-"], ["", "", " "], $week)
             ),
-            fn($v) => (\is_numeric($v) === true)
+            fn ($v) => (\is_numeric($v) === true)
         );
 
 
@@ -76,7 +77,8 @@ function weekdate_to_array($week) : ?array
 
 
         // Apenas se os dados encontrados estão dentro dos limites...
-        if ($year >= 1 && $year <= 9999 &&
+        if (
+            $year >= 1 && $year <= 9999 &&
             $week >= 1 && $week <= 53 &&
             $day >= 1 && $day <= 7
         ) {
@@ -88,8 +90,7 @@ function weekdate_to_array($week) : ?array
                 ];
             }
         }
-    }
-    elseif (\is_a($week, "\DateTime") === true) {
+    } elseif (\is_a($week, "\DateTime") === true) {
         $r = [
             "year" => (int)$week->format("o"),
             "week" => (int)$week->format("W"),

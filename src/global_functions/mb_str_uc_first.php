@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Converte para maiúscula o primeiro caractere de uma ``string``.
@@ -12,7 +13,7 @@ declare (strict_types=1);
  * @return      string
  *              Nova ``string`` modificada.
  */
-function mb_str_uc_first(string $string) : string
+function mb_str_uc_first(string $string): string
 {
     if ($string === "" || $string === " ") {
         return $string;

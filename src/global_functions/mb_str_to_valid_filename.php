@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Verifica a string original passada e remove dela qualquer caracter que a torne um nome
@@ -16,7 +17,7 @@ declare (strict_types=1);
  *
  * @return      string
  */
-function mb_str_to_valid_filename(string $str) : string
+function mb_str_to_valid_filename(string $str): string
 {
     $str = \mb_str_remove_glyphs(
         \preg_replace(

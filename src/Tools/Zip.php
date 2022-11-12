@@ -100,8 +100,8 @@ class Zip
                         $childResources = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($resource), \RecursiveIteratorIterator::SELF_FIRST);
                         foreach ($childResources as $child) {
                             $childName = (string)$child;
-                            if (\mb_str_ends_with($childName, ".") === false &&
-                                \mb_str_ends_with($childName, "..") === false
+                            if (\str_ends_with($childName, ".") === false &&
+                                \str_ends_with($childName, "..") === false
                             ) {
                                 $recName = $useContainer . \str_replace($resource . DS, "", $childName);
 

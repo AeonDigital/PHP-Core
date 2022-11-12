@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Retorna um objeto ``DateTime`` setado para o último dia do mês. Hora minuto e segundo
@@ -10,7 +11,7 @@ declare (strict_types=1);
  *
  * @return      \DateTime
  */
-function date_to_last_month_day(\DateTime $date) : \DateTime
+function date_to_last_month_day(\DateTime $date): \DateTime
 {
     $Y = (int)$date->format("Y");
     $m = (int)$date->format("m");

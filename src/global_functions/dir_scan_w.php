@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Retorna a listagem do conteúdo do diretório alvo já ordenado adequadamente conforme o
@@ -11,7 +12,7 @@ declare (strict_types=1);
  * @return      array
  *              Lista de diretórios e arquivos encontrados no local indicado.
  */
-function dir_scan_w(string $absoluteSystemPathToDir) : array
+function dir_scan_w(string $absoluteSystemPathToDir): array
 {
     $dirContent = \scandir($absoluteSystemPathToDir);
 

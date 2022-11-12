@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Imprime na tela o valor de ``$obj`` dentro de uma tag ``<pre>``, facilitando assim a leitura
@@ -19,7 +20,7 @@ declare (strict_types=1);
  *
  * @return      void
  */
-function html_print($obj, $o = null, $w = null, $h = null) : void
+function html_print($obj, bool $o = false, string $w = "", string $h = ""): void
 {
     $s = "";
     $styles = [];
@@ -27,10 +28,10 @@ function html_print($obj, $o = null, $w = null, $h = null) : void
     if ($o === true) {
         $styles[] = "overflow:auto;";
     }
-    if ($w !== null) {
+    if ($w !== "") {
         $styles[] = "width:$w;";
     }
-    if ($h !== null) {
+    if ($h !== "") {
         $styles[] = "height:$h;";
     }
 

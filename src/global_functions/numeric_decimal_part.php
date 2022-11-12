@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Retorna unicamente a parte decimal de um numeral.
@@ -15,21 +16,14 @@ declare (strict_types=1);
  *              Tamanho da parte decimal a ser retornada.
  *              Se não for informado, será usado o valor **2**.
  *
- * @return      ?float
- *              Retornará ``null`` caso o valor de entrada não seja numérico.
+ * @return      float
+ *              Retornará um ``float`` como ``0.004321``.
  */
-function numeric_decimal_part($n, int $l = 2) : ?float
+function numeric_decimal_part(int|float $n, int $l = 2): float
 {
-    $r = null;
+    $r = 0.0;
 
-    if (\is_int($n) === true ||
-        \is_float($n) === true)
-    {
-        if (\is_int($n) === true) {
-            $n = (float)$n;
-        }
-
-        $str = null;
+    if (\is_float($n) === true) {
         $str = \explode(".", \number_format($n, $l, ".", ""));
         $str = "0." . $str[1];
         $r = (float)$str;

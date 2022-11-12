@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Efetua alteração nas permissões de um diretório e em todos seus itens filhos.
@@ -13,7 +14,7 @@ declare (strict_types=1);
  * @return      bool
  *              Retornará ``true`` se TODOS os itens alvo tiverem suas permissões alteradas.
  */
-function dir_chmod_r(string $absoluteSystemPathToDir, int $permissions) : bool
+function dir_chmod_r(string $absoluteSystemPathToDir, int $permissions): bool
 {
     $isOK = \chmod($absoluteSystemPathToDir, $permissions);
 

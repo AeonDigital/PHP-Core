@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Verifica se a string corresponde à expressão regular definida.
@@ -12,7 +13,7 @@ declare (strict_types=1);
  *
  * @return      bool
  */
-function mb_str_pattern_match(string $str, string $regx) : bool
+function mb_str_pattern_match(string $str, string $regx): bool
 {
     $result = \preg_match($regx, $str);
     return (\is_integer($result) === true && $result === 1);

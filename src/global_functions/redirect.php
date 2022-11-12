@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Redireciona o ``UA`` para a URL indicada.
@@ -16,7 +17,7 @@ declare (strict_types=1);
  *
  * @return      void
  */
-function redirect(string $url, string $httpStatusCode = "HTTP/1.1 302 Found") : void
+function redirect(string $url, string $httpStatusCode = "HTTP/1.1 302 Found"): void
 {
     \header($httpStatusCode);
     \header("Location: " .  $url);

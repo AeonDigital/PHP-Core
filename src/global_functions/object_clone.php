@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Efetua a clonagem de um objeto.
@@ -11,25 +12,23 @@ declare (strict_types=1);
  */
 function object_clone($obj)
 {
-    if ($obj === null ||
+    if (
+        $obj === null ||
         \is_scalar($obj) === true ||
-        (\is_array($obj) === true && \array_is_assoc($obj) === false))
-    {
+        (\is_array($obj) === true && \array_is_assoc($obj) === false)
+    ) {
         return $obj;
-    }
-    else {
+    } else {
         $clone = null;
         $type = null;
 
         if (\array_is_assoc($obj) === true) {
             $type = "assoc";
             $clone = [];
-        }
-        elseif (\is_a($obj, "\stdClass") === true) {
+        } elseif (\is_a($obj, "\stdClass") === true) {
             $type = "stdClass";
             $clone = new \stdClass();
-        }
-        else {
+        } else {
             $clone = clone $obj;
         }
 

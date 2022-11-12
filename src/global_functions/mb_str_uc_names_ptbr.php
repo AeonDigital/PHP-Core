@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Converte para maiúsculas o primeiro caractere de cada parte de uma ``string`` que representa um
@@ -14,12 +15,14 @@ declare (strict_types=1);
  * @return      string
  *              Nova ``string`` modificada.
  */
-function mb_str_uc_names_ptbr(string $string) : string
+function mb_str_uc_names_ptbr(string $string): string
 {
-    $ignore = [ "a", "as", "à", "às", "da", "das", "na", "nas", "pela", "pelas",
-                "o", "os", "ao", "aos", "do", "dos", "no", "nos", "pelo", "pelos",
-                "de", "em", "por", "per", "um", "uns", "dum", "duns", "num", "nums",
-                "uma", "umas", "duma", "dumas", "numa", "numas"];
+    $ignore = [
+        "a", "as", "à", "às", "da", "das", "na", "nas", "pela", "pelas",
+        "o", "os", "ao", "aos", "do", "dos", "no", "nos", "pelo", "pelos",
+        "de", "em", "por", "per", "um", "uns", "dum", "duns", "num", "nums",
+        "uma", "umas", "duma", "dumas", "numa", "numas"
+    ];
 
     return \mb_str_uc_names($string, "", $ignore);
 }

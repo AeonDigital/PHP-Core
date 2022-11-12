@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Verifica se o objeto passado é um ``Array Associativo``.
@@ -11,7 +12,7 @@ declare (strict_types=1);
  *              Retornará ``true`` se ``$o`` for mesmo um ``Array Associativo``.
  *              Um ``array`` vazio retornará ``false``.
  */
-function array_is_assoc($o) : bool
+function array_is_assoc($o): bool
 {
     if (\is_array($o) === true && $o !== []) {
         return \array_keys($o) !== \range(0, \count($o) - 1);

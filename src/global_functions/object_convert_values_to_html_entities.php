@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Converte todo conteúdo de um ``Array Associativo`` ou objeto ``\stdClass`` em um valor do tipo
@@ -20,28 +21,22 @@ function object_convert_values_to_html_entities($o)
         foreach ($o as $i => $v) {
             $nO[$i] = \object_convert_values_to_html_entities($v);
         }
-    }
-    elseif (\is_a($o, "\stdClass") === true) {
+    } elseif (\is_a($o, "\stdClass") === true) {
         $nO = new \stdClass();
         foreach ($o as $k => $v) {
             $nO->{$k} = \object_convert_values_to_html_entities($v);
         }
-    }
-    elseif (\is_a($o, "\DateTime") === true) {
+    } elseif (\is_a($o, "\DateTime") === true) {
         $nO = $o->format("Y-m-d H:i:s");
-    }
-    elseif (\is_object($o) === true) {
+    } elseif (\is_object($o) === true) {
         if (\method_exists($o, "__toString") === true) {
             $nO = (string)$o;
-        }
-        else {
+        } else {
             $nO = \get_class($o);
         }
-    }
-    elseif (\is_string($o) === true) {
+    } elseif (\is_string($o) === true) {
         $nO = \htmlentities($o);
-    }
-    else {
+    } else {
         $nO = $o;
     }
 

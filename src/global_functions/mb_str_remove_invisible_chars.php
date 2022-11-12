@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Remove da ``string`` todas as ocorrências de caracteres não visíveis.
@@ -9,7 +10,7 @@ declare (strict_types=1);
  *
  * @return      string
  */
-function mb_str_remove_invisible_chars(string $str) : string
+function mb_str_remove_invisible_chars(string $str): string
 {
     return \preg_replace(
         '/[\x00-\x1F\x7F]/u',

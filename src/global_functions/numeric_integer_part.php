@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Retorna unicamente a parte inteira de um numeral.
@@ -7,17 +8,14 @@ declare (strict_types=1);
  * @param       int|float $n
  *              Valor numérico de entrada.
  *
- * @return      ?int
- *              Retornará ``null`` caso o valor de entrada não seja numérico.
+ * @return      int
+ *              Retorna a parte inteira do numeral passado.
  */
-function numeric_integer_part($n) : ?int
+function numeric_integer_part(int|float $n): int
 {
-    $r = null;
+    $r = $n;
 
-    if (\is_int($n) === true) {
-        $r = (int)$n;
-    }
-    elseif (\is_float($n) === true) {
+    if (\is_float($n) === true) {
         $str = \number_format($n, 10, ".", "");
         $str = \explode(".", $str);
         $r = (int)$str[0];

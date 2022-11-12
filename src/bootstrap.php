@@ -30,7 +30,7 @@ const undefined = "∅";
  * Separador de diretório conforme o S/O.
  * Apenas uma forma menor para se referir à constante ``DIRECTORY_SEPARATOR``.
  *
- * @var     DS
+ * @var     string
  */
 const DS = DIRECTORY_SEPARATOR;
 

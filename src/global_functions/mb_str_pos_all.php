@@ -1,21 +1,22 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Encontra todas as ocorrências de uma ``string`` e retorna um ``array`` com as
  * respectivas posições.
  *
- * @param       string $string
+ * @param       string $haystack
  *              ``String`` original.
  *
  * @param       string $needle
  *              Valor que será procurado.
  *
- * @return      false|array
+ * @return      array|false
  *              Retornará ``false`` caso nenhuma ocorrência seja encontrada ou um ``array``
  *              contendo a posição de cada ocorrência de ``$needle`` encontrada.
  */
-function mb_str_pos_all(string $haystack, string $needle)
+function mb_str_pos_all(string $haystack, string $needle): array|false
 {
     $r = [];
     $s = 0;

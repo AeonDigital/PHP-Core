@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Retorna o resto da divisão entre o valor atual e o divisor passado.
@@ -10,16 +11,10 @@ declare (strict_types=1);
  * @param       int|float $div
  *              Divisor.
  *
- * @return      ?int
- *              Retornará ``null`` caso um dos valores passados não seja numérico.
+ * @return      int
+ *              Resto da divisão.
  */
-function numeric_mod($n, $div) : ?int
+function numeric_mod(int|float $n, int|float $div): int
 {
-    $r = null;
-    if ((\is_int($n) === true || \is_float($n) === true) &&
-        (\is_int($div) === true || \is_float($div) === true))
-    {
-        $r = ($n % $div);
-    }
-    return $r;
+    return ($n % $div);
 }

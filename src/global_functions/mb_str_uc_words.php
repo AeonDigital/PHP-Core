@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Converte para maiúsculas o primeiro caractere de cada palavra.
@@ -16,7 +17,7 @@ declare (strict_types=1);
  * @return      string
  *              Nova ``string`` modificada.
  */
-function mb_str_uc_words(string $string, array $ignore = []) : string
+function mb_str_uc_words(string $string, array $ignore = []): string
 {
     if (\trim($string) === "") {
         return $string;
@@ -25,7 +26,7 @@ function mb_str_uc_words(string $string, array $ignore = []) : string
         $nStr   = [];
 
         foreach ($split as $i => $str) {
-            if (\array_in_ci($str, $ignore) === true) {
+            if (\in_array_ci($str, $ignore) === true) {
                 $nStr[] = $str;
             } else {
                 $nStr[] = \mb_str_uc_first($str);

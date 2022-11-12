@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Retorna um objeto ``DateTime`` referente ao último dia da última semana do ano
@@ -10,7 +11,7 @@ declare (strict_types=1);
  *
  * @return      \DateTime
  */
-function weekdate_get_last_week(int $year) : \Datetime
+function weekdate_get_last_week(int $year): \Datetime
 {
     return \weekdate_get_first_week($year + 1)->sub(new \DateInterval("P1D"));
 }

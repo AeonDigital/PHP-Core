@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Insere a nova ``string`` na posição indicada em ``$pos``.
@@ -21,6 +22,6 @@ function mb_str_insert(
     string $str,
     string $insert,
     int $pos
-) : string {
+): string {
     return \mb_substr_replace($str, $insert, $pos, 0);
 }

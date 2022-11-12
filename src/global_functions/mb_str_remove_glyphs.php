@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Transforma todos caracteres com glifos para seu equivalente sem glifos.
@@ -11,7 +12,7 @@ declare (strict_types=1);
  */
 function mb_str_remove_glyphs(
     string $str
-) : string {
+): string {
     $charMap = [
         "£" => "", "À" => "A", "Ă" => "A", "Ấ" => "A", "Ắ" => "A",
         "Ạ" => "A", "Á" => "A", "Ậ" => "A", "Ẫ" => "A", "Ầ" => "A",

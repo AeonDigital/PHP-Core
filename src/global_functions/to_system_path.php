@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Corrige um caminho para um diretório ou arquivo interno ajustando os separadores de
@@ -12,7 +13,7 @@ declare (strict_types=1);
  * @return      ?string
  *              Caminho corrigido.
  */
-function to_system_path(?string $systemPath) : ?string
+function to_system_path(?string $systemPath): ?string
 {
     if ($systemPath === null) {
         return null;

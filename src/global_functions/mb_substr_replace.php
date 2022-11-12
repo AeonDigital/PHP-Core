@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Substitui o texto em uma parte da ``string`` por outro.
@@ -30,7 +31,7 @@ function mb_substr_replace(
     int $start,
     ?int $length = null,
     ?string $encoding = null
-) : string {
+): string {
 
     $string_length = (\is_null($encoding) === true) ? \mb_strlen($string) : \mb_strlen($string, $encoding);
 

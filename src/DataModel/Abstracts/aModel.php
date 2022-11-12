@@ -864,10 +864,10 @@ abstract class aModel extends BObject implements iModel
             $action     = null;
 
 
-            if (\mb_str_starts_with($name, "new") === true) {
+            if (\str_starts_with($name, "new") === true) {
                 $useName    = \substr($name, 3);
                 $action     = "new";
-            } elseif (\mb_str_starts_with($name, "add") === true) {
+            } elseif (\str_starts_with($name, "add") === true) {
                 $useName    = \substr($name, 3);
                 $action     = "add";
             } else {
@@ -968,7 +968,7 @@ abstract class aModel extends BObject implements iModel
         $useName = $name;
         $isField = false;
 
-        if (\mb_str_starts_with($name, "_") === true) {
+        if (\str_starts_with($name, "_") === true) {
             $useName = \substr($name, 1);
             $isField = true;
         }

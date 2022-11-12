@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Identifica se o valor é impar.
@@ -7,14 +8,10 @@ declare (strict_types=1);
  * @param       int|float $n
  *              Valor numérico de entrada.
  *
- * @return      ?bool
- *              Retornará ``null`` caso o valor indicado não seja numérico.
+ * @return      bool
+ *              Retorna ``true`` caso o valor indicado seja impar.
  */
-function numeric_is_odd($n) : ?bool
+function numeric_is_odd(int|float $n): ?bool
 {
-    $r = null;
-    if (\is_int($n) === true || \is_float($n) === true) {
-        $r = ($n % 2 !== 0);
-    }
-    return $r;
+    return ($n % 2 !== 0);
 }

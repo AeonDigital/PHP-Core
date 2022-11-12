@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Mantém apenas os caracteres que estão na coleção de válidos.
@@ -15,6 +16,6 @@ declare (strict_types=1);
 function mb_str_preserve_chars(
     string $str,
     string $preserve
-) : string {
+): string {
     return \preg_replace("/[^" . \preg_quote($preserve, "/") . "]/", "", $str);
 }

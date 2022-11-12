@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Verifica se a variável indicada está definida.
@@ -21,7 +22,7 @@ declare (strict_types=1);
  *              Objetos do tipo ``array`` e ``\stdClass`` retornarão ``true`` SE não forem vazios
  *              quando ``$k`` não for definido.
  */
-function var_is_defined(&$o, ?string $k = null) : bool
+function var_is_defined(&$o, ?string $k = null): bool
 {
     $r = false;
 
@@ -29,27 +30,23 @@ function var_is_defined(&$o, ?string $k = null) : bool
         if (\count($o) > 0) {
             if ($k === null) {
                 $r = true;
-            }
-            else {
+            } else {
                 if (\key_exists($k, $o) === true) {
                     $r = \var_is_defined($o[$k]);
                 }
             }
         }
-    }
-    elseif (\is_a($o, "stdClass") === true) {
+    } elseif (\is_a($o, "stdClass") === true) {
         if (\count((array)$o) > 0) {
             if ($k === null) {
                 $r = true;
-            }
-            else {
+            } else {
                 if (isset($o->{$k}) === true) {
                     $r = \var_is_defined($o->{$k});
                 }
             }
         }
-    }
-    else {
+    } else {
         if (\is_scalar($o) === true) {
             $r = ($o !== null && $o !== undefined && $o !== "");
         }

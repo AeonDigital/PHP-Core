@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Retorna um objeto ``DateTime`` referente ao primeiro dia da primeira semana do ano
@@ -10,7 +11,7 @@ declare (strict_types=1);
  *
  * @return      \DateTime
  */
-function weekdate_get_first_week(int $year) : \Datetime
+function weekdate_get_first_week(int $year): \Datetime
 {
     $date = "$year-01-01 00:00:00";
     $o = \DateTime::createFromFormat("Y-m-d H:i:s", $date);

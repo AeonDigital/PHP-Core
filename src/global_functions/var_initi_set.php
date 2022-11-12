@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 /**
  * Se a variável indicada não estiver definida, irá iniciá-la com o valor padrão passado.
@@ -16,7 +17,7 @@ declare (strict_types=1);
  *
  * @return      void
  */
-function var_initi_set(&$o, $d = null, bool $u = false) : void
+function var_initi_set(&$o, $d = null, bool $u = false): void
 {
     if ($u === true) {
         $o = ($o === undefined) ? $d : $o;
