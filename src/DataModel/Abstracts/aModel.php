@@ -887,15 +887,14 @@ abstract class aModel extends BObject implements iModel
      *              Opcionalmente pode ser definido uma coleção de valores a serem
      *              definidos para a nova instância.
      *
-     * @return      void|mixed
+     * @return      mixed
      */
-    public function __call($name, $arguments)
+    public function __call(string $name, $arguments)
     {
         $r = $this->extendCall($name, $arguments);
         if ($this->useMainCall === false) {
             return $r;
         } else {
-            $field      = null;
             $useName    = null;
             $action     = null;
 
