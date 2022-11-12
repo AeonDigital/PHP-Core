@@ -12,7 +12,6 @@ use AeonDigital\BObject as BObject;
 
 
 
-
 /**
  * Implementa a interface ``iBasicCollection``.
  *

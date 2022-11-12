@@ -6,9 +6,9 @@ namespace AeonDigital\DataModel\Abstracts;
 
 use AeonDigital\Interfaces\DataModel\iModel as iModel;
 use AeonDigital\Interfaces\DataModel\iField as iField;
+use AeonDigital\Interfaces\DataModel\iFieldModel as iFieldModel;
+use AeonDigital\Interfaces\DataModel\iFieldCollection as iFieldCollection;
 use AeonDigital\BObject as BObject;
-
-
 
 
 
@@ -199,8 +199,42 @@ abstract class aModel extends BObject implements iModel
     protected function getField(string $f): ?iField
     {
         $r = null;
-        if ($this->hasField($f)) {
+        if ($this->hasField($f) === true) {
             $r = $this->fieldsCollection[\strtolower($f)];
+        }
+        return $r;
+    }
+    /**
+     * Retorna o objeto ``iFieldModel`` referente ao campo de nome indicado.
+     *
+     * @param       string $f
+     *              Nome do campo que será retornado.
+     *
+     * @return      ?iFieldModel
+     */
+    protected function getFieldModel(string $f): ?iFieldModel
+    {
+        $r = null;
+        $field = $this->getField($f);
+        if ($field !== null && $field->isReference() === true) {
+            $r = $field;
+        }
+        return $r;
+    }
+    /**
+     * Retorna o objeto ``iFieldCollection`` referente ao campo de nome indicado.
+     *
+     * @param       string $f
+     *              Nome do campo que será retornado.
+     *
+     * @return      ?iFieldCollection
+     */
+    protected function getFieldCollection(string $f): ?iFieldCollection
+    {
+        $r = null;
+        $field = $this->getField($f);
+        if ($field !== null && $field->isCollection() === true) {
+            $r = $field;
         }
         return $r;
     }
@@ -573,7 +607,6 @@ abstract class aModel extends BObject implements iModel
         $this->modelState_InitialState = false;
 
         $field = $this->getField($f);
-        $fName = $field->getName();
 
         $r = $field->setValue($v);
 
@@ -880,50 +913,49 @@ abstract class aModel extends BObject implements iModel
 
 
             $this->throwErrorIfFieldDoesNotExists($useName);
-            $field  = $this->getField($useName);
-            $ref    = $field->isReference();
-            $col    = $field->isCollection();
+            $fieldModel = $this->getFieldModel($useName);
 
-
-            if ($ref === true && $col === false) {
-                // Define o campo de nome passado com uma nova instância
-                // do modelo de dados que ele utiliza.
-                if ($action === "new") {
-                    $inst = $field->getModel();
-                    if (\count($arguments) > 0) {
-                        $inst->setValues($arguments[0]);
-                    }
-                    $field->setValue($inst);
-                } elseif ($action === "get") {
-                    return $field->getInstanceValue();
-                }
-            } elseif ($ref === true && $col === true) {
-                // Adiciona um número determinado de novas instâncias
-                // à coleção atualmente definida.
-                // Se nenhuma quantidade de itens for explicitado, apenas 1 item
-                // será adicionado
-                if ($action === "add") {
-                    $n = ((\count($arguments) > 0) ? $arguments[0] : 1);
-
-                    if (\is_int($n) === false) {
-                        $msg = "The argument must be an integer.";
-                        throw new \InvalidArgumentException($msg);
-                    } else {
-                        $field = $this->getField($useName);
-
-                        for ($i = 0; $i < $n; $i++) {
-                            $field->collectionAddValue($field->getModel());
+            if ($fieldModel !== null) {
+                if ($fieldModel->isCollection() === false) {
+                    // Define o campo de nome passado com uma nova instância
+                    // do modelo de dados que ele utiliza.
+                    if ($action === "new") {
+                        $inst = $fieldModel->getModel();
+                        if (\count($arguments) > 0) {
+                            $inst->setValues($arguments[0]);
                         }
+                        $fieldModel->setValue($inst);
+                    } elseif ($action === "get") {
+                        return $fieldModel->getInstanceValue();
                     }
-                } elseif ($action === "get") {
-                    $index = ((\count($arguments) > 0) ? $arguments[0] : null);
+                } else {
+                    $fieldCollection = $this->getFieldCollection($useName);
 
-                    if ($index === null) {
-                        return $field->getInstanceValue();
-                    } elseif (\is_int($index) === false || $index >= $field->collectionCount() || $index < 0) {
-                        return null;
-                    } else {
-                        return $field->getInstanceValue()[$index];
+                    // Adiciona um número determinado de novas instâncias
+                    // à coleção atualmente definida.
+                    // Se nenhuma quantidade de itens for explicitado, apenas 1 item
+                    // será adicionado
+                    if ($action === "add") {
+                        $n = ((\count($arguments) > 0) ? $arguments[0] : 1);
+
+                        if (\is_int($n) === false) {
+                            $msg = "The argument must be an integer.";
+                            throw new \InvalidArgumentException($msg);
+                        } else {
+                            for ($i = 0; $i < $n; $i++) {
+                                $fieldCollection->collectionAddValue($fieldModel->getModel());
+                            }
+                        }
+                    } elseif ($action === "get") {
+                        $index = ((\count($arguments) > 0) ? $arguments[0] : null);
+
+                        if ($index === null) {
+                            return $fieldModel->getInstanceValue();
+                        } elseif (\is_int($index) === false || $index >= $fieldCollection->collectionCount() || $index < 0) {
+                            return null;
+                        } else {
+                            return $fieldModel->getInstanceValue()[$index];
+                        }
                     }
                 }
             }
@@ -981,7 +1013,7 @@ abstract class aModel extends BObject implements iModel
             return $field;
         } else {
             if ($field->isReference() === true) {
-                return $field->getInstanceValue();
+                return $this->getFieldModel($useName)->getInstanceValue();
             } else {
                 return $field->getValue();
             }

@@ -12,7 +12,6 @@ use AeonDigital\RealType as RealType;
 
 
 
-
 /**
  * Coleção de métodos estáticos para diversos fins.
  *
