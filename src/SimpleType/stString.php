@@ -1,12 +1,12 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\SimpleType;
 
 use AeonDigital\Interfaces\SimpleType\iString as iString;
 use AeonDigital\SimpleType\Abstracts\aBasic as aBasic;
 use AeonDigital\Tools as Tools;
-
 
 
 
@@ -36,7 +36,7 @@ final class stString extends aBasic implements iString
      *
      * @return      bool
      */
-    public static function validate($v) : bool
+    public static function validate(mixed $v): bool
     {
         return (Tools::toString($v) !== null);
     }
@@ -58,7 +58,7 @@ final class stString extends aBasic implements iString
      *
      * @return      mixed
      */
-    public static function parseIfValidate($v, ?string &$err = null)
+    public static function parseIfValidate(mixed $v, ?string &$err = null): mixed
     {
         return static::parseTypeIfValidate($v, $err, "string");
     }

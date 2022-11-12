@@ -1,12 +1,12 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\SimpleType;
 
 use AeonDigital\Interfaces\SimpleType\iBool as iBool;
 use AeonDigital\SimpleType\Abstracts\aBasic as aBasic;
 use AeonDigital\Tools as Tools;
-
 
 
 
@@ -35,7 +35,7 @@ final class stBool extends aBasic implements iBool
      *
      * @return      bool
      */
-    public static function validate($v) : bool
+    public static function validate(mixed $v): bool
     {
         return (Tools::toBool($v) !== null);
     }
@@ -51,7 +51,7 @@ final class stBool extends aBasic implements iBool
      *
      * @return      ?string
      */
-    public static function toString($v) : ?string
+    public static function toString(mixed $v): ?string
     {
         if (static::validate($v) === true) {
             $b = Tools::toBool($v);
@@ -78,7 +78,7 @@ final class stBool extends aBasic implements iBool
      *
      * @return      mixed
      */
-    public static function parseIfValidate($v, ?string &$err = null)
+    public static function parseIfValidate(mixed $v, ?string &$err = null): mixed
     {
         return static::parseTypeIfValidate($v, $err, "bool");
     }

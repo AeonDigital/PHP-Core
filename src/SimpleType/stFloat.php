@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\SimpleType;
 
 use AeonDigital\SimpleType\Abstracts\aFloat as aFloat;
-use AeonDigital\Tools as Tools;
 
 
 
@@ -32,7 +32,7 @@ final class stFloat extends aFloat
      *
      * @return      float
      */
-    public static function min() : float
+    public static function min(): float
     {
         return (float)-2147483648;
     }
@@ -43,7 +43,7 @@ final class stFloat extends aFloat
      *
      * @return      float
      */
-    public static function max() : float
+    public static function max(): float
     {
         return (float)2147483647;
     }

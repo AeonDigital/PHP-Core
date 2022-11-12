@@ -1,12 +1,12 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\SimpleType\Abstracts;
 
 use AeonDigital\Interfaces\SimpleType\iFloat as iFloat;
 use AeonDigital\SimpleType\Abstracts\aBasic as aBasic;
 use AeonDigital\Tools as Tools;
-
 
 
 
@@ -32,7 +32,7 @@ abstract class aFloat extends aBasic implements iFloat
      *
      * @return      float
      */
-    abstract public static function min() : float;
+    abstract public static function min(): float;
 
 
     /**
@@ -40,7 +40,7 @@ abstract class aFloat extends aBasic implements iFloat
      *
      * @return      float
      */
-    abstract public static function max() : float;
+    abstract public static function max(): float;
 
 
 
@@ -55,7 +55,7 @@ abstract class aFloat extends aBasic implements iFloat
      *
      * @return      bool
      */
-    public static function validate($v) : bool
+    public static function validate(mixed $v): bool
     {
         $n = Tools::toFloat($v);
         if ($n === null) {
@@ -84,7 +84,7 @@ abstract class aFloat extends aBasic implements iFloat
      *
      * @return      mixed
      */
-    public static function parseIfValidate($v, ?string &$err = null)
+    public static function parseIfValidate(mixed $v, ?string &$err = null): mixed
     {
         $err = null;
         if (static::validate($v) === false) {
@@ -116,7 +116,7 @@ abstract class aFloat extends aBasic implements iFloat
      *
      * @return      bool
      */
-    protected static function validateFloatValue(float $v) : bool
+    protected static function validateFloatValue(float $v): bool
     {
         return ($v >= static::min() && $v <= static::max());
     }

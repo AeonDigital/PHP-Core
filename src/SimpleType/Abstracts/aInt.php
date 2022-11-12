@@ -1,12 +1,12 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\SimpleType\Abstracts;
 
 use AeonDigital\Interfaces\SimpleType\iInt as iInt;
 use AeonDigital\SimpleType\Abstracts\aBasic as aBasic;
 use AeonDigital\Tools as Tools;
-
 
 
 
@@ -32,7 +32,7 @@ abstract class aInt extends aBasic implements iInt
      *
      * @return      int
      */
-    abstract public static function min() : int;
+    abstract public static function min(): int;
 
 
     /**
@@ -40,7 +40,7 @@ abstract class aInt extends aBasic implements iInt
      *
      * @return      int
      */
-    abstract public static function max() : int;
+    abstract public static function max(): int;
 
 
 
@@ -55,7 +55,7 @@ abstract class aInt extends aBasic implements iInt
      *
      * @return      bool
      */
-    public static function validate($v) : bool
+    public static function validate(mixed $v): bool
     {
         $n = Tools::toInt($v);
         if ($n === null) {
@@ -84,7 +84,7 @@ abstract class aInt extends aBasic implements iInt
      *
      * @return      mixed
      */
-    public static function parseIfValidate($v, ?string &$err = null)
+    public static function parseIfValidate(mixed $v, ?string &$err = null): mixed
     {
         $err = null;
         if (static::validate($v) === false) {
@@ -111,12 +111,12 @@ abstract class aInt extends aBasic implements iInt
     /**
      * Verifica se o valor informado está entre o intervalo definido para este tipo.
      *
-     * @param       float $v
+     * @param       int $v
      *              Valor que será verificado.
      *
      * @return      bool
      */
-    protected static function validateIntValue(int $v) : bool
+    protected static function validateIntValue(int $v): bool
     {
         return ($v >= static::min() && $v <= static::max());
     }

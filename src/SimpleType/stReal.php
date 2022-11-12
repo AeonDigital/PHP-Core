@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\SimpleType;
 
@@ -7,7 +8,6 @@ use AeonDigital\Interfaces\SimpleType\iReal as iReal;
 use AeonDigital\SimpleType\Abstracts\aBasic as aBasic;
 use AeonDigital\Realtype as Realtype;
 use AeonDigital\Tools as Tools;
-
 
 
 
@@ -33,7 +33,7 @@ final class stReal extends aBasic implements iReal
      *
      * @return      ?string
      */
-    public static function min() : ?string
+    public static function min(): ?string
     {
         return null;
     }
@@ -45,7 +45,7 @@ final class stReal extends aBasic implements iReal
      *
      * @return      ?string
      */
-    public static function max() : ?string
+    public static function max(): ?string
     {
         return null;
     }
@@ -63,7 +63,7 @@ final class stReal extends aBasic implements iReal
      *
      * @return      bool
      */
-    public static function validate($v) : bool
+    public static function validate(mixed $v): bool
     {
         $n = Tools::toRealtype($v);
         if ($n === null) {
@@ -92,7 +92,7 @@ final class stReal extends aBasic implements iReal
      *
      * @return      mixed
      */
-    public static function parseIfValidate($v, ?string &$err = null)
+    public static function parseIfValidate(mixed $v, ?string &$err = null): mixed
     {
         $err = null;
         if (static::validate($v) === false) {
@@ -120,11 +120,11 @@ final class stReal extends aBasic implements iReal
      *
      * @return      bool
      */
-    protected static function validateRealValue(Realtype $v) : bool
+    protected static function validateRealValue(Realtype $v): bool
     {
         $min = static::min();
         $max = static::max();
         return (($min === null || $v->isGreaterOrEqualAs(static::min()) === true) &&
-                ($max === null || $v->isLessOrEqualAs(static::max()) === true));
+            ($max === null || $v->isLessOrEqualAs(static::max()) === true));
     }
 }

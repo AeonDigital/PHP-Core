@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\SimpleType\Abstracts;
 
 use AeonDigital\Interfaces\SimpleType\iBasic as iBasic;
 use AeonDigital\Tools as Tools;
-
 
 
 
@@ -35,7 +35,7 @@ abstract class aBasic implements iBasic
      *
      * @return      bool
      */
-    abstract static function validate($v) : bool;
+    abstract static function validate(mixed $v): bool;
 
 
 
@@ -48,7 +48,7 @@ abstract class aBasic implements iBasic
      *
      * @return      ?string
      */
-    public static function toString($v) : ?string
+    public static function toString(mixed $v): ?string
     {
         if (static::validate($v) === true) {
             return Tools::toString($v);
@@ -74,7 +74,7 @@ abstract class aBasic implements iBasic
      *
      * @return      mixed
      */
-    abstract static function parseIfValidate($v, ?string &$err = null);
+    abstract static function parseIfValidate(mixed $v, ?string &$err = null): mixed;
 
 
 
@@ -98,7 +98,7 @@ abstract class aBasic implements iBasic
      *
      * @return      mixed
      */
-    protected static function parseTypeIfValidate($v, ?string &$err = null, string $type)
+    protected static function parseTypeIfValidate(mixed $v, ?string &$err = null, string $type): mixed
     {
         $err = null;
         if (static::validate($v) === false || $v === undefined) {
@@ -113,7 +113,6 @@ abstract class aBasic implements iBasic
                     $v = Tools::toString($v);
                     break;
             }
-
         }
         return $v;
     }

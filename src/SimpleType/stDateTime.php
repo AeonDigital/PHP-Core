@@ -1,12 +1,12 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\SimpleType;
 
 use AeonDigital\Interfaces\SimpleType\iDateTime as iDateTime;
 use AeonDigital\SimpleType\Abstracts\aBasic as aBasic;
 use AeonDigital\Tools as Tools;
-
 
 
 
@@ -36,7 +36,7 @@ final class stDateTime extends aBasic implements iDateTime
      *
      * @return      ?\DateTime
      */
-    public static function min() : ?\DateTime
+    public static function min(): ?\DateTime
     {
         return null;
     }
@@ -49,7 +49,7 @@ final class stDateTime extends aBasic implements iDateTime
      *
      * @return      ?\DateTime
      */
-    public static function max() : ?\DateTime
+    public static function max(): ?\DateTime
     {
         return null;
     }
@@ -71,7 +71,7 @@ final class stDateTime extends aBasic implements iDateTime
      *
      * @return      bool
      */
-    public static function validate($v) : bool
+    public static function validate(mixed $v): bool
     {
         $d = Tools::toDateTime($v);
         if ($d === null) {
@@ -98,7 +98,7 @@ final class stDateTime extends aBasic implements iDateTime
      *
      * @return      mixed
      */
-    public static function parseIfValidate($v, ?string &$err = null)
+    public static function parseIfValidate(mixed $v, ?string &$err = null): mixed
     {
         $err = null;
 
@@ -126,11 +126,10 @@ final class stDateTime extends aBasic implements iDateTime
      *
      * @return      bool
      */
-    protected static function validateDateTimeValue(\DateTime $v) : bool
+    protected static function validateDateTimeValue(\DateTime $v): bool
     {
         $min = static::min();
         $max = static::max();
         return (($min === null || $v >= $min) && ($max === null || $v <= $max));
     }
-
 }

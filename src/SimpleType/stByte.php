@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\SimpleType;
 
 use AeonDigital\SimpleType\Abstracts\aInt as aInt;
-use AeonDigital\Tools as Tools;
 
 
 
@@ -32,7 +32,7 @@ final class stByte extends aInt
      *
      * @return      int
      */
-    public static function min() : int
+    public static function min(): int
     {
         return (int)-128;
     }
@@ -43,7 +43,7 @@ final class stByte extends aInt
      *
      * @return      int
      */
-    public static function max() : int
+    public static function max(): int
     {
         return (int)127;
     }
