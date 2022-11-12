@@ -1,12 +1,12 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataModel\Abstracts;
 
 use AeonDigital\Interfaces\DataModel\iFieldCollection as iFieldCollection;
 use AeonDigital\Interfaces\DataModel\iModelFactory as iModelFactory;
 use AeonDigital\DataModel\Abstracts\aFieldModel as aFieldModel;
-
 
 
 

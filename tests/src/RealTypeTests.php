@@ -1,8 +1,9 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use AeonDigital\Realtype as Realtype;
+use AeonDigital\RealType as RealType;
 
 require_once __DIR__ . "/../phpunit.php";
 
@@ -11,8 +12,7 @@ require_once __DIR__ . "/../phpunit.php";
 
 
 
-
-class RealtypeTests extends TestCase
+class RealTypeTests extends TestCase
 {
 
 
@@ -23,10 +23,10 @@ class RealtypeTests extends TestCase
     {
         $fail = false;
         try {
-            $obj = new Realtype("invalid");
+            $obj = new RealType("invalid");
         } catch (\Exception $ex) {
             $fail = true;
-            $this->assertSame("Argument must be a valid Realtype. Given: [ invalid ]", $ex->getMessage());
+            $this->assertSame("Argument must be a valid iRealType. Given: [ invalid ]", $ex->getMessage());
         }
         $this->assertTrue($fail, "Test must fail");
     }
@@ -40,14 +40,14 @@ class RealtypeTests extends TestCase
 
 
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value);
-            $this->assertTrue(is_a($obj, Realtype::class));
+            $obj = new RealType($value);
+            $this->assertTrue(is_a($obj, RealType::class));
         }
 
 
-        $o1 = new Realtype(55);
-        $o2 = new Realtype($o1);
-        $this->assertTrue(is_a($o2, Realtype::class));
+        $o1 = new RealType(55);
+        $o2 = new RealType($o1);
+        $this->assertTrue(is_a($o2, RealType::class));
     }
 
 
@@ -55,12 +55,12 @@ class RealtypeTests extends TestCase
 
     public function test_property_value()
     {
-        $testValues = [ "0", "10", "1500000005000", "3.000000", 74.088];
-        $expectedValues = [ "0", "10", "1500000005000", "3", "74.088"];
+        $testValues = ["0", "10", "1500000005000", "3.000000", 74.088];
+        $expectedValues = ["0", "10", "1500000005000", "3", "74.088"];
 
 
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value);
+            $obj = new RealType($value);
             $this->assertSame($expectedValues[$i], $obj->value());
         }
     }
@@ -68,12 +68,12 @@ class RealtypeTests extends TestCase
 
     public function test_method_get_integer_part()
     {
-        $testValues = [ "0", "1.0", "165.53543", 74.088];
-        $expectedValues = [ "0", "1", "165", "74"];
+        $testValues = ["0", "1.0", "165.53543", 74.088];
+        $expectedValues = ["0", "1", "165", "74"];
 
 
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value);
+            $obj = new RealType($value);
             $this->assertSame($expectedValues[$i], $obj->getIntegerPart());
         }
     }
@@ -81,11 +81,11 @@ class RealtypeTests extends TestCase
 
     public function test_method_get_decimal_part()
     {
-        $testValues = [ "0", "1.0", "1.00", "165.53543", 74.088];
-        $expectedValues = [ "0", "0", "0", "53543", "088"];
+        $testValues = ["0", "1.0", "1.00", "165.53543", 74.088];
+        $expectedValues = ["0", "0", "0", "53543", "088"];
 
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value);
+            $obj = new RealType($value);
             $this->assertSame($expectedValues[$i], $obj->getDecimalPart());
         }
     }
@@ -94,7 +94,7 @@ class RealtypeTests extends TestCase
     public function test_property_precision()
     {
         $testValues = [
-            "0" , "10", "1500000005000", "1500000005000.8977767"
+            "0", "10", "1500000005000", "1500000005000.8977767"
         ];
         $expected = [
             1, 2, 13, 20
@@ -102,7 +102,7 @@ class RealtypeTests extends TestCase
 
 
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value);
+            $obj = new RealType($value);
             $this->assertSame($expected[$i], $obj->precision());
         }
     }
@@ -111,7 +111,7 @@ class RealtypeTests extends TestCase
     public function test_property_integerPlaces()
     {
         $testValues = [
-            "0" , "10", "1500000005000", "1500000005000.8977767"
+            "0", "10", "1500000005000", "1500000005000.8977767"
         ];
         $expected = [
             1, 2, 13, 13
@@ -119,7 +119,7 @@ class RealtypeTests extends TestCase
 
 
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value);
+            $obj = new RealType($value);
             $this->assertSame($expected[$i], $obj->integerPlaces());
         }
     }
@@ -136,7 +136,7 @@ class RealtypeTests extends TestCase
 
 
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value);
+            $obj = new RealType($value);
             $this->assertSame($expected[$i], $obj->decimalPlaces());
         }
     }
@@ -155,8 +155,8 @@ class RealtypeTests extends TestCase
 
 
         foreach ($testValues as $i => $value) {
-            Realtype::defineGlobalDecimalPlaces($value);
-            $this->assertSame($expected[$i], Realtype::getGlobalDecimalPlaces());
+            RealType::defineGlobalDecimalPlaces($value);
+            $this->assertSame($expected[$i], RealType::getGlobalDecimalPlaces());
         }
     }
 
@@ -168,45 +168,44 @@ class RealtypeTests extends TestCase
         $testValues = [
             [null, null],
             ["invalid", null],
-            ["floor", new Realtype("0.004")],
-            ["floor", new Realtype("0.001")],
-            ["CEIL", new Realtype("0.01")],
-            ["floor-3", new Realtype("0.01")],
-            ["CEIL-5", new Realtype("10")]
+            ["floor", new RealType("0.004")],
+            ["floor", new RealType("0.001")],
+            ["CEIL", new RealType("0.01")],
+            ["floor-3", new RealType("0.01")],
+            ["CEIL-5", new RealType("10")]
         ];
         $expected = [
             [null, null],
             [null, null],
             [null, null],
-            ["floor", new Realtype("0.001")],
-            ["ceil", new Realtype("0.01")],
-            ["floor-3", new Realtype("0.01")],
-            ["ceil-5", new Realtype("10")]
+            ["floor", new RealType("0.001")],
+            ["ceil", new RealType("0.01")],
+            ["floor-3", new RealType("0.01")],
+            ["ceil-5", new RealType("10")]
         ];
 
 
         foreach ($testValues as $i => $value) {
-            Realtype::defineGlobalRoundType($value[0], $value[1]);
-            $this->assertSame($expected[$i][0], Realtype::getRoundType());
+            RealType::defineGlobalRoundType($value[0], $value[1]);
+            $this->assertSame($expected[$i][0], RealType::getRoundType());
 
             if ($expected[$i][1] === null) {
-                $this->assertNull(Realtype::getRoundSensibility());
-            }
-            else {
-                $this->assertSame($expected[$i][1]->format(3, ".", ""), Realtype::getRoundSensibility()->format(3, ".", ""));
+                $this->assertNull(RealType::getRoundSensibility());
+            } else {
+                $this->assertSame($expected[$i][1]->format(3, ".", ""), RealType::getRoundSensibility()->format(3, ".", ""));
             }
         }
 
-        Realtype::defineGlobalRoundType(null, null);
+        RealType::defineGlobalRoundType(null, null);
     }
 
 
 
 
-    public function test_method_is_valid_Realtype_number()
+    public function test_method_is_valid_RealType_number()
     {
         $sucessValues = [
-            "0", "-1", "0.33", .55, new Realtype("3847.888")
+            "0", "-1", "0.33", .55, new RealType("3847.888")
         ];
         $failValues = [
             false, true, new DateTime(), "a", "49384.443d"
@@ -214,10 +213,10 @@ class RealtypeTests extends TestCase
 
 
         foreach ($sucessValues as $value) {
-            $this->assertTrue(Realtype::isValidRealtype($value));
+            $this->assertTrue(RealType::isValidRealType($value));
         }
         foreach ($failValues as $value) {
-            $this->assertFalse(Realtype::isValidRealtype($value));
+            $this->assertFalse(RealType::isValidRealType($value));
         }
     }
 
@@ -227,7 +226,7 @@ class RealtypeTests extends TestCase
 
     public function test_method_isEqualAs()
     {
-        $obj = new Realtype(1);
+        $obj = new RealType(1);
 
         $this->assertTrue($obj->isEqualAs(1));
         $this->assertFalse($obj->isEqualAs(2));
@@ -237,7 +236,7 @@ class RealtypeTests extends TestCase
 
     public function test_method_isGreaterThan()
     {
-        $obj = new Realtype(2);
+        $obj = new RealType(2);
 
         $this->assertTrue($obj->isGreaterThan(1));
         $this->assertFalse($obj->isGreaterThan(2));
@@ -248,7 +247,7 @@ class RealtypeTests extends TestCase
 
     public function test_method_isGreaterOrEqualAs()
     {
-        $obj = new Realtype(2);
+        $obj = new RealType(2);
 
         $this->assertTrue($obj->isGreaterOrEqualAs(1));
         $this->assertTrue($obj->isGreaterOrEqualAs(2));
@@ -259,7 +258,7 @@ class RealtypeTests extends TestCase
 
     public function test_method_isLessThan()
     {
-        $obj = new Realtype(2);
+        $obj = new RealType(2);
 
         $this->assertTrue($obj->isLessThan(3));
         $this->assertFalse($obj->isLessThan(2));
@@ -270,7 +269,7 @@ class RealtypeTests extends TestCase
 
     public function test_method_isLessOrEqualAs()
     {
-        $obj = new Realtype(2);
+        $obj = new RealType(2);
 
         $this->assertTrue($obj->isLessOrEqualAs(3));
         $this->assertTrue($obj->isLessOrEqualAs(2));
@@ -281,10 +280,10 @@ class RealtypeTests extends TestCase
 
     public function test_method_isZero()
     {
-        $obj = new Realtype(0);
+        $obj = new RealType(0);
         $this->assertTrue($obj->isZero());
 
-        $obj = new Realtype(1);
+        $obj = new RealType(1);
         $this->assertFalse($obj->isZero());
     }
 
@@ -292,13 +291,13 @@ class RealtypeTests extends TestCase
 
     public function test_method_isPositive()
     {
-        $obj = new Realtype(0);
+        $obj = new RealType(0);
         $this->assertTrue($obj->isPositive());
 
-        $obj = new Realtype(1);
+        $obj = new RealType(1);
         $this->assertTrue($obj->isPositive());
 
-        $obj = new Realtype(-1);
+        $obj = new RealType(-1);
         $this->assertFalse($obj->isPositive());
     }
 
@@ -306,13 +305,13 @@ class RealtypeTests extends TestCase
 
     public function test_method_isNegative()
     {
-        $obj = new Realtype(0);
+        $obj = new RealType(0);
         $this->assertFalse($obj->isNegative());
 
-        $obj = new Realtype(1);
+        $obj = new RealType(1);
         $this->assertFalse($obj->isNegative());
 
-        $obj = new Realtype(-1);
+        $obj = new RealType(-1);
         $this->assertTrue($obj->isNegative());
     }
 
@@ -320,7 +319,7 @@ class RealtypeTests extends TestCase
 
     public function test_method_toPositive()
     {
-        $obj = new Realtype(-3345);
+        $obj = new RealType(-3345);
         $pos = $obj->toPositive();
 
         $this->assertEquals("-3345", $obj->value());
@@ -331,14 +330,14 @@ class RealtypeTests extends TestCase
 
     public function test_method_toNegative()
     {
-        $obj = new Realtype(3345);
+        $obj = new RealType(3345);
         $neg = $obj->toNegative();
 
         $this->assertEquals("3345", $obj->value());
         $this->assertEquals("-3345", $neg->value());
 
 
-        $obj = new Realtype(0);
+        $obj = new RealType(0);
         $neg = $obj->toNegative();
         $this->assertEquals("0", $neg->value());
     }
@@ -347,7 +346,7 @@ class RealtypeTests extends TestCase
 
     public function test_method_invertSignal()
     {
-        $obj = new Realtype(3345);
+        $obj = new RealType(3345);
         $inv1 = $obj->invertSignal();
         $inv2 = $inv1->invertSignal();
 
@@ -356,7 +355,7 @@ class RealtypeTests extends TestCase
         $this->assertEquals("3345", $inv2->value());
 
 
-        $obj = new Realtype(0);
+        $obj = new RealType(0);
         $inv = $obj->invertSignal();
         $this->assertEquals("0", $inv->value());
     }
@@ -368,7 +367,7 @@ class RealtypeTests extends TestCase
 
     public function test_method_round_to()
     {
-        Realtype::defineGlobalRoundType(null, null);
+        RealType::defineGlobalRoundType(null, null);
 
         // Teste de arredondamento
         $testValues         = [
@@ -405,57 +404,57 @@ class RealtypeTests extends TestCase
 
         foreach ($testValues as $i => $value) {
             foreach ($sensibility as $is => $sen) {
-                $obj = new Realtype($value);
-                $objSen = new Realtype($sen);
+                $obj = new RealType($value);
+                $objSen = new RealType($sen);
                 $this->assertSame(
                     $expectedRoundFloor[$i][$is],
-                    Realtype::roundTo($obj, "floor", $objSen)->format(4, ".", "")
+                    RealType::roundTo($obj, "floor", $objSen)->format(4, ".", "")
                 );
 
                 $this->assertSame(
                     $expectedRoundCeil[$i][$is],
-                    Realtype::roundTo($obj, "ceil", $objSen)->format(4, ".", "")
+                    RealType::roundTo($obj, "ceil", $objSen)->format(4, ".", "")
                 );
 
                 $this->assertSame(
                     $expectedRoundFloor5[$i][$is],
-                    Realtype::roundTo($obj, "floor-5", $objSen)->format(4, ".", "")
+                    RealType::roundTo($obj, "floor-5", $objSen)->format(4, ".", "")
                 );
 
                 $this->assertSame(
                     $expectedRoundCeil5[$i][$is],
-                    Realtype::roundTo($obj, "ceil-5", $objSen)->format(4, ".", "")
+                    RealType::roundTo($obj, "ceil-5", $objSen)->format(4, ".", "")
                 );
 
                 $this->assertSame(
                     $expectedRoundFloor6[$i][$is],
-                    Realtype::roundTo($obj, "floor-6", $objSen)->format(4, ".", "")
+                    RealType::roundTo($obj, "floor-6", $objSen)->format(4, ".", "")
                 );
 
                 $this->assertSame(
                     $expectedRoundCeil6[$i][$is],
-                    Realtype::roundTo($obj, "ceil-6", $objSen)->format(4, ".", "")
+                    RealType::roundTo($obj, "ceil-6", $objSen)->format(4, ".", "")
                 );
 
                 $this->assertSame(
                     $expectedRoundFloor3[$i][$is],
-                    Realtype::roundTo($obj, "ceil-3", $objSen)->format(4, ".", "")
+                    RealType::roundTo($obj, "ceil-3", $objSen)->format(4, ".", "")
                 );
 
                 $this->assertSame(
                     $expectedRoundCeil3[$i][$is],
-                    Realtype::roundTo($obj, "ceil-3", $objSen)->format(4, ".", "")
+                    RealType::roundTo($obj, "ceil-3", $objSen)->format(4, ".", "")
                 );
             }
         }
 
 
-        $testValues = new Realtype("99.492055");
+        $testValues = new RealType("99.492055");
         $roundTo = "ceil-7";
-        $sensibility = new Realtype("0.0001");
+        $sensibility = new RealType("0.0001");
         $this->assertSame(
             "99.492000",
-            Realtype::roundTo($testValues, $roundTo, $sensibility)->format(6, ".", "")
+            RealType::roundTo($testValues, $roundTo, $sensibility)->format(6, ".", "")
         );
     }
 
@@ -472,28 +471,28 @@ class RealtypeTests extends TestCase
         ];
 
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value[0]);
+            $obj = new RealType($value[0]);
             $res = $obj->sum($value[1]);
             $this->assertSame($value[2], $res->value());
         }
 
 
-        Realtype::defineGlobalRoundType("floor-5", new Realtype("0.01"));
-        $this->assertSame("floor-5", Realtype::getRoundType());
-        $this->assertSame("0.01", Realtype::getRoundSensibility()->format(2, ".", ""));
+        RealType::defineGlobalRoundType("floor-5", new RealType("0.01"));
+        $this->assertSame("floor-5", RealType::getRoundType());
+        $this->assertSame("0.01", RealType::getRoundSensibility()->format(2, ".", ""));
 
         $testValues = [
             ["100.348595", "000.3", "100.60"],
             ["100.348595", "000.2", "100.50"],
         ];
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value[0]);
+            $obj = new RealType($value[0]);
             $res = $obj->sum($value[1], 2);
             $this->assertSame($value[2], $res->value());
         }
 
 
-        Realtype::defineGlobalRoundType(null, null);
+        RealType::defineGlobalRoundType(null, null);
     }
 
 
@@ -515,27 +514,27 @@ class RealtypeTests extends TestCase
             $expected = $rules[2];
             $places = $rules[3];
 
-            $obj = new Realtype($val);
+            $obj = new RealType($val);
             $res = $obj->sub($oper, $places);
             $this->assertSame($expected, $res->value());
         }
 
 
-        Realtype::defineGlobalRoundType("ceil-7", new Realtype("0.001"));
-        $this->assertSame("ceil-7", Realtype::getRoundType());
-        $this->assertSame("0.001", Realtype::getRoundSensibility()->format(3, ".", ""));
+        RealType::defineGlobalRoundType("ceil-7", new RealType("0.001"));
+        $this->assertSame("ceil-7", RealType::getRoundType());
+        $this->assertSame("0.001", RealType::getRoundSensibility()->format(3, ".", ""));
 
         $testValues = [
             ["100.348595", "000.856540", "99.490000"],
             ["100.348595", "000.32545", "100.020000"],
         ];
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value[0]);
+            $obj = new RealType($value[0]);
             $res = $obj->sub($value[1], 6);
             $this->assertSame($value[2], $res->value());
         }
 
-        Realtype::defineGlobalRoundType(null, null);
+        RealType::defineGlobalRoundType(null, null);
     }
 
 
@@ -556,15 +555,15 @@ class RealtypeTests extends TestCase
             $expected = $rules[2];
             $places = $rules[3];
 
-            $obj = new Realtype($val);
+            $obj = new RealType($val);
             $res = $obj->mul($oper, $places);
             $this->assertSame($expected, $res->value());
         }
 
 
-        Realtype::defineGlobalRoundType("floor-5", new Realtype("0.001"));
-        $this->assertSame("floor-5", Realtype::getRoundType());
-        $this->assertSame("0.001", Realtype::getRoundSensibility()->format(3, ".", ""));
+        RealType::defineGlobalRoundType("floor-5", new RealType("0.001"));
+        $this->assertSame("floor-5", RealType::getRoundType());
+        $this->assertSame("0.001", RealType::getRoundSensibility()->format(3, ".", ""));
 
         $testValues = [
             ["8625.425", "0.08", "690.03"],     // 690.034
@@ -572,12 +571,12 @@ class RealtypeTests extends TestCase
             ["8650.45", "0.08", "692.04"],      // 692.036
         ];
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value[0]);
+            $obj = new RealType($value[0]);
             $res = $obj->mul($value[1], 2);
             $this->assertSame($value[2], $res->value());
         }
 
-        Realtype::defineGlobalRoundType(null, null);
+        RealType::defineGlobalRoundType(null, null);
     }
 
 
@@ -597,15 +596,15 @@ class RealtypeTests extends TestCase
             $expected = $rules[2];
             $places = $rules[3];
 
-            $obj = new Realtype($val);
+            $obj = new RealType($val);
             $res = $obj->div($oper, $places);
             $this->assertSame($expected, $res->value());
         }
 
 
-        Realtype::defineGlobalRoundType("floor-5", new Realtype("0.001"));
-        $this->assertSame("floor-5", Realtype::getRoundType());
-        $this->assertSame("0.001", Realtype::getRoundSensibility()->format(3, ".", ""));
+        RealType::defineGlobalRoundType("floor-5", new RealType("0.001"));
+        $this->assertSame("floor-5", RealType::getRoundType());
+        $this->assertSame("0.001", RealType::getRoundSensibility()->format(3, ".", ""));
 
         $testValues = [
             ["848.74182", "1.23", "690.03"],    // 690.034
@@ -613,12 +612,12 @@ class RealtypeTests extends TestCase
             ["595.15096", "0.86", "692.04"],    // 692.036
         ];
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value[0]);
+            $obj = new RealType($value[0]);
             $res = $obj->div($value[1], 2);
             $this->assertSame($value[2], $res->value());
         }
 
-        Realtype::defineGlobalRoundType(null, null);
+        RealType::defineGlobalRoundType(null, null);
     }
 
 
@@ -634,15 +633,15 @@ class RealtypeTests extends TestCase
         ];
 
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value[0]);
+            $obj = new RealType($value[0]);
             $res = $obj->mod($value[1]);
             $this->assertSame($value[2], $res->value());
         }
 
 
-        Realtype::defineGlobalRoundType("floor-5", new Realtype("1"));
-        $this->assertSame("floor-5", Realtype::getRoundType());
-        $this->assertSame("1", Realtype::getRoundSensibility()->format(0, ".", ""));
+        RealType::defineGlobalRoundType("floor-5", new RealType("1"));
+        $this->assertSame("floor-5", RealType::getRoundType());
+        $this->assertSame("1", RealType::getRoundSensibility()->format(0, ".", ""));
 
         $testValues = [
             ["18", "7", "0"],   // 4
@@ -650,12 +649,12 @@ class RealtypeTests extends TestCase
             ["18", "12", "10"], // 6
         ];
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value[0]);
+            $obj = new RealType($value[0]);
             $res = $obj->mod($value[1], 2);
             $this->assertSame($value[2], $res->value());
         }
 
-        Realtype::defineGlobalRoundType(null, null);
+        RealType::defineGlobalRoundType(null, null);
     }
 
 
@@ -675,15 +674,15 @@ class RealtypeTests extends TestCase
             $scale = $rules[2];
             $expected = $rules[3];
 
-            $obj = new Realtype($val);
+            $obj = new RealType($val);
             $res = $obj->pow($exp, $scale);
             $this->assertSame($expected, $res->value());
         }
 
 
-        Realtype::defineGlobalRoundType("ceil-4", new Realtype("1"));
-        $this->assertSame("ceil-4", Realtype::getRoundType());
-        $this->assertSame("1", Realtype::getRoundSensibility()->format(0, ".", ""));
+        RealType::defineGlobalRoundType("ceil-4", new RealType("1"));
+        $this->assertSame("ceil-4", RealType::getRoundType());
+        $this->assertSame("1", RealType::getRoundSensibility()->format(0, ".", ""));
 
         $testValues = [
             ["4.2", "3", 3, "80.00"],   // 74.088
@@ -694,12 +693,12 @@ class RealtypeTests extends TestCase
             $scale = $rules[2];
             $expected = $rules[3];
 
-            $obj = new Realtype($val);
+            $obj = new RealType($val);
             $res = $obj->pow($exp, $scale);
             $this->assertSame($expected, $res->format(2, ".", ""));
         }
 
-        Realtype::defineGlobalRoundType(null, null);
+        RealType::defineGlobalRoundType(null, null);
     }
 
 
@@ -719,15 +718,15 @@ class RealtypeTests extends TestCase
             $expected = $rules[1];
             $scale = $rules[2];
 
-            $obj = new Realtype($val);
+            $obj = new RealType($val);
             $res = $obj->sqrt($scale);
             $this->assertSame($expected, $res->value());
         }
 
 
-        Realtype::defineGlobalRoundType("ceil-4", new Realtype("0.1"));
-        $this->assertSame("ceil-4", Realtype::getRoundType());
-        $this->assertSame("0.1", Realtype::getRoundSensibility()->format(1, ".", ""));
+        RealType::defineGlobalRoundType("ceil-4", new RealType("0.1"));
+        $this->assertSame("ceil-4", RealType::getRoundType());
+        $this->assertSame("0.1", RealType::getRoundSensibility()->format(1, ".", ""));
 
         $testValues = [
             ["90", "10", 3],   // 9.486
@@ -737,12 +736,12 @@ class RealtypeTests extends TestCase
             $expected = $rules[1];
             $scale = $rules[2];
 
-            $obj = new Realtype($val);
+            $obj = new RealType($val);
             $res = $obj->sqrt($scale);
             $this->assertSame($expected, $res->format(0, ".", ""));
         }
 
-        Realtype::defineGlobalRoundType(null, null);
+        RealType::defineGlobalRoundType(null, null);
     }
 
 
@@ -751,11 +750,11 @@ class RealtypeTests extends TestCase
 
     public function test_method_tostring()
     {
-        $testValues = [ "0", "10", "1500000005000", "3.000000", 74.088];
+        $testValues = ["0", "10", "1500000005000", "3.000000", 74.088];
 
 
         foreach ($testValues as $value) {
-            $obj = new Realtype($value);
+            $obj = new RealType($value);
 
             $expected = (string)((float)$value);
             $this->assertSame($expected, (string)$obj);
@@ -766,18 +765,18 @@ class RealtypeTests extends TestCase
 
     public function test_method_format()
     {
-        $testValues = [ "0", "10", "100", "1000", "123455678.99878" ];
-        $expected = [ "0,000", "10,000", "100,000", "1.000,000", "123.455.678,998" ];
+        $testValues = ["0", "10", "100", "1000", "123455678.99878"];
+        $expected = ["0,000", "10,000", "100,000", "1.000,000", "123.455.678,998"];
 
         foreach ($testValues as $i => $value) {
-            $obj = new Realtype($value);
+            $obj = new RealType($value);
 
             $r = $obj->format(3, ",", ".");
             $this->assertSame($expected[$i], $r);
         }
 
-        Realtype::defineGlobalDecimalPlaces(2);
-        $obj = new Realtype("568.55445");
+        RealType::defineGlobalDecimalPlaces(2);
+        $obj = new RealType("568.55445");
         $this->assertSame("568,55", $obj->format(null, ",", "."));
     }
 }

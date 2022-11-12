@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AeonDigital\SimpleType;
 
+use AeonDigital\Interfaces\iRealType as iRealType;
 use AeonDigital\Interfaces\SimpleType\iReal as iReal;
 use AeonDigital\SimpleType\Abstracts\aBasic as aBasic;
-use AeonDigital\Realtype as Realtype;
 use AeonDigital\Tools as Tools;
 
 
@@ -65,7 +65,7 @@ final class stReal extends aBasic implements iReal
      */
     public static function validate(mixed $v): bool
     {
-        $n = Tools::toRealtype($v);
+        $n = Tools::toRealType($v);
         if ($n === null) {
             return false;
         } else {
@@ -96,14 +96,14 @@ final class stReal extends aBasic implements iReal
     {
         $err = null;
         if (static::validate($v) === false) {
-            $n = Tools::toRealtype($v);
+            $n = Tools::toRealType($v);
             $err = "unknown";
 
             if ($n === null) {
                 $err = "error.st.unexpected.type";
             }
         } else {
-            $v = Tools::toRealtype($v);
+            $v = Tools::toRealType($v);
         }
         return $v;
     }
@@ -115,12 +115,12 @@ final class stReal extends aBasic implements iReal
     /**
      * Verifica se o valor informado está entre o intervalo definido para este tipo.
      *
-     * @param       Realtype $v
+     * @param       iRealType $v
      *              Valor que será verificado.
      *
      * @return      bool
      */
-    protected static function validateRealValue(Realtype $v): bool
+    protected static function validateRealValue(iRealType $v): bool
     {
         $min = static::min();
         $max = static::max();

@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataModel\Traits;
 
 use AeonDigital\Tools as Tools;
-
 
 
 
@@ -32,7 +32,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      string
      */
-    public function collectionGetState() : string
+    public function collectionGetState(): string
     {
         return $this->fieldState_CollectionState;
     }
@@ -42,7 +42,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      string
      */
-    public function collectionGetLastValidateState() : string
+    public function collectionGetLastValidateState(): string
     {
         return $this->fieldState_CollectionValidateState;
     }
@@ -67,7 +67,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      void
      */
-    private function setCollectionIsDistinct(bool $is) : void
+    private function setCollectionIsDistinct(bool $is): void
     {
         $this->collectionDistinct = $is;
     }
@@ -76,7 +76,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      bool
      */
-    public function collectionIsDistinct() : bool
+    public function collectionIsDistinct(): bool
     {
         return $this->collectionDistinct;
     }
@@ -104,7 +104,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      void
      */
-    private function setCollectionGetDistinctKeys(?array $keys) : void
+    private function setCollectionGetDistinctKeys(?array $keys): void
     {
         $this->collectionDistinctKeys = $keys;
     }
@@ -119,11 +119,12 @@ trait FieldCollectionCommomMethods
      *
      * @return      ?array
      */
-    public function collectionGetDistinctKeys() : ?array
+    public function collectionGetDistinctKeys(): ?array
     {
-        if ($this->collectionDistinctKeys === null &&
-            $this->isReference() === true)
-        {
+        if (
+            $this->collectionDistinctKeys === null &&
+            $this->isReference() === true
+        ) {
             if ($this->modelValidate === null) {
                 $this->modelValidate = $this->modelFactory->createDataModel($this->modelName);
             }
@@ -150,7 +151,7 @@ trait FieldCollectionCommomMethods
      *              agora ele esteja inválido. Também retornará ``false`` caso o valor seja
      *              totalmente incompatível com o campo.
      */
-    public function collectionAddValue($v) : bool
+    public function collectionAddValue(mixed $v): bool
     {
         return $this->setValue(\array_merge($this->rawValue, [$v]));
     }
@@ -171,7 +172,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      ?int
      */
-    public function collectionGetIndexOfValue($v) : ?int
+    public function collectionGetIndexOfValue(mixed $v): ?int
     {
         $r = null;
         $useCompare = $this->individualValue_RetrieveInStorageFormat($v);
@@ -200,7 +201,9 @@ trait FieldCollectionCommomMethods
                         $vvCompare = $vv->format("Y-m-d H:i:s");
                     }
 
-                    if ($useCompare === $vvCompare) { $r = $i; }
+                    if ($useCompare === $vvCompare) {
+                        $r = $i;
+                    }
                 }
             }
         }
@@ -219,12 +222,14 @@ trait FieldCollectionCommomMethods
      *
      * @return      int
      */
-    public function collectionCountOccurrenciesOfValue($v) : int
+    public function collectionCountOccurrenciesOfValue(mixed $v): int
     {
         $r = 0;
         $fV = $this->individualValue_RetrieveInStorageFormat($v);
         foreach ($this->value as $vv) {
-            if ($fV === $vv) { $r++; }
+            if ($fV === $vv) {
+                $r++;
+            }
         }
         return $r;
     }
@@ -241,7 +246,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      bool
      */
-    public function collectionHasValue($v) : bool
+    public function collectionHasValue(mixed $v): bool
     {
         return ($this->collectionGetIndexOfValue($v) !== null);
     }
@@ -255,7 +260,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      int
      */
-    public function collectionCount() : int
+    public function collectionCount(): int
     {
         return \count($this->value);
     }
@@ -275,7 +280,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      void
      */
-    public function collectionUnsetValue($v, bool $all = false) : void
+    public function collectionUnsetValue(mixed $v, bool $all = false): void
     {
         $i = $this->collectionGetIndexOfValue($v);
         if ($i !== null) {
@@ -308,10 +313,9 @@ trait FieldCollectionCommomMethods
      *
      * @return      void
      */
-    public function collectionUnsetIndex(int $i) : void
+    public function collectionUnsetIndex(int $i): void
     {
-        if ($i >= 0 && isset($this->value[$i]) === true)
-        {
+        if ($i >= 0 && isset($this->value[$i]) === true) {
             \array_splice($this->value, $i, 1);
             \array_splice($this->rawValue, $i, 1);
 
@@ -390,10 +394,12 @@ trait FieldCollectionCommomMethods
      * @param       ?string $rules
      *              Regras que serão definidas conforme especificações abaixo.
      *
+     * @return      void
+     *
      * @throws      \InvalidArgumentException
      *              Caso algum valor passado não seja válido.
      */
-    protected function collectionSetAcceptedCount(?string $rules)
+    protected function collectionSetAcceptedCount(?string $rules): void
     {
         if ($rules !== null && $rules !== "") {
             $acceptedCount = null;
@@ -426,9 +432,10 @@ trait FieldCollectionCommomMethods
                 // valores..
                 elseif (\strpos($r, ",") !== false) {
                     $mm = \explode(",", $r);
-                    if (\count($mm) === 2 && $max === null &&
-                        \is_numeric($mm[0]) === true && \is_numeric($mm[1]) === true)
-                    {
+                    if (
+                        \count($mm) === 2 && $max === null &&
+                        \is_numeric($mm[0]) === true && \is_numeric($mm[1]) === true
+                    ) {
                         $min = (int)$mm[0];
                         $max = (int)$mm[1];
 
@@ -482,7 +489,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      ?array
      */
-    public function collectionGetAcceptedCount() : ?array
+    public function collectionGetAcceptedCount(): ?array
     {
         return $this->acceptedCount;
     }
@@ -497,7 +504,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      ?int
      */
-    public function collectionGetMin() : ?int
+    public function collectionGetMin(): ?int
     {
         $r = null;
         if ($this->acceptedCount !== null) {
@@ -516,7 +523,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      ?int
      */
-    public function collectionGetMax() : ?int
+    public function collectionGetMax(): ?int
     {
         $r = null;
         if ($this->acceptedCount !== null) {
@@ -553,7 +560,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      string
      */
-    private function createStringToCompareReferences($v) : string
+    private function createStringToCompareReferences(mixed $v): string
     {
         $str = "";
         $distinctKeys = $this->collectionGetDistinctKeys();
@@ -585,7 +592,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      string
      */
-    private function collectionCheckDistinct($v) : string
+    private function collectionCheckDistinct(mixed $v): string
     {
         $r = "valid";
 
@@ -636,7 +643,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      string
      */
-    private function collectionCheckAcceptedCount(int $count) : string
+    private function collectionCheckAcceptedCount(int $count): string
     {
         $r = "valid";
 
@@ -652,8 +659,7 @@ trait FieldCollectionCommomMethods
 
             if ($count < $min || $count > $max) {
                 $r = "error.dm.field.collection.constraint.range.violated";
-            }
-            else {
+            } else {
                 $checked = false;
 
                 if (\count($exactValues) > 0 && \in_array($count, $exactValues) === true) {
@@ -704,7 +710,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      array
      */
-    protected function collectionValue_RetrieveInStorageFormat(array $v) : array
+    protected function collectionValue_RetrieveInStorageFormat(array $v): array
     {
         $arr = [];
         foreach ($v as $vv) {
@@ -742,7 +748,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      array
      */
-    protected function collectionValue_CheckValue($v) : array
+    protected function collectionValue_CheckValue(mixed $v): array
     {
         $canSet = true;
         $state  = [];
@@ -811,7 +817,6 @@ trait FieldCollectionCommomMethods
                 if ($cState === "valid") {
                     $cState = $this->collectionCheckAcceptedCount(\count($v));
                 }
-
             }
         }
 
@@ -856,7 +861,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      array
      */
-    protected function collectionValue_ProccessSet($v) : array
+    protected function collectionValue_ProccessSet(mixed $v): array
     {
         $cvCV = $this->collectionValue_CheckValue($v);
 
@@ -891,7 +896,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      array
      */
-    protected function collectionValue_ProccessGet(array $val, bool $formated = false) : array
+    protected function collectionValue_ProccessGet(array $val, bool $formated = false): array
     {
         $r = [];
         $arr = (($val === []) ? $this->getDefault() : $val);
@@ -925,7 +930,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      mixed
      */
-    protected function internal_RetrieveInStorageFormat($v)
+    protected function internal_RetrieveInStorageFormat(mixed $v): mixed
     {
         return $this->collectionValue_RetrieveInStorageFormat($v);
     }
@@ -958,7 +963,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      array
      */
-    protected function internal_CheckValue($v) : array
+    protected function internal_CheckValue(mixed $v): array
     {
         return $this->collectionValue_CheckValue($v);
     }
@@ -997,7 +1002,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      array
      */
-    protected function internal_ProccessSet($v) : array
+    protected function internal_ProccessSet(mixed $v): array
     {
         return $this->collectionValue_ProccessSet($v);
     }
@@ -1016,7 +1021,7 @@ trait FieldCollectionCommomMethods
      *
      * @return      mixed
      */
-    protected function internal_ProccessGet($val, bool $formated = false)
+    protected function internal_ProccessGet(mixed $val, bool $formated = false): mixed
     {
         return $this->collectionValue_ProccessGet($val, $formated);
     }

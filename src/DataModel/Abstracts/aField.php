@@ -1,15 +1,15 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataModel\Abstracts;
 
+use AeonDigital\Interfaces\iRealType as iRealType;
 use AeonDigital\Interfaces\DataModel\iField as iField;
 use AeonDigital\Interfaces\DataModel\iModel as iModel;
 use AeonDigital\Interfaces\DataModel\iModelFactory as iModelFactory;
 use AeonDigital\BObject as BObject;
-
-
-
+use AeonDigital\Tools as Tools;
 
 
 /**
@@ -43,7 +43,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    private function isValidSimpleType() : bool
+    private function isValidSimpleType(): bool
     {
         $ns = "AeonDigital\\Interfaces\\SimpleType\\iSimpleType";
         return ($this->typeReflection->implementsInterface($ns) === true);
@@ -53,7 +53,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    private function isSimpleTypeBool() : bool
+    private function isSimpleTypeBool(): bool
     {
         $ns = "AeonDigital\\Interfaces\\SimpleType\\iBool";
         return ($this->typeReflection->implementsInterface($ns) === true);
@@ -63,17 +63,17 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    private function isSimpleTypeNumeric() : bool
+    private function isSimpleTypeNumeric(): bool
     {
         $ns = "AeonDigital\\Interfaces\\SimpleType\\iNumeric";
         return ($this->typeReflection->implementsInterface($ns) === true);
     }
     /**
-     * Identifica se a classe passada para o ``simpleType``` implementa a namespace ``iReal``.
+     * Identifica se a classe passada para o ``simpleType`` implementa a namespace ``iReal``.
      *
      * @return      bool
      */
-    private function isSimpleTypeReal() : bool
+    private function isSimpleTypeReal(): bool
     {
         $ns = "AeonDigital\\Interfaces\\SimpleType\\iReal";
         return ($this->typeReflection->implementsInterface($ns) === true);
@@ -83,7 +83,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    private function isSimpleTypeDateTime() : bool
+    private function isSimpleTypeDateTime(): bool
     {
         $ns = "AeonDigital\\Interfaces\\SimpleType\\iDateTime";
         return ($this->typeReflection->implementsInterface($ns) === true);
@@ -93,7 +93,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    private function isSimpleTypeString() : bool
+    private function isSimpleTypeString(): bool
     {
         $ns = "AeonDigital\\Interfaces\\SimpleType\\iString";
         return ($this->typeReflection->implementsInterface($ns) === true);
@@ -109,16 +109,23 @@ abstract class aField extends BObject implements iField
      *              Os valores a serem retornados podem ser:
      *              ``bool``, ``numeric``, ``real``, ``DateTime``, ``string``, ``reference``
      */
-    protected function identifySimpleType() : string
+    protected function identifySimpleType(): string
     {
         $str = null;
 
-        if ($this->isReference() === true)              { $str = "reference"; }
-        elseif ($this->isSimpleTypeBool() === true)     { $str = "Bool"; }
-        elseif ($this->isSimpleTypeNumeric() === true)  { $str = "Numeric"; }
-        elseif ($this->isSimpleTypeReal() === true)     { $str = "Real"; }
-        elseif ($this->isSimpleTypeDateTime() === true) { $str = "DateTime"; }
-        elseif ($this->isSimpleTypeString() === true)   { $str = "String"; }
+        if ($this->isReference() === true) {
+            $str = "reference";
+        } elseif ($this->isSimpleTypeBool() === true) {
+            $str = "Bool";
+        } elseif ($this->isSimpleTypeNumeric() === true) {
+            $str = "Numeric";
+        } elseif ($this->isSimpleTypeReal() === true) {
+            $str = "Real";
+        } elseif ($this->isSimpleTypeDateTime() === true) {
+            $str = "DateTime";
+        } elseif ($this->isSimpleTypeString() === true) {
+            $str = "String";
+        }
 
         return $str;
     }
@@ -142,7 +149,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    private function isValidInputFormat() : bool
+    private function isValidInputFormat(): bool
     {
         $ns = "AeonDigital\\Interfaces\\DataFormat\\iFormat";
         return ($this->inputFormatReflection->implementsInterface($ns) === true);
@@ -156,11 +163,11 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    private function isValidNowInstruction($v) : bool
+    private function isValidNowInstruction(mixed $v): bool
     {
         return ($this->isSimpleTypeDateTime() === true &&
-                ($v !== null && \is_string($v) === true) &&
-                (\strtoupper($v) === "NOW()" || \strtoupper($v) === "NOW"));
+            ($v !== null && \is_string($v) === true) &&
+            (\strtoupper($v) === "NOW()" || \strtoupper($v) === "NOW"));
     }
 
 
@@ -188,10 +195,12 @@ abstract class aField extends BObject implements iField
      * @throws      \InvalidArgumentException
      *              Caso o nome indicado seja inválido.
      */
-    private function setName(string $n) : void
+    private function setName(string $n): void
     {
         $this->mainCheckForInvalidArgumentException(
-            "name", $n, [
+            "name",
+            $n,
+            [
                 [
                     "validate"          => "is string matches pattern",
                     "patternPregMatch"  => "/^[a-zA-Z0-9_]+$/",
@@ -206,7 +215,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -229,7 +238,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      void
      */
-    private function setDescription(string $d) : void
+    private function setDescription(string $d): void
     {
         $this->description = $d;
     }
@@ -238,7 +247,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -267,13 +276,15 @@ abstract class aField extends BObject implements iField
      * @throws      \InvalidArgumentException
      *              Caso a classe indicada não seja válida.
      */
-    private function setType(string $t) : void
+    private function setType(string $t): void
     {
         $t = $this->mainCheckForInvalidArgumentException(
-            "type", $t, [
+            "type",
+            $t,
+            [
                 [
                     "validate" => "is string not empty",
-                    "executeBeforeReturn" => function($args) {
+                    "executeBeforeReturn" => function ($args) {
                         $argValue = $args["argValue"];
                         if ($argValue !== "" && (\class_exists($argValue) === false || $argValue === "DateTime")) {
                             $argValue = "AeonDigital\\SimpleType\\st" . $argValue;
@@ -300,7 +311,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      string
      */
-    public function getType() : string
+    public function getType(): string
     {
         return (($this->isReference() === true) ? "reference" : $this->type);
     }
@@ -346,7 +357,7 @@ abstract class aField extends BObject implements iField
      *      ];
      * ```
      *
-     * @param       ?array|?string $if
+     * @param       null|string|array $if
      *              Nome completo da classe a ser usada.
      *
      * @return      void
@@ -354,11 +365,12 @@ abstract class aField extends BObject implements iField
      * @throws      \InvalidArgumentException
      *              Caso a classe indicada não seja válida.
      */
-    private function setInputFormat($if) : void
+    private function setInputFormat(null|string|array $if): void
     {
         if (\is_array($if) === true) {
             $this->mainCheckForInvalidArgumentException(
-                "inputFormat", $if,
+                "inputFormat",
+                $if,
                 [
                     [
                         "validate" => "has array assoc required keys",
@@ -383,14 +395,15 @@ abstract class aField extends BObject implements iField
                 "format"        => $if["format"],
                 "storageFormat" => $if["storageFormat"]
             ];
-        }
-        elseif (is_string($if) === true) {
+        } elseif (is_string($if) === true) {
             if (\class_exists($if) === false) {
                 $if = "AeonDigital\\DataFormat\\Patterns\\" . \str_replace(".", "\\", $if);
             }
 
             $this->mainCheckForInvalidArgumentException(
-                "inputFormat", $if, [
+                "inputFormat",
+                $if,
+                [
                     "is class exists",
                     [
                         "validate" => "is class implements interface",
@@ -419,7 +432,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      ?string
      */
-    public function getInputFormat() : ?string
+    public function getInputFormat(): ?string
     {
         return (($this->inputFormat === null) ? null : $this->inputFormat["name"]);
     }
@@ -446,7 +459,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      void
      */
-    private function setLength(?int $l) : void
+    private function setLength(?int $l): void
     {
         if ($this->isSimpleTypeString() === true && $l !== null && $l > 0) {
             $this->length = $l;
@@ -458,7 +471,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      ?int
      */
-    public function getLength() : ?int
+    public function getLength(): ?int
     {
         return $this->length;
     }
@@ -470,9 +483,9 @@ abstract class aField extends BObject implements iField
     /**
      * Menor valor possível para um tipo simples numérico ou ``DateTime``.
      *
-     * @var         ?int|?\AeonDigital\Numbers\RealNumber|?\DateTime
+     * @var         null|int|iRealType|\DateTime
      */
-    private $min = null;
+    private null|int|iRealType|\DateTime $min = null;
     /**
      * Define o menor valor possível para um tipo numérico ou ``DateTime``.
      *
@@ -485,7 +498,7 @@ abstract class aField extends BObject implements iField
      * Se for explicitamente definido, o valor deverá estar dentro dos limites definidos
      * pelo ``type``.
      *
-     * @param       ?int|?\AeonDigital\Numbers\RealNumber|?\DateTime $m
+     * @param       null|int|string|iRealType|\DateTime $m
      *              Valor a ser definido.
      *
      * @return      void
@@ -493,7 +506,7 @@ abstract class aField extends BObject implements iField
      * @throws      \InvalidArgumentException
      *              Caso o valor a ser definido não seja válido.
      */
-    private function setMin($m) : void
+    private function setMin(null|int|string|iRealType|\DateTime $m): void
     {
         if ($this->isSimpleTypeNumeric() === true || $this->isSimpleTypeDateTime() === true) {
             if ($m === null) {
@@ -505,7 +518,9 @@ abstract class aField extends BObject implements iField
 
                 if ($err !== null) {
                     $this->mainCheckForInvalidArgumentException(
-                        "min", $m, ["is numeric"]
+                        "min",
+                        $m,
+                        ["is numeric"]
                     );
                 } else {
                     $this->min = $m;
@@ -517,9 +532,9 @@ abstract class aField extends BObject implements iField
      * Retorna o menor valor possível para um tipo numérico ou ``DateTime``.
      * Por padrão, herdará este valor da definição de seu ``type`` quando isto for aplicável.
      *
-     * @return      ?int|?\AeonDigital\Numbers\RealNumber|?\DateTime
+     * @return      null|int|iRealType|\DateTime
      */
-    public function getMin()
+    public function getMin(): null|int|iRealType|\DateTime
     {
         return $this->min;
     }
@@ -531,9 +546,9 @@ abstract class aField extends BObject implements iField
     /**
      * Maior valor possível para um tipo numérico ou ``DateTime``.
      *
-     * @var         ?int|?\AeonDigital\Numbers\RealNumber|?\DateTime
+     * @var         null|int|iRealType|\DateTime
      */
-    private $max = null;
+    private null|int|iRealType|\DateTime $max = null;
     /**
      * Define o maior valor possível para um tipo numérico ou ``DateTime``.
      *
@@ -546,7 +561,7 @@ abstract class aField extends BObject implements iField
      * Se for explicitamente definido, o valor deverá estar dentro dos limites definidos
      * pelo ``type``.
      *
-     * @param       ?int|?\AeonDigital\Numbers\RealNumber|?\DateTime $m
+     * @param       null|int|string|iRealType|\DateTime $m
      *              Valor a ser definido.
      *
      * @return      void
@@ -554,7 +569,7 @@ abstract class aField extends BObject implements iField
      * @throws      \InvalidArgumentException
      *              Caso o valor a ser definido não seja válido.
      */
-    private function setMax($m) : void
+    private function setMax(null|int|string|iRealType|\DateTime $m): void
     {
         if ($this->isSimpleTypeNumeric() === true || $this->isSimpleTypeDateTime() === true) {
             if ($m === null) {
@@ -566,7 +581,9 @@ abstract class aField extends BObject implements iField
 
                 if ($err !== null) {
                     $this->mainCheckForInvalidArgumentException(
-                        "max", $m, ["is numeric"]
+                        "max",
+                        $m,
+                        ["is numeric"]
                     );
                 } else {
                     $this->max = $m;
@@ -578,9 +595,9 @@ abstract class aField extends BObject implements iField
      * Retorna o maior valor possível para um tipo numérico ou ``DateTime``.
      * Por padrão, herdará este valor da definição de seu ``type`` quando isto for aplicável.
      *
-     * @return      ?int|?\AeonDigital\Numbers\RealNumber|?\DateTime
+     * @return      null|int|iRealType|\DateTime
      */
-    public function getMax()
+    public function getMax(): null|int|iRealType|\DateTime
     {
         return $this->max;
     }
@@ -611,7 +628,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      void
      */
-    private function setIsAllowNull(bool $is) : void
+    private function setIsAllowNull(bool $is): void
     {
         $this->allowNull = $is;
     }
@@ -620,7 +637,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    public function isAllowNull() : bool
+    public function isAllowNull(): bool
     {
         return $this->allowNull;
     }
@@ -646,7 +663,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      void
      */
-    private function setIsAllowEmpty(bool $is) : void
+    private function setIsAllowEmpty(bool $is): void
     {
         $this->allowEmpty = $is;
     }
@@ -655,7 +672,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      ?bool
      */
-    public function isAllowEmpty() : ?bool
+    public function isAllowEmpty(): ?bool
     {
         return $this->allowEmpty;
     }
@@ -681,7 +698,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      void
      */
-    private function setIsConvertEmptyToNull(bool $is) : void
+    private function setIsConvertEmptyToNull(bool $is): void
     {
         $this->convertEmptyToNull = $is;
     }
@@ -690,7 +707,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    public function isConvertEmptyToNull() : bool
+    public function isConvertEmptyToNull(): bool
     {
         return $this->convertEmptyToNull;
     }
@@ -722,7 +739,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      void
      */
-    private function setIsReadOnly(bool $is) : void
+    private function setIsReadOnly(bool $is): void
     {
         $this->readOnly = $is;
     }
@@ -731,7 +748,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    public function isReadOnly() : bool
+    public function isReadOnly(): bool
     {
         return $this->readOnly;
     }
@@ -777,7 +794,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    public function isReference() : bool
+    public function isReference(): bool
     {
         $ns = "AeonDigital\\Interfaces\\DataModel\\iFieldModel";
         return (\in_array($ns, \class_implements(\get_class($this))) === true);
@@ -792,7 +809,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    public function isCollection() : bool
+    public function isCollection(): bool
     {
         $ns = "AeonDigital\\Interfaces\\DataModel\\iFieldCollection";
         return (\in_array($ns, \class_implements(\get_class($this))) === true);
@@ -829,7 +846,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    public function isValid() : bool
+    public function isValid(): bool
     {
         return $this->fieldState_IsValid;
     }
@@ -841,7 +858,7 @@ abstract class aField extends BObject implements iField
      *
      * @var         string|array
      */
-    protected $fieldState_CurrentState = "valid";
+    protected string|array $fieldState_CurrentState = "valid";
     /**
      * Retorna o código do estado atual deste campo.
      *
@@ -861,7 +878,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      string|array
      */
-    public function getState()
+    public function getState(): string|array
     {
         return $this->fieldState_CurrentState;
     }
@@ -875,7 +892,7 @@ abstract class aField extends BObject implements iField
      *
      * @var         string|array
      */
-    protected $fieldState_ValidateState = "valid";
+    protected string|array $fieldState_ValidateState = "valid";
     /**
      * Retornará o resultado da validação conforme o tipo de campo testado.
      *
@@ -895,7 +912,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      string|array
      */
-    public function getLastValidateState()
+    public function getLastValidateState(): string|array
     {
         return $this->fieldState_ValidateState;
     }
@@ -925,7 +942,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    public function getLastValidateCanSet() : bool
+    public function getLastValidateCanSet(): bool
     {
         return $this->fieldState_ValidateStateCanSet;
     }
@@ -938,9 +955,9 @@ abstract class aField extends BObject implements iField
      * Este valor é sobrescrito sempre que um método que exige validação for acionado,
      * portanto, sempre conterá o valor da última validação realizada.
      *
-     * @var         string|string[]
+     * @var         null|string|array
      */
-    protected $fieldState_CollectionValidateState = null;
+    protected null|string|array $fieldState_CollectionValidateState = null;
     /**
      * Armazena o registro da validação referente à toda coleção de dados armazenada no
      * momento.
@@ -950,7 +967,7 @@ abstract class aField extends BObject implements iField
      *
      * @var         ?string
      */
-    protected ?string $fieldState_CollectionState = null;
+    protected null|string $fieldState_CollectionState = null;
 
 
     /**
@@ -979,7 +996,7 @@ abstract class aField extends BObject implements iField
      *  2. Verifica se o valor cai em algum dos valores especiais citados no tópico anterior.
      *  3. Verifica se o valor não é um objeto de um tipo não aceito.
      *    Os tipos aceitos para campos simples são:
-     *    ``bool``, ``int``, ``float``, ``RealNumber``, ``DateTime``, ``string``
+     *    ``bool``, ``int``, ``float``, ``iRealType``, ``DateTime``, ``string``
      *  4. Validação de tipo:
      *  4.1. Havendo um ``inputFormat`` definido, identifica se o valor passa em sua
      *    respectiva validação.
@@ -993,7 +1010,7 @@ abstract class aField extends BObject implements iField
      *   limites.
      *
      * **Valores aceitáveis**
-     * ``null``, ``bool``, ``int``, ``float``, ``RealNumber``, ``DateTime``, ``string``
+     * ``null``, ``bool``, ``int``, ``float``, ``iRealType``, ``DateTime``, ``string``
      *
      *
      * **Regras de aceitação**
@@ -1033,7 +1050,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      bool
      */
-    public function validateValue($v) : bool
+    public function validateValue(mixed $v): bool
     {
         $iCV = $this->internal_CheckValue($v);
 
@@ -1076,7 +1093,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      mixed
      */
-    protected function individualValue_RetrieveInStorageFormat($v)
+    protected function individualValue_RetrieveInStorageFormat(mixed $v): mixed
     {
         if ($v !== null && $v !== "") {
             if ($this->inputFormat !== null && \is_string($v) === true) {
@@ -1090,8 +1107,7 @@ abstract class aField extends BObject implements iField
 
                 if (\defined($ifDateMask) === true) {
                     $v = $this->inputFormat["format"]($v, [$this->inputFormat["name"]::DateMask]);
-                }
-                else {
+                } else {
                     $v = $this->inputFormat["format"]($v);
                 }
             } else {
@@ -1128,7 +1144,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      array
      */
-    protected function individualValue_CheckValue($v) : array
+    protected function individualValue_CheckValue(mixed $v): array
     {
         $canSet = true;
         $state  = "valid";
@@ -1170,13 +1186,12 @@ abstract class aField extends BObject implements iField
             } else {
 
                 // Verifica se o valor passado é de um tipo válido.
-                $isValidType = (
-                    \is_bool($v) === true ||
+                $isValidType = (\is_bool($v) === true ||
                     \is_int($v) === true ||
                     \is_float($v) === true ||
                     \is_string($v) === true ||
                     \is_a($v, "\DateTime") === true ||
-                    \is_a($v, "AeonDigital\\Numbers\\RealNumber") === true);
+                    Tools::isRealType($v) === true);
 
                 if ($isValidType === false) {
                     $canSet = false;
@@ -1209,8 +1224,7 @@ abstract class aField extends BObject implements iField
 
                                 if (\defined($ifDateMask) === true) {
                                     $sVal = $this->inputFormat["format"]($sVal, [$this->inputFormat["name"]::DateMask]);
-                                }
-                                else {
+                                } else {
                                     $sVal = $this->inputFormat["format"]($sVal);
                                 }
                             }
@@ -1245,7 +1259,9 @@ abstract class aField extends BObject implements iField
 
                             foreach ($this->enumerator as $enum) {
                                 $eVal = ((\is_array($enum) === true) ? $enum[0] : $enum);
-                                if ($sVal === $eVal) { $r = true; }
+                                if ($sVal === $eVal) {
+                                    $r = true;
+                                }
                             }
 
                             if ($r === false) {
@@ -1263,15 +1279,17 @@ abstract class aField extends BObject implements iField
                                 $min = $this->getMin();
                                 $max = $this->getMax();
 
-                                // Para casos de números reais "RealNumber"
+                                // Para casos de números reais
                                 if ($this->isSimpleTypeReal() === true) {
                                     if (($min !== null && $sVal->isLessThan($min) === true) ||
-                                        ($max !== null && $sVal->isGreaterThan($max) === true)) {
+                                        ($max !== null && $sVal->isGreaterThan($max) === true)
+                                    ) {
                                         $state = "error.dm.field.value.constraint.range.violated";
                                     }
                                 } else {
                                     if (($min !== null && $sVal < $min) ||
-                                        ($max !== null && $sVal > $max)) {
+                                        ($max !== null && $sVal > $max)
+                                    ) {
                                         $state = "error.dm.field.value.constraint.range.violated";
                                     }
                                 }
@@ -1323,7 +1341,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      array
      */
-    protected function individualValue_ProccessSet($v) : array
+    protected function individualValue_ProccessSet(mixed $v): array
     {
         $ivCV = $this->individualValue_CheckValue($v);
 
@@ -1335,7 +1353,9 @@ abstract class aField extends BObject implements iField
 
             // Verifica necessidade de converter "" para "null".
             if ($v === "" || $v === null) {
-                if ($this->isConvertEmptyToNull() === true) { $useVal = null; }
+                if ($this->isConvertEmptyToNull() === true) {
+                    $useVal = null;
+                }
             } else {
                 $useVal = $this->individualValue_RetrieveInStorageFormat($useVal);
                 if ($useVal === null && $v !== null) {
@@ -1361,15 +1381,16 @@ abstract class aField extends BObject implements iField
      *
      * @return      mixed
      */
-    protected function individualValue_ProccessGet($val, bool $formated = false)
+    protected function individualValue_ProccessGet(mixed $val, bool $formated = false): mixed
     {
         $r = (($val === undefined) ? $this->getDefault() : $val);
 
-        if ($r !== undefined &&
+        if (
+            $r !== undefined &&
             $r !== null &&
             $formated === true &&
-            $this->inputFormat !== null)
-        {
+            $this->inputFormat !== null
+        ) {
             $useR = (
                 ($this->isSimpleTypeDateTime() === false) ?
                 $this->inputFormat["format"]($r) :
@@ -1404,7 +1425,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      mixed
      */
-    protected function internal_RetrieveInStorageFormat($v)
+    protected function internal_RetrieveInStorageFormat(mixed $v): mixed
     {
         return $this->individualValue_RetrieveInStorageFormat($v);
     }
@@ -1437,7 +1458,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      array
      */
-    protected function internal_CheckValue($v) : array
+    protected function internal_CheckValue(mixed $v): array
     {
         return $this->individualValue_CheckValue($v);
     }
@@ -1476,7 +1497,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      array
      */
-    protected function internal_ProccessSet($v) : array
+    protected function internal_ProccessSet(mixed $v): array
     {
         return $this->individualValue_ProccessSet($v);
     }
@@ -1495,7 +1516,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      mixed
      */
-    protected function internal_ProccessGet($val, bool $formated = false)
+    protected function internal_ProccessGet(mixed $val, bool $formated = false): mixed
     {
         return $this->individualValue_ProccessGet($val, $formated);
     }
@@ -1536,7 +1557,7 @@ abstract class aField extends BObject implements iField
      * @throws      \InvalidArgumentException
      *              Caso o argumento passado não seja válido.
      */
-    protected function setDefault($v) : void
+    protected function setDefault(mixed $v): void
     {
         if ($this->isValidNowInstruction($v) === true) {
             $this->default = "NOW()";
@@ -1545,7 +1566,9 @@ abstract class aField extends BObject implements iField
 
             if ($iCV["valid"] === false) {
                 $this->mainCheckForInvalidArgumentException(
-                    "default", $v, ["fail"]
+                    "default",
+                    $v,
+                    ["fail"]
                 );
             } else {
                 $this->default = $this->internal_RetrieveInStorageFormat($v);
@@ -1562,7 +1585,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      mixed
      */
-    public function getDefault(bool $getInstruction = false)
+    public function getDefault(bool $getInstruction = false): mixed
     {
         if ($this->default === "NOW()" && $getInstruction === false) {
             return new \DateTime();
@@ -1607,15 +1630,16 @@ abstract class aField extends BObject implements iField
      * @throws      \InvalidArgumentException
      *              Caso o argumento passado não seja válido.
      */
-    private function setEnumerator($enum) : void
+    private function setEnumerator(string|array $enum): void
     {
         $this->enumerator = $this->mainCheckForInvalidArgumentException(
-            "enumerator", $enum,
+            "enumerator",
+            $enum,
             [
                 [
                     "conditions"    => "is string",
                     "validate"      => "is file exists",
-                    "executeBeforeReturn" => function($args) {
+                    "executeBeforeReturn" => function ($args) {
                         return include $args["argValue"];
                     }
                 ],
@@ -1634,18 +1658,18 @@ abstract class aField extends BObject implements iField
                             "expectedCountValues"   => 2
                         ],
                         [
-                            "executeBeforeValidate" => function($args) {
+                            "executeBeforeValidate" => function ($args) {
                                 $argValue = $args["argValue"];
                                 return ((\is_array($argValue) === true) ? $argValue[0] : $argValue);
                             },
                             "validate" => "closure",
-                            "closure" => function($arg) {
+                            "closure" => function ($arg) {
                                 $ivCV = $this->individualValue_CheckValue($arg);
                                 return $ivCV["valid"];
                             }
                         ]
                     ],
-                    "executeBeforeReturn" => function($args) {
+                    "executeBeforeReturn" => function ($args) {
                         $argValue = $args["argValue"];
                         $newArgValue = [];
 
@@ -1677,7 +1701,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      ?array
      */
-    public function getEnumerator(bool $getOnlyValues = false) : ?array
+    public function getEnumerator(bool $getOnlyValues = false): ?array
     {
         $enum = $this->enumerator;
 
@@ -1733,7 +1757,7 @@ abstract class aField extends BObject implements iField
      * Caso contrário o campo ficará com o valor ``null``.
      *
      * **Valores aceitáveis**
-     * ``null``, ``bool``, ``int``, ``float``, ``RealNumber``, ``DateTime``, ``string``
+     * ``null``, ``bool``, ``int``, ``float``, ``iRealType``, ``DateTime``, ``string``
      *
      *
      * **Campos "reference"**
@@ -1776,7 +1800,7 @@ abstract class aField extends BObject implements iField
      *              agora ele esteja inválido. Também retornará ``false`` caso o valor seja
      *              totalmente incompatível com o campo.
      */
-    public function setValue($v) : bool
+    public function setValue(mixed $v): bool
     {
         $iPS = $this->internal_ProccessSet($v);
 
@@ -1824,7 +1848,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      mixed
      */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->internal_ProccessGet($this->value, true);
     }
@@ -1860,7 +1884,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      mixed
      */
-    public function getStorageValue()
+    public function getStorageValue(): mixed
     {
         if ($this->isValid() === true && ($this->value !== undefined || $this->default !== undefined)) {
             return $this->internal_ProccessGet($this->value, false);
@@ -1878,7 +1902,7 @@ abstract class aField extends BObject implements iField
      *
      * @return      mixed
      */
-    public function getRawValue()
+    public function getRawValue(): mixed
     {
         return $this->rawValue;
     }

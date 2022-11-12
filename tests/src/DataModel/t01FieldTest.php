@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\DataModel\Tests\Concrete\DataField as DataField;
 
 require_once __DIR__ . "/../../phpunit.php";
-
 
 
 
@@ -336,7 +336,9 @@ class t01FieldTest extends TestCase
                 "inputFormat"               => [
                     "name"          => "valid",
                     "length"        => 100,
-                    "check"         => function() { return true; },
+                    "check"         => function () {
+                        return true;
+                    },
                     "removeFormat"  => null,
                     "format"        => null,
                     "storageFormat" => null
@@ -361,8 +363,12 @@ class t01FieldTest extends TestCase
                 "inputFormat"               => [
                     "name"          => "valid",
                     "length"        => 100,
-                    "check"         => function() { return true; },
-                    "removeFormat"  => function($v) { return $v; },
+                    "check"         => function () {
+                        return true;
+                    },
+                    "removeFormat"  => function ($v) {
+                        return $v;
+                    },
                     "format"        => null,
                     "storageFormat" => null,
                 ]
@@ -386,9 +392,15 @@ class t01FieldTest extends TestCase
                 "inputFormat"               => [
                     "name"          => "valid",
                     "length"        => 100,
-                    "check"         => function() { return true; },
-                    "removeFormat"  => function($v) { return $v; },
-                    "format"        => function($v) { return $v; },
+                    "check"         => function () {
+                        return true;
+                    },
+                    "removeFormat"  => function ($v) {
+                        return $v;
+                    },
+                    "format"        => function ($v) {
+                        return $v;
+                    },
                     "storageFormat" => null,
                 ]
             ]);
@@ -411,10 +423,18 @@ class t01FieldTest extends TestCase
             "inputFormat"               => [
                 "name"          => "transformname",
                 "length"        => 16,
-                "check"         => function($v) { return (strpos($v, "z") === false); },
-                "removeFormat"  => function($v) { return str_replace("!", "i", $v); },
-                "format"        => function($v) { return strtoupper($v); },
-                "storageFormat" => function($v) { return str_replace(["i", "I"], "!", $v); }
+                "check"         => function ($v) {
+                    return (strpos($v, "z") === false);
+                },
+                "removeFormat"  => function ($v) {
+                    return str_replace("!", "i", $v);
+                },
+                "format"        => function ($v) {
+                    return strtoupper($v);
+                },
+                "storageFormat" => function ($v) {
+                    return str_replace(["i", "I"], "!", $v);
+                }
             ]
         ]);
 
@@ -546,7 +566,7 @@ class t01FieldTest extends TestCase
         $this->assertSame($testValue, $obj->getMin());
 
 
-        // Valor explicito para um RealNumber
+        // Valor explicito para um RealType
         $testValue = "-400000";
 
         $obj = new DataField([
@@ -626,7 +646,7 @@ class t01FieldTest extends TestCase
         $this->assertSame($testValue, $obj->getMax());
 
 
-        // Valor explicito para um RealNumber
+        // Valor explicito para um RealType
         $testValue = "400000";
 
         $obj = new DataField([

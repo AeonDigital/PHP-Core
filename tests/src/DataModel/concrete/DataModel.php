@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataModel\Tests\Concrete;
 
 use AeonDigital\DataModel\Abstracts\aModel as aModel;
-
 
 
 
@@ -22,5 +22,8 @@ class DataModel extends aModel
         parent::__construct($config);
     }
 
-    protected function extendCall($name, $arguments) { return true; }
+    protected function extendCall(string $name, array $arguments): mixed
+    {
+        return true;
+    }
 }

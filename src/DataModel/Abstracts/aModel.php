@@ -1,12 +1,12 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataModel\Abstracts;
 
 use AeonDigital\Interfaces\DataModel\iModel as iModel;
 use AeonDigital\Interfaces\DataModel\iField as iField;
 use AeonDigital\BObject as BObject;
-
 
 
 
@@ -35,7 +35,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      bool
      */
-    private function checkIfValueIsModel($v) : bool
+    private function checkIfValueIsModel(mixed $v): bool
     {
         $r = false;
         if (\is_object($v) === true) {
@@ -64,10 +64,12 @@ abstract class aModel extends BObject implements iModel
      * @throws      \InvalidArgumentException
      *              Caso o nome indicado seja inválido.
      */
-    private function setName(string $n) : void
+    private function setName(string $n): void
     {
         $this->mainCheckForInvalidArgumentException(
-            "name", $n, [
+            "name",
+            $n,
+            [
                 [
                     "validate"          => "is string matches pattern",
                     "patternPregMatch"  => "/^[a-zA-Z0-9_]+$/",
@@ -82,7 +84,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -105,7 +107,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      void
      */
-    private function setDescription(string $d) : void
+    private function setDescription(string $d): void
     {
         $this->description = $d;
     }
@@ -114,7 +116,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -136,7 +138,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      void
      */
-    protected function throwErrorIfFieldDoesNotExists(string $f) : void
+    protected function throwErrorIfFieldDoesNotExists(string $f): void
     {
         if ($this->hasField($f) === false) {
             $msg = "Non-existent field name [\"$f\"].";
@@ -173,7 +175,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @throws      \InvalidArgumentException
      */
-    private function addField(iField $field) : void
+    private function addField(iField $field): void
     {
         $name = \strtolower($field->getName());
         if (isset($this->fieldsCollection[$name]) === true) {
@@ -194,7 +196,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      ?iField
      */
-    protected function getField(string $f) : ?iField
+    protected function getField(string $f): ?iField
     {
         $r = null;
         if ($this->hasField($f)) {
@@ -213,7 +215,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      bool
      */
-    public function hasField(string $f) : bool
+    public function hasField(string $f): bool
     {
         return (isset($this->fieldsCollection[\strtolower($f)]) === true);
     }
@@ -225,7 +227,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      int
      */
-    public function countFields() : int
+    public function countFields(): int
     {
         return \count($this->fieldsCollection);
     }
@@ -242,7 +244,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      array
      */
-    public function getFieldNames(bool $getReferences = true) : array
+    public function getFieldNames(bool $getReferences = true): array
     {
         $r = [];
         foreach ($this->fieldsCollection as $fieldName => $field) {
@@ -261,7 +263,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      array
      */
-    public function getInitialDataModel() : array
+    public function getInitialDataModel(): array
     {
         $r = [];
         foreach ($this->fieldsCollection as $fieldName => $field) {
@@ -293,7 +295,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      bool
      */
-    public function isInitial() : bool
+    public function isInitial(): bool
     {
         return $this->modelState_InitialState;
     }
@@ -306,7 +308,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      bool
      */
-    public function isValid() : bool
+    public function isValid(): bool
     {
         $validFields = [];
         foreach ($this->fieldsCollection as $fieldName => $field) {
@@ -338,7 +340,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      string|array
      */
-    public function getState()
+    public function getState(): string|array
     {
         if ($this->isValid() === true) {
             return "valid";
@@ -368,9 +370,9 @@ abstract class aModel extends BObject implements iModel
      * Este valor é sobrescrito sempre que um método que exige validação for acionado,
      * portanto, sempre conterá o valor da última validação realizada.
      *
-     * @var         string|array
+     * @var         null|string|array
      */
-    private $modelState_ValidateState = null;
+    private null|string|array $modelState_ValidateState = null;
     /**
      * Referente a última validação executada:
      * Se todos seus campos estão com valores válidos será retornado ``valid``.
@@ -392,9 +394,9 @@ abstract class aModel extends BObject implements iModel
      *      ];
      * ```
      *
-     * @return      string|array
+     * @return      null|string|array
      */
-    public function getLastValidateState()
+    public function getLastValidateState(): null|string|array
     {
         return $this->modelState_ValidateState;
     }
@@ -413,7 +415,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      bool
      */
-    public function getLastValidateCanSet() : bool
+    public function getLastValidateCanSet(): bool
     {
         return $this->modelState_ValidateStateCanSet;
     }
@@ -461,7 +463,7 @@ abstract class aModel extends BObject implements iModel
      *              Caso o objeto passado possua propriedades não correspondentes aos campos
      *              definidos.
      */
-    public function validateValues($objValues, bool $checkAll = false) : bool
+    public function validateValues(mixed $objValues, bool $checkAll = false): bool
     {
         $validateResult = [];
         $validateState  = [];
@@ -565,7 +567,7 @@ abstract class aModel extends BObject implements iModel
      * @throws      \InvalidArgumentException
      *              Caso o nome do campo não seja válido.
      */
-    public function setFieldValue(string $f, $v) : bool
+    public function setFieldValue(string $f, mixed $v): bool
     {
         $this->throwErrorIfFieldDoesNotExists($f);
         $this->modelState_InitialState = false;
@@ -594,7 +596,7 @@ abstract class aModel extends BObject implements iModel
      * @throws      \InvalidArgumentException
      *              Caso o nome do campo não seja válido.
      */
-    public function getFieldValue(string $f)
+    public function getFieldValue(string $f): mixed
     {
         $this->throwErrorIfFieldDoesNotExists($f);
         return $this->getField($f)->getValue();
@@ -614,7 +616,7 @@ abstract class aModel extends BObject implements iModel
      * @throws      \InvalidArgumentException
      *              Caso o nome do campo não seja válido.
      */
-    public function getFieldStorageValue(string $f)
+    public function getFieldStorageValue(string $f): mixed
     {
         $this->throwErrorIfFieldDoesNotExists($f);
         return $this->getField($f)->getStorageValue();
@@ -634,7 +636,7 @@ abstract class aModel extends BObject implements iModel
      * @throws      \InvalidArgumentException
      *              Caso o nome do campo não seja válido.
      */
-    public function getFieldRawValue(string $f)
+    public function getFieldRawValue(string $f): mixed
     {
         $this->throwErrorIfFieldDoesNotExists($f);
         return $this->getField($f)->getRawValue();
@@ -674,7 +676,7 @@ abstract class aModel extends BObject implements iModel
      *              Caso o objeto passado possua propriedades não correspondentes aos campos
      *              definidos.
      */
-    public function setValues($objValues, bool $checkAll = false) : bool
+    public function setValues(mixed $objValues, bool $checkAll = false): bool
     {
         $r = $this->validateValues($objValues, $checkAll);
         if ($this->getLastValidateCanSet() === true) {
@@ -699,7 +701,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      array
      */
-    public function getValues() : array
+    public function getValues(): array
     {
         $r = [];
         foreach ($this->fieldsCollection as $fieldName => $field) {
@@ -719,7 +721,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      array
      */
-    public function getStorageValues() : array
+    public function getStorageValues(): array
     {
         $r = [];
         foreach ($this->fieldsCollection as $fieldName => $field) {
@@ -738,7 +740,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      array
      */
-    public function getRawValues() : array
+    public function getRawValues(): array
     {
         $r = [];
         foreach ($this->fieldsCollection as $fieldName => $field) {
@@ -790,7 +792,9 @@ abstract class aModel extends BObject implements iModel
 
 
         $this->mainCheckForInvalidArgumentException(
-            "config['fields']", $fields, [
+            "config['fields']",
+            $fields,
+            [
                 [
                     "validate"          => "is array not empty or null"
                 ]
@@ -837,7 +841,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      mixed
      */
-    abstract protected function extendCall($name, $arguments);
+    abstract protected function extendCall(string $name, array $arguments): mixed;
     /**
      * Permite efetuar o auto-set de um dos campos quando este for do tipo *reference*.
      *
@@ -850,15 +854,14 @@ abstract class aModel extends BObject implements iModel
      *              Opcionalmente pode ser definido uma coleção de valores a serem
      *              definidos para a nova instância.
      *
-     * @return      mixed
+     * @return      void|mixed
      */
     public function __call($name, $arguments)
     {
         $r = $this->extendCall($name, $arguments);
         if ($this->useMainCall === false) {
             return $r;
-        }
-        else {
+        } else {
             $field      = null;
             $useName    = null;
             $action     = null;
@@ -912,16 +915,14 @@ abstract class aModel extends BObject implements iModel
                             $field->collectionAddValue($field->getModel());
                         }
                     }
-                } elseif($action === "get") {
+                } elseif ($action === "get") {
                     $index = ((\count($arguments) > 0) ? $arguments[0] : null);
 
                     if ($index === null) {
                         return $field->getInstanceValue();
-                    }
-                    elseif (\is_int($index) === false || $index >= $field->collectionCount() || $index < 0) {
+                    } elseif (\is_int($index) === false || $index >= $field->collectionCount() || $index < 0) {
                         return null;
-                    }
-                    else {
+                    } else {
                         return $field->getInstanceValue()[$index];
                     }
                 }
@@ -1003,7 +1004,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @return      \Traversable
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->getValues());
     }

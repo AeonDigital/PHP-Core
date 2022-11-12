@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataModel\Abstracts;
 
@@ -7,7 +8,6 @@ use AeonDigital\Interfaces\DataModel\iModel as iModel;
 use AeonDigital\Interfaces\DataModel\iFieldModel as iFieldModel;
 use AeonDigital\Interfaces\DataModel\iModelFactory as iModelFactory;
 use AeonDigital\DataModel\Abstracts\aField as aField;
-
 
 
 
@@ -40,7 +40,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * @return      bool
      */
-    private function checkIfValueIsModelOf($v, string $modelName) : bool
+    private function checkIfValueIsModelOf(mixed $v, string $modelName): bool
     {
         $r = false;
         if (\is_object($v) === true) {
@@ -63,7 +63,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * @return      mixed
      */
-    protected function modelIndividualValue_RetrieveInStorageFormat($v)
+    protected function modelIndividualValue_RetrieveInStorageFormat(mixed $v): mixed
     {
         $nInst = $this->modelFactory->createDataModel($this->modelName);
         $nInst->setValues($v);
@@ -96,7 +96,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * @return      array
      */
-    protected function modelIndividualValue_CheckValue($v) : array
+    protected function modelIndividualValue_CheckValue(mixed $v): array
     {
         $canSet = true;
         $state  = "valid";
@@ -185,7 +185,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * @return      array
      */
-    protected function modelIndividualValue_ProccessSet($v) : array
+    protected function modelIndividualValue_ProccessSet(mixed $v): array
     {
         $ivCV = $this->modelIndividualValue_CheckValue($v);
 
@@ -211,7 +211,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * @return      mixed
      */
-    protected function modelIndividualValue_ProccessGet($val, bool $formated = false)
+    protected function modelIndividualValue_ProccessGet(mixed $val, bool $formated = false): mixed
     {
         $r = $val;
         if ($val !== undefined && $val !== null) {
@@ -262,7 +262,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * @return      array
      */
-    protected function internal_CheckValue($v) : array
+    protected function internal_CheckValue(mixed $v): array
     {
         return $this->modelIndividualValue_CheckValue($v);
     }
@@ -301,7 +301,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * @return      array
      */
-    protected function internal_ProccessSet($v) : array
+    protected function internal_ProccessSet(mixed $v): array
     {
         return $this->modelIndividualValue_ProccessSet($v);
     }
@@ -320,7 +320,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * @return      mixed
      */
-    protected function internal_ProccessGet($val, bool $formated = false)
+    protected function internal_ProccessGet(mixed $val, bool $formated = false): mixed
     {
         return $this->modelIndividualValue_ProccessGet($val, $formated);
     }
@@ -353,7 +353,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * @return      bool
      */
-    public function isInitial() : bool
+    public function isInitial(): bool
     {
         return ($this->value === undefined || ($this->value !== null && $this->value->isInitial() === true));
     }
@@ -367,7 +367,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * @return      iModel
      */
-    public function getModel() : iModel
+    public function getModel(): iModel
     {
         return $this->modelFactory->createDataModel($this->modelName);
     }
@@ -376,7 +376,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * @return      string
      */
-    public function getModelName() : string
+    public function getModelName(): string
     {
         return $this->modelName;
     }
@@ -386,9 +386,9 @@ abstract class aFieldModel extends aField implements iFieldModel
      * Em campos *collection* será retornado o ``array`` contendo as instâncias que
      * compõe a coleção atual.
      *
-     * @return      iModel|iModel[]
+     * @return      string|array|iModel
      */
-    public function getInstanceValue()
+    public function getInstanceValue(): string|array|iModel
     {
         return $this->value;
     }

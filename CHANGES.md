@@ -16,3 +16,17 @@ StdClass    -> stdClass
 boolean     -> bool
 
 identificar e remover variáveis declaradas e não utilizadas.
+
+ANTES DE PROSSEGUIR PARA O PRÓXIMO REPOSITÓRIO:
+    - Resolver o que fazer com o 'undefined' ...
+    - verificar todos os 'erros' que o IDE está mostrando. ver se tem forma de resolver.
+
+
+
+
+============================================================
+Segunda revisão:
+    - Alterar hash de senha para um mais seguro em AeonDigital\DataFormat\Patterns\World\Password
+
+Remover do 'phpunit.php':
+    require_once $rootDir . "/vendor/aeondigital/phpinterfaces/src/iRealType.php"; // @@TODO

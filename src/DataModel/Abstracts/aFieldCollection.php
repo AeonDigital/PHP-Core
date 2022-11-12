@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataModel\Abstracts;
 
 use AeonDigital\Interfaces\DataModel\iFieldCollection as iFieldCollection;
 use AeonDigital\DataModel\Abstracts\aField as aField;
-
 
 
 
@@ -103,8 +103,12 @@ abstract class aFieldCollection extends aField implements iFieldCollection
         $config["convertEmptyToNull"]   = false;
         $config["readOnly"]             = false;
 
-        if (isset($config["value"]) === false) { $config["value"] = []; }
-        if (isset($config["default"]) === false) { $config["default"] = []; }
+        if (isset($config["value"]) === false) {
+            $config["value"] = [];
+        }
+        if (isset($config["default"]) === false) {
+            $config["default"] = [];
+        }
 
         parent::__construct($config);
 

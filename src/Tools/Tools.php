@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AeonDigital;
 
-use AeonDigital\Realtype as Realtype;
-
+use AeonDigital\Interfaces\iRealType as iRealType;
+use AeonDigital\RealType as RealType;
 
 
 
@@ -201,16 +201,21 @@ class Tools
         return (\is_a($o, "\DateTime") === true);
     }
     /**
-     * Verifica se o objeto passado é do tipo ``Realtype``.
+     * Verifica se o objeto passado é do tipo ``iRealType``.
      *
      * @param       mixed $o
      *              Objeto que será verificado.
      *
      * @return      bool
      */
-    public static function isRealtype(mixed $o): bool
+    public static function isRealType(mixed $o): bool
     {
-        return (\is_a($o, "AeonDigital\\Realtype") === true);
+        $r = false;
+        if (\is_object($o) === true) {
+            $typeReflection = new \ReflectionClass($o);
+            $r = $typeReflection->implementsInterface("AeonDigital\\Interfaces\\iRealType");
+        }
+        return $r;
     }
 
 
@@ -377,14 +382,14 @@ class Tools
                 $dec = \str_replace("0.", "", (string)$dec);
                 return ((string)($int . "." . $dec));
             }
-        } elseif (\is_a($o, "AeonDigital\\Realtype") === true) {
-            return $o->value();
         } elseif (\is_a($o, "\DateTime") === true) {
             return $o->format("Y-m-d H:i:s");
         } elseif (\is_string($o) === true && $o !== undefined) {
             return (string)$o;
         } elseif (\is_array($o) === true) {
             return \implode(" ", $o);
+        } elseif (Tools::isRealType($o) === true) {
+            return $o->value();
         } else {
             return null;
         }
@@ -592,19 +597,19 @@ class Tools
         return $oR;
     }
     /**
-     * Tenta converter o tipo do valor passado para ``Realtype``.
+     * Tenta converter o tipo do valor passado para ``iRealType``.
      * Apenas valores realmente compatíveis serão convertidos.
      *
      * @param       mixed $o
      *              Objeto que será convertido.
      *
-     * @return      ?Realtype
+     * @return      ?iRealType
      *              Retornará ``null`` caso não seja possível efetuar a conversão.
      */
-    public static function toRealtype(mixed $o): ?Realtype
+    public static function toRealType(mixed $o): ?iRealType
     {
-        if (Realtype::isValidRealtype($o) === true) {
-            return new Realtype($o);
+        if (RealType::isValidRealType($o) === true) {
+            return new RealType($o);
         } else {
             return null;
         }
@@ -632,8 +637,8 @@ class Tools
             $r = "null";
         } elseif (\is_a($o, "\DateTime") === true) {
             $r = \json_encode($o->format("Y-m-d H:i:s"));
-        } elseif (\is_a($o, "AeonDigital\\Realtype") === true) {
-            $r = \json_encode((string)$o);
+        } elseif (Tools::isRealType($o) === true) {
+            $r = \json_encode($o->value());
         } elseif (
             \is_bool($o) === true ||
             \is_int($o) === true ||

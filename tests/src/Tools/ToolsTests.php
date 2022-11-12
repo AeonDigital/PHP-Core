@@ -1,12 +1,12 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\Tools as Tools;
-use AeonDigital\Realtype as Realtype;
+use AeonDigital\RealType as RealType;
 
 require_once __DIR__ . "/../../phpunit.php";
-
 
 
 
@@ -39,7 +39,7 @@ class ToolsTests extends TestCase
         $bValues = [null, true, 1, 10.44, "str", [1, 2, 3]];
         $bTypes = ["null", "bool", "int", "float", "string", "array"];
 
-        for ($i=0; $i<count($bValues); $i++) {
+        for ($i = 0; $i < count($bValues); $i++) {
             $this->assertTrue(Tools::isScalarType($bValues[$i], $bTypes[$i]));
         }
     }
@@ -48,10 +48,10 @@ class ToolsTests extends TestCase
         $bTrue = [null, true, 1, 10.44, "str", [1, 2, 3]];
         $bFalse = [new stdClass(), new \DateTime()];
 
-        for ($i=0; $i<count($bTrue); $i++) {
+        for ($i = 0; $i < count($bTrue); $i++) {
             $this->assertTrue(Tools::isScalar($bTrue[$i]));
         }
-        for ($i=0; $i<count($bFalse); $i++) {
+        for ($i = 0; $i < count($bFalse); $i++) {
             $this->assertFalse(Tools::isScalar($bFalse[$i]));
         }
     }
@@ -166,17 +166,17 @@ class ToolsTests extends TestCase
             $this->assertFalse(Tools::isDateTime($bFalse[$i]));
         }
     }
-    public function test_method_isRealtype()
+    public function test_method_isRealType()
     {
-        $bTrue = [new Realtype("12232.43445")];
+        $bTrue = [new RealType("12232.43445")];
         $bFalse = [null, true, false, -1, 0, 1, 12.33];
 
         for ($i = 0; $i < count($bTrue); $i++) {
-            $this->assertTrue(Tools::isRealtype($bTrue[$i]));
+            $this->assertTrue(Tools::isRealType($bTrue[$i]));
         }
 
         for ($i = 0; $i < count($bFalse); $i++) {
-            $this->assertFalse(Tools::isRealtype($bFalse[$i]));
+            $this->assertFalse(Tools::isRealType($bFalse[$i]));
         }
     }
 
@@ -303,7 +303,7 @@ class ToolsTests extends TestCase
 
 
         $this->assertSame("0", Tools::toString(0.0));
-        $nReal = new Realtype("12");
+        $nReal = new RealType("12");
         $this->assertSame("12", Tools::toString($nReal));
     }
     public function test_method_toArray()
@@ -394,7 +394,7 @@ class ToolsTests extends TestCase
             $this->assertNull($dTemp);
         }
     }
-    public function test_method_toRealtype()
+    public function test_method_toRealType()
     {
         $convertTrue = [
             1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.999999, 2,
@@ -409,12 +409,12 @@ class ToolsTests extends TestCase
 
 
         for ($i = 0; $i < count($convertTrue); $i++) {
-            $result = Tools::toRealtype($convertTrue[$i]);
+            $result = Tools::toRealType($convertTrue[$i]);
             $this->assertEquals($result->value(), strval($resultConvert[$i]));
         }
 
         for ($i = 0; $i < count($convertFalse); $i++) {
-            $result = Tools::toRealtype($convertFalse[$i]);
+            $result = Tools::toRealType($convertFalse[$i]);
             $this->assertNull($result);
         }
     }
