@@ -31,7 +31,7 @@ class stDateTimeTest extends TestCase
         $validateFalse = [
             null,
             [],
-            new StdClass(),
+            new stdClass(),
             "17/05/1980"
         ];
 

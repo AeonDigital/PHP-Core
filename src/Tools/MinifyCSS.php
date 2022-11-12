@@ -1,8 +1,8 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\Tools;
-
 
 
 
@@ -35,7 +35,7 @@ class MinifyCSS
      *
      * @return       string
      */
-    public static function minifyCode(string $cssCode) : string
+    public static function minifyCode(string $cssCode): string
     {
         if (\trim($cssCode) !== "") {
             // Remove comentários
@@ -71,7 +71,7 @@ class MinifyCSS
      *
      * @return       string
      */
-    public static function minifyFile(string $absoluteSystemPathToFile) : string
+    public static function minifyFile(string $absoluteSystemPathToFile): string
     {
         $cssCode = \file_get_contents($absoluteSystemPathToFile);
         return self::minifyCode($cssCode);
@@ -89,7 +89,7 @@ class MinifyCSS
      *
      * @return       string
      */
-    public static function minifyFiles(array $absoluteSystemPathToFiles) : string
+    public static function minifyFiles(array $absoluteSystemPathToFiles): string
     {
         $str = "";
 
@@ -120,7 +120,7 @@ class MinifyCSS
     public static function createMinifyFile(
         array $absoluteSystemPathToFiles,
         string $absoluteSystemPathToMinifiedFile
-    ) : bool {
+    ): bool {
 
         $minifiedCode = self::minifyFiles($absoluteSystemPathToFiles);
         $r = \file_put_contents($absoluteSystemPathToMinifiedFile, $minifiedCode);

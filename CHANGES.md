@@ -11,3 +11,8 @@ mb_str_starts_with  -> str_starts_with          [removido; atualmente é parte d
 adicionar tipos em todos argumentos de todas as funções.
 adicionar retornos em todas funções.
 adicionar tipos "mixed", "object" e "void" quando necessário
+
+StdClass    -> stdClass
+boolean     -> bool
+
+identificar e remover variáveis declaradas e não utilizadas.

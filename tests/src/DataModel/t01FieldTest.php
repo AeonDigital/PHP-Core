@@ -147,12 +147,12 @@ class t01FieldTest extends TestCase
         try {
             $obj = new DataField([
                 "name"                      => "validName",
-                "type"                      => StdClass::class
+                "type"                      => stdClass::class
             ]);
         } catch (\Exception $ex) {
             $fail = true;
             $this->assertSame(
-                "Invalid value defined for \"type\". Expected Namespace of class thats implements the interface AeonDigital\Interfaces\SimpleType\iSimpleType. Given: [ StdClass ]",
+                "Invalid value defined for \"type\". Expected Namespace of class thats implements the interface AeonDigital\Interfaces\SimpleType\iSimpleType. Given: [ stdClass ]",
                 $ex->getMessage()
             );
         }
@@ -868,7 +868,7 @@ class t01FieldTest extends TestCase
             "length"                    => 10
         ]);
 
-        $val            = new StdClass();
+        $val            = new stdClass();
         $r              = $obj->validateValue($val);
         $validateState  = $obj->getLastValidateState();
         $validateCanSet = $obj->getLastValidateCanSet();
@@ -1732,7 +1732,7 @@ class t01FieldTest extends TestCase
             "length"                    => 10
         ]);
 
-        $val            = new StdClass();
+        $val            = new stdClass();
         $r              = $obj->setValue($val);
         $v              = $obj->isValid();
         $realState      = $obj->getState();

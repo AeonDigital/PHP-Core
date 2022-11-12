@@ -126,10 +126,10 @@ class TypeListTest extends TestCase
 
 
 
-        $typeOfEntry = "[?string, ?string, StdClass]";
+        $typeOfEntry = "[?string, ?string, stdClass]";
         $nMock = new TypeList($typeOfEntry);
 
-        $value = ["echo", null, new \StdClass()];
+        $value = ["echo", null, new \stdClass()];
         $nMock->set("entry", $value);
 
         $this->assertSame($value, $nMock->get("entry"));

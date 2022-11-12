@@ -250,7 +250,7 @@ class t02FieldCollectionTest extends TestCase
 
         // Deve falhar e expor no array de erros
         // a coleção de resultados da validação encontrada
-        $val        = ["val1", "val2", new StdClass(), new StdClass()];
+        $val        = ["val1", "val2", new stdClass(), new stdClass()];
         $expected   = null;
 
         $r                  = $obj->validateValue($val);
@@ -746,7 +746,7 @@ class t02FieldCollectionTest extends TestCase
 
         // Deve falhar e expor no array de erros
         // a coleção de resultados da validação encontrada
-        $val        = ["val1", "val2", new StdClass(), new StdClass()];
+        $val        = ["val1", "val2", new stdClass(), new stdClass()];
 
         $r                  = $obj->setValue($val);
         $v                  = $obj->isValid();

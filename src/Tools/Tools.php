@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital;
 
@@ -37,16 +38,23 @@ class Tools
      *
      * @return      ?string
      */
-    public static function getScalarType($o) : ?string
+    public static function getScalarType(mixed $o): ?string
     {
         $r = null;
 
-        if ($o === null) { $r = "null"; }
-        elseif (\is_bool($o) === true) { $r = "bool"; }
-        elseif (\is_int($o) === true) { $r = "int"; }
-        elseif (\is_float($o) === true) { $r = "float"; }
-        elseif (\is_string($o) === true) { $r = "string"; }
-        elseif (\is_array($o) === true) { $r = "array"; }
+        if ($o === null) {
+            $r = "null";
+        } elseif (\is_bool($o) === true) {
+            $r = "bool";
+        } elseif (\is_int($o) === true) {
+            $r = "int";
+        } elseif (\is_float($o) === true) {
+            $r = "float";
+        } elseif (\is_string($o) === true) {
+            $r = "string";
+        } elseif (\is_array($o) === true) {
+            $r = "array";
+        }
 
         return $r;
     }
@@ -62,7 +70,7 @@ class Tools
      *
      * @return      bool
      */
-    public static function isScalarType($o, string $type) : bool
+    public static function isScalarType(mixed $o, string $type): bool
     {
         return (self::getScalarType($o) === \mb_strtolower($type));
     }
@@ -74,7 +82,7 @@ class Tools
      *
      * @return      bool
      */
-    public static function isScalar($o) : bool
+    public static function isScalar(mixed $o): bool
     {
         return (self::getScalarType($o) !== null);
     }
@@ -91,7 +99,7 @@ class Tools
      *
      * @return      bool
      */
-    public static function isNull($o) : bool
+    public static function isNull(mixed $o): bool
     {
         return ($o === null);
     }
@@ -103,7 +111,7 @@ class Tools
      *
      * @return      bool
      */
-    public static function isBool($o) : bool
+    public static function isBool(mixed $o): bool
     {
         return (\is_bool($o) === true);
     }
@@ -116,7 +124,7 @@ class Tools
      *
      * @return      bool
      */
-    public static function isNumeric($o) : bool
+    public static function isNumeric(mixed $o): bool
     {
         return ((\is_int($o) === true) || (\is_float($o) === true) || (\is_numeric($o) === true));
     }
@@ -128,7 +136,7 @@ class Tools
      *
      * @return      bool
      */
-    public static function isInt($o) : bool
+    public static function isInt(mixed $o): bool
     {
         return (\is_int($o) === true);
     }
@@ -140,7 +148,7 @@ class Tools
      *
      * @return      bool
      */
-    public static function isFloat($o) : bool
+    public static function isFloat(mixed $o): bool
     {
         return (\is_float($o) === true);
     }
@@ -152,7 +160,7 @@ class Tools
      *
      * @return      bool
      */
-    public static function isString($o) : bool
+    public static function isString(mixed $o): bool
     {
         return (\is_string($o) === true);
     }
@@ -164,21 +172,19 @@ class Tools
      *
      * @return      bool
      */
-    public static function isArray($o) : bool
+    public static function isArray(mixed $o): bool
     {
         return (\is_array($o) === true);
     }
     /**
      * Verifica se o objeto passado um ``array`` associativo.
      *
-     * @codeCoverageIgnore
-     *
      * @param       mixed $o
      *              Objeto que será verificado.
      *
      * @return      bool
      */
-    public static function isArrayAssoc($o) : bool
+    public static function isArrayAssoc(mixed $o): bool
     {
         return (\array_is_assoc($o) === true);
     }
@@ -190,7 +196,7 @@ class Tools
      *
      * @return      bool
      */
-    public static function isDateTime($o) : bool
+    public static function isDateTime(mixed $o): bool
     {
         return (\is_a($o, "\DateTime") === true);
     }
@@ -202,7 +208,7 @@ class Tools
      *
      * @return      bool
      */
-    public static function isRealtype($o) : bool
+    public static function isRealtype(mixed $o): bool
     {
         return (\is_a($o, "AeonDigital\\Realtype") === true);
     }
@@ -228,17 +234,17 @@ class Tools
      *                  False = false; no; 0; off
      *
      * @return      ?bool
+     *              Retornará o valor booleano correspondente ao originalmente passado.
      *              Retornará ``null`` caso não seja possível efetuar a conversão.
      */
-    public static function toBool($o) : ?bool
+    public static function toBool(mixed $o): ?bool
     {
         if (\is_bool($o) === true) {
             return $o;
         } else {
             if (\is_int($o) === true || \is_float($o) === true) {
                 return ($o === 0) ? false : true;
-            }
-            elseif (\is_string($o) === true) {
+            } elseif (\is_string($o) === true) {
                 switch (\mb_strtolower($o)) {
                     case "true":
                     case "yes":
@@ -265,24 +271,23 @@ class Tools
         }
     }
     /**
-     * Tenta converter o tipo do valor passado para ``number`` (seja ``int``, ``float`` ou ``double``).
+     * Tenta converter o tipo do valor passado para ``number`` (seja ``int`` ou ``float``).
      * Apenas valores realmente compatíveis serão convertidos.
      *
      * @param       mixed $o
      *              Objeto que será convertido.
      *
-     * @return      ?int|?float
+     * @return      null|int|float
      *              Retornará ``null`` caso não seja possível efetuar a conversão.
      */
-    public static function toNumeric($o)
+    public static function toNumeric(mixed $o): null|int|float
     {
         if (\is_int($o) === true || \is_float($o) === true) {
             return $o;
         } else {
             if (\is_bool($o) === true) {
                 return (int)$o;
-            }
-            elseif (\is_numeric($o) === true && $o !== "") {
+            } elseif (\is_numeric($o) === true && $o !== "") {
                 return ($o + 0);
             }
 
@@ -301,15 +306,14 @@ class Tools
      * @return      ?int
      *              Retornará ``null`` caso não seja possível efetuar a conversão.
      */
-    public static function toInt($o) : ?int
+    public static function toInt(mixed $o): ?int
     {
         if (\is_int($o) === true || \is_float($o) === true) {
             return \intval($o);
         } else {
             if (\is_bool($o) === true) {
                 return ($o) ? 1 : 0;
-            }
-            elseif (\is_numeric($o) === true && $o !== "") {
+            } elseif (\is_numeric($o) === true && $o !== "") {
                 return \intval($o + 0);
             }
 
@@ -326,7 +330,7 @@ class Tools
      * @return      ?float
      *              Retornará ``null`` caso não seja possível efetuar a conversão.
      */
-    public static function toFloat($o) : ?float
+    public static function toFloat(mixed $o): ?float
     {
         $o = self::toNumeric($o);
 
@@ -350,23 +354,22 @@ class Tools
      * @return      ?string
      *              Retornará ``null`` caso não seja possível efetuar a conversão.
      */
-    public static function toString($o) : ?string
+    public static function toString(mixed $o): ?string
     {
         if ($o === null) {
             return "";
-        }
-        elseif (\is_bool($o) === true) {
+        } elseif (\is_bool($o) === true) {
             return (($o === true) ? "1" : "0");
-        }
-        elseif (\is_int($o) === true) {
+        } elseif (\is_int($o) === true) {
             return (string)$o;
-        }
-        elseif (\is_float($o) === true) {
+        } elseif (\is_float($o) === true) {
             $int = \numeric_integer_part($o);
             $dec = 0.0;
 
             $tDec = (15 - \strlen((string)$int));
-            if ($tDec > 0) { $dec = \numeric_decimal_part($o, $tDec); }
+            if ($tDec > 0) {
+                $dec = \numeric_decimal_part($o, $tDec);
+            }
 
             if ($dec === 0.0) {
                 return ((string)$int);
@@ -374,20 +377,15 @@ class Tools
                 $dec = \str_replace("0.", "", (string)$dec);
                 return ((string)($int . "." . $dec));
             }
-        }
-        elseif (\is_a($o, "AeonDigital\\Realtype") === true) {
+        } elseif (\is_a($o, "AeonDigital\\Realtype") === true) {
             return $o->value();
-        }
-        elseif (\is_a($o, "\DateTime") === true) {
+        } elseif (\is_a($o, "\DateTime") === true) {
             return $o->format("Y-m-d H:i:s");
-        }
-        elseif (\is_string($o) === true && $o !== undefined) {
+        } elseif (\is_string($o) === true && $o !== undefined) {
             return (string)$o;
-        }
-        elseif (\is_array($o) === true) {
+        } elseif (\is_array($o) === true) {
             return \implode(" ", $o);
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -395,10 +393,13 @@ class Tools
      * Tenta converter o tipo do valor passado para ``array``.
      * Apenas valores realmente compatíveis serão convertidos.
      *
-     * @return      ?float
+     * @param       mixed $o
+     *              Objeto que será convertido.
+     *
+     * @return      ?array
      *              Retornará ``null`` caso não seja possível efetuar a conversão.
      */
-    public static function toArray($o) : ?array
+    public static function toArray(mixed $o): ?array
     {
         $r = null;
 
@@ -426,7 +427,7 @@ class Tools
      *
      * @return      ?array
      */
-    public static function toArrayStr(?array $o, bool $force = false) : ?array
+    public static function toArrayStr(?array $o, bool $force = false): ?array
     {
         $arr = null;
 
@@ -435,23 +436,18 @@ class Tools
             foreach ($o as $val) {
                 if (self::isScalar($val) === true) {
                     $arr[] = self::toString($val);
-                }
-                elseif (\is_a($val, "\DateTime") === true) {
+                } elseif (\is_a($val, "\DateTime") === true) {
                     $arr[] = $val->format("Y-m-d H:i:s");
-                }
-                else {
+                } else {
                     if ($force === false) {
                         $arr = null;
                         break;
-                    }
-                    else {
+                    } else {
                         if ($val === null) {
                             $arr[] = "";
-                        }
-                        elseif (\method_exists($val, "__toString") === true) {
+                        } elseif (\method_exists($val, "__toString") === true) {
                             $arr[] = (string)$val;
-                        }
-                        else {
+                        } else {
                             $arr[] = \get_class($val);
                         }
                     }
@@ -465,13 +461,7 @@ class Tools
      * Tenta converter o tipo do valor passado para ``DateTime``.
      * Apenas valores realmente compatíveis serão convertidos.
      *
-     * O formato padrão é o **Y-m-d H:i:s**.
-     *
-     * Se no objeto original não houver o valor ``time`` e em ``$format`` também
-     * não existir definições para horários (H | i | s) esta conversão assumirá
-     * o valor zero para cada uma destas posições.
-     *
-     * @param       string|int $o
+     * @param       mixed $o
      *              Objeto que será convertido.
      *              Para ser efetivamente processado, é esperado uma ``string`` ou
      *              um ``int``, correspondente a um **timestamp**.
@@ -483,16 +473,19 @@ class Tools
      *
      * @return      ?\DateTime
      *              Retornará ``null`` caso não seja possível efetuar a conversão.
+     *
+     *              Se passada uma string de data sem a parte ``time``, e, em ``$format`` também
+     *              não existir definições para horários (H | i | s) a conversão assumirá
+     *              o valor zero para cada uma destas posições.
      */
     public static function toDateTime(
-        $o,
+        mixed $o,
         string $format = "Y-m-d H:i:s"
-    ) : ?\DateTime {
+    ): ?\DateTime {
         $oR = null;
 
         if ($o !== undefined && $o !== "") {
-            if ((
-                    \is_string($o) === true &&
+            if ((\is_string($o) === true &&
                     \is_numeric($o) === true
                 ) ||
                 \is_float($o) === true
@@ -500,8 +493,7 @@ class Tools
                 $o = (int)$o;
                 $oR = new \DateTime();
                 $oR->setTimestamp($o);
-            }
-            elseif (\is_string($o) === true) {
+            } elseif (\is_string($o) === true) {
                 $o = \str_replace("/", "-", $o);
                 $format = \str_replace("/", "-", $format);
 
@@ -510,17 +502,30 @@ class Tools
                 $l = \strlen($o);
                 if ($format === "Y-m-d H:i:s" && $l < 19) {
                     switch ($l) {
-                        case 4: $o .= "-01-01 00:00:00"; break;
-                        case 7: $o .= "-01 00:00:00"; break;
-                        case 10: $o .= " 00:00:00"; break;
-                        case 13: $o .= ":00:00"; break;
-                        case 16: $o .= ":00"; break;
+                        case 4:
+                            $o .= "-01-01 00:00:00";
+                            break;
+                        case 7:
+                            $o .= "-01 00:00:00";
+                            break;
+                        case 10:
+                            $o .= " 00:00:00";
+                            break;
+                        case 13:
+                            $o .= ":00:00";
+                            break;
+                        case 16:
+                            $o .= ":00";
+                            break;
                     }
-                }
-                elseif ($format === "H:i:s" && $l < 8) {
+                } elseif ($format === "H:i:s" && $l < 8) {
                     switch ($l) {
-                        case 2: $o .= ":00:00"; break;
-                        case 5: $o .= ":00"; break;
+                        case 2:
+                            $o .= ":00:00";
+                            break;
+                        case 5:
+                            $o .= ":00";
+                            break;
                     }
                 }
 
@@ -528,27 +533,25 @@ class Tools
                 $oR = \DateTime::createFromFormat($format, $o);
                 if ($oR === false) {
                     $oR = null;
-                }
-                else {
+                } else {
                     // Um objeto "DateTime" criado com o método "createFromFormat" preenche cada
                     // componente da data com a informação do dia e hora atual.
                     // Abaixo, todos os componentes não expressamente definidos em ``$format``
                     // serão ``zerados`` conforme a data base 2000-01-01 00:00:00
                     $oR->setDate(
-                        ((  \strpos($format, "Y") === false &&
+                        ((\strpos($format, "Y") === false &&
                             \strpos($format, "y") === false) ? 2000 : (int)$oR->format("Y")),
                         ((\strpos($format, "m") === false) ? 1 : (int)$oR->format("m")),
                         ((\strpos($format, "d") === false) ? 1 : (int)$oR->format("d"))
                     );
                     $oR->setTime(
-                        ((  \strpos($format, "H") === false &&
+                        ((\strpos($format, "H") === false &&
                             \strpos($format, "h") === false) ? 0 : (int)$oR->format("H")),
                         ((\strpos($format, "i") === false) ? 0 : (int)$oR->format("i")),
                         ((\strpos($format, "s") === false) ? 0 : (int)$oR->format("s"))
                     );
                 }
-            }
-            elseif (\is_a($o, "\DateTime") === true) {
+            } elseif (\is_a($o, "\DateTime") === true) {
                 $oR = $o;
             }
         }
@@ -560,7 +563,7 @@ class Tools
      * formato de saida escolhido.
      * Apenas valores realmente compatíveis serão convertidos.
      *
-     * @param       string|int|\DateTime $o
+     * @param       mixed $o
      *              Objeto que será convertido.
      *              Para ser efetivamente processado, é esperado um ``DateTime``, uma ``string`` ou
      *              um ``int``, correspondente a um **timestamp**.
@@ -578,10 +581,10 @@ class Tools
      *              Retornará ``null`` caso não seja possível efetuar a conversão.
      */
     public static function toDateTimeString(
-        $o,
+        mixed $o,
         string $inputFormat = "Y-m-d H:i:s",
         string $outputFormat = "Y-m-d H:i:s"
-    ) : ?string {
+    ): ?string {
         $oR = self::toDateTime($o, $inputFormat);
         if ($oR !== null) {
             $oR = $oR->format($outputFormat);
@@ -598,7 +601,7 @@ class Tools
      * @return      ?Realtype
      *              Retornará ``null`` caso não seja possível efetuar a conversão.
      */
-    public static function toRealtype($o) : ?Realtype
+    public static function toRealtype(mixed $o): ?Realtype
     {
         if (Realtype::isValidRealtype($o) === true) {
             return new Realtype($o);
@@ -615,23 +618,23 @@ class Tools
      * Tenta converter o tipo do valor passado para uma ``string json``.
      * Apenas valores realmente compatíveis serão convertidos.
      *
+     * @param       mixed $o
+     *              Objeto que será convertido.
+     *
      * @return      ?string
      *              Retornará ``null`` caso não seja possível efetuar a conversão.
      */
-    public static function toJSON($o) : ?string
+    public static function toJSON(mixed $o): ?string
     {
         $r = null;
 
         if ($o === null) {
             $r = "null";
-        }
-        elseif (\is_a($o, "\DateTime") === true) {
+        } elseif (\is_a($o, "\DateTime") === true) {
             $r = \json_encode($o->format("Y-m-d H:i:s"));
-        }
-        elseif (\is_a($o, "AeonDigital\\Realtype") === true) {
+        } elseif (\is_a($o, "AeonDigital\\Realtype") === true) {
             $r = \json_encode((string)$o);
-        }
-        elseif (
+        } elseif (
             \is_bool($o) === true ||
             \is_int($o) === true ||
             \is_float($o) === true ||

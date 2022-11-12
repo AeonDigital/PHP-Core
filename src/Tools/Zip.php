@@ -1,8 +1,8 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\Tools;
-
 
 
 
@@ -36,9 +36,9 @@ class Zip
      * @param       string $absoluteSystemPathToFile
      *              Endereço completo onde o novo arquivo zip será gerado.
      *
-     * @return      boolean
+     * @return      bool
      */
-    public static function packTargets(array $absoluteSystemPaths, string $absoluteSystemPathToFile) : bool
+    public static function packTargets(array $absoluteSystemPaths, string $absoluteSystemPathToFile): bool
     {
         $isOK = true;
 
@@ -100,7 +100,8 @@ class Zip
                         $childResources = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($resource), \RecursiveIteratorIterator::SELF_FIRST);
                         foreach ($childResources as $child) {
                             $childName = (string)$child;
-                            if (\str_ends_with($childName, ".") === false &&
+                            if (
+                                \str_ends_with($childName, ".") === false &&
                                 \str_ends_with($childName, "..") === false
                             ) {
                                 $recName = $useContainer . \str_replace($resource . DS, "", $childName);
@@ -141,7 +142,7 @@ class Zip
      *
      * @return      bool
      */
-    public static function pack(string $absoluteSystemPaths, ?string $absoluteSystemPathToFile = null) : bool
+    public static function pack(string $absoluteSystemPaths, ?string $absoluteSystemPathToFile = null): bool
     {
         $useTgtPath = (($absoluteSystemPathToFile === null) ? \dirname(\to_system_path($absoluteSystemPaths)) : $absoluteSystemPathToFile);
         $useTgtFileName = \basename(\to_system_path($absoluteSystemPaths));
@@ -172,7 +173,7 @@ class Zip
      *
      * @return      bool
      */
-    public static function unpack(string $absoluteSystemPathToFile, ?string $absoluteSystemPathToDir = null) : bool
+    public static function unpack(string $absoluteSystemPathToFile, ?string $absoluteSystemPathToDir = null): bool
     {
         $isOK = false;
 
@@ -246,7 +247,7 @@ class Zip
      *
      * @return      bool
      */
-    static function unpackTargets(string $absoluteSystemPathToFile, array $targets) : bool
+    static function unpackTargets(string $absoluteSystemPathToFile, array $targets): bool
     {
         $isOK = false;
 

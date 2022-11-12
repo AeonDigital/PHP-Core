@@ -1,8 +1,8 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\Tools;
-
 
 
 
@@ -35,7 +35,7 @@ class MinifyJS
      *
      * @return       string
      */
-    public static function minifyCode(string $jsCode) : string
+    public static function minifyCode(string $jsCode): string
     {
         // Unifica marcações de nova linha.
         $inputCode = \str_replace(["\r\n", "\r"], "\n", $jsCode);
@@ -62,7 +62,6 @@ class MinifyJS
                 // Resgata o caracter da posição atual E o próximo
                 $c = $inputCode[$i];                                        // Caracter atual
                 $nc = ($i < $lastCodeIndex) ? $inputCode[$i + 1] : "";      // Próximo caracter
-                $lc = ($i > 0) ? $inputCode[$i - 1] : "";                   // Caracter anterior
 
 
 
@@ -72,7 +71,7 @@ class MinifyJS
                 } else {
                     // Conforme o caracter atual
                     switch ($c) {
-                        // Verifica a abertura de blocos de comentário ou de um Regex
+                            // Verifica a abertura de blocos de comentário ou de um Regex
                         case "/":
                             $CharType = "IgnoreBlock";
 
@@ -143,7 +142,7 @@ class MinifyJS
 
                             break;
 
-                        // Identifica a abertura de uma string envolvida por aspas simples ou duplas
+                            // Identifica a abertura de uma string envolvida por aspas simples ou duplas
                         case "'":
                         case "\"":
                             $CharType = "IgnoreBlock";
@@ -235,7 +234,7 @@ class MinifyJS
      *
      * @return       string
      */
-    public static function minifyFile(string $absoluteSystemPathToFile) : string
+    public static function minifyFile(string $absoluteSystemPathToFile): string
     {
         $cssCode = \file_get_contents($absoluteSystemPathToFile);
         return self::minifyCode($cssCode);
@@ -253,7 +252,7 @@ class MinifyJS
      *
      * @return       string
      */
-    public static function minifyFiles(array $absoluteSystemPathToFiles) : string
+    public static function minifyFiles(array $absoluteSystemPathToFiles): string
     {
         $str = "";
 
@@ -284,7 +283,7 @@ class MinifyJS
     public static function createMinifyFile(
         array $absoluteSystemPathToFiles,
         string $absoluteSystemPathToMinifiedFile
-    ) : bool {
+    ): bool {
 
         $minifiedCode = self::minifyFiles($absoluteSystemPathToFiles);
         $r = \file_put_contents($absoluteSystemPathToMinifiedFile, $minifiedCode);

@@ -12,7 +12,6 @@ use AeonDigital\BObject as BObject;
 
 
 
-
 /**
  * Permite operações matemáticas com números reais de qualquer precisão decimal.
  *

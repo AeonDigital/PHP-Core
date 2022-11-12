@@ -1,8 +1,8 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\Tools;
-
 
 
 
@@ -29,7 +29,7 @@ class JSON
 
     /**
      * Carrega o conteúdo de um arquivo JSON na memória e retorna um Array Associativo ou
-     * um objeto do tipo ``StdClass``. Caso o arquivo alvo não exista será retornado ``null``.
+     * um objeto do tipo ``stdClass``. Caso o arquivo alvo não exista será retornado ``null``.
      *
      * Apesar do padrão JSON não assumir a possibilidade de haver comentários este método
      * irá remover os mesmos se existirem e carregará o conteúdo normalmente.
@@ -39,12 +39,14 @@ class JSON
      *
      * @param       bool $isAssoc
      *              Quando ``true`` retornará um array associativo.
-     *              Se ``false``, retornará um objeto ``StdClass``
+     *              Se ``false``, retornará um objeto ``stdClass``
      *
-     * @return      ?array|\StdClass
+     * @return      null|array|\stdClass
      */
-    public static function retrieve(string $absoluteSystemPathToFile, bool $assoc = true)
-    {
+    public static function retrieve(
+        string $absoluteSystemPathToFile,
+        bool $assoc = true
+    ): null|array|\stdClass {
         $rJSON = null;
 
         if (\file_exists($absoluteSystemPathToFile) === true) {
@@ -75,7 +77,7 @@ class JSON
      *
      * @return      string
      */
-    public static function indent(string $strJSON) : string
+    public static function indent(string $strJSON): string
     {
         $strReturn = "";
         $indentLevel = 0;
@@ -151,12 +153,12 @@ class JSON
 
     /**
      * Salva o um objeto JSON (representado por uma ``String``, ``Array Associativo``
-     * ou objeto ``StdClass`` no caminho informado).
+     * ou objeto ``stdClass`` no caminho informado).
      *
      * @param       string $absoluteSystemPathToFile
      *              Caminho completo até o arquivo que será salvo.
      *
-     * @param       string|array|\StdClass $JSON
+     * @param       string|array|\stdClass $JSON
      *              Objeto que será salvo como um arquivo JSON.
      *
      * @param       int $options
@@ -165,8 +167,11 @@ class JSON
      *
      * @return      bool
      */
-    public static function save(string $absoluteSystemPathToFile, $JSON, int $options = 0) : bool
-    {
+    public static function save(
+        string $absoluteSystemPathToFile,
+        string|array|\stdClass $JSON,
+        int $options = 0
+    ): bool {
         $strJSON = $JSON;
 
         // Se o objeto passado não for uma string, converte-o

@@ -1,8 +1,8 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\Tools;
-
 
 
 
@@ -103,7 +103,7 @@ class Image
         ?int $imgCropHeight = null,
         ?int $imgCropX = null,
         ?int $imgCropY = null
-    ) : bool {
+    ): bool {
 
 
         $r = false;
@@ -357,7 +357,7 @@ class Image
         string $resizeType = "auto",
         ?int $imgMaxWidth = null,
         ?int $imgMaxHeight = null
-    ) : bool {
+    ): bool {
         return self::transform(
             $absoluteSystemPathToOriginalImage,
             $absoluteSystemPathToNewImage,
@@ -405,7 +405,7 @@ class Image
         ?int $imgCropHeight = null,
         ?int $imgCropX = null,
         ?int $imgCropY = null
-    ) : bool {
+    ): bool {
         return self::transform(
             $absoluteSystemPathToOriginalImage,
             $absoluteSystemPathToNewImage,
