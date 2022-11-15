@@ -14,7 +14,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=8.2",
-    "aeondigital/phpinterfaces": ">=v0.6.2-beta"
+    "aeondigital/phpinterfaces": "dev-php82"
   },
   "require-dev": {
     "phpunit/phpunit": "^9",

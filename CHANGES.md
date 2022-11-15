@@ -20,7 +20,8 @@ boolean     -> bool
 identificar e remover variáveis declaradas e não utilizadas.
 
 
-
+"aeondigital/phpinterfaces": ">=v0.6.2-beta"
+"aeondigital/phpinterfaces": "dev-php82"
 
 
 ============================================================
