@@ -16,6 +16,9 @@ declare(strict_types=1);
  *              esperado ou que faz parte do fluxo padrão da aplicação.
  *
  * @return      void
+ *
+ *
+ * @codeCoverageIgnore
  */
 function redirect(string $url, string $httpStatusCode = "HTTP/1.1 302 Found"): void
 {

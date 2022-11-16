@@ -20,25 +20,13 @@ function file_convert_to_utf8(string $absoluteSystemPathToFile): bool
 
     if (\file_exists($absoluteSystemPathToFile) === true) {
         $content = \file_get_contents($absoluteSystemPathToFile);
+        $utf8Content = \mb_convert_encoding($content, "UTF-8", \mb_list_encodings());
 
         // Verifica se o arquivo já é UTF-8
-        if (\utf8_encode(\utf8_decode($content)) === $content) {
+        if ($utf8Content === $content) {
             $isOK = true;
         } else {
-            $ncontent = "";
-            // Para cada caracter...
-            for ($i = 0; $i < \strlen($content); $i++) {
-                $c = $content[$i];
-
-                // Se o caracter atual já é unicode...
-                if (\utf8_encode(\utf8_decode($c)) === $c) {
-                    $ncontent .= $c;
-                } else {
-                    $ncontent .= \utf8_encode($c);
-                }
-            }
-
-            $isOK = \file_put_contents($absoluteSystemPathToFile, $ncontent);
+            $isOK = \file_put_contents($absoluteSystemPathToFile, $utf8Content);
         }
     }
 

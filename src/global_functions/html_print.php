@@ -18,14 +18,19 @@ declare(strict_types=1);
  * @param       string $h
  *              Valor da propriedade css ``height`` para definir a altura do objeto ``<pre>``.
  *
- * @return      void
+ * @param       bool $noPrint
+ *              Quando ``true`` não irá printar na tela o resultado e sim retornar o mesmo
+ *              como uma string.
+ *
+ * @return      void|string
  */
 function html_print(
     mixed $obj,
     bool $o = false,
     string $w = "",
-    string $h = ""
-): void {
+    string $h = "",
+    bool $noPrint = false
+): string {
     $s = "";
     $styles = [];
 
@@ -44,6 +49,13 @@ function html_print(
     }
 
 
+
     $obj = \object_convert_values_to_html_entities($obj);
-    echo "<pre" . $s . ">" . \print_r($obj, true) . "</pre>";
+    $r = "<pre" . $s . ">" . \print_r($obj, true) . "</pre>";
+    if ($noPrint === false) {
+        echo $r;
+        $r = "";
+    }
+
+    return $r;
 }

@@ -285,6 +285,62 @@ class global_functionsTests extends TestCase
 
 
 
+    public function test_method_dir_convert_to_utf8()
+    {
+        // Primeiramente, remove todo o diretório de testes que este
+        // teste unitário utiliza.
+        $strMainDirTest = __DIR__ . DS . "testDirConvertToUTF8";
+        $strChildDirTest = $strMainDirTest . DS . "childDir";
+
+        dir_deltree($strMainDirTest);
+        $this->assertFalse(is_dir($strMainDirTest));
+
+        // Recria o diretório, alguns arquivos, um diretório filho e alguns outros
+        // arquivos.
+        mkdir($strMainDirTest, 0777);
+        mkdir($strChildDirTest, 0777);
+
+
+        $this->assertTrue(is_dir($strMainDirTest));
+        $this->assertTrue(is_dir($strChildDirTest));
+
+
+
+        $strFilePath01 = $strMainDirTest . DS . "file01.txt";
+        $strFilePath02 = $strMainDirTest . DS . "file02.txt";
+        $strFilePath03 = $strChildDirTest . DS . "file03.txt";
+        $strFilePath04 = $strChildDirTest . DS . "file04.txt";
+
+        $strContent = "Informação que será adicionada em cada um dos arquivos ";
+        $strContent .= "de teste com o encoding ISO-8859-1 [também chamado de Windows-1252] \n";
+        $strContent .= "Tudop dando certo, todos deverão ser convertidos para UTF8";
+
+        // Converte o conteúdo para ISO-8859-1
+        $strContent_ISO_8859_1 = iconv("UTF-8", "ISO-8859-1//TRANSLIT", $strContent);
+
+        // Cria os arquivos com o conteúdo no encoding definido diferente do UTF-8.
+        file_put_contents($strFilePath01, $strContent_ISO_8859_1);
+        file_put_contents($strFilePath02, $strContent_ISO_8859_1);
+        file_put_contents($strFilePath03, $strContent_ISO_8859_1);
+        file_put_contents($strFilePath04, $strContent_ISO_8859_1);
+
+        $this->assertTrue(is_File($strFilePath01));
+        $this->assertTrue(is_File($strFilePath02));
+        $this->assertTrue(is_File($strFilePath03));
+        $this->assertTrue(is_File($strFilePath04));
+
+
+
+        // Falha por falta de informações
+        $this->assertTrue(dir_convert_to_utf8([]));
+        $this->assertTrue(dir_convert_to_utf8([$strFilePath01]));
+        $this->assertTrue(dir_convert_to_utf8([$strMainDirTest], ["txt"]));
+
+        dir_deltree($strMainDirTest);
+    }
+
+
+
     public function test_method_dir_copy()
     {
         $this->provider_createResources();
@@ -377,6 +433,21 @@ class global_functionsTests extends TestCase
 
         // Exclui o arquivo de teste
         unlink($strFilePath);
+    }
+
+
+
+    public function test_method_html_print()
+    {
+        $assocTest = [
+            "k1" => "v1",
+            "k2" => "v2",
+            "k3" => "v3",
+        ];
+
+        $expected = "<pre style=\"overflow:auto; width:1000px; height:350px;\">Array\n(\n    [k1] => v1\n    [k2] => v2\n    [k3] => v3\n)\n</pre>";
+        $result = html_print($assocTest, true, "1000px", "350px", true);
+        $this->assertEquals($expected, $result);
     }
 
 
@@ -686,6 +757,15 @@ class global_functionsTests extends TestCase
         $result = mb_str_uc_names($original, "", ["da"]);
 
         $this->assertSame($expected, $result);
+
+
+        function mb_str_uc_names_aa_bb(string $str): string {
+            return \strtolower($str);
+        }
+
+        $original = "rio GRANDE do SUL";
+        $expected = "rio grande do sul";
+        $result = mb_str_uc_names($original, "aa_bb");
     }
 
 
@@ -1014,6 +1094,29 @@ class global_functionsTests extends TestCase
 
 
 
+    public function test_method_object_convert_values_to_html_entities()
+    {
+        $originalArrayTest = [
+            "'", "q", "'", "<b>", "</b>", 1,
+            (object)["str1" => "&"],
+            new DateTime("2001-02-03 04:05:06"),
+            new AeonDigital\RealType(12345),
+            new DOMDocument()
+        ];
+        $expectedArrayTest = [
+            "&#039;", "q", "&#039;", "&lt;b&gt;", "&lt;/b&gt;", 1,
+            (object)["str1" => "&amp;"],
+            "2001-02-03 04:05:06",
+            "12345",
+            "DOMDocument"
+        ];
+        $resultArrayTest = object_convert_values_to_html_entities($originalArrayTest);
+
+        $this->assertEquals($expectedArrayTest, $resultArrayTest);
+    }
+
+
+
     public function test_method_to_system_path()
     {
         $ds = DIRECTORY_SEPARATOR;
@@ -1085,6 +1188,8 @@ class global_functionsTests extends TestCase
         $this->assertFalse(var_is_defined($arr, "know"));
         $arr = ["know" => 1];
         $this->assertTrue(var_is_defined($arr, "know"));
+        $this->assertTrue(var_is_defined($arr));
+
 
         $std = new \stdClass();
         $this->assertFalse(var_is_defined($std));
@@ -1093,8 +1198,7 @@ class global_functionsTests extends TestCase
         $this->assertFalse(var_is_defined($std, "know"));
         $std->know = 1;
         $this->assertTrue(var_is_defined($std, "know"));
-
-        $this->assertTrue(var_is_defined($std, "know"));
+        $this->assertTrue(var_is_defined($std));
 
 
         $dt = new \DateTime();
