@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\DataModel\Tests\Concrete\DataFieldModelCollection as DataFieldModelCollection;
@@ -7,7 +8,6 @@ use AeonDigital\DataModel\Tests\Concrete\ModelFactory as ModelFactory;
 use AeonDigital\DataModel\Tests\Concrete\DataModel as DataModel;
 
 require_once __DIR__ . "/../../phpunit.php";
-
 
 
 
@@ -21,13 +21,15 @@ class t06FieldModelCollectionTest extends TestCase
 
     private function provider_field_model_aplicacao()
     {
-        return new DataFieldModelCollection([
-            "name"                      => "refAplicacao",
-            "modelName"                 => "Aplicacao",
-            "allowNull"                 => false,
-            "readOnly"                  => true
-        ],
-        new ModelFactory());
+        return new DataFieldModelCollection(
+            [
+                "name"                      => "refAplicacao",
+                "modelName"                 => "Aplicacao",
+                "allowNull"                 => false,
+                "readOnly"                  => true
+            ],
+            new ModelFactory()
+        );
     }
 
 
@@ -40,11 +42,13 @@ class t06FieldModelCollectionTest extends TestCase
 
     public function test_constructor_ok()
     {
-        $obj = new DataFieldModelCollection([
-            "name"                      => "refAplicacao",
-            "modelName"                 => "Aplicacao"
-        ],
-        new ModelFactory());
+        $obj = new DataFieldModelCollection(
+            [
+                "name"                      => "refAplicacao",
+                "modelName"                 => "Aplicacao"
+            ],
+            new ModelFactory()
+        );
         $this->assertTrue(is_a($obj, DataFieldModelCollection::class));
         $this->assertTrue($obj->isReference());
         $this->assertTrue($obj->isCollection());

@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\Tools\MinifyCSS as MinifyCSS;
 
 require_once __DIR__ . "/../../phpunit.php";
-
 
 
 
@@ -51,7 +51,7 @@ class MinifyCSSTest extends TestCase
         // Confirma que o número de caracteres é o mesmo
         $this->assertSame(count($chrMinify), count($chrFinal));
         $this->assertSame($final, $minify);
-}
+    }
 
 
 

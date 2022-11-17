@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataModel\Tests\Concrete;
 
 use AeonDigital\DataModel\Abstracts\aField as aField;
-
 
 
 

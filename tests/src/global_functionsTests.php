@@ -1,10 +1,10 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . "/../phpunit.php";
-
 
 
 
@@ -759,7 +759,8 @@ class global_functionsTests extends TestCase
         $this->assertSame($expected, $result);
 
 
-        function mb_str_uc_names_aa_bb(string $str): string {
+        function mb_str_uc_names_aa_bb(string $str): string
+        {
             return \strtolower($str);
         }
 

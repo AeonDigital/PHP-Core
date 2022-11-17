@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\SimpleType\stLong as stLong;
 
 require_once __DIR__ . "/../../phpunit.php";
-
 
 
 
@@ -48,14 +48,14 @@ class stLongTest extends TestCase
         // a comparação ainda assim seria dada como correta.
         $t = 9223372036854775807;
         $strNumber = "9.2233720368548E+18";
-        for ($i=0; $i < 10000; $i++) {
+        for ($i = 0; $i < 10000; $i++) {
             $t = $t + 1;
             $this->assertSame($strNumber, (string)$t);
         }
 
         $t = -9223372036854775808;
         $strNumber = "-9.2233720368548E+18";
-        for ($i=0; $i < 10000; $i++) {
+        for ($i = 0; $i < 10000; $i++) {
             $t = $t - 1;
             $this->assertSame($strNumber, (string)$t);
         }

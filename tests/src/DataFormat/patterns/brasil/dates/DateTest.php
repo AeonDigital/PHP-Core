@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\DataFormat\Patterns\Brasil\Dates\Date as Date;
 
 require_once __DIR__ . "/../../../../../phpunit.php";
-
 
 
 
@@ -51,5 +51,4 @@ class BrasilDateTest extends TestCase
         $this->assertTrue(is_a($resultDate, "DateTime"));
         $this->assertSame($objectDate->format("Y-m-d H:i:s"), $resultDate->format("Y-m-d H:i:s"));
     }
-
 }

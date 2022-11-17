@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace AeonDigital\DataModel\Tests\Concrete;
 
@@ -9,7 +10,6 @@ use AeonDigital\DataModel\Tests\Concrete\DataField as DataField;
 use AeonDigital\DataModel\Tests\Concrete\DataFieldCollection as DataFieldCollection;
 use AeonDigital\DataModel\Tests\Concrete\DataFieldModelCollection as DataFieldModelCollection;
 use AeonDigital\DataModel\Tests\Concrete\DataModel as DataModel;
-
 
 
 /**
@@ -37,7 +37,7 @@ class ModelFactory implements iModelFactory
      *
      * @return      bool
      */
-    public function hasDataModel(string $idName) : bool
+    public function hasDataModel(string $idName): bool
     {
         return (key_exists($idName, $this->modelsConfig) === true);
     }
@@ -58,7 +58,7 @@ class ModelFactory implements iModelFactory
      *
      * @return      iModel
      */
-    public function createDataModel(string $idName, $initialValues = null) : iModel
+    public function createDataModel(string $idName, $initialValues = null): iModel
     {
         if ($this->hasDataModel($idName) === true) {
             $useConfig = $this->modelsConfig[$idName];
@@ -216,5 +216,7 @@ class ModelFactory implements iModelFactory
      * Construtor de uma nova fábrica de
      * modelos de dados
      */
-    function __construct() { }
+    function __construct()
+    {
+    }
 }

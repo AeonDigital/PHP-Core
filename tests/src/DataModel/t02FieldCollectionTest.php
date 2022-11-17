@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\DataModel\Tests\Concrete\DataFieldCollection as DataFieldCollection;
 
 require_once __DIR__ . "/../../phpunit.php";
-
 
 
 
@@ -1585,5 +1585,4 @@ class t02FieldCollectionTest extends TestCase
             $this->assertSame($result, $r);
         }
     }
-
 }

@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\DataModel\Tests\Concrete\DataFieldModel as DataFieldModel;
@@ -7,7 +8,6 @@ use AeonDigital\DataModel\Tests\Concrete\ModelFactory as ModelFactory;
 use AeonDigital\DataModel\Tests\Concrete\DataModel as DataModel;
 
 require_once __DIR__ . "/../../phpunit.php";
-
 
 
 
@@ -21,13 +21,15 @@ class t05FieldModelTest extends TestCase
 
     private function provider_field_model_aplicacao()
     {
-        return new DataFieldModel([
-            "name"                      => "refAplicacao",
-            "modelName"                 => "Aplicacao",
-            "allowNull"                 => false,
-            "readOnly"                  => true
-        ],
-        new ModelFactory());
+        return new DataFieldModel(
+            [
+                "name"                      => "refAplicacao",
+                "modelName"                 => "Aplicacao",
+                "allowNull"                 => false,
+                "readOnly"                  => true
+            ],
+            new ModelFactory()
+        );
     }
 
 
@@ -40,11 +42,13 @@ class t05FieldModelTest extends TestCase
 
     public function test_constructor_ok()
     {
-        $obj = new DataFieldModel([
-            "name"                      => "refAplicacao",
-            "modelName"                 => "Aplicacao"
-        ],
-        new ModelFactory());
+        $obj = new DataFieldModel(
+            [
+                "name"                      => "refAplicacao",
+                "modelName"                 => "Aplicacao"
+            ],
+            new ModelFactory()
+        );
         $this->assertTrue(is_a($obj, DataFieldModel::class));
         $this->assertTrue($obj->isReference());
     }
@@ -54,11 +58,13 @@ class t05FieldModelTest extends TestCase
     {
         $fail = false;
         try {
-            $obj = new DataFieldModel([
-                "name"                      => "refAplicacao",
-                "modelName"                 => "InvalidModel"
-            ],
-            new ModelFactory());
+            $obj = new DataFieldModel(
+                [
+                    "name"                      => "refAplicacao",
+                    "modelName"                 => "InvalidModel"
+                ],
+                new ModelFactory()
+            );
         } catch (\Exception $ex) {
             $fail = true;
             $this->assertSame("The data model to be used is not provided by the \"iModelFactory\" instance [\"InvalidModel\"].", $ex->getMessage());
@@ -378,5 +384,4 @@ class t05FieldModelTest extends TestCase
         $this->assertSame($formatedExpected, $obj->getValue());
         $this->assertSame($storageExpected, $obj->getStorageValue());
     }
-
 }

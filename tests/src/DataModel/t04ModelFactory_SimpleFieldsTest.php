@@ -1,5 +1,6 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\DataModel\Tests\Concrete\DataModel as DataModel;
@@ -7,7 +8,6 @@ use AeonDigital\DataModel\Tests\Concrete\DataFieldCollection as DataFieldCollect
 use AeonDigital\DataModel\Tests\Concrete\ModelFactory as ModelFactory;
 
 require_once __DIR__ . "/../../phpunit.php";
-
 
 
 
@@ -81,6 +81,5 @@ class t04ModelFactoryTest extends TestCase
         $this->assertTrue(key_exists("Descricao", $values));
         $this->assertSame("GuideLine", $Aplicacao->Nome);
         $this->assertSame("Descricao da aplicação", $Aplicacao->Descricao);
-
     }
 }

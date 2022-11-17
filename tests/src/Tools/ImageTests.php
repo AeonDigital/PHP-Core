@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\Tools\Image as Image;
 
 require_once __DIR__ . "/../../phpunit.php";
-
 
 
 
@@ -19,7 +19,7 @@ class ImageTest extends TestCase
 
 
 
-    public static function tearDownAfterClass() : void
+    public static function tearDownAfterClass(): void
     {
         $ds = DIRECTORY_SEPARATOR;
         $testDir = realpath(__DIR__ . $ds . "files") . $ds;
@@ -459,20 +459,24 @@ class ImageTest extends TestCase
                 $cropY = (isset($cfg["cropY"]) ? $cfg["cropY"] : null);
 
 
-                $r = Image::resize( $targetImagePath,
-                                    $cfg["finalPath"],
-                                    $cfg["resizeType"],
-                                    $useW,
-                                    $useH);
+                $r = Image::resize(
+                    $targetImagePath,
+                    $cfg["finalPath"],
+                    $cfg["resizeType"],
+                    $useW,
+                    $useH
+                );
                 $this->assertTrue($r);
 
 
-                $r = Image::crop(   $cfg["finalPath"],
-                                    null,
-                                    $cropW,
-                                    $cropH,
-                                    $cropX,
-                                    $cropY);
+                $r = Image::crop(
+                    $cfg["finalPath"],
+                    null,
+                    $cropW,
+                    $cropH,
+                    $cropX,
+                    $cropY
+                );
                 $this->assertTrue($r);
             }
         }
@@ -530,20 +534,24 @@ class ImageTest extends TestCase
                 $cropX = (isset($cfg["cropX"]) ? $cfg["cropX"] : null);
                 $cropY = (isset($cfg["cropY"]) ? $cfg["cropY"] : null);
 
-                $r = Image::resize( $targetImagePath,
-                                    $cfg["finalPath"],
-                                    $cfg["resizeType"],
-                                    $useW,
-                                    $useH);
+                $r = Image::resize(
+                    $targetImagePath,
+                    $cfg["finalPath"],
+                    $cfg["resizeType"],
+                    $useW,
+                    $useH
+                );
                 $this->assertTrue($r);
 
 
-                $r = Image::crop(   $cfg["finalPath"],
-                                    null,
-                                    $cropW,
-                                    $cropH,
-                                    $cropX,
-                                    $cropY);
+                $r = Image::crop(
+                    $cfg["finalPath"],
+                    null,
+                    $cropW,
+                    $cropH,
+                    $cropX,
+                    $cropY
+                );
                 $this->assertTrue($r);
             }
         }
@@ -602,22 +610,26 @@ class ImageTest extends TestCase
                 $cropY = (isset($cfg["cropY"]) ? $cfg["cropY"] : null);
 
 
-                $r = Image::resize( $targetImagePath,
-                                    $cfg["finalPath"],
-                                    $cfg["resizeType"],
-                                    $useW,
-                                    $useH);
+                $r = Image::resize(
+                    $targetImagePath,
+                    $cfg["finalPath"],
+                    $cfg["resizeType"],
+                    $useW,
+                    $useH
+                );
                 $this->assertTrue($r);
 
 
                 // o nome final da imagem abaixo está com um ajuste pois a extenção estava errada de
                 // propósito para poder testar a manutenção da mesma entre as transformações.
-                $r = Image::crop(   str_replace(".gif", ".png", $cfg["finalPath"]),
-                                    null,
-                                    $cropW,
-                                    $cropH,
-                                    $cropX,
-                                    $cropY);
+                $r = Image::crop(
+                    str_replace(".gif", ".png", $cfg["finalPath"]),
+                    null,
+                    $cropW,
+                    $cropH,
+                    $cropX,
+                    $cropY
+                );
                 $this->assertTrue($r);
             }
         }

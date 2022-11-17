@@ -1,12 +1,12 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\DataModel\Tests\Concrete\ModelFactory as ModelFactory;
 use AeonDigital\DataModel\Tests\Concrete\DataModel as DataModel;
 
 require_once __DIR__ . "/../../phpunit.php";
-
 
 
 
@@ -186,5 +186,4 @@ class t07ComplexFieldModelCollectionTest extends TestCase
         $this->assertSame("Usuario filho 2", $val["GrupoDeSeguranca"]["Usuarios"][1]["Nome"]);
         $this->assertSame("loginfilho2", $val["GrupoDeSeguranca"]["Usuarios"][1]["Login"]);
     }
-
 }

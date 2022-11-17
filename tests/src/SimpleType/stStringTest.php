@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\SimpleType\stString as stString;
 
 require_once __DIR__ . "/../../phpunit.php";
-
 
 
 
@@ -43,7 +43,8 @@ class stStringTest extends TestCase
             undefined, null, []
         ];
         $expectedValues = [
-            "1", "2", "0.004", "1", "0", "2000-05-17 17:17:00", "positivo", null, "", ""];
+            "1", "2", "0.004", "1", "0", "2000-05-17 17:17:00", "positivo", null, "", ""
+        ];
 
         for ($i = 0; $i < count($originalValues); $i++) {
             $result = stString::toString($originalValues[$i]);

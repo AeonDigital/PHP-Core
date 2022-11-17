@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\Tools\Zip as Zip;
 
 require_once __DIR__ . "/../../phpunit.php";
-
 
 
 
@@ -19,10 +19,10 @@ class ZipTest extends TestCase
 
 
 
-    public static function tearDownAfterClass() : void
+    public static function tearDownAfterClass(): void
     {
         $ds = DIRECTORY_SEPARATOR;
-        $testDir = realpath(__DIR__ ) . $ds;
+        $testDir = realpath(__DIR__) . $ds;
 
         $deleteDirs = [
             $testDir . "files_unpacked",
@@ -32,7 +32,7 @@ class ZipTest extends TestCase
             $testDir . "files" . $ds . "dirinside",
         ];
 
-        foreach($deleteDirs as $k => $v) {
+        foreach ($deleteDirs as $k => $v) {
             if (file_exists($v)) {
                 dir_deltree($v);
             }
@@ -120,8 +120,8 @@ class ZipTest extends TestCase
         $dirInsideDir = $testDir . "dirinside" . $ds;
         if (!file_exists($dirInsideDir)) {
             mkdir($dirInsideDir, 700);
-            copy($testDir . "original-image.jpg", $dirInsideDir. "original-image.jpg");
-            copy($testDir . "original-image.png", $dirInsideDir. "original-image.png");
+            copy($testDir . "original-image.jpg", $dirInsideDir . "original-image.jpg");
+            copy($testDir . "original-image.png", $dirInsideDir . "original-image.png");
         }
 
         $r = Zip::packTargets($testFile, $testFileZip);
@@ -208,8 +208,8 @@ class ZipTest extends TestCase
         $dirInsideDir = $testDir . "dirinside" . $ds;
         if (!file_exists($dirInsideDir)) {
             mkdir($dirInsideDir, 700);
-            copy($testDir . "original-image.jpg", $dirInsideDir. "original-image.jpg");
-            copy($testDir . "original-image.png", $dirInsideDir. "original-image.png");
+            copy($testDir . "original-image.jpg", $dirInsideDir . "original-image.jpg");
+            copy($testDir . "original-image.png", $dirInsideDir . "original-image.png");
         }
 
 

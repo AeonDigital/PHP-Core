@@ -1,11 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use AeonDigital\Traits\MainCheckArgumentException as MainCheckArgumentException;
 
 require_once __DIR__ . "/../../phpunit.php";
-
 
 
 
@@ -279,8 +279,13 @@ class MainCheckArgumentExceptionTest extends TestCase
     {
         $fail = false;
         try {
-            $obj = new MainCheckArgumentExceptionMockClass("arg01", 1, 1, 0.1,
-                ["p1" => "v1"], ["p1" => "v1"]
+            $obj = new MainCheckArgumentExceptionMockClass(
+                "arg01",
+                1,
+                1,
+                0.1,
+                ["p1" => "v1"],
+                ["p1" => "v1"]
             );
         } catch (\Exception $ex) {
             $fail = true;
@@ -295,7 +300,11 @@ class MainCheckArgumentExceptionTest extends TestCase
     {
         $fail = false;
         try {
-            $obj = new MainCheckArgumentExceptionMockClass("arg01", 1, 1, 0.1,
+            $obj = new MainCheckArgumentExceptionMockClass(
+                "arg01",
+                1,
+                1,
+                0.1,
                 ["p1" => "v1"],
                 [1, 2, 3, 4]
             );
@@ -312,7 +321,11 @@ class MainCheckArgumentExceptionTest extends TestCase
     {
         $fail = false;
         try {
-            $obj = new MainCheckArgumentExceptionMockClass("arg01", 1, 1, 0.1,
+            $obj = new MainCheckArgumentExceptionMockClass(
+                "arg01",
+                1,
+                1,
+                0.1,
                 ["p1" => "v1"],
                 [1, 2, 3],
                 [
@@ -334,7 +347,9 @@ class MainCheckArgumentExceptionTest extends TestCase
         $fail = false;
         try {
             $obj = new MainCheckArgumentExceptionMockClass02(
-                "arg01", 1, 1,
+                "arg01",
+                1,
+                1,
                 [
                     "key1" => 1
                 ]
@@ -353,7 +368,9 @@ class MainCheckArgumentExceptionTest extends TestCase
         $fail = false;
         try {
             $obj = new MainCheckArgumentExceptionMockClass02(
-                "arg01", 1, 1,
+                "arg01",
+                1,
+                1,
                 [
                     "key1" => ""
                 ]
@@ -376,7 +393,11 @@ class MainCheckArgumentExceptionTest extends TestCase
     {
         $fail = false;
         try {
-            $obj = new MainCheckArgumentExceptionMockClass("arg01", 1, 1, 0.1,
+            $obj = new MainCheckArgumentExceptionMockClass(
+                "arg01",
+                1,
+                1,
+                0.1,
                 ["p1" => "v1"],
                 [1, 2, 3],
                 ["val01" => "str", "val02" => 1],
@@ -396,7 +417,10 @@ class MainCheckArgumentExceptionTest extends TestCase
         $fail = false;
         try {
             $obj = new MainCheckArgumentExceptionMockClass02(
-                "arg01", 1, 1, null,
+                "arg01",
+                1,
+                1,
+                null,
                 [
                     "invalid" => ""
                 ]
@@ -419,7 +443,11 @@ class MainCheckArgumentExceptionTest extends TestCase
     {
         $fail = false;
         try {
-            $obj = new MainCheckArgumentExceptionMockClass("arg01", 1, 1, 0.1,
+            $obj = new MainCheckArgumentExceptionMockClass(
+                "arg01",
+                1,
+                1,
+                0.1,
                 ["p1" => "v1"],
                 [1, 2, 3],
                 ["val01" => "str", "val02" => 1],
@@ -439,7 +467,11 @@ class MainCheckArgumentExceptionTest extends TestCase
     {
         $fail = false;
         try {
-            $obj = new MainCheckArgumentExceptionMockClass("arg01", 1, 1, 0.1,
+            $obj = new MainCheckArgumentExceptionMockClass(
+                "arg01",
+                1,
+                1,
+                0.1,
                 ["p1" => "v1"],
                 [1, 2, 3],
                 ["val01" => "str", "val02" => 1],
@@ -460,13 +492,19 @@ class MainCheckArgumentExceptionTest extends TestCase
     {
         $fail = false;
         try {
-            $obj = new MainCheckArgumentExceptionMockClass("arg01", 1, 1, 0.1,
+            $obj = new MainCheckArgumentExceptionMockClass(
+                "arg01",
+                1,
+                1,
+                0.1,
                 ["p1" => "v1"],
                 [1, 2, 3],
                 ["val01" => "str", "val02" => 1],
                 "aaa",
                 "123",
-                function() { return true; },
+                function () {
+                    return true;
+                },
                 "\NonExists"
             );
         } catch (\Exception $ex) {
@@ -482,13 +520,19 @@ class MainCheckArgumentExceptionTest extends TestCase
     {
         $fail = false;
         try {
-            $obj = new MainCheckArgumentExceptionMockClass("arg01", 1, 1, 0.1,
+            $obj = new MainCheckArgumentExceptionMockClass(
+                "arg01",
+                1,
+                1,
+                0.1,
                 ["p1" => "v1"],
                 [1, 2, 3],
                 ["val01" => "str", "val02" => 1],
                 "aaa",
                 "123",
-                function() { return true; },
+                function () {
+                    return true;
+                },
                 "\DateTime",
                 "\stdClass",
             );
@@ -510,13 +554,19 @@ class MainCheckArgumentExceptionTest extends TestCase
     {
         $fail = false;
         try {
-            $obj = new MainCheckArgumentExceptionMockClass("arg01", 1, 1, 0.1,
+            $obj = new MainCheckArgumentExceptionMockClass(
+                "arg01",
+                1,
+                1,
+                0.1,
                 ["p1" => "v1"],
                 [1, 2, 3],
                 ["val01" => "str", "val02" => 1],
                 "aaa",
                 "123",
-                function() { return true; },
+                function () {
+                    return true;
+                },
                 "\DateTime",
                 "\DateTime",
                 __DIR__ . "/nonexists"
@@ -535,13 +585,19 @@ class MainCheckArgumentExceptionTest extends TestCase
     {
         $fail = false;
         try {
-            $obj = new MainCheckArgumentExceptionMockClass("arg01", 1, 1, 0.1,
+            $obj = new MainCheckArgumentExceptionMockClass(
+                "arg01",
+                1,
+                1,
+                0.1,
                 ["p1" => "v1"],
                 [1, 2, 3],
                 ["val01" => "str", "val02" => 1],
                 "aaa",
                 "123",
-                function() { return true; },
+                function () {
+                    return true;
+                },
                 "\DateTime",
                 "\DateTime",
                 __DIR__,
@@ -561,13 +617,19 @@ class MainCheckArgumentExceptionTest extends TestCase
     {
         $fail = false;
         try {
-            $obj = new MainCheckArgumentExceptionMockClass("arg01", 1, 1, 0.1,
+            $obj = new MainCheckArgumentExceptionMockClass(
+                "arg01",
+                1,
+                1,
+                0.1,
                 ["p1" => "v1"],
                 [1, 2, 3],
                 ["val01" => "str", "val02" => 1],
                 "aaa",
                 "123",
-                function() { return true; },
+                function () {
+                    return true;
+                },
                 "\DateTime",
                 "\DateTime",
                 __DIR__,
@@ -694,7 +756,9 @@ class MainCheckArgumentExceptionMockClass
         $arg15 = null
     ) {
         $this->mainCheckForInvalidArgumentException(
-            "arg01", $arg01, [
+            "arg01",
+            $arg01,
+            [
                 [
                     "validate" => "not null"
                 ],
@@ -714,7 +778,9 @@ class MainCheckArgumentExceptionMockClass
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg02", $arg02, [
+            "arg02",
+            $arg02,
+            [
                 [
                     "validate" => "is numeric"
                 ],
@@ -729,7 +795,9 @@ class MainCheckArgumentExceptionMockClass
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg03", $arg03, [
+            "arg03",
+            $arg03,
+            [
                 [
                     "validate" => "is integer"
                 ],
@@ -744,7 +812,9 @@ class MainCheckArgumentExceptionMockClass
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg04", $arg04, [
+            "arg04",
+            $arg04,
+            [
                 [
                     "validate" => "is float"
                 ],
@@ -759,7 +829,9 @@ class MainCheckArgumentExceptionMockClass
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg05", $arg05, [
+            "arg05",
+            $arg05,
+            [
                 [
                     "validate" => "is array"
                 ],
@@ -774,7 +846,9 @@ class MainCheckArgumentExceptionMockClass
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg06", $arg06, [
+            "arg06",
+            $arg06,
+            [
                 [
                     "validate" => "is not array assoc"
                 ],
@@ -787,7 +861,9 @@ class MainCheckArgumentExceptionMockClass
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg07", $arg07, [
+            "arg07",
+            $arg07,
+            [
                 [
                     "validate" => "has array assoc required keys",
                     "requiredKeys" => [
@@ -808,7 +884,9 @@ class MainCheckArgumentExceptionMockClass
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg08", $arg08, [
+            "arg08",
+            $arg08,
+            [
                 [
                     "validate" => "is allowed value",
                     "allowedValues" => ["aaa", "bbb", "ccc", 111],
@@ -819,17 +897,23 @@ class MainCheckArgumentExceptionMockClass
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg09", $arg09, [
+            "arg09",
+            $arg09,
+            [
                 [
                     "validate" => "closure or null",
-                    "closure" => function($arg) { return ($arg === "123"); }
+                    "closure" => function ($arg) {
+                        return ($arg === "123");
+                    }
                 ]
             ]
         );
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg10", $arg10, [
+            "arg10",
+            $arg10,
+            [
                 [
                     "validate" => "is callable or null"
                 ]
@@ -838,7 +922,9 @@ class MainCheckArgumentExceptionMockClass
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg11", $arg11, [
+            "arg11",
+            $arg11,
+            [
                 [
                     "validate" => "is class exists or null"
                 ]
@@ -847,7 +933,9 @@ class MainCheckArgumentExceptionMockClass
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg12", $arg12, [
+            "arg12",
+            $arg12,
+            [
                 [
                     "validate" => "is class implements interface or null",
                     "interface" => "DateTimeInterface"
@@ -857,7 +945,9 @@ class MainCheckArgumentExceptionMockClass
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg13", $arg13, [
+            "arg13",
+            $arg13,
+            [
                 [
                     "validate" => "is resource exists or null"
                 ]
@@ -866,7 +956,9 @@ class MainCheckArgumentExceptionMockClass
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg14", $arg14, [
+            "arg14",
+            $arg14,
+            [
                 [
                     "validate" => "is dir exists or null"
                 ]
@@ -875,7 +967,9 @@ class MainCheckArgumentExceptionMockClass
 
 
         $this->mainCheckForInvalidArgumentException(
-            "arg15", $arg15, [
+            "arg15",
+            $arg15,
+            [
                 [
                     "validate" => "is file exists or null"
                 ]
@@ -900,11 +994,15 @@ class MainCheckArgumentExceptionMockClass02
     ) {
 
         $this->mainCheckForInvalidArgumentException(
-            "arg01", $arg01, ["not null"]
+            "arg01",
+            $arg01,
+            ["not null"]
         );
 
         $this->mainCheckForInvalidArgumentException(
-            "arg02", $arg02, [
+            "arg02",
+            $arg02,
+            [
                 [
                     "validate" => "not null",
                     "executeBeforeConditions" => "",
@@ -915,14 +1013,16 @@ class MainCheckArgumentExceptionMockClass02
         );
 
         $this->result = $this->mainCheckForInvalidArgumentException(
-            "arg03", $arg03, [
+            "arg03",
+            $arg03,
+            [
                 [
-                    "executeBeforeConditions" => function($args) {
+                    "executeBeforeConditions" => function ($args) {
                         //echo $args["argValue"] . "-- \n";
                         return (($args["argValue"] === null) ? 1 : $args["argValue"]);
                     },
                     "conditions" => "is numeric",
-                    "executeBeforeValidate" => function($args) {
+                    "executeBeforeValidate" => function ($args) {
                         //echo $args["argValue"] . "-- \n";
                         return (int)$args["argValue"];
                     },
@@ -930,7 +1030,7 @@ class MainCheckArgumentExceptionMockClass02
                     // Forma de passar os argumentos externos para as funções acima.
                     "subArg01" => $arg01,
                     "subArg02" => $arg02,
-                    "executeBeforeReturn" => function($args) {
+                    "executeBeforeReturn" => function ($args) {
                         return "Sucess!";
                     }
                 ],
@@ -938,7 +1038,9 @@ class MainCheckArgumentExceptionMockClass02
         );
 
         $this->mainCheckForInvalidArgumentException(
-            "arg04", $arg04, [
+            "arg04",
+            $arg04,
+            [
                 [
                     "conditions" => ["not null", "is array assoc"],
                     "validate" => "foreach array child",
@@ -949,14 +1051,13 @@ class MainCheckArgumentExceptionMockClass02
                 [
                     "conditions" => ["not null", "is array assoc"],
                     "validate" => "foreach array child",
-                    "foreachChild" => function($key, $value) {
+                    "foreachChild" => function ($key, $value) {
                         $allowed = ["HEAD", "OPTIONS", "TRACE", "DEV", "CONNECT"];
                         if (\in_array($key, $allowed) === false) {
                             $this->invalidArgumentExceptionMessage = "Invalid value defined for \"arg04\". Expected only the HTTP Methods \"" . implode(", ", $allowed) . "\".";
 
                             return false;
-                        }
-                        else {
+                        } else {
                             return true;
                         }
                     }
@@ -965,7 +1066,9 @@ class MainCheckArgumentExceptionMockClass02
         );
 
         $this->mainCheckForInvalidArgumentException(
-            "arg05", $arg05, [
+            "arg05",
+            $arg05,
+            [
                 [
                     "conditions" => ["not null", "is array assoc"],
                     "validate" => "is allowed key",
@@ -974,14 +1077,13 @@ class MainCheckArgumentExceptionMockClass02
                 ]
             ]
         );
-
-
     }
 
 
 
     private $result = null;
-    public function getResult() {
+    public function getResult()
+    {
         return $this->result;
     }
 }
@@ -998,7 +1100,9 @@ class MainCheckArgumentExceptionMockClass03
     ) {
 
         $this->mainCheckForInvalidArgumentException(
-            "arg01", $arg01, ["is boolean"]
+            "arg01",
+            $arg01,
+            ["is boolean"]
         );
     }
 }
