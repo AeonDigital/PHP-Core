@@ -9,18 +9,18 @@ declare(strict_types=1);
  * vazio, ou, quando tratar-se de um tipo escalar, for diferente de ``null``, ``undefined``
  * e ``''``.
  *
- * @param       mixed $o
- *              Objeto que será testado.
+ * @param mixed $o
+ * Objeto que será testado.
  *
- * @param       ?string $k
- *              Quando indicado, ``$o`` deve ser um ``array`` ou um objeto ``\stdClass`` e ``$k``
- *              será a chave cuja existência e valor será verificado.
+ * @param ?string $k
+ * Quando indicado, ``$o`` deve ser um ``array`` ou um objeto ``\stdClass`` e ``$k``
+ * será a chave cuja existência e valor será verificado.
  *
- * @return      bool
- *              Retornará ``true`` SE a variável ESTA definida E SE seu valor é diferente de
- *              ``null``, ``undefined`` e ``''``.
- *              Objetos do tipo ``array`` e ``\stdClass`` retornarão ``true`` SE não forem vazios
- *              quando ``$k`` não for definido.
+ * @return bool
+ * Retornará ``true`` SE a variável ESTA definida E SE seu valor é diferente de
+ * ``null``, ``undefined`` e ``''``.
+ * Objetos do tipo ``array`` e ``\stdClass`` retornarão ``true`` SE não forem vazios
+ * quando ``$k`` não for definido.
  */
 function var_is_defined(mixed &$o, ?string $k = null): bool
 {

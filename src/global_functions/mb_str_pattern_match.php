@@ -5,13 +5,13 @@ declare(strict_types=1);
 /**
  * Verifica se a string corresponde à expressão regular definida.
  *
- * @param       string $string
- *              ``String`` original.
+ * @param string $string
+ * ``String`` original.
  *
- * @param       string $regx
- *              RegExp que será usada para validar a string.
+ * @param string $regx
+ * RegExp que será usada para validar a string.
  *
- * @return      bool
+ * @return bool
  */
 function mb_str_pattern_match(string $str, string $regx): bool
 {

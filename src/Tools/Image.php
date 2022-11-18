@@ -83,7 +83,7 @@ class Image
      * Posição no eixo Y a partir de onde o corte da imagem deve ocorrer.
      * Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
      *
-     * @return      bool
+     * @return bool
      */
     public static function transform(
         string $absoluteSystemPathToOriginalImage,
@@ -337,7 +337,7 @@ class Image
      * Altura máxima que a imagem deverá ter.
      * Se não for definido, este valor será calculado conforme o tipo ``$resizeType``.
      *
-     * @return      bool
+     * @return bool
      */
     public static function resize(
         string $absoluteSystemPathToOriginalImage,
@@ -384,7 +384,7 @@ class Image
      * Posição no eixo Y a partir de onde o corte da imagem deve ocorrer.
      * Apenas surte efeito se ``$resizeType`` for definido como ``crop``
      *
-     * @return      bool
+     * @return bool
      */
     public static function crop(
         string $absoluteSystemPathToOriginalImage,

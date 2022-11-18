@@ -6,10 +6,10 @@ declare(strict_types=1);
  * Retorna um objeto ``DateTime`` setado para o primeiro dia do mês. Hora minuto e segundo
  * serão definidos como **00:00:00**.
  *
- * @param       \DateTime $date
- *              Data original.
+ * @param \DateTime $date
+ * Data original.
  *
- * @return      \DateTime
+ * @return \DateTime
  */
 function date_to_first_month_day(\DateTime $date): \DateTime
 {

@@ -9,15 +9,15 @@ declare(strict_types=1);
  * maior precisão possível de ser encontrada é a de números de até 15 dígitos, independente do
  * local onde está o ponto decimal.
  *
- * @param       int|float $n
- *              Valor numérico de entrada.
+ * @param int|float $n
+ * Valor numérico de entrada.
  *
- * @param       int $l
- *              Tamanho da parte decimal a ser retornada.
- *              Se não for informado, será usado o valor **2**.
+ * @param int $l
+ * Tamanho da parte decimal a ser retornada.
+ * Se não for informado, será usado o valor **2**.
  *
- * @return      float
- *              Retornará um ``float`` como ``0.004321``.
+ * @return float
+ * Retornará um ``float`` como ``0.004321``.
  */
 function numeric_decimal_part(int|float $n, int $l = 2): float
 {

@@ -6,18 +6,18 @@ declare(strict_types=1);
  * Converte para maiúsculas o primeiro caractere de cada parte de uma ``string`` que representa um
  * nome próprio. Todos os demais caracteres da ``string`` passada serão revertidos para minúsculas.
  *
- * @param       string $str
- *              ``String`` que será alterada.
+ * @param string $str
+ * ``String`` que será alterada.
  *
- * @param       string $locale
- *              Locale que deve ser usado.
+ * @param string $locale
+ * Locale que deve ser usado.
  *
- * @param       array $ignore
- *              Se definido, deve ser um ``array de strings`` contendo palavras que devem escapar
- *              da transformação.
+ * @param array $ignore
+ * Se definido, deve ser um ``array de strings`` contendo palavras que devem escapar
+ * da transformação.
  *
- * @return      string
- *              Nova ``string`` modificada.
+ * @return string
+ * Nova ``string`` modificada.
  */
 function mb_str_uc_names(string $str, string $locale = "", array $ignore = []): string
 {

@@ -5,11 +5,11 @@ declare(strict_types=1);
 /**
  * Retorna unicamente a parte inteira de um numeral.
  *
- * @param       int|float $n
- *              Valor numérico de entrada.
+ * @param int|float $n
+ * Valor numérico de entrada.
  *
- * @return      int
- *              Retorna a parte inteira do numeral passado.
+ * @return int
+ * Retorna a parte inteira do numeral passado.
  */
 function numeric_integer_part(int|float $n): int
 {

@@ -7,11 +7,11 @@ declare(strict_types=1);
  *
  * Este método é equivalente ao ``ucfirst()`` porém, suporta ``multi-byte``.
  *
- * @param       string $string
- *              ``String`` que será alterada.
+ * @param string $string
+ * ``String`` que será alterada.
  *
- * @return      string
- *              Nova ``string`` modificada.
+ * @return string
+ * Nova ``string`` modificada.
  */
 function mb_str_uc_first(string $string): string
 {

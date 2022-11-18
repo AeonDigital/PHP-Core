@@ -16,12 +16,12 @@ declare(strict_types=1);
  *      ];
  * ```
  *
- * @param       string|\DateTime $week
- *              String ou objeto \DateTime.
+ * @param string|\DateTime $week
+ * String ou objeto \DateTime.
  *
- * @return      ?array
- *              Retornará ``null`` se não for possível identificar os componentes
- *              da data.
+ * @return ?array
+ * Retornará ``null`` se não for possível identificar os componentes
+ * da data.
  */
 function weekdate_to_array(string|\DateTime $week): ?array
 {

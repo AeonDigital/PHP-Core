@@ -5,16 +5,16 @@ declare(strict_types=1);
 /**
  * Remove uma cadeia de caracteres dentro dos limites indicados.
  *
- * @param       string $str
- *              ``String`` original.
+ * @param string $str
+ * ``String`` original.
  *
- * @param       int $start
- *              Posição inicial para inserir a nova ``string``.
+ * @param int $start
+ * Posição inicial para inserir a nova ``string``.
  *
- * @param       ?int $length
- *              Tamanho da porção da ``string`` original que será substituída.
+ * @param ?int $length
+ * Tamanho da porção da ``string`` original que será substituída.
  *
- * @return      string
+ * @return string
  */
 function mb_str_remove(
     string $str,

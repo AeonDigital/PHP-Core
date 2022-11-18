@@ -6,15 +6,15 @@ declare(strict_types=1);
  * Verifica se as chaves definidas como obrigatórias de um ``Array Associativo`` estão realmente
  * presentes.
  *
- * @param       array $keys
- *              Coleção com o nome das chaves obrigatórias.
+ * @param array $keys
+ * Coleção com o nome das chaves obrigatórias.
  *
- * @param       array $array
- *              ``Array associativo`` que será verificado.
+ * @param array $array
+ * ``Array associativo`` que será verificado.
  *
- * @return      array
- *              Retorna um ``array`` contendo o nome de cada um dos itens que **NÃO** foram definidos.
- *              Ou seja, se retornar um ``array`` vazio, significa que todas as chaves foram definidas.
+ * @return array
+ * Retorna um ``array`` contendo o nome de cada um dos itens que **NÃO** foram definidos.
+ * Ou seja, se retornar um ``array`` vazio, significa que todas as chaves foram definidas.
  */
 function array_check_required_keys(array $keys, array $array): array
 {

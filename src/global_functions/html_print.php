@@ -6,23 +6,23 @@ declare(strict_types=1);
  * Imprime na tela o valor de ``$obj`` dentro de uma tag ``<pre>``, facilitando assim a leitura
  * quando necessário o debug.
  *
- * @param       mixed $obj
- *              Objeto que será **impresso**.
+ * @param mixed $obj
+ * Objeto que será **impresso**.
  *
- * @param       bool $o
- *              Indica se a tag ``<pre>`` deve receber a propriedade css ``overflow:auto``.
+ * @param bool $o
+ * Indica se a tag ``<pre>`` deve receber a propriedade css ``overflow:auto``.
  *
- * @param       string $w
- *              Valor da propriedade css ``width`` para definir a largura do objeto ``<pre>``.
+ * @param string $w
+ * Valor da propriedade css ``width`` para definir a largura do objeto ``<pre>``.
  *
- * @param       string $h
- *              Valor da propriedade css ``height`` para definir a altura do objeto ``<pre>``.
+ * @param string $h
+ * Valor da propriedade css ``height`` para definir a altura do objeto ``<pre>``.
  *
- * @param       bool $noPrint
- *              Quando ``true`` não irá printar na tela o resultado e sim retornar o mesmo
- *              como uma string.
+ * @param bool $noPrint
+ * Quando ``true`` não irá printar na tela o resultado e sim retornar o mesmo
+ * como uma string.
  *
- * @return      void|string
+ * @return void|string
  */
 function html_print(
     mixed $obj,

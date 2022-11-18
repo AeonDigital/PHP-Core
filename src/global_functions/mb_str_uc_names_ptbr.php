@@ -9,11 +9,11 @@ declare(strict_types=1);
  * Artigos usados nos nomes próprios típicos do locale **pt-BR** serão protegidos de terem
  * seus caracteres alterados.
  *
- * @param       string $string
- *              ``String`` que será alterada.
+ * @param string $string
+ * ``String`` que será alterada.
  *
- * @return      string
- *              Nova ``string`` modificada.
+ * @return string
+ * Nova ``string`` modificada.
  */
 function mb_str_uc_names_ptbr(string $string): string
 {

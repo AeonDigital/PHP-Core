@@ -7,23 +7,23 @@ declare(strict_types=1);
  *
  * Este método é equivalente ao ``substr_replace()`` porém, suporta ``multi-byte``.
  *
- * @param       string $string
- *              ``String`` original.
+ * @param string $string
+ * ``String`` original.
  *
- * @param       string $replacement
- *              ``String`` que será adicionada.
+ * @param string $replacement
+ * ``String`` que será adicionada.
  *
- * @param       int $start
- *              Posição inicial para inserir a nova ``string``.
+ * @param int $start
+ * Posição inicial para inserir a nova ``string``.
  *
- * @param       ?int $length
- *              Tamanho da porção da ``string`` original que será substituída.
+ * @param ?int $length
+ * Tamanho da porção da ``string`` original que será substituída.
  *
- * @param       ?string $encoding
- *              Quando usado indica que codificação a ``string`` original está usando.
+ * @param ?string $encoding
+ * Quando usado indica que codificação a ``string`` original está usando.
  *
- * @return      string
- *              Nova ``string`` com o novo valor.
+ * @return string
+ * Nova ``string`` com o novo valor.
  */
 function mb_substr_replace(
     string $string,

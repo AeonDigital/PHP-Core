@@ -5,10 +5,10 @@ declare(strict_types=1);
 /**
  * Transforma todos caracteres com glifos para seu equivalente sem glifos.
  *
- * @param       string $str
- *              ``String`` original.
+ * @param string $str
+ * ``String`` original.
  *
- * @return      string
+ * @return string
  */
 function mb_str_remove_glyphs(
     string $str

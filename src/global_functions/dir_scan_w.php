@@ -6,11 +6,11 @@ declare(strict_types=1);
  * Retorna a listagem do conteúdo do diretório alvo já ordenado adequadamente conforme o
  * padrão Windows.
  *
- * @param       string $absoluteSystemPathToDir
- *              Diretório que será listado.
+ * @param string $absoluteSystemPathToDir
+ * Diretório que será listado.
  *
- * @return      array
- *              Lista de diretórios e arquivos encontrados no local indicado.
+ * @return array
+ * Lista de diretórios e arquivos encontrados no local indicado.
  */
 function dir_scan_w(string $absoluteSystemPathToDir): array
 {

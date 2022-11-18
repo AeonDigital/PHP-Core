@@ -32,38 +32,38 @@ trait MainCheckArgumentException
      * Propriedade encarregada de armazenar a mensagem que deve ser mostrada ao disparar
      * a exception.
      *
-     * @var         string
+     * @var string
      */
     private string $invalidArgumentExceptionMessage = "";
     /**
      * Mensagem customizada para casos especiais.
      *
-     * @var         string
+     * @var string
      */
     private string $customInvalidArgumentExceptionMessage = "";
     /**
      * Indica se deve ou não mostrar o valor recebido do argumento no momento
      * em que a validação falhou.
      *
-     * @var         bool
+     * @var bool
      */
     private bool $showArgumentInExceptionMessage = true;
     /**
      * Indica quando deve ou não lançar a exception em caso de falhar na validação.
      *
-     * @var         bool
+     * @var bool
      */
     private bool $throwsExceptionOnValidateFail = true;
     /**
      * Indica o resultado da última validação efetuada.
      *
-     * @var         bool
+     * @var bool
      */
     private bool $lastArgumentValidateResult = true;
     /**
      * Retorna o resultado da última validação efetuada.
      *
-     * @return      bool
+     * @return bool
      */
     protected function getLastArgumentValidateResult(): bool
     {
@@ -75,12 +75,12 @@ trait MainCheckArgumentException
     /**
      * Efetivamente dispara a exception caso alguma mensagem de erro esteja presente.
      *
-     * @param       mixed $argValue
-     *              Valor do argumento no momento da falha.
+     * @param mixed $argValue
+     * Valor do argumento no momento da falha.
      *
-     * @return      void
+     * @return void
      *
-     * @throws      \InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     private function throwInvalidArgumentException(mixed $argValue): void
     {
@@ -123,51 +123,51 @@ trait MainCheckArgumentException
      * Efetua a verificação do valor do argumento passado conforme as regras descritas
      * no ``array`` de validação.
      *
-     * @param       string $argName
-     *              Nome do argumento que está sendo testado.
+     * @param string $argName
+     * Nome do argumento que está sendo testado.
      *
-     * @param       mixed $argValue
-     *              Valor do argumento.
+     * @param mixed $argValue
+     * Valor do argumento.
      *
-     * @param       array $validateRules
-     *              Regras para as validações.
+     * @param array $validateRules
+     * Regras para as validações.
      *
-     *              De forma básica este parametro pode ser um array de strings onde cada um
-     *              dos itens passados informa um tipo de validação, ou, cada item passado
-     *              é um array associativo que deve ser compatível com a validação que está
-     *              sendo exigida.
+     * De forma básica este parametro pode ser um array de strings onde cada um
+     * dos itens passados informa um tipo de validação, ou, cada item passado
+     * é um array associativo que deve ser compatível com a validação que está
+     * sendo exigida.
      *
-     *              No caso de usar um array associativo, a única chave obrigatória
-     *              é a "validate" que deve conter a própria string que identifica a validação
-     *              que deve ser feita.
+     * No caso de usar um array associativo, a única chave obrigatória
+     * é a "validate" que deve conter a própria string que identifica a validação
+     * que deve ser feita.
      *
-     *              Quando presente, a chave "conditions" deve ter como valor um array de strings
-     *              contendo cada tipo de verificação a ser feito ANTES que as validações relacionadas
-     *              iniciem OU pode ser um objeto "closure" com a verificação que precisa ser realizada.
+     * Quando presente, a chave "conditions" deve ter como valor um array de strings
+     * contendo cada tipo de verificação a ser feito ANTES que as validações relacionadas
+     * iniciem OU pode ser um objeto "closure" com a verificação que precisa ser realizada.
      *
-     *              As chaves "executeBeforeConditions", "executeBeforeValidate" e "executeBeforeReturn",
-     *              quando presentes, devem  ser objetos "closure" que tem como função efetuar uma ação
-     *              sobre o próprio valor que foi passado em ``$argValue``.
-     *              "executeBeforeConditions" é executada SEMPRE.
-     *              "executeBeforeValidate" apenas é executada se as condições de validação forem corretas.
-     *              "executeBeforeReturn" apenas é executada se a validação ocorrer sem erros.
+     * As chaves "executeBeforeConditions", "executeBeforeValidate" e "executeBeforeReturn",
+     * quando presentes, devem  ser objetos "closure" que tem como função efetuar uma ação
+     * sobre o próprio valor que foi passado em ``$argValue``.
+     * "executeBeforeConditions" é executada SEMPRE.
+     * "executeBeforeValidate" apenas é executada se as condições de validação forem corretas.
+     * "executeBeforeReturn" apenas é executada se a validação ocorrer sem erros.
      *
-     *              A chave "customErrorMessage" pode ser usada quando, por algum motivo, seja necessário
-     *              usar uma mensagem de erro própria.
+     * A chave "customErrorMessage" pode ser usada quando, por algum motivo, seja necessário
+     * usar uma mensagem de erro própria.
      *
-     *              A chave "showArgumentInMessage" deve indicar (``true|false``) se deve ou não mostrar
-     *              o valor atual do argumento que falhou ao ser processado.
+     * A chave "showArgumentInMessage" deve indicar (``true|false``) se deve ou não mostrar
+     * o valor atual do argumento que falhou ao ser processado.
      *
-     * @param       ?bool $throws
-     *              Indica quando é para lançar a exception.
+     * @param ?bool $throws
+     * Indica quando é para lançar a exception.
      *
-     * @return      mixed
-     *              Retornará o próprio ``$argValue`` ou, sua versão modificada por qualquer das
-     *              funções especiais indicadas em ``$validateRules``.
+     * @return mixed
+     * Retornará o próprio ``$argValue`` ou, sua versão modificada por qualquer das
+     * funções especiais indicadas em ``$validateRules``.
      *
-     * @throws      \InvalidArgumentException
-     *              Quando o argumento falhar em sua verificação irá, necessariamente disparar
-     *              esta exception.
+     * @throws \InvalidArgumentException
+     * Quando o argumento falhar em sua verificação irá, necessariamente disparar
+     * esta exception.
      */
     protected function mainCheckForInvalidArgumentException(
         string $argName,
@@ -198,22 +198,22 @@ trait MainCheckArgumentException
      * Verifica se o argumento recebido está de acordo com as regras de validações
      * especificadas em ``$rules``.
      *
-     * @param       string $argName
-     *              Nome do argumento que está sendo testado.
+     * @param string $argName
+     * Nome do argumento que está sendo testado.
      *
-     * @param       mixed $argValue
-     *              Valor do argumento.
+     * @param mixed $argValue
+     * Valor do argumento.
      *
-     * @param       string|array $rules
-     *              Regras para as validações.
+     * @param string|array $rules
+     * Regras para as validações.
      *
-     * @return      mixed
-     *              Retornará o próprio ``$argValue`` ou, sua versão modificada por qualquer das
-     *              funções especiais indicadas em ``$validateRules``.
+     * @return mixed
+     * Retornará o próprio ``$argValue`` ou, sua versão modificada por qualquer das
+     * funções especiais indicadas em ``$validateRules``.
      *
-     * @throws      \InvalidArgumentException
-     *              Quando o argumento falhar em sua verificação irá, necessariamente disparar
-     *              esta exception.
+     * @throws \InvalidArgumentException
+     * Quando o argumento falhar em sua verificação irá, necessariamente disparar
+     * esta exception.
      */
     protected function checkForInvalidArgumentException(
         string $argName,
@@ -332,10 +332,10 @@ trait MainCheckArgumentException
     /**
      * Dispara uma falha genérica.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      false
+     * @return false
      */
     protected function checkArgument_fail(array $rules): false
     {
@@ -350,10 +350,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é diferente de ``null``.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_not_null(array $rules): bool
     {
@@ -374,10 +374,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é diferente do tipo boolean.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_boolean(array $rules): bool
     {
@@ -398,10 +398,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é diferente do tipo string.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_string(array $rules): bool
     {
@@ -422,10 +422,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é diferente do tipo string.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_string_not_empty(array $rules): bool
     {
@@ -451,10 +451,10 @@ trait MainCheckArgumentException
      * - "errorShowPattern" :   versão ``string`` do mesmo regex que será adicionado na
      *                          mensagem de erro caso necessário.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_string_matches_pattern(array $rules): bool
     {
@@ -489,10 +489,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é um tipo numérico.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_numeric(array $rules): bool
     {
@@ -513,10 +513,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é um tipo numérico e maior que zero.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_numeric_greather_than_zero(array $rules): bool
     {
@@ -542,10 +542,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é um tipo numérico e maior ou igual a zero.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_numeric_greather_than_or_equal_to_zero(array $rules): bool
     {
@@ -576,10 +576,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é um tipo integer.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_integer(array $rules): bool
     {
@@ -600,10 +600,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é um tipo integer e maior que zero.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_integer_greather_than_zero(array $rules): bool
     {
@@ -629,10 +629,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é um tipo integer e maior ou igual a zero.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_integer_greather_than_or_equal_to_zero(array $rules): bool
     {
@@ -663,10 +663,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é um tipo float.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_float(array $rules): bool
     {
@@ -687,10 +687,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é um tipo float e maior que zero.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_float_greather_than_zero(array $rules): bool
     {
@@ -716,10 +716,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é um tipo float e maior ou igual a zero.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_float_greather_than_or_equal_to_zero(array $rules): bool
     {
@@ -750,10 +750,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é um tipo array.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_array(array $rules): bool
     {
@@ -774,10 +774,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é um tipo array que não esteja vazio.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_array_not_empty(array $rules): bool
     {
@@ -798,10 +798,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é um tipo array associativo.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_array_assoc(array $rules): bool
     {
@@ -822,10 +822,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é um array simples, não associativo.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_not_array_assoc(array $rules): bool
     {
@@ -849,10 +849,10 @@ trait MainCheckArgumentException
      * São esperados os seguintes parâmetros:
      * - "expectedCountValues" :    Quantidade de itens que o array deve ter.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_array_with_x_values(array $rules): bool
     {
@@ -879,10 +879,10 @@ trait MainCheckArgumentException
      *                      deve estar presente no argumento principal, e, seus valores, devem ser
      *                      um outro array associativo contendo a validação daquele sub-valor.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_has_array_assoc_required_keys(array $rules): bool
     {
@@ -935,10 +935,10 @@ trait MainCheckArgumentException
      *                      No caso de usar uma closure, cabe ao escopo da mesma definir a mensagem de
      *                      erro que deve ser utilizada.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_foreach_array_child(array $rules): bool
     {
@@ -982,10 +982,10 @@ trait MainCheckArgumentException
      * - "allowedValues"    : Array simples indicando quais os valores são válidos.
      * - "caseInsensitive"  : Se ``true`` fará a comparação de forma 'case-insensitive'.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_allowed_value(array $rules): bool
     {
@@ -1019,10 +1019,10 @@ trait MainCheckArgumentException
      * - "allowedValues"    : Array simples indicando quais os valores são válidos.
      * - "caseInsensitive"  : Se ``true`` fará a comparação de forma 'case-insensitive'.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_allowed_key(array $rules): bool
     {
@@ -1063,10 +1063,10 @@ trait MainCheckArgumentException
      * São esperados os seguintes parâmetros:
      * - "closure"    : function($arg) { return bool; }
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_closure(array $rules): bool
     {
@@ -1088,10 +1088,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é ``callable``.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_callable(array $rules): bool
     {
@@ -1112,10 +1112,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é o nome de uma classe que existe.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_class_exists(array $rules): bool
     {
@@ -1140,10 +1140,10 @@ trait MainCheckArgumentException
      * São esperados os seguintes parâmetros:
      * - "interface"    : Namespace da interface que será testada
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_class_implements_interface(array $rules): bool
     {
@@ -1175,10 +1175,10 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é do tipo "resource".
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_resource(array $rules): bool
     {
@@ -1200,10 +1200,10 @@ trait MainCheckArgumentException
      * Verifica se o argumento passado corresponde ao caminho para um
      * diretório ou arquivo existente.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_resource_exists(array $rules): bool
     {
@@ -1225,10 +1225,10 @@ trait MainCheckArgumentException
      * Verifica se o argumento passado corresponde ao caminho para um
      * diretório existente.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_dir_exists(array $rules): bool
     {
@@ -1250,10 +1250,10 @@ trait MainCheckArgumentException
      * Verifica se o argumento passado corresponde ao caminho para um
      * file existente.
      *
-     * @param       array $rules
-     *              Regras para as validações.
+     * @param array $rules
+     * Regras para as validações.
      *
-     * @return      bool
+     * @return bool
      */
     protected function checkArgument_is_file_exists(array $rules): bool
     {

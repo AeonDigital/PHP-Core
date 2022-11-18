@@ -6,12 +6,12 @@ declare(strict_types=1);
  * Converte todo conteúdo de um ``Array Associativo`` ou objeto ``\stdClass`` em um valor do tipo
  * ``string`` que pode ser apresentado normalmente em um documento HTML.
  *
- * @param       mixed $o
- *              Objeto original, que será convertido.
+ * @param mixed $o
+ * Objeto original, que será convertido.
  *
- * @return      mixed
- *              Retornará o mesmo tipo de objeto inicialmente passado em ``$o``, mas com todos
- *              seus valores convertidos para ``strings`` representáveis em um documento HTML.
+ * @return mixed
+ * Retornará o mesmo tipo de objeto inicialmente passado em ``$o``, mas com todos
+ * seus valores convertidos para ``strings`` representáveis em um documento HTML.
  */
 function object_convert_values_to_html_entities(mixed $o): mixed
 {

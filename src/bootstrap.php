@@ -20,7 +20,7 @@ declare (strict_types=1);
  * ``null`` o que faria ela entrar nas recomendações PSR junto com as mesmas regras que
  * definem que ``null``, ``true`` e ``false`` devem ser escritas em **lowercase**.
  *
- * @var     undefined
+ * @var undefined
  */
 const undefined = new AeonDigital\undefined();
 
@@ -30,7 +30,7 @@ const undefined = new AeonDigital\undefined();
  * Separador de diretório conforme o S/O.
  * Apenas uma forma menor para se referir à constante ``DIRECTORY_SEPARATOR``.
  *
- * @var     string
+ * @var string
  */
 const DS = DIRECTORY_SEPARATOR;
 

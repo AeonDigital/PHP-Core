@@ -5,17 +5,17 @@ declare(strict_types=1);
 /**
  * Copia todo o conteúdo de um diretório para outro local.
  *
- * @param       string $absoluteSystemPathToDir_source
- *              Caminho para o diretório de conteúdo que será copiado.
+ * @param string $absoluteSystemPathToDir_source
+ * Caminho para o diretório de conteúdo que será copiado.
  *
- * @param       string $absoluteSystemPathToDir_dest
- *              Caminho para o diretório de destino.
+ * @param string $absoluteSystemPathToDir_dest
+ * Caminho para o diretório de destino.
  *
- * @param       int $permissions
- *              As permissões que devem ser setadas no novo diretório.
+ * @param int $permissions
+ * As permissões que devem ser setadas no novo diretório.
  *
- * @return      bool
- *              Retornará ``true`` se a cópia do conteúdo ocorrer sem erros.
+ * @return bool
+ * Retornará ``true`` se a cópia do conteúdo ocorrer sem erros.
  */
 function dir_copy(
     string $absoluteSystemPathToDir_source,

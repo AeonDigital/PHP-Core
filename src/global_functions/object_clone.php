@@ -5,10 +5,10 @@ declare(strict_types=1);
 /**
  * Efetua a clonagem de um objeto.
  *
- * @param       mixed $obj
- *              Objeto que será clonado.
+ * @param mixed $obj
+ * Objeto que será clonado.
  *
- * @return      mixed
+ * @return mixed
  */
 function object_clone(mixed $obj): mixed
 {

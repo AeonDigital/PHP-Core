@@ -8,20 +8,20 @@ declare(strict_types=1);
  * Se algum diretório for alvo desta ação, todos os seus arquivos filhos (incluindo arquivos em subdiretórios)
  * que estiverem de acordo com a lista de extenções válidas serão também convertidos.
  *
- * @param       array $absoluteSystemPaths
- *              Caminhos para os recursos que serão convertidos.
- *              Todo arquivo indicado passará pela conversão.
- *              Caminhos de diretórios serão alvo de verificação onde apenas serão convertidos os arquivos
- *              cuja extenção esteja entre as consideradas válidas.
+ * @param array $absoluteSystemPaths
+ * Caminhos para os recursos que serão convertidos.
+ * Todo arquivo indicado passará pela conversão.
+ * Caminhos de diretórios serão alvo de verificação onde apenas serão convertidos os arquivos
+ * cuja extenção esteja entre as consideradas válidas.
  *
- * @param       array $validExtensions
- *              Usado quando algum caminho indicado em ``$absoluteSystemPaths`` for um diretório
- *              deve ser passado um array contendo uma coleção de extenções de arquivos que são alvo
- *              desta ação.
+ * @param array $validExtensions
+ * Usado quando algum caminho indicado em ``$absoluteSystemPaths`` for um diretório
+ * deve ser passado um array contendo uma coleção de extenções de arquivos que são alvo
+ * desta ação.
  *
- * @return      bool
- *              Retornará ``true`` se TODOS os recursos alvo desta ação forem corretamente convertidos.
- *              Também retornará ``true`` se não encontrar nenhum arquivo para ser convertido.
+ * @return bool
+ * Retornará ``true`` se TODOS os recursos alvo desta ação forem corretamente convertidos.
+ * Também retornará ``true`` se não encontrar nenhum arquivo para ser convertido.
  */
 function dir_convert_to_utf8(array $absoluteSystemPaths, array $validExtensions = []): bool
 {

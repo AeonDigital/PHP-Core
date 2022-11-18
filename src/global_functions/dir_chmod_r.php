@@ -5,14 +5,14 @@ declare(strict_types=1);
 /**
  * Efetua alteração nas permissões de um diretório e em todos seus itens filhos.
  *
- * @param       string $absoluteSystemPathToDir
- *              Diretório que terá suas alterações alteradas.
+ * @param string $absoluteSystemPathToDir
+ * Diretório que terá suas alterações alteradas.
  *
- * @param       int $permissions
- *              As permissões que serão setadas.
+ * @param int $permissions
+ * As permissões que serão setadas.
  *
- * @return      bool
- *              Retornará ``true`` se TODOS os itens alvo tiverem suas permissões alteradas.
+ * @return bool
+ * Retornará ``true`` se TODOS os itens alvo tiverem suas permissões alteradas.
  */
 function dir_chmod_r(string $absoluteSystemPathToDir, int $permissions): bool
 {

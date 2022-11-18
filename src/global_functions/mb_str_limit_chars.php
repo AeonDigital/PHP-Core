@@ -5,17 +5,17 @@ declare(strict_types=1);
 /**
  * Limita uma sentença à um número máximo de caracteres.
  *
- * @param       string $str
- *              ``String`` original.
+ * @param string $str
+ * ``String`` original.
  *
- * @param       int $max
- *              Número máximo de caracteres.
+ * @param int $max
+ * Número máximo de caracteres.
  *
- * @param       string $etc
- *              Será adicionado ao final da sentença, se, o número
- *              total de caracteres iniciais for maior que ``$max``.
+ * @param string $etc
+ * Será adicionado ao final da sentença, se, o número
+ * total de caracteres iniciais for maior que ``$max``.
  *
- * @return      string
+ * @return string
  */
 function mb_str_limit_chars(
     string $str,

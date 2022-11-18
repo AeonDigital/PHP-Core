@@ -8,11 +8,11 @@ declare(strict_types=1);
  * O processo consiste em resgatar todo o conteúdo e verificar caracter à caracter convertendo
  * aqueles que não forem unicode e então remontando todo o arquivo.
  *
- * @param       string $absoluteSystemPathToFile
- *              Caminho para o arquivo que será convertido.
+ * @param string $absoluteSystemPathToFile
+ * Caminho para o arquivo que será convertido.
  *
- * @return      bool
- *              Retornará ``true`` caso o documento seja convertido sem falhas.
+ * @return bool
+ * Retornará ``true`` caso o documento seja convertido sem falhas.
  */
 function file_convert_to_utf8(string $absoluteSystemPathToFile): bool
 {

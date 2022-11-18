@@ -12,10 +12,10 @@ declare(strict_types=1);
  * Os caracteres "\\", "/", "*", "?", "<", ">", "|", "\"", "'", ":" serão convertidos em "_".
  * Espaços serão convertidos em "_".
  *
- * @param       string $str
- *              ``String`` original.
+ * @param string $str
+ * ``String`` original.
  *
- * @return      string
+ * @return string
  */
 function mb_str_to_valid_filename(string $str): string
 {

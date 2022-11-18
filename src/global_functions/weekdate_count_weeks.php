@@ -5,10 +5,10 @@ declare(strict_types=1);
 /**
  * Calcula a quantidade de semanas que o ano informado tem.
  *
- * @param       int $year
- *              Ano.
+ * @param int $year
+ * Ano.
  *
- * @return      int
+ * @return int
  */
 function weekdate_count_weeks(int $year): int
 {

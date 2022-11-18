@@ -7,15 +7,15 @@ declare(strict_types=1);
  *
  * Este método é equivalente ao ``ucwords()`` porém, suporta ``multi-byte``.
  *
- * @param       string $string
- *              ``String`` que será alterada.
+ * @param string $string
+ * ``String`` que será alterada.
  *
- * @param       array $ignore
- *              Se definido, deve ser um ``array de strings`` contendo palavras que devem escapar
- *              da transformação.
+ * @param array $ignore
+ * Se definido, deve ser um ``array de strings`` contendo palavras que devem escapar
+ * da transformação.
  *
- * @return      string
- *              Nova ``string`` modificada.
+ * @return string
+ * Nova ``string`` modificada.
  */
 function mb_str_uc_words(string $string, array $ignore = []): string
 {

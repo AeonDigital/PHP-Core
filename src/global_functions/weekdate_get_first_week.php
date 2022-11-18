@@ -6,10 +6,10 @@ declare(strict_types=1);
  * Retorna um objeto ``DateTime`` referente ao primeiro dia da primeira semana do ano
  * informado.
  *
- * @param       int $year
- *              Ano.
+ * @param int $year
+ * Ano.
  *
- * @return      \DateTime
+ * @return \DateTime
  */
 function weekdate_get_first_week(int $year): \Datetime
 {

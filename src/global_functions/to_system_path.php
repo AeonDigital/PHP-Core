@@ -7,11 +7,11 @@ declare(strict_types=1);
  * diretório e eliminando duplicação dos mesmos. Qualquer ``\\`` ou ``/`` no final do caminho
  * será removida.
  *
- * @param       ?string $systemPath
- *              Caminho que será ajustado.
+ * @param ?string $systemPath
+ * Caminho que será ajustado.
  *
- * @return      ?string
- *              Caminho corrigido.
+ * @return ?string
+ * Caminho corrigido.
  */
 function to_system_path(?string $systemPath): ?string
 {
