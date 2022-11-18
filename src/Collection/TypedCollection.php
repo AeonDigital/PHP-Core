@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AeonDigital\Collection;
 
-use AeonDigital\Interfaces\Collection\iTypeList as iTypeList;
+use AeonDigital\Interfaces\Collection\iTypedCollection as iTypedCollection;
 use AeonDigital\Collection\Collection as Collection;
 
 
@@ -21,7 +21,7 @@ use AeonDigital\Collection\Collection as Collection;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-class TypeList extends Collection implements iTypeList
+class TypedCollection extends Collection implements iTypedCollection
 {
 
 
@@ -30,10 +30,10 @@ class TypeList extends Collection implements iTypeList
 
 
     /**
-     * Objeto que traz o padrão de dados que será aceito por esta lista.
+     * Objeto que traz o padrão de dados que será aceito por esta coleção.
      * Baseado neste objeto que a validação é feita.
      *
-     * @var         array
+     * @var array
      */
     private array $collectionModelType = [];
 
@@ -45,13 +45,13 @@ class TypeList extends Collection implements iTypeList
      * Indica quando também será aceito ``null`` para valor de um item. Desta forma
      * o collection fica também ``nullable``.
      *
-     * @var         bool
+     * @var bool
      */
     private bool $isCollectionNullable = true;
     /**
      * Indica se a coleção aceita valores ``null`` para seus pares de chave/valor.
      *
-     * @return      bool
+     * @return bool
      */
     public function isNullable(): bool
     {
@@ -66,7 +66,7 @@ class TypeList extends Collection implements iTypeList
      * Indica o tipo de dados que esta coleção pode conter.
      * O tipo padrão é ``mixed``, ou seja, qualquer tipo.
      *
-     * @var         string
+     * @var string
      */
     private string $collectionType = "mixed";
     /**
@@ -78,7 +78,7 @@ class TypeList extends Collection implements iTypeList
      * objetos daquele próprio tipo, é aceito também ``null`` como um valor válido de ser
      * armazenado na coleção.
      *
-     * @return      string
+     * @return string
      */
     public function getType(): string
     {
@@ -95,23 +95,23 @@ class TypeList extends Collection implements iTypeList
 
 
     /**
-     * Inicia nova lista de dados.
+     * Inicia nova coleção de dados.
      *
-     * @param       string $type
-     *              Tipo de dados que devem ser aceitos para cada item da lista. Os tipos
-     *              de classes e interfaces, quando usados devem vir com seus nomes completos,
-     *              ou seja ``namespace + classname``.
+     * @param string $type
+     * Tipo de dados que devem ser aceitos para cada item da coleção. Os tipos
+     * de classes e interfaces, quando usados devem vir com seus nomes completos,
+     * ou seja ``namespace + classname``.
      *
-     * @param       ?array $initialValues
-     *              Valores com os quais a instância deve iniciar.
+     * @param ?array $initialValues
+     * Valores com os quais a instância deve iniciar.
      *
-     * @param       bool $autoincrement
-     *              Quando ``true`` permite que seja omitido o nome da chave dos valores pois
-     *              eles serão definidos internamente conforme fosse um array começando em zero.
+     * @param bool $autoincrement
+     * Quando ``true`` permite que seja omitido o nome da chave dos valores pois
+     * eles serão definidos internamente conforme fosse um array começando em zero.
      *
      *
-     * @throws      \InvalidArgumentException
-     *              Caso algum dos valores iniciais a serem definidos não seja aceito.
+     * @throws \InvalidArgumentException
+     * Caso algum dos valores iniciais a serem definidos não seja aceito.
      */
     function __construct(string $type = "", ?array $initialValues = [], bool $autoincrement = false)
     {
@@ -146,10 +146,10 @@ class TypeList extends Collection implements iTypeList
      * mais específicas sobre o motivo da falha e aponte o que era esperado de ser recebido.
      *
      *
-     * @param       mixed $value
-     *              Valor que será testado.
+     * @param mixed $value
+     * Valor que será testado.
      *
-     * @return      bool
+     * @return bool
      */
     protected function isValidType(mixed $value): bool
     {
@@ -159,13 +159,13 @@ class TypeList extends Collection implements iTypeList
      * Valida um dos valores passados para a entrada de dados conforme seu modelo de estrutura
      * de dados.
      *
-     * @param       array $structure
-     *              Estrutura de dados que será usada para validar o valor.
+     * @param array $structure
+     * Estrutura de dados que será usada para validar o valor.
      *
-     * @param       mixed $value
-     *              Valor que será validado.
+     * @param mixed $value
+     * Valor que será validado.
      *
-     * @return      bool
+     * @return bool
      */
     protected function validateCollectionTypeValue(array $structure, mixed $value): bool
     {
@@ -259,10 +259,10 @@ class TypeList extends Collection implements iTypeList
      *
      * @codeCoverageIgnore
      *
-     * @param       mixed $o
-     *              Objeto que será testado.
+     * @param mixed $o
+     * Objeto que será testado.
      *
-     * @return      bool
+     * @return bool
      */
     protected function isAssoc(mixed $o): bool
     {
@@ -277,13 +277,13 @@ class TypeList extends Collection implements iTypeList
 
 
     /**
-     * Prepara o valor informado que identifica os tipos que compõe a lista de forma que
+     * Prepara o valor informado que identifica os tipos que compõe a coleção de forma que
      * possa ser corretamente validado.
      *
-     * @param       string $type
-     *              Tipo que será verificado.
+     * @param string $type
+     * Tipo que será verificado.
      *
-     * @return      string
+     * @return string
      */
     protected function normalizeTypeBeforeParse(string $type): string
     {
@@ -323,19 +323,19 @@ class TypeList extends Collection implements iTypeList
     /**
      * Desmembra a string que representa o/os objeto/s que podem ser aceitos e seus
      * respectivos tipos de dados para formar um objeto modelo capaz de validar cada uma das
-     * posteriores entradas que a lista pode vir a ter.
+     * posteriores entradas que a coleção pode vir a ter.
      *
-     * @param       string $type
-     *              Tipo que será verificado.
+     * @param string $type
+     * Tipo que será verificado.
      *
-     * @param       int $lvl
-     *              Nível de complexidade do objeto.
+     * @param int $lvl
+     * Nível de complexidade do objeto.
      *
-     * @return      array
+     * @return array
      *
      *
-     * @throws      \InvalidArgumentException
-     *              Caso ocorra falha no processamento dos dados.
+     * @throws \InvalidArgumentException
+     * Caso ocorra falha no processamento dos dados.
      */
     protected function generateCollectionModelType(
         string $type,
@@ -381,28 +381,25 @@ class TypeList extends Collection implements iTypeList
     /**
      * Retorna o tipo de estrutura de dados que a string passada representa.
      *
-     * O retorno será um ``array associativo`` contendo:
+     * O retorno será um ``array associativo`` contendo as chaves:
      *
-     * ```php
-     *      "structureType"     => [nullable-] type | array
-     *      "dataType           => type | array-of-types | array-assoc
-     *      "internalStructure  =>  Estrutura interna, removendo marcações mais
-     *                              externas como ?[ ... ], ficando apenas o
-     *                              conteúdo em si.
-     *      "childModel"        => Array contendo as definições para os valores
-     *                             filhos da estrutura atual.
-     * ```
+     * - ``structureType``      : [nullable-] type | array
+     * - ``dataType``           : type | array-of-types | array-assoc
+     * - ``internalStructure``  : Estrutura interna, removendo marcações mais
+     *                            externas como ?[ ... ], ficando apenas o conteúdo em si.
+     * - ``childModel``         : Array contendo as definições para os valores
+     *                            filhos da estrutura atual.
      *
      * O valor **structureType** representado por uma string vazia indica que o tipo
      * não é válido.
      *
-     * @param       string $structure
-     *              Estrutura de dados que será identificada.
+     * @param string $structure
+     * Estrutura de dados que será identificada.
      *
-     * @param       int $lvl
-     *              Nível de complexidade do objeto.
+     * @param int $lvl
+     * Nível de complexidade do objeto.
      *
-     * @return      array
+     * @return array
      */
     protected function getStructureType(string $structure, int $lvl): array
     {
@@ -460,10 +457,10 @@ class TypeList extends Collection implements iTypeList
      *      [ ... ]
      * ```
      *
-     * @param       string $structure
-     *              Estrutura de dados que será testada.
+     * @param string $structure
+     * Estrutura de dados que será testada.
      *
-     * @return      bool
+     * @return bool
      */
     protected function isStructureAnCommomArray(string $structure): bool
     {
@@ -483,13 +480,13 @@ class TypeList extends Collection implements iTypeList
      *      int     => [ ... ]
      * ```
      *
-     * @param       string $structure
-     *              Estrutura de dados que será testada.
+     * @param string $structure
+     * Estrutura de dados que será testada.
      *
-     * @param       int $lvl
-     *              Nível de complexidade do objeto.
+     * @param int $lvl
+     * Nível de complexidade do objeto.
      *
-     * @return      bool
+     * @return bool
      */
     protected function isStructureAnAssocArray(string $structure, int $lvl): bool
     {
@@ -510,13 +507,13 @@ class TypeList extends Collection implements iTypeList
      *      string, int, bool
      * ```
      *
-     * @param       string $structure
-     *              Estrutura de dados que será testada.
+     * @param string $structure
+     * Estrutura de dados que será testada.
      *
-     * @param       int $lvl
-     *              Nível de complexidade do objeto.
+     * @param int $lvl
+     * Nível de complexidade do objeto.
      *
-     * @return      bool
+     * @return bool
      */
     protected function isStructureAnArrayOfTypes(string $structure, int $lvl): bool
     {
@@ -545,10 +542,10 @@ class TypeList extends Collection implements iTypeList
      *      DateTime
      * ```
      *
-     * @param       string $structure
-     *              Estrutura de dados que será testada.
+     * @param string $structure
+     * Estrutura de dados que será testada.
      *
-     * @return      bool
+     * @return bool
      */
     protected function isStructureASingleType(string $structure): bool
     {
@@ -557,15 +554,15 @@ class TypeList extends Collection implements iTypeList
     /**
      * Verifica se um tipo específico de dados é válido.
      *
-     * @param       string $type
-     *              Tipo que será verificado.
+     * @param string $type
+     * Tipo que será verificado.
      *
-     * @param       bool $isKey
-     *              Indica que o tipo testado será usado como chave de uma outra
-     *              coleção de dados. Neste caso apenas serão aceitos valores
-     *              ``string`` e ``int``.
+     * @param bool $isKey
+     * Indica que o tipo testado será usado como chave de uma outra
+     * coleção de dados. Neste caso apenas serão aceitos valores
+     * ``string`` e ``int``.
      *
-     * @return      bool
+     * @return bool
      */
     protected function validateType(string $type, bool $isKey = false): bool
     {

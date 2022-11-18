@@ -70,7 +70,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * Se uma mesma chave é definida em dois momentos distintos DEVE ser mantido o último formato
      * indicado.
      *
-     * @var         array
+     * @var array
      */
     private array $collection = [];
 
@@ -86,7 +86,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * Para coleções que importam-se com o tipo dos valores armazenados o método ``set`` efetuará
      * uma verificação de seu tipo usando para isso o método ``isValidType()``.
      *
-     * @var         string
+     * @var string
      */
     protected string $messageInvalidValue = "Invalid collection value.";
 
@@ -98,7 +98,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * Se ``true`` irá controlar tal valor como se fosse um ``array`` comum dando a cada chave
      * de entrada um valor igual a um número inteiro iniciando em zero.
      *
-     * @var         bool
+     * @var bool
      */
     protected bool $autoIncrementCollection = false;
 
@@ -108,7 +108,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * Guarda o valor do índice a ser usado na próxima entrada de valores para o caso de ser uma
      * instância definida como ``autoIncrementCollection``.
      *
-     * @var         int
+     * @var int
      */
     protected int $nextKeyValue = 0;
 
@@ -121,7 +121,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * Normalmente apenas impede que a classe seja reconhecida como ``readOnly`` para permitir o
      * set dos dados durante a construção da instância.
      *
-     * @var         bool
+     * @var bool
      */
     private bool $constructorActive = false;
 
@@ -137,12 +137,12 @@ class BasicCollection extends BObject implements iBasicCollection
     /**
      * Indica se uma interface está ou não implementada na classe concreta.
      *
-     * @param       string $interface
-     *              Nome da interface.
+     * @param string $interface
+     * Nome da interface.
      *
-     * @return      bool
-     *              Retorna ``true`` ou ``false`` indicando se a instância implementa a interface
-     *              da namespace ``AeonDigital\\Interfaces\\Collection`` de nome passado.
+     * @return bool
+     * Retorna ``true`` ou ``false`` indicando se a instância implementa a interface
+     * da namespace ``AeonDigital\\Interfaces\\Collection`` de nome passado.
      */
     protected function isImplement(string $interface): bool
     {
@@ -155,10 +155,10 @@ class BasicCollection extends BObject implements iBasicCollection
     /**
      * Indica se a coleção implementa a interface ``iProtectedCollection``.
      *
-     * @return      bool
-     *              Quando ``true`` indica que a coleção manterá o estado de todos os seus
-     *              objetos não permitindo que eles sejam alterados, no entanto os valores uma
-     *              vez definidos PODEM ser excluídos.
+     * @return bool
+     * Quando ``true`` indica que a coleção manterá o estado de todos os seus
+     * objetos não permitindo que eles sejam alterados, no entanto os valores uma
+     * vez definidos PODEM ser excluídos.
      */
     public function isProtected(): bool
     {
@@ -170,9 +170,9 @@ class BasicCollection extends BObject implements iBasicCollection
     /**
      * Indica se a coleção implementa a interface ``iAppendOnlyCollection``.
      *
-     * @return      bool
-     *              Quando ``true`` indica que a coleção pode ser apenas incrementada mas jamais
-     *              modificada nem reduzida.
+     * @return bool
+     * Quando ``true`` indica que a coleção pode ser apenas incrementada mas jamais
+     * modificada nem reduzida.
      */
     public function isAppendOnly(): bool
     {
@@ -184,9 +184,9 @@ class BasicCollection extends BObject implements iBasicCollection
     /**
      * Indica se a coleção implementa a interface ``iReadOnlyCollection``.
      *
-     * @return      bool
-     *              Quando ``true`` indica que a coleção não pode ser alterada após ser definida
-     *              durante a construção da instância.
+     * @return bool
+     * Quando ``true`` indica que a coleção não pode ser alterada após ser definida
+     * durante a construção da instância.
      */
     public function isReadOnly(): bool
     {
@@ -198,9 +198,9 @@ class BasicCollection extends BObject implements iBasicCollection
     /**
      * Indica se a coleção implementa a interface ``iCaseInsensitiveCollection``.
      *
-     * @return      bool
-     *              Quando ``true`` indica que os nomes das chaves de cada entrada de dados será
-     *              tratado de forma ``case insensitive``, ou seja, ``KeyName = keyname = KEYNAME``.
+     * @return bool
+     * Quando ``true`` indica que os nomes das chaves de cada entrada de dados será
+     * tratado de forma ``case insensitive``, ou seja, ``KeyName = keyname = KEYNAME``.
      */
     public function isCaseInsensitive(): bool
     {
@@ -227,8 +227,8 @@ class BasicCollection extends BObject implements iBasicCollection
      *      // Ficará, ao final com 5 itens cada qual ocupando uma posição entre 0 e 4.
      * ```
      *
-     * @return      bool
-     *              Retorna ``true`` quando a coleção é do tipo ``autoincrement``.
+     * @return bool
+     * Retorna ``true`` quando a coleção é do tipo ``autoincrement``.
      */
     public function isAutoIncrement(): bool
     {
@@ -280,14 +280,14 @@ class BasicCollection extends BObject implements iBasicCollection
      * Para todos estes casos é importante que TODOS os métodos que referenciem-se a uma posição
      * definida na ``collection`` passe ANTES por esta transformação.
      *
-     * @param       string $key
-     *              Chave que será transformada (se necessário).
+     * @param string $key
+     * Chave que será transformada (se necessário).
      *
-     * @param       mixed $value
-     *              Valor que está sendo definido no momento.
+     * @param mixed $value
+     * Valor que está sendo definido no momento.
      *
-     * @return      string
-     *              Chave no formato de uso interno real.
+     * @return string
+     * Chave no formato de uso interno real.
      */
     protected function useKey(string $key, mixed $value = null): string
     {
@@ -320,14 +320,14 @@ class BasicCollection extends BObject implements iBasicCollection
      * alteração deve ocorrer.
      *
      *
-     * @param       mixed $value
-     *              Valor que será verificado ou transformado.
+     * @param mixed $value
+     * Valor que será verificado ou transformado.
      *
-     * @param       mixed $oldValue
-     *              Se já há um valor definido para a chave, este deverá ser enviado para possível uso.
+     * @param mixed $oldValue
+     * Se já há um valor definido para a chave, este deverá ser enviado para possível uso.
      *
-     * @return      mixed
-     *              Valor retornado após a transformação.
+     * @return mixed
+     * Valor retornado após a transformação.
      */
     protected function beforeSet($value, mixed $oldValue = null): mixed
     {
@@ -356,13 +356,13 @@ class BasicCollection extends BObject implements iBasicCollection
      * Este método visa dar suporte para esta interface.
      *
      *
-     * @param       mixed $value
-     *              Valor que será testado.
+     * @param mixed $value
+     * Valor que será testado.
      *
-     * @return      bool
-     *              Retorna ``true`` ou ``false`` mas PODE/DEVE, em caso ``false`` alterar o valor da
-     *              propriedade ``messageInvalidValue`` de forma que esta dê informações mais
-     *              específicas sobre o motivo da falha e aponte o que era esperado de ser recebido.
+     * @return bool
+     * Retorna ``true`` ou ``false`` mas PODE/DEVE, em caso ``false`` alterar o valor da
+     * propriedade ``messageInvalidValue`` de forma que esta dê informações mais
+     * específicas sobre o motivo da falha e aponte o que era esperado de ser recebido.
      */
     protected function isValidType(mixed $value): bool
     {
@@ -375,13 +375,13 @@ class BasicCollection extends BObject implements iBasicCollection
      * Executa, se necessário, algum processamento na coleção no momento **IMEDIATAMENTE
      * POSTERIOR** a um novo valor haver sido definido.
      *
-     * @param       string $key
-     *              Chave que foi adicionada já no formato de uso interno.
+     * @param string $key
+     * Chave que foi adicionada já no formato de uso interno.
      *
-     * @param       mixed $value
-     *              Valor que foi adicionado já após qualquer alteração executada anteriormente.
+     * @param mixed $value
+     * Valor que foi adicionado já após qualquer alteração executada anteriormente.
      *
-     * @return      void
+     * @return void
      */
     protected function afterSet(string $key, mixed $value): void
     {
@@ -397,20 +397,19 @@ class BasicCollection extends BObject implements iBasicCollection
      * Nas implementações comuns deve ser retornado o valor alvo ou ``undefined`` caso a chave indicada
      * não exista.
      *
-     *
-     * **Interface ``iProtectedCollection``**
-     * **Interface ``iAppendOnlyCollection``**
-     * **Interface ``iReadOnlyCollection``**
+     * - **Interface ``iProtectedCollection``**
+     * - **Interface ``iAppendOnlyCollection``**
+     * - **Interface ``iReadOnlyCollection``**
      *
      * Para qualquer destas interfaces, quando for para retornar um valor que é a instância de um
      * dado objeto, este deve ser clonado ANTES de ser devolvido. Isto garante que a coleção
      * permanece a mesma, sem alterações indevidas.
      *
-     * @param       mixed $key
-     *              Chave alvo da ação ``get``.
+     * @param mixed $key
+     * Chave alvo da ação ``get``.
      *
-     * @return      mixed
-     *              Valor devidamente transformado, quando necessário.
+     * @return mixed
+     * Valor devidamente transformado, quando necessário.
      */
     protected function beforeGet(string $key): mixed
     {
@@ -451,12 +450,12 @@ class BasicCollection extends BObject implements iBasicCollection
     /**
      * Indica se a chave de nome indicado existe entre os itens da coleção.
      *
-     * @param       string $key
-     *              Nome da chave que será identificada.
+     * @param string $key
+     * Nome da chave que será identificada.
      *
-     * @return      bool
-     *              Retorna ``true`` caso a chave indicada existir entre os itens da coleção ou
-     *              ``false`` se não existir.
+     * @return bool
+     * Retorna ``true`` caso a chave indicada existir entre os itens da coleção ou
+     * ``false`` se não existir.
      */
     public function has(string $key): bool
     {
@@ -470,15 +469,15 @@ class BasicCollection extends BObject implements iBasicCollection
      *
      * Se já existe um valor com chave de mesmo nome então, o valor antigo será substituído.
      *
-     * @param       string $key
-     *              Nome da chave.
-     *              Pode ser usado ``''`` caso a instância seja do tipo ``autoincrement``.
+     * @param string $key
+     * Nome da chave.
+     * Pode ser usado ``''`` caso a instância seja do tipo ``autoincrement``.
      *
-     * @param       mixed $value
-     *              Valor que será associado a esta chave.
+     * @param mixed $value
+     * Valor que será associado a esta chave.
      *
-     * @return      bool
-     *              Retorna ``true`` quando a insersão/atualização do item foi bem sucedido.
+     * @return bool
+     * Retorna ``true`` quando a insersão/atualização do item foi bem sucedido.
      */
     public function set(string $key, mixed $value): bool
     {
@@ -520,12 +519,12 @@ class BasicCollection extends BObject implements iBasicCollection
     /**
      * Resgata um valor da coleção a partir do nome da chave indicada.
      *
-     * @param       string $key
-     *              Nome da chave cujo valor deve ser retornado.
+     * @param string $key
+     * Nome da chave cujo valor deve ser retornado.
      *
-     * @return      mixed
-     *              Valor armazenado na ``collection`` que correspondente a chave passada.
-     *              DEVE retornar ``null`` quando a chave de nome indicado não existir.
+     * @return mixed
+     * Valor armazenado na ``collection`` que correspondente a chave passada.
+     * DEVE retornar ``null`` quando a chave de nome indicado não existir.
      */
     public function get(string $key): mixed
     {
@@ -537,13 +536,13 @@ class BasicCollection extends BObject implements iBasicCollection
     /**
      * Remove da coleção o item com a chave indicada.
      *
-     * @param       string $key
-     *              Nome da chave do valor que será excluído.
+     * @param string $key
+     * Nome da chave do valor que será excluído.
      *
-     * @return      bool
-     *              Retornará ``true`` se a chave foi removida, ou, se, ela não existia dentro
-     *              da coleção atual e ``false`` caso por algum motivo não seja possível executar
-     *              este método.
+     * @return bool
+     * Retornará ``true`` se a chave foi removida, ou, se, ela não existia dentro
+     * da coleção atual e ``false`` caso por algum motivo não seja possível executar
+     * este método.
      */
     public function remove(string $key): bool
     {
@@ -586,15 +585,15 @@ class BasicCollection extends BObject implements iBasicCollection
      * Inicia uma nova coleção de dados.
      *
      *
-     * @param       ?array $initialValues
-     *              Valores com os quais a instância deve iniciar.
+     * @param ?array $initialValues
+     * Valores com os quais a instância deve iniciar.
      *
-     * @param       bool $autoincrement
-     *              Quando ``true`` permite que seja omitido o nome da chave dos valores pois eles
-     *              serão definidos internamente conforme fosse um ``array`` começando em zero.
+     * @param bool $autoincrement
+     * Quando ``true`` permite que seja omitido o nome da chave dos valores pois eles
+     * serão definidos internamente conforme fosse um ``array`` começando em zero.
      *
-     * @throws      \InvalidArgumentException
-     *              Caso algum dos valores iniciais a serem definidos não seja aceito.
+     * @throws \InvalidArgumentException
+     * Caso algum dos valores iniciais a serem definidos não seja aceito.
      */
     function __construct(?array $initialValues = [], bool $autoincrement = false)
     {
@@ -617,10 +616,10 @@ class BasicCollection extends BObject implements iBasicCollection
     /**
      * Insere na coleção todos os dados passados via parametro ``$values``.
      *
-     * @param       array $values
-     *              Coleção de valores que serão adicionados.
+     * @param array $values
+     * Coleção de valores que serão adicionados.
      *
-     * @return      bool
+     * @return bool
      */
     protected function insertValues(array $values): bool
     {
@@ -641,7 +640,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * Remonta os índices dos objetos internos para que eles mantenham coesão com relação a
      * suas posições no ``array de valores``.
      *
-     * @return      void
+     * @return void
      */
     protected function remakeAutoIncrementIndex(): void
     {
@@ -669,16 +668,16 @@ class BasicCollection extends BObject implements iBasicCollection
      * Prioriza o retorno das chaves conforme usadas internamente pois considera que se há uma
      * alteração nelas deve-se a alguma importância relacionado a seu formato de uso.
      *
-     * @param       bool $originalKeys
-     *              Quando ``true`` irá usar as chaves conforme foram definidas na função ``set``.
-     *              Se no armazenamento interno elas sofrerem qualquer alteração e for definido
-     *              ``false`` então elas retornarão seu formato alterado.
+     * @param bool $originalKeys
+     * Quando ``true`` irá usar as chaves conforme foram definidas na função ``set``.
+     * Se no armazenamento interno elas sofrerem qualquer alteração e for definido
+     * ``false`` então elas retornarão seu formato alterado.
      *
-     * @param       ?callable $keyTransform
-     *              Quando for definido E ``$originalKeys = false`` será usado para converter as
-     *              chaves da coleção da forma que for definida na função.
+     * @param ?callable $keyTransform
+     * Quando for definido E ``$originalKeys = false`` será usado para converter as
+     * chaves da coleção da forma que for definida na função.
      *
-     * @return      array
+     * @return array
      */
     protected function retrieveCollection(?bool $originalKeys = false, ?callable $keyTransform = null): array
     {
@@ -708,10 +707,10 @@ class BasicCollection extends BObject implements iBasicCollection
     /**
      * Retorna a coleção de chaves existentes no momento.
      *
-     * @return      array
-     *              As chaves retornadas estarão no formato que estão sendo efetivamente utilizadas
-     *              no ``array collection``.
-     *              Retornará ``[]`` se a coleção for vazia.
+     * @return array
+     * As chaves retornadas estarão no formato que estão sendo efetivamente utilizadas
+     * no ``array collection``.
+     * Retornará ``[]`` se a coleção for vazia.
      */
     protected function retrieveAllKeys(): array
     {
@@ -742,12 +741,12 @@ class BasicCollection extends BObject implements iBasicCollection
      *      if (isset($oCollect["keyName"])) { ... }
      * ```
      *
-     * @param       mixed $offset
-     *              Chave que será verificada.
+     * @param mixed $offset
+     * Chave que será verificada.
      *
-     * @link        http://php.net/manual/pt_BR/arrayaccess.offsetexists.php
+     * @link http://php.net/manual/pt_BR/arrayaccess.offsetexists.php
      *
-     * @return      bool
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -765,12 +764,12 @@ class BasicCollection extends BObject implements iBasicCollection
      *      if ($oCollect["keyName"] == $value) { ... }
      * ```
      *
-     * @param       mixed $offset
-     *              Nome da chave cujo valor deve ser retornado.
+     * @param mixed $offset
+     * Nome da chave cujo valor deve ser retornado.
      *
-     * @link        http://php.net/manual/pt_BR/arrayaccess.offsetget.php
+     * @link http://php.net/manual/pt_BR/arrayaccess.offsetget.php
      *
-     * @return      mixed
+     * @return mixed
      */
     public function offsetGet(mixed $offset): mixed
     {
@@ -788,15 +787,15 @@ class BasicCollection extends BObject implements iBasicCollection
      *      $oCollect["keyName"] = $value;
      * ```
      *
-     * @param       mixed $offset
-     *              Nome da chave.
+     * @param mixed $offset
+     * Nome da chave.
      *
-     * @param       mixed $value
-     *              Valor que será associado.
+     * @param mixed $value
+     * Valor que será associado.
      *
-     * @link        http://php.net/manual/pt_BR/arrayaccess.offsetset.php
+     * @link http://php.net/manual/pt_BR/arrayaccess.offsetset.php
      *
-     * @return      void
+     * @return void
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
@@ -814,12 +813,12 @@ class BasicCollection extends BObject implements iBasicCollection
      *      unset($oCollect["keyName"]);
      * ```
      *
-     * @param       mixed $offset
-     *              Nome da chave cujo valor deve ser retornado.
+     * @param mixed $offset
+     * Nome da chave cujo valor deve ser retornado.
      *
-     * @link        http://php.net/manual/pt_BR/arrayaccess.offsetunset.php
+     * @link http://php.net/manual/pt_BR/arrayaccess.offsetunset.php
      *
-     * @return      void
+     * @return void
      */
     public function offsetUnset(mixed $offset): void
     {
@@ -846,9 +845,9 @@ class BasicCollection extends BObject implements iBasicCollection
      *      if (count($oCollect) > 1) { ... }
      * ```
      *
-     * @link        http://php.net/manual/pt_BR/countable.count.php
+     * @link http://php.net/manual/pt_BR/countable.count.php
      *
-     * @return      int
+     * @return int
      */
     public function count(): int
     {
@@ -875,9 +874,9 @@ class BasicCollection extends BObject implements iBasicCollection
      *      foreach($oCollect as $key => $value) { ... }
      * ```
      *
-     * @link        http://php.net/manual/pt_BR/iteratoraggregate.getiterator.php
+     * @link http://php.net/manual/pt_BR/iteratoraggregate.getiterator.php
      *
-     * @return      \Traversable
+     * @return \Traversable
      */
     public function getIterator(): \Traversable
     {

@@ -40,12 +40,12 @@ class Collection extends BasicCollection implements iCollection
      * Prioriza o retorno das chaves conforme usadas internamente pois considera que se
      * há uma alteração nelas deve-se a alguma importância relacionado a seu formato de uso.
      *
-     * @param       ?bool $originalKeys
-     *              Quando ``true`` irá usar as chaves conforme foram definidas na função ``set``.
-     *              Se no armazenamento interno elas sofrerem qualquer alteração e for definido
-     *              ``false`` então elas retornarão seu formato alterado.
+     * @param ?bool $originalKeys
+     * Quando ``true`` irá usar as chaves conforme foram definidas na função ``set``.
+     * Se no armazenamento interno elas sofrerem qualquer alteração e for definido
+     * ``false`` então elas retornarão seu formato alterado.
      *
-     * @return      array
+     * @return array
      */
     public function toArray(?bool $originalKeys = false): array
     {
@@ -57,15 +57,15 @@ class Collection extends BasicCollection implements iCollection
     /**
      * Permite inserir multiplos dados de uma única vez na coleção.
      *
-     * @param       array $newValues
-     *              ``array associativo`` contendo os novos valores a serem definidos para a coleção.
+     * @param array $newValues
+     * ``array associativo`` contendo os novos valores a serem definidos para a coleção.
      *
-     * @return      bool
-     *              Retornará ``true`` caso TODOS os novos valores sejam adicionados e ``false``
-     *              caso 1 deles falhe.
+     * @return bool
+     * Retornará ``true`` caso TODOS os novos valores sejam adicionados e ``false``
+     * caso 1 deles falhe.
      *
-     * @throws      \InvalidArgumentException
-     *              DEVE ser lançado caso algum dos valores passados seja ``undefined``.
+     * @throws \InvalidArgumentException
+     * DEVE ser lançado caso algum dos valores passados seja ``undefined``.
      */
     public function insert(array $newValues): bool
     {
@@ -77,10 +77,10 @@ class Collection extends BasicCollection implements iCollection
     /**
      * Limpa totalmente a coleção de dados eliminando toda informação armazenada no momento.
      *
-     * @return      bool
-     *              Retornará ``true`` caso a exclusão dos dados tenha sido executada com sucesso
-     *              e ``false`` caso ocorra algum erro em algum dos itens. Neste caso, a coleção
-     *              ficará pela metade.
+     * @return bool
+     * Retornará ``true`` caso a exclusão dos dados tenha sido executada com sucesso
+     * e ``false`` caso ocorra algum erro em algum dos itens. Neste caso, a coleção
+     * ficará pela metade.
      */
     public function clean(): bool
     {
@@ -106,16 +106,16 @@ class Collection extends BasicCollection implements iCollection
      * Inicia nova coleção de dados.
      *
      *
-     * @param       ?array $initialValues
-     *              Valores com os quais a instância deve iniciar.
+     * @param ?array $initialValues
+     * Valores com os quais a instância deve iniciar.
      *
-     * @param       bool $autoincrement
-     *              Quando ``true`` permite que seja omitido o nome da chave dos valores pois eles
-     *              serão definidos internamente conforme fosse um array começando em zero.
+     * @param bool $autoincrement
+     * Quando ``true`` permite que seja omitido o nome da chave dos valores pois eles
+     * serão definidos internamente conforme fosse um array começando em zero.
      *
      *
-     * @throws      \InvalidArgumentException
-     *              Caso algum dos valores iniciais a serem definidos não seja aceito.
+     * @throws \InvalidArgumentException
+     * Caso algum dos valores iniciais a serem definidos não seja aceito.
      */
     function __construct(?array $initialValues = [], bool $autoincrement = false)
     {
