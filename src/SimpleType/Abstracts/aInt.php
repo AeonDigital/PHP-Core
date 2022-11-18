@@ -30,7 +30,7 @@ abstract class aInt extends aBasic implements iInt
     /**
      * Retorna o menor valor possível para o tipo definido.
      *
-     * @return      int
+     * @return int
      */
     abstract public static function min(): int;
 
@@ -38,7 +38,7 @@ abstract class aInt extends aBasic implements iInt
     /**
      * Retorna o maior valor possível para o tipo definido.
      *
-     * @return      int
+     * @return int
      */
     abstract public static function max(): int;
 
@@ -50,10 +50,10 @@ abstract class aInt extends aBasic implements iInt
      * Verifica se o valor indicado pode ser convertido e usado como um valor válido
      * dentro das definições deste tipo.
      *
-     * @param       mixed $v
-     *              Valor que será verificado.
+     * @param mixed $v
+     * Valor que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function validate(mixed $v): bool
     {
@@ -76,13 +76,13 @@ abstract class aInt extends aBasic implements iInt
      * Caso não passe retornará um código que identifica o erro ocorrido na variável
      * ``$err``.
      *
-     * @param       mixed $v
-     *              Valor que será convertido.
+     * @param mixed $v
+     * Valor que será convertido.
      *
-     * @param       ?string $err
-     *              Código do erro da validação.
+     * @param ?string $err
+     * Código do erro da validação.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function parseIfValidate(mixed $v, ?string &$err = null): mixed
     {
@@ -111,10 +111,10 @@ abstract class aInt extends aBasic implements iInt
     /**
      * Verifica se o valor informado está entre o intervalo definido para este tipo.
      *
-     * @param       int $v
-     *              Valor que será verificado.
+     * @param int $v
+     * Valor que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     protected static function validateIntValue(int $v): bool
     {

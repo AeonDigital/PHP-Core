@@ -43,7 +43,7 @@ final class stLong extends aInt
     /**
      * Retorna o menor valor possível para o tipo definido.
      *
-     * @return      int
+     * @return int
      */
     public static function min(): int
     {
@@ -54,7 +54,7 @@ final class stLong extends aInt
     /**
      * Retorna o maior valor possível para o tipo definido.
      *
-     * @return      int
+     * @return int
      */
     public static function max(): int
     {

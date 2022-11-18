@@ -30,10 +30,10 @@ abstract class aBasic implements iBasic
      * Verifica se o valor indicado pode ser convertido e usado como um valor válido
      * dentro das definições deste tipo.
      *
-     * @param       mixed $v
-     *              Valor que será verificado.
+     * @param mixed $v
+     * Valor que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     abstract static function validate(mixed $v): bool;
 
@@ -43,10 +43,10 @@ abstract class aBasic implements iBasic
      * Tenta efetuar a conversão do valor indicado para o tipo ``string``. Caso não
      * seja possível converter o valor, retorna ``null``.
      *
-     * @param       mixed $v
-     *              Valor que será convertido.
+     * @param mixed $v
+     * Valor que será convertido.
      *
-     * @return      ?string
+     * @return ?string
      */
     public static function toString(mixed $v): ?string
     {
@@ -66,13 +66,13 @@ abstract class aBasic implements iBasic
      * Caso não passe retornará um código que identifica o erro ocorrido na variável
      * ``$err``.
      *
-     * @param       mixed $v
-     *              Valor que será convertido.
+     * @param mixed $v
+     * Valor que será convertido.
      *
-     * @param       ?string $err
-     *              Código do erro da validação.
+     * @param ?string $err
+     * Código do erro da validação.
      *
-     * @return      mixed
+     * @return mixed
      */
     abstract static function parseIfValidate(mixed $v, ?string &$err = null): mixed;
 
@@ -87,16 +87,16 @@ abstract class aBasic implements iBasic
      * Caso não passe na validação, retornará um código que identifica o erro ocorrido na
      * variável ``$err``.
      *
-     * @param       mixed $v
-     *              Valor que será convertido.
+     * @param mixed $v
+     * Valor que será convertido.
      *
-     * @param       ?string $err
-     *              Código do erro da validação.
+     * @param ?string $err
+     * Código do erro da validação.
      *
-     * @param       string $type
-     *              Tipo que deve ser retornado.
+     * @param string $type
+     * Tipo que deve ser retornado.
      *
-     * @return      mixed
+     * @return mixed
      */
     protected static function parseTypeIfValidate(mixed $v, ?string &$err = null, string $type): mixed
     {

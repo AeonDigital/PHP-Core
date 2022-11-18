@@ -30,7 +30,7 @@ final class stFloat extends aFloat
     /**
      * Retorna o menor valor possível para o tipo definido.
      *
-     * @return      float
+     * @return float
      */
     public static function min(): float
     {
@@ -41,7 +41,7 @@ final class stFloat extends aFloat
     /**
      * Retorna o maior valor possível para o tipo definido.
      *
-     * @return      float
+     * @return float
      */
     public static function max(): float
     {

@@ -31,10 +31,10 @@ final class stString extends aBasic implements iString
      * Verifica se o valor indicado pode ser convertido e usado como um valor válido
      * dentro das definições deste tipo.
      *
-     * @param       mixed $v
-     *              Valor que será verificado.
+     * @param mixed $v
+     * Valor que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function validate(mixed $v): bool
     {
@@ -50,13 +50,13 @@ final class stString extends aBasic implements iString
      * Caso não passe retornará um código que identifica o erro ocorrido na variável
      * ``$err``.
      *
-     * @param       mixed $v
-     *              Valor que será convertido.
+     * @param mixed $v
+     * Valor que será convertido.
      *
-     * @param       ?string $err
-     *              Código do erro da validação.
+     * @param ?string $err
+     * Código do erro da validação.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function parseIfValidate(mixed $v, ?string &$err = null): mixed
     {

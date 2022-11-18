@@ -30,7 +30,7 @@ abstract class aFloat extends aBasic implements iFloat
     /**
      * Retorna o menor valor possível para o tipo definido.
      *
-     * @return      float
+     * @return float
      */
     abstract public static function min(): float;
 
@@ -38,7 +38,7 @@ abstract class aFloat extends aBasic implements iFloat
     /**
      * Retorna o maior valor possível para o tipo definido.
      *
-     * @return      float
+     * @return float
      */
     abstract public static function max(): float;
 
@@ -50,10 +50,10 @@ abstract class aFloat extends aBasic implements iFloat
      * Verifica se o valor indicado pode ser convertido e usado como um valor válido
      * dentro das definições deste tipo.
      *
-     * @param       mixed $v
-     *              Valor que será verificado.
+     * @param mixed $v
+     * Valor que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function validate(mixed $v): bool
     {
@@ -76,13 +76,13 @@ abstract class aFloat extends aBasic implements iFloat
      * Caso não passe retornará um código que identifica o erro ocorrido na variável
      * ``$err``.
      *
-     * @param       mixed $v
-     *              Valor que será convertido.
+     * @param mixed $v
+     * Valor que será convertido.
      *
-     * @param       ?string $err
-     *              Código do erro da validação.
+     * @param ?string $err
+     * Código do erro da validação.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function parseIfValidate(mixed $v, ?string &$err = null): mixed
     {
@@ -111,10 +111,10 @@ abstract class aFloat extends aBasic implements iFloat
     /**
      * Verifica se o valor informado está entre o intervalo definido para este tipo.
      *
-     * @param       float $v
-     *              Valor que será verificado.
+     * @param float $v
+     * Valor que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     protected static function validateFloatValue(float $v): bool
     {

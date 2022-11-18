@@ -31,7 +31,7 @@ final class stReal extends aBasic implements iReal
      * Retorna o menor valor possível para o tipo definido. Se for definido ``null``, não
      * haverá limites para a representação numérica a ser utilizada.
      *
-     * @return      ?string
+     * @return ?string
      */
     public static function min(): ?string
     {
@@ -43,7 +43,7 @@ final class stReal extends aBasic implements iReal
      * Retorna o maior valor possível para o tipo definido. Se for definido ``null``, não
      * haverá limites para a representação numérica a ser utilizada.
      *
-     * @return      ?string
+     * @return ?string
      */
     public static function max(): ?string
     {
@@ -58,10 +58,10 @@ final class stReal extends aBasic implements iReal
      * Verifica se o valor indicado pode ser convertido e usado como um valor válido
      * dentro das definições deste tipo.
      *
-     * @param       mixed $v
-     *              Valor que será verificado.
+     * @param mixed $v
+     * Valor que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function validate(mixed $v): bool
     {
@@ -84,13 +84,13 @@ final class stReal extends aBasic implements iReal
      * Caso não passe retornará um código que identifica o erro ocorrido na variável
      * ``$err``.
      *
-     * @param       mixed $v
-     *              Valor que será convertido.
+     * @param mixed $v
+     * Valor que será convertido.
      *
-     * @param       ?string $err
-     *              Código do erro da validação.
+     * @param ?string $err
+     * Código do erro da validação.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function parseIfValidate(mixed $v, ?string &$err = null): mixed
     {
@@ -115,10 +115,10 @@ final class stReal extends aBasic implements iReal
     /**
      * Verifica se o valor informado está entre o intervalo definido para este tipo.
      *
-     * @param       iRealType $v
-     *              Valor que será verificado.
+     * @param iRealType $v
+     * Valor que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     protected static function validateRealValue(iRealType $v): bool
     {

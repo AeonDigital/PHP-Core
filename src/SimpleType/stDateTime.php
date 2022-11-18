@@ -34,7 +34,7 @@ final class stDateTime extends aBasic implements iDateTime
      * Retorna o menor valor possível para este tipo de data. Se for definido ``null``,
      * o limite será dado pelo próprio sistema.
      *
-     * @return      ?\DateTime
+     * @return ?\DateTime
      */
     public static function min(): ?\DateTime
     {
@@ -47,7 +47,7 @@ final class stDateTime extends aBasic implements iDateTime
      * Retorna o maior valor possível para este tipo de data. Se for definido ``null``,
      * o limite será dado pelo próprio sistema.
      *
-     * @return      ?\DateTime
+     * @return ?\DateTime
      */
     public static function max(): ?\DateTime
     {
@@ -66,10 +66,10 @@ final class stDateTime extends aBasic implements iDateTime
      * representando um **timestamp** ou um objeto ``DateTime`` dentro dos limites
      * especificados.
      *
-     * @param       mixed $v
-     *              Valor que será verificado.
+     * @param mixed $v
+     * Valor que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function validate(mixed $v): bool
     {
@@ -90,13 +90,13 @@ final class stDateTime extends aBasic implements iDateTime
      * Caso não passe retornará um código que identifica o erro ocorrido na variável
      * ``$err``.
      *
-     * @param       mixed $v
-     *              Valor que será convertido.
+     * @param mixed $v
+     * Valor que será convertido.
      *
-     * @param       ?string $err
-     *              Código do erro da validação.
+     * @param ?string $err
+     * Código do erro da validação.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function parseIfValidate(mixed $v, ?string &$err = null): mixed
     {
@@ -121,10 +121,10 @@ final class stDateTime extends aBasic implements iDateTime
     /**
      * Verifica se o valor informado está entre o intervalo definido para este tipo.
      *
-     * @param       \DateTime $v
-     *              Valor que será verificado.
+     * @param \DateTime $v
+     * Valor que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     protected static function validateDateTimeValue(\DateTime $v): bool
     {
