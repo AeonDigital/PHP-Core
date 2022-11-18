@@ -32,13 +32,13 @@ abstract class aFieldModel extends aField implements iFieldModel
      * Verifica se o valor passado é uma instância ``iModel`` de mesmo nome que o nome
      * passado.
      *
-     * @param       mixed $v
-     *              Objeto que será testado.
+     * @param mixed $v
+     * Objeto que será testado.
      *
-     * @param       string $modelName
-     *              Nome do modelo de dados alvo.
+     * @param string $modelName
+     * Nome do modelo de dados alvo.
      *
-     * @return      bool
+     * @return bool
      */
     private function checkIfValueIsModelOf(mixed $v, string $modelName): bool
     {
@@ -58,10 +58,10 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * Este método não efetua a validação do valor.
      *
-     * @param       mixed $v
-     *              Valor que será convertido.
+     * @param mixed $v
+     * Valor que será convertido.
      *
-     * @return      mixed
+     * @return mixed
      */
     protected function modelIndividualValue_RetrieveInStorageFormat(mixed $v): mixed
     {
@@ -91,10 +91,10 @@ abstract class aFieldModel extends aField implements iFieldModel
      *      ];
      * ```
      *
-     * @param       mixed $v
-     *              Valor que será testado.
+     * @param mixed $v
+     * Valor que será testado.
      *
-     * @return      array
+     * @return array
      */
     protected function modelIndividualValue_CheckValue(mixed $v): array
     {
@@ -180,10 +180,10 @@ abstract class aFieldModel extends aField implements iFieldModel
      *      ];
      * ```
      *
-     * @param       mixed $v
-     *              Valor que será testado.
+     * @param mixed $v
+     * Valor que será testado.
      *
-     * @return      array
+     * @return array
      */
     protected function modelIndividualValue_ProccessSet(mixed $v): array
     {
@@ -202,14 +202,14 @@ abstract class aFieldModel extends aField implements iFieldModel
     /**
      * Retorna o valor indicado conforme as definições de formatação.
      *
-     * @param       mixed $val
-     *              Valor que será tratado.
+     * @param mixed $val
+     * Valor que será tratado.
      *
-     * @param       bool $formated
-     *              Este parametro só surte efeto se houver um ``inputFormat`` definido.
-     *              Se ``true``, retornará o valor conforme o padrão ``inputFormat`` define.
+     * @param bool $formated
+     * Este parametro só surte efeto se houver um ``inputFormat`` definido.
+     * Se ``true``, retornará o valor conforme o padrão ``inputFormat`` define.
      *
-     * @return      mixed
+     * @return mixed
      */
     protected function modelIndividualValue_ProccessGet(mixed $val, bool $formated = false): mixed
     {
@@ -257,10 +257,10 @@ abstract class aFieldModel extends aField implements iFieldModel
      *      ];
      * ```
      *
-     * @param       mixed $v
-     *              Valor que será testado.
+     * @param mixed $v
+     * Valor que será testado.
      *
-     * @return      array
+     * @return array
      */
     protected function internal_CheckValue(mixed $v): array
     {
@@ -296,10 +296,10 @@ abstract class aFieldModel extends aField implements iFieldModel
      *      ];
      * ```
      *
-     * @param       mixed $v
-     *              Valor que será testado.
+     * @param mixed $v
+     * Valor que será testado.
      *
-     * @return      array
+     * @return array
      */
     protected function internal_ProccessSet(mixed $v): array
     {
@@ -311,14 +311,14 @@ abstract class aFieldModel extends aField implements iFieldModel
      * Deve ser substituído dentro de cada classe especialista de forma a apontar para o
      * devido processo compatível com os critérios definidos.
      *
-     * @param       mixed $val
-     *              Valor que será tratado.
+     * @param mixed $val
+     * Valor que será tratado.
      *
-     * @param       bool $formated
-     *              Este parametro só surte efeto se houver um ``inputFormat`` definido.
-     *              Se ``true``, retornará o valor conforme o padrão ``inputFormat`` define.
+     * @param bool $formated
+     * Este parametro só surte efeto se houver um ``inputFormat`` definido.
+     * Se ``true``, retornará o valor conforme o padrão ``inputFormat`` define.
      *
-     * @return      mixed
+     * @return mixed
      */
     protected function internal_ProccessGet(mixed $val, bool $formated = false): mixed
     {
@@ -351,7 +351,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      * A partir do acionamento de qualquer método de alteração de campos e obter sucesso
      * ao defini-lo, o resultado deste método será sempre ``false``.
      *
-     * @return      bool
+     * @return bool
      */
     public function isInitial(): bool
     {
@@ -365,7 +365,7 @@ abstract class aFieldModel extends aField implements iFieldModel
     /**
      * Retorna uma instância do modelo de dados usada por este campo.
      *
-     * @return      iModel
+     * @return iModel
      */
     public function getModel(): iModel
     {
@@ -374,7 +374,7 @@ abstract class aFieldModel extends aField implements iFieldModel
     /**
      * Retorna o nome do modelo de dados usado.
      *
-     * @return      string
+     * @return string
      */
     public function getModelName(): string
     {
@@ -386,7 +386,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      * Em campos *collection* será retornado o ``array`` contendo as instâncias que
      * compõe a coleção atual.
      *
-     * @return      string|array|iModel|undefined
+     * @return string|array|iModel|undefined
      */
     public function getInstanceValue(): string|array|iModel|undefined
     {
@@ -435,15 +435,15 @@ abstract class aFieldModel extends aField implements iFieldModel
      *      ];
      * ```
      *
-     * @param       array $config
-     *              ``array`` associativo com as configurações para este campo.
+     * @param array $config
+     * ``array`` associativo com as configurações para este campo.
      *
-     * @param       iModelFactory $factory
-     *              Instância de uma fábrica de modelos para ser usada internamente caso a
-     *              nova instância represente um campo que utiliza modelos de dados.
+     * @param iModelFactory $factory
+     * Instância de uma fábrica de modelos para ser usada internamente caso a
+     * nova instância represente um campo que utiliza modelos de dados.
      *
-     * @throws      \InvalidArgumentException
-     *              Caso algum valor passado não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso algum valor passado não seja válido.
      */
     function __construct(array $config, iModelFactory $factory)
     {

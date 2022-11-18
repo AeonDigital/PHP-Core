@@ -90,11 +90,11 @@ abstract class aFieldCollection extends aField implements iFieldCollection
      *      ];
      * ```
      *
-     * @param       array $config
-     *              Array associativo com as configurações para este campo.
+     * @param array $config
+     * Array associativo com as configurações para este campo.
      *
-     * @throws      \InvalidArgumentException
-     *              Caso algum valor passado não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso algum valor passado não seja válido.
      */
     function __construct(array $config)
     {

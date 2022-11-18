@@ -68,15 +68,15 @@ abstract class aFieldModelCollection extends aFieldModel implements iFieldCollec
      *      ];
      * ```
      *
-     * @param       array $config
-     *              Array associativo com as configurações para este campo.
+     * @param array $config
+     * Array associativo com as configurações para este campo.
      *
-     * @param       iModelFactory $factory
-     *              Instância de uma fábrica de modelos para ser usada internamente caso a
-     *              nova instância represente um campo que utiliza modelos de dados.
+     * @param iModelFactory $factory
+     * Instância de uma fábrica de modelos para ser usada internamente caso a
+     * nova instância represente um campo que utiliza modelos de dados.
      *
-     * @throws      \InvalidArgumentException
-     *              Caso algum valor passado não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso algum valor passado não seja válido.
      */
     function __construct(array $config, iModelFactory $factory)
     {

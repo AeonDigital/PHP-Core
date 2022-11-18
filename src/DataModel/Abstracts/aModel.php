@@ -30,10 +30,10 @@ abstract class aModel extends BObject implements iModel
     /**
      * Verifica se o valor passado é uma instância ``iModel``.
      *
-     * @param       mixed $v
-     *              Objeto que será testado.
+     * @param mixed $v
+     * Objeto que será testado.
      *
-     * @return      bool
+     * @return bool
      */
     private function checkIfValueIsModel(mixed $v): bool
     {
@@ -51,18 +51,18 @@ abstract class aModel extends BObject implements iModel
     /**
      * Nome do modelo de dados.
      *
-     * @var         string
+     * @var string
      */
     private string $name = "";
     /**
      * Define o nome do modelo de dados.
      * O nome de um modelo de dados apenas pode aceitar caracteres ``a-zA-Z0-9_``.
      *
-     * @param       string $n
-     *              Nome do modelo de dados.
+     * @param string $n
+     * Nome do modelo de dados.
      *
-     * @throws      \InvalidArgumentException
-     *              Caso o nome indicado seja inválido.
+     * @throws \InvalidArgumentException
+     * Caso o nome indicado seja inválido.
      */
     private function setName(string $n): void
     {
@@ -82,7 +82,7 @@ abstract class aModel extends BObject implements iModel
     /**
      * Retorna o nome do modelo de dados.
      *
-     * @return      string
+     * @return string
      */
     public function getName(): string
     {
@@ -96,16 +96,16 @@ abstract class aModel extends BObject implements iModel
     /**
      * Descrição de uso/funcionalidade do modelo de dados.
      *
-     * @var         string
+     * @var string
      */
     private string $description = "";
     /**
      * Define a descrição de uso/funcionalidade do modelo de dados.
      *
-     * @param       string $d
-     *              Descrição do modelo de dados.
+     * @param string $d
+     * Descrição do modelo de dados.
      *
-     * @return      void
+     * @return void
      */
     private function setDescription(string $d): void
     {
@@ -114,7 +114,7 @@ abstract class aModel extends BObject implements iModel
     /**
      * Retorna a descrição de uso/funcionalidade do modelo de dados.
      *
-     * @return      string
+     * @return string
      */
     public function getDescription(): string
     {
@@ -133,10 +133,10 @@ abstract class aModel extends BObject implements iModel
     /**
      * Causa uma exception padrão para quando o campo de nome indicado não existir.
      *
-     * @param       string $f
-     *              Nome do campo.
+     * @param string $f
+     * Nome do campo.
      *
-     * @return      void
+     * @return void
      */
     protected function throwErrorIfFieldDoesNotExists(string $f): void
     {
@@ -162,18 +162,18 @@ abstract class aModel extends BObject implements iModel
      *      ];
      * ```
      *
-     * @var         array
+     * @var array
      */
     private array $fieldsCollection = [];
     /**
      * Permite adicionar um novo campo na coleção deste modelo de dados.
      *
-     * @param       iField $field
-     *              Instância do campo que será adicionado neste modelo de dados.
+     * @param iField $field
+     * Instância do campo que será adicionado neste modelo de dados.
      *
-     * @return      void
+     * @return void
      *
-     * @throws      \InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     private function addField(iField $field): void
     {
@@ -191,10 +191,10 @@ abstract class aModel extends BObject implements iModel
     /**
      * Retorna o objeto ``iField`` referente ao campo de nome indicado.
      *
-     * @param       string $f
-     *              Nome do campo que será retornado.
+     * @param string $f
+     * Nome do campo que será retornado.
      *
-     * @return      ?iField
+     * @return ?iField
      */
     protected function getField(string $f): ?iField
     {
@@ -207,10 +207,10 @@ abstract class aModel extends BObject implements iModel
     /**
      * Retorna o objeto ``iFieldModel`` referente ao campo de nome indicado.
      *
-     * @param       string $f
-     *              Nome do campo que será retornado.
+     * @param string $f
+     * Nome do campo que será retornado.
      *
-     * @return      ?iFieldModel
+     * @return ?iFieldModel
      */
     protected function getFieldModel(string $f): ?iFieldModel
     {
@@ -224,10 +224,10 @@ abstract class aModel extends BObject implements iModel
     /**
      * Retorna o objeto ``iFieldCollection`` referente ao campo de nome indicado.
      *
-     * @param       string $f
-     *              Nome do campo que será retornado.
+     * @param string $f
+     * Nome do campo que será retornado.
      *
-     * @return      ?iFieldCollection
+     * @return ?iFieldCollection
      */
     protected function getFieldCollection(string $f): ?iFieldCollection
     {
@@ -244,10 +244,10 @@ abstract class aModel extends BObject implements iModel
     /**
      * Identifica se o campo com o nome indicado existe neste modelo de dados.
      *
-     * @param       string $f
-     *              Nome do campo que será verificado.
+     * @param string $f
+     * Nome do campo que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public function hasField(string $f): bool
     {
@@ -259,7 +259,7 @@ abstract class aModel extends BObject implements iModel
     /**
      * Retorna a contagem total dos campos existentes para este modelo de dados.
      *
-     * @return      int
+     * @return int
      */
     public function countFields(): int
     {
@@ -272,11 +272,11 @@ abstract class aModel extends BObject implements iModel
      * Retorna um ``array`` contendo o nome de cada um dos campos existentes neste
      * modelo de dados.
      *
-     * @param       bool $getReferences
-     *              Quando ``true`` retornará todos os campos existentes.
-     *              Quando ``false`` não trará os campos que são do tipo ``reference``.
+     * @param bool $getReferences
+     * Quando ``true`` retornará todos os campos existentes.
+     * Quando ``false`` não trará os campos que são do tipo ``reference``.
      *
-     * @return      array
+     * @return array
      */
     public function getFieldNames(bool $getReferences = true): array
     {
@@ -295,7 +295,7 @@ abstract class aModel extends BObject implements iModel
      * Retorna um ``array`` associativo contendo todos os campos definidos para o
      * modelo atual e seus respectivos valores iniciais.
      *
-     * @return      array
+     * @return array
      */
     public function getInitialDataModel(): array
     {
@@ -318,7 +318,7 @@ abstract class aModel extends BObject implements iModel
     /**
      * Identifica se já houve qualquer alteração em qualquer dos campos deste modelo de dados.
      *
-     * @var         bool
+     * @var bool
      */
     private bool $modelState_InitialState = true;
     /**
@@ -327,7 +327,7 @@ abstract class aModel extends BObject implements iModel
      * A partir do acionamento de qualquer método de alteração de campos e obter sucesso
      * ao defini-lo, o resultado deste método será sempre ``false``.
      *
-     * @return      bool
+     * @return bool
      */
     public function isInitial(): bool
     {
@@ -340,7 +340,7 @@ abstract class aModel extends BObject implements iModel
      * Informa se o modelo de dados tem no momento valores que satisfazem os critérios de
      * validação para todos os seus campos.
      *
-     * @return      bool
+     * @return bool
      */
     public function isValid(): bool
     {
@@ -372,7 +372,7 @@ abstract class aModel extends BObject implements iModel
      *      ];
      * ```
      *
-     * @return      string|array
+     * @return string|array
      */
     public function getState(): string|array
     {
@@ -404,7 +404,7 @@ abstract class aModel extends BObject implements iModel
      * Este valor é sobrescrito sempre que um método que exige validação for acionado,
      * portanto, sempre conterá o valor da última validação realizada.
      *
-     * @var         null|string|array
+     * @var null|string|array
      */
     private null|string|array $modelState_ValidateState = null;
     /**
@@ -428,7 +428,7 @@ abstract class aModel extends BObject implements iModel
      *      ];
      * ```
      *
-     * @return      null|string|array
+     * @return null|string|array
      */
     public function getLastValidateState(): null|string|array
     {
@@ -440,14 +440,14 @@ abstract class aModel extends BObject implements iModel
      * Mantêm a última verificação ``canSet`` referente a última validação realizada
      * para este campo de dados.
      *
-     * @var         bool
+     * @var bool
      */
     protected bool $modelState_ValidateStateCanSet = true;
     /**
      * Retornará ``true`` caso a última validação realizada permitir que o valor testado seja
      * definido para o modelo de dados usado.
      *
-     * @return      bool
+     * @return bool
      */
     public function getLastValidateCanSet(): bool
     {
@@ -470,6 +470,7 @@ abstract class aModel extends BObject implements iModel
      *
      *
      * **Método "getLastValidateState()"**
+     *
      * Após uma validação é possível usar este método para averiguar com precisão qual foi o
      * motivo da falha.
      * Para os passos **1** e **3** será retornado uma ``string`` única com o código do erro.
@@ -478,24 +479,25 @@ abstract class aModel extends BObject implements iModel
      *
      *
      * **Método "getLastValidateCanSet()"**
+     *
      * Após uma validação é possível usar este método para averiguar se o valor passado,
      * passando ou não, pode ser efetivamente definido para o modelo de dados.
      *
      *
-     * @param       mixed $objValues
-     *              Objeto que traz os valores a serem testados.
+     * @param mixed $objValues
+     * Objeto que traz os valores a serem testados.
      *
-     * @param       bool $checkAll
-     *              Quando ``true`` apenas confirmará a validade da coleção de valores se com os
-     *              mesmos for possível preencher todos os campos obrigatórios deste modelo de
-     *              dados. Campos não declarados mas que possuem um valor padrão definido **SEMPRE**
-     *              passarão neste tipo de validação
+     * @param bool $checkAll
+     * Quando ``true`` apenas confirmará a validade da coleção de valores se com os
+     * mesmos for possível preencher todos os campos obrigatórios deste modelo de
+     * dados. Campos não declarados mas que possuem um valor padrão definido **SEMPRE**
+     * passarão neste tipo de validação
      *
-     * @return      bool
+     * @return bool
      *
-     * @throws      \InvalidArgumentException
-     *              Caso o objeto passado possua propriedades não correspondentes aos campos
-     *              definidos.
+     * @throws \InvalidArgumentException
+     * Caso o objeto passado possua propriedades não correspondentes aos campos
+     * definidos.
      */
     public function validateValues(mixed $objValues, bool $checkAll = false): bool
     {
@@ -586,20 +588,20 @@ abstract class aModel extends BObject implements iModel
      * Define o valor do campo de nome indicado.
      * Internamente executa o método ``iField->setValue()``.
      *
-     * @param       string $f
-     *              Nome do campo cujo valor será definido.
+     * @param string $f
+     * Nome do campo cujo valor será definido.
      *
-     * @param       mixed $v
-     *              Valor a ser definido para o campo.
+     * @param mixed $v
+     * Valor a ser definido para o campo.
      *
-     * @return      bool
-     *              Retornará ``true`` se o valor tornou o campo válido ou ``false`` caso
-     *              agora ele esteja inválido.
-     *              Também retornará ``false`` caso o valor seja totalmente incompatível
-     *              com o campo.
+     * @return bool
+     * Retornará ``true`` se o valor tornou o campo válido ou ``false`` caso
+     * agora ele esteja inválido.
+     * Também retornará ``false`` caso o valor seja totalmente incompatível
+     * com o campo.
      *
-     * @throws      \InvalidArgumentException
-     *              Caso o nome do campo não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso o nome do campo não seja válido.
      */
     public function setFieldValue(string $f, mixed $v): bool
     {
@@ -621,13 +623,13 @@ abstract class aModel extends BObject implements iModel
      * Retorna o valor atual do campo de nome indicado.
      * Internamente executa o método ``iField->getValue()``.
      *
-     * @param       string $f
-     *              Nome do campo alvo.
+     * @param string $f
+     * Nome do campo alvo.
      *
-     * @return      mixed
+     * @return mixed
      *
-     * @throws      \InvalidArgumentException
-     *              Caso o nome do campo não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso o nome do campo não seja válido.
      */
     public function getFieldValue(string $f): mixed
     {
@@ -641,13 +643,13 @@ abstract class aModel extends BObject implements iModel
      * Retorna o valor atual do campo de nome indicado.
      * Internamente executa o método ``iField->getStorageValue()``.
      *
-     * @param       string $f
-     *              Nome do campo alvo.
+     * @param string $f
+     * Nome do campo alvo.
      *
-     * @return      mixed
+     * @return mixed
      *
-     * @throws      \InvalidArgumentException
-     *              Caso o nome do campo não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso o nome do campo não seja válido.
      */
     public function getFieldStorageValue(string $f): mixed
     {
@@ -661,13 +663,13 @@ abstract class aModel extends BObject implements iModel
      * Retorna o valor atual do campo de nome indicado.
      * Internamente executa o método ``iField->getRawValue()``.
      *
-     * @param       string $f
-     *              Nome do campo alvo.
+     * @param string $f
+     * Nome do campo alvo.
      *
-     * @return      mixed
+     * @return mixed
      *
-     * @throws      \InvalidArgumentException
-     *              Caso o nome do campo não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso o nome do campo não seja válido.
      */
     public function getFieldRawValue(string $f): mixed
     {
@@ -692,22 +694,22 @@ abstract class aModel extends BObject implements iModel
      * campos de dados então isto será feito mesmo que isto  torne o modelo como um todo
      * inválido.
      *
-     * @param       mixed $objValues
-     *              Objeto que traz os valores a serem redefinidos para o atual modelo de
-     *              dados.
+     * @param mixed $objValues
+     * Objeto que traz os valores a serem redefinidos para o atual modelo de
+     * dados.
      *
-     * @param       bool $checkAll
-     *              Quando ``true`` apenas irá definir os dados caso seja possível definir
-     *              todos os campos do modelo de dados com os valores explicitados.
-     *              Os campos não definidos devem poder serem definidos com seus valores
-     *              padrão, caso contrário o *set* não será feito.
+     * @param bool $checkAll
+     * Quando ``true`` apenas irá definir os dados caso seja possível definir
+     * todos os campos do modelo de dados com os valores explicitados.
+     * Os campos não definidos devem poder serem definidos com seus valores
+     * padrão, caso contrário o *set* não será feito.
      *
-     * @return      bool
-     *              Retornará ``true`` caso os valores passados tornem o modelo válido.
+     * @return bool
+     * Retornará ``true`` caso os valores passados tornem o modelo válido.
      *
-     * @throws      \InvalidArgumentException
-     *              Caso o objeto passado possua propriedades não correspondentes aos campos
-     *              definidos.
+     * @throws \InvalidArgumentException
+     * Caso o objeto passado possua propriedades não correspondentes aos campos
+     * definidos.
      */
     public function setValues(mixed $objValues, bool $checkAll = false): bool
     {
@@ -732,7 +734,7 @@ abstract class aModel extends BObject implements iModel
      * Internamente executa o método ``iField->getValue()`` para cada um dos campos de dados
      * existente.
      *
-     * @return      array
+     * @return array
      */
     public function getValues(): array
     {
@@ -752,7 +754,7 @@ abstract class aModel extends BObject implements iModel
      * Internamente executa o método ``iField->getStorageValue()`` para cada um dos campos
      * de dados existente.
      *
-     * @return      array
+     * @return array
      */
     public function getStorageValues(): array
     {
@@ -771,7 +773,7 @@ abstract class aModel extends BObject implements iModel
      * Internamente executa o método ``iField->getRawValue()`` para cada um dos campos de
      * dados existente.
      *
-     * @return      array
+     * @return array
      */
     public function getRawValues(): array
     {
@@ -809,11 +811,11 @@ abstract class aModel extends BObject implements iModel
      *          "fields" => ,
      *      ];
      * ```
-     * @param       array $config
-     *              Array associativo com as configurações para este modelo de dados.
+     * @param array $config
+     * Array associativo com as configurações para este modelo de dados.
      *
-     * @throws      \InvalidArgumentException
-     *              Caso algum valor passado não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso algum valor passado não seja válido.
      */
     function __construct(array $config)
     {
@@ -856,38 +858,38 @@ abstract class aModel extends BObject implements iModel
      * Indica se ao acessar ``_call`` é para ativar o método principal
      * (definido nesta classe abstrata).
      *
-     * @var         bool
+     * @var bool
      */
     protected bool $useMainCall = true;
     /**
      * Método que deve ser definido nas classes concretas e que permitem expandir o uso
      * do método ``__call``.
      *
-     * @param       string $name
-     *              Nome do método.
-     *              É preciso ter o prefixo ``new`` e o nome do campo que será
-     *              automaticamente definido.
+     * @param string $name
+     * Nome do método.
+     * É preciso ter o prefixo ``new`` e o nome do campo que será
+     * automaticamente definido.
      *
-     * @param       array $arguments
-     *              Opcionalmente pode ser definido uma coleção de valores a serem
-     *              definidos para a nova instância.
+     * @param array $arguments
+     * Opcionalmente pode ser definido uma coleção de valores a serem
+     * definidos para a nova instância.
      *
-     * @return      mixed
+     * @return mixed
      */
     abstract protected function extendCall(string $name, array $arguments): mixed;
     /**
      * Permite efetuar o auto-set de um dos campos quando este for do tipo *reference*.
      *
-     * @param       string $name
-     *              Nome do método.
-     *              É preciso ter o prefixo ``new`` e o nome do campo que será
-     *              automaticamente definido.
+     * @param string $name
+     * Nome do método.
+     * É preciso ter o prefixo ``new`` e o nome do campo que será
+     * automaticamente definido.
      *
-     * @param       array $arguments
-     *              Opcionalmente pode ser definido uma coleção de valores a serem
-     *              definidos para a nova instância.
+     * @param array $arguments
+     * Opcionalmente pode ser definido uma coleção de valores a serem
+     * definidos para a nova instância.
      *
-     * @return      mixed
+     * @return mixed
      */
     public function __call(string $name, $arguments)
     {
@@ -971,11 +973,11 @@ abstract class aModel extends BObject implements iModel
      * Não retorna nenhum valor, e, caso o valor passado não seja válido para este campo,
      * nenhuma alteração será feita sobre o valor pré-existente.
      *
-     * @param       string $name
-     *              Nome do campo.
+     * @param string $name
+     * Nome do campo.
      *
-     * @param       mixed $value
-     *              Valor a ser definido.
+     * @param mixed $value
+     * Valor a ser definido.
      */
     public function __set(string $name, mixed $value): void
     {
@@ -990,10 +992,10 @@ abstract class aModel extends BObject implements iModel
      *
      * Internamente executa o método ``getFieldValue()``.
      *
-     * @param       string $name
-     *              Nome do campo.
+     * @param string $name
+     * Nome do campo.
      *
-     * @return      mixed
+     * @return mixed
      */
     public function __get(string $name): mixed
     {
@@ -1033,7 +1035,7 @@ abstract class aModel extends BObject implements iModel
      *
      * @link        http://php.net/manual/pt_BR/iteratoraggregate.getiterator.php
      *
-     * @return      \Traversable
+     * @return \Traversable
      */
     public function getIterator(): \Traversable
     {

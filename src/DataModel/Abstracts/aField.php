@@ -31,7 +31,7 @@ abstract class aField extends BObject implements iField
     /**
      * Reflection da classe definida para o tipo deste campo.
      *
-     * @var         \ReflectionClass
+     * @var \ReflectionClass
      */
     private \ReflectionClass $typeReflection;
 
@@ -41,7 +41,7 @@ abstract class aField extends BObject implements iField
      * Identifica se o nome da classe passada para o ``simpleType`` corresponde a uma
      * classe ``iSimpleType`` válida.
      *
-     * @return      bool
+     * @return bool
      */
     private function isValidSimpleType(): bool
     {
@@ -51,7 +51,7 @@ abstract class aField extends BObject implements iField
     /**
      * Identifica se a classe passada para o ``simpleType`` implementa a namespace ``iBool``.
      *
-     * @return      bool
+     * @return bool
      */
     private function isSimpleTypeBool(): bool
     {
@@ -61,7 +61,7 @@ abstract class aField extends BObject implements iField
     /**
      * Identifica se a classe passada para o ``simpleType`` implementa a namespace ``iNumeric``.
      *
-     * @return      bool
+     * @return bool
      */
     private function isSimpleTypeNumeric(): bool
     {
@@ -71,7 +71,7 @@ abstract class aField extends BObject implements iField
     /**
      * Identifica se a classe passada para o ``simpleType`` implementa a namespace ``iReal``.
      *
-     * @return      bool
+     * @return bool
      */
     private function isSimpleTypeReal(): bool
     {
@@ -81,7 +81,7 @@ abstract class aField extends BObject implements iField
     /**
      * Identifica se a classe passada para o ``simpleType`` implementa a namespace ``iDateTime``.
      *
-     * @return      bool
+     * @return bool
      */
     private function isSimpleTypeDateTime(): bool
     {
@@ -91,7 +91,7 @@ abstract class aField extends BObject implements iField
     /**
      * Identifica se a classe passada para o ``simpleType`` implementa a namespace ``iString``.
      *
-     * @return      bool
+     * @return bool
      */
     private function isSimpleTypeString(): bool
     {
@@ -105,9 +105,9 @@ abstract class aField extends BObject implements iField
      * Retorna uma ``string`` simples que permite identificar o tipo de dado que este campo
      * está apto a armazenar.
      *
-     * @return      string
-     *              Os valores a serem retornados podem ser:
-     *              ``bool``, ``numeric``, ``real``, ``DateTime``, ``string``, ``reference``
+     * @return string
+     * Os valores a serem retornados podem ser:
+     * ``bool``, ``numeric``, ``real``, ``DateTime``, ``string``, ``reference``
      */
     protected function identifySimpleType(): string
     {
@@ -137,7 +137,7 @@ abstract class aField extends BObject implements iField
     /**
      * Reflection da classe definida para o ``inputFormat``.
      *
-     * @var         \ReflectionClass
+     * @var \ReflectionClass
      */
     private \ReflectionClass $inputFormatReflection;
 
@@ -147,7 +147,7 @@ abstract class aField extends BObject implements iField
      * Identifica se o nome da classe passada para o ``inputFormat`` corresponde a uma classe
      * ``iFormat`` válida.
      *
-     * @return      bool
+     * @return bool
      */
     private function isValidInputFormat(): bool
     {
@@ -158,10 +158,10 @@ abstract class aField extends BObject implements iField
      * Indica se o valor passado, se for uma instrução ``NOW()`` pode ou não ser usada para
      * este campo.
      *
-     * @param       mixed $v
-     *              Valor que será testado.
+     * @param mixed $v
+     * Valor que será testado.
      *
-     * @return      bool
+     * @return bool
      */
     private function isValidNowInstruction(mixed $v): bool
     {
@@ -182,18 +182,18 @@ abstract class aField extends BObject implements iField
     /**
      * Nome do campo.
      *
-     * @var         string
+     * @var string
      */
     private string $name = "";
     /**
      * Define o nome do campo.
      * O nome de um campo apenas pode aceitar caracteres ``a-zA-Z0-9_``.
      *
-     * @param       string $n
-     *              Nome do campo.
+     * @param string $n
+     * Nome do campo.
      *
-     * @throws      \InvalidArgumentException
-     *              Caso o nome indicado seja inválido.
+     * @throws \InvalidArgumentException
+     * Caso o nome indicado seja inválido.
      */
     private function setName(string $n): void
     {
@@ -213,7 +213,7 @@ abstract class aField extends BObject implements iField
     /**
      * Retorna o nome do campo.
      *
-     * @return      string
+     * @return string
      */
     public function getName(): string
     {
@@ -227,16 +227,16 @@ abstract class aField extends BObject implements iField
     /**
      * Descrição de uso/funcionalidade do campo.
      *
-     * @var         string
+     * @var string
      */
     private string $description = "";
     /**
      * Define a descrição de uso/funcionalidade do campo.
      *
-     * @param       string $d
-     *              Descrição do campo.
+     * @param string $d
+     * Descrição do campo.
      *
-     * @return      void
+     * @return void
      */
     private function setDescription(string $d): void
     {
@@ -245,7 +245,7 @@ abstract class aField extends BObject implements iField
     /**
      * Retorna a descrição de uso/funcionalidade do campo.
      *
-     * @return      string
+     * @return string
      */
     public function getDescription(): string
     {
@@ -259,7 +259,7 @@ abstract class aField extends BObject implements iField
     /**
      * Nome completo da classe que determina o tipo deste campo.
      *
-     * @var         string
+     * @var string
      */
     private string $type = "";
     /**
@@ -268,13 +268,13 @@ abstract class aField extends BObject implements iField
      * A classe informada deve implementar a interface
      * ``AeonDigital\Interfaces\SimpleType\iSimpleType``.
      *
-     * @param       string $t
-     *              Nome completo da classe a ser usada.
+     * @param string $t
+     * Nome completo da classe a ser usada.
      *
-     * @return      void
+     * @return void
      *
-     * @throws      \InvalidArgumentException
-     *              Caso a classe indicada não seja válida.
+     * @throws \InvalidArgumentException
+     * Caso a classe indicada não seja válida.
      */
     private function setType(string $t): void
     {
@@ -309,7 +309,7 @@ abstract class aField extends BObject implements iField
     /**
      * Retorna o nome completo da classe que determina o tipo deste campo.
      *
-     * @return      string
+     * @return string
      */
     public function getType(): string
     {
@@ -324,7 +324,7 @@ abstract class aField extends BObject implements iField
      * Array associativo que armazena as principais funções que uma definição de formato
      * de entrada deve ter.
      *
-     * @var         ?array
+     * @var ?array
      */
     private ?array $inputFormat = null;
     /**
@@ -357,13 +357,13 @@ abstract class aField extends BObject implements iField
      *      ];
      * ```
      *
-     * @param       null|string|array $if
-     *              Nome completo da classe a ser usada.
+     * @param null|string|array $if
+     * Nome completo da classe a ser usada.
      *
-     * @return      void
+     * @return void
      *
-     * @throws      \InvalidArgumentException
-     *              Caso a classe indicada não seja válida.
+     * @throws \InvalidArgumentException
+     * Caso a classe indicada não seja válida.
      */
     private function setInputFormat(null|string|array $if): void
     {
@@ -430,7 +430,7 @@ abstract class aField extends BObject implements iField
      * retorna o nome de uma instrução especial de transformação de caracteres para
      * campos do tipo ``string``.
      *
-     * @return      ?string
+     * @return ?string
      */
     public function getInputFormat(): ?string
     {
@@ -453,11 +453,11 @@ abstract class aField extends BObject implements iField
      * Apenas poderá ser definido para campos que armazenam ``strings``. Se este campo usa um
      * ``inputFormat``, então esta regra deve ser controlada pela definição que o formato impõe.
      *
-     * @param       ?int $l
-     *              Número máximo de caracteres aceitos para valores que este campo possa
-     *              assumir.
+     * @param ?int $l
+     * Número máximo de caracteres aceitos para valores que este campo possa
+     * assumir.
      *
-     * @return      void
+     * @return void
      */
     private function setLength(?int $l): void
     {
@@ -469,7 +469,7 @@ abstract class aField extends BObject implements iField
      * Retorna o tamanho máximo (em caracteres) aceitos por este campo.
      * Deve retornar ``null`` quando não há um limite definido.
      *
-     * @return      ?int
+     * @return ?int
      */
     public function getLength(): ?int
     {
@@ -483,7 +483,7 @@ abstract class aField extends BObject implements iField
     /**
      * Menor valor possível para um tipo simples numérico ou ``DateTime``.
      *
-     * @var         null|int|iRealType|\DateTime
+     * @var null|int|iRealType|\DateTime
      */
     private null|int|iRealType|\DateTime $min = null;
     /**
@@ -498,13 +498,13 @@ abstract class aField extends BObject implements iField
      * Se for explicitamente definido, o valor deverá estar dentro dos limites definidos
      * pelo ``type``.
      *
-     * @param       null|int|string|iRealType|\DateTime $m
-     *              Valor a ser definido.
+     * @param null|int|string|iRealType|\DateTime $m
+     * Valor a ser definido.
      *
-     * @return      void
+     * @return void
      *
-     * @throws      \InvalidArgumentException
-     *              Caso o valor a ser definido não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso o valor a ser definido não seja válido.
      */
     private function setMin(null|int|string|iRealType|\DateTime $m): void
     {
@@ -532,7 +532,7 @@ abstract class aField extends BObject implements iField
      * Retorna o menor valor possível para um tipo numérico ou ``DateTime``.
      * Por padrão, herdará este valor da definição de seu ``type`` quando isto for aplicável.
      *
-     * @return      null|int|iRealType|\DateTime
+     * @return null|int|iRealType|\DateTime
      */
     public function getMin(): null|int|iRealType|\DateTime
     {
@@ -546,7 +546,7 @@ abstract class aField extends BObject implements iField
     /**
      * Maior valor possível para um tipo numérico ou ``DateTime``.
      *
-     * @var         null|int|iRealType|\DateTime
+     * @var null|int|iRealType|\DateTime
      */
     private null|int|iRealType|\DateTime $max = null;
     /**
@@ -561,13 +561,13 @@ abstract class aField extends BObject implements iField
      * Se for explicitamente definido, o valor deverá estar dentro dos limites definidos
      * pelo ``type``.
      *
-     * @param       null|int|string|iRealType|\DateTime $m
-     *              Valor a ser definido.
+     * @param null|int|string|iRealType|\DateTime $m
+     * Valor a ser definido.
      *
-     * @return      void
+     * @return void
      *
-     * @throws      \InvalidArgumentException
-     *              Caso o valor a ser definido não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso o valor a ser definido não seja válido.
      */
     private function setMax(null|int|string|iRealType|\DateTime $m): void
     {
@@ -595,7 +595,7 @@ abstract class aField extends BObject implements iField
      * Retorna o maior valor possível para um tipo numérico ou ``DateTime``.
      * Por padrão, herdará este valor da definição de seu ``type`` quando isto for aplicável.
      *
-     * @return      null|int|iRealType|\DateTime
+     * @return null|int|iRealType|\DateTime
      */
     public function getMax(): null|int|iRealType|\DateTime
     {
@@ -615,7 +615,7 @@ abstract class aField extends BObject implements iField
      * Propriedade que define se é ou não permitido atribuir ``null`` como um valor
      * válido para este campo.
      *
-     * @var         bool
+     * @var bool
      */
     private bool $allowNull = true;
     /**
@@ -623,10 +623,10 @@ abstract class aField extends BObject implements iField
      *
      * Por padrão este valor deve ser ``true``.
      *
-     * @param       bool $is
-     *              Valor a ser definido para esta propriedade.
+     * @param bool $is
+     * Valor a ser definido para esta propriedade.
      *
-     * @return      void
+     * @return void
      */
     private function setIsAllowNull(bool $is): void
     {
@@ -635,7 +635,7 @@ abstract class aField extends BObject implements iField
     /**
      * Indica se é ou não permitido atribuir ``null`` como um valor válido para este campo.
      *
-     * @return      bool
+     * @return bool
      */
     public function isAllowNull(): bool
     {
@@ -650,7 +650,7 @@ abstract class aField extends BObject implements iField
      * Propriedade que define se é ou não permitido atribuir ``''`` como um valor válido
      * para este campo.
      *
-     * @var         bool
+     * @var bool
      */
     private bool $allowEmpty = true;
     /**
@@ -658,10 +658,10 @@ abstract class aField extends BObject implements iField
      *
      * Por padrão este valor deve ser ``true``.
      *
-     * @param       bool $is
-     *              Valor a ser definido para esta propriedade.
+     * @param bool $is
+     * Valor a ser definido para esta propriedade.
      *
-     * @return      void
+     * @return void
      */
     private function setIsAllowEmpty(bool $is): void
     {
@@ -670,7 +670,7 @@ abstract class aField extends BObject implements iField
     /**
      * Indica se é ou não permitido atribuir ``''`` como um valor válido para este campo.
      *
-     * @return      ?bool
+     * @return ?bool
      */
     public function isAllowEmpty(): ?bool
     {
@@ -685,7 +685,7 @@ abstract class aField extends BObject implements iField
      * Propriedade que define se, ao receber um valor ``''``, este deverá ser convertido
      * para ``null``.
      *
-     * @var         bool
+     * @var bool
      */
     private bool $convertEmptyToNull = false;
     /**
@@ -693,10 +693,10 @@ abstract class aField extends BObject implements iField
      *
      * Por padrão este valor deve ser ``false``.
      *
-     * @param       bool $is
-     *              Valor a ser definido para esta propriedade.
+     * @param bool $is
+     * Valor a ser definido para esta propriedade.
      *
-     * @return      void
+     * @return void
      */
     private function setIsConvertEmptyToNull(bool $is): void
     {
@@ -705,7 +705,7 @@ abstract class aField extends BObject implements iField
     /**
      * Define se, ao receber um valor ``''``, este deverá ser convertido para ``null``.
      *
-     * @return      bool
+     * @return bool
      */
     public function isConvertEmptyToNull(): bool
     {
@@ -724,7 +724,7 @@ abstract class aField extends BObject implements iField
     /**
      * Propriedade que define se este campo é ou não ``readonly``.
      *
-     * @var         bool
+     * @var bool
      */
     private bool $readOnly = false;
     /**
@@ -734,10 +734,10 @@ abstract class aField extends BObject implements iField
      *
      * Por padrão este valor deve ser ``false``.
      *
-     * @param       bool $is
-     *              Valor a ser definido para esta propriedade.
+     * @param bool $is
+     * Valor a ser definido para esta propriedade.
      *
-     * @return      void
+     * @return void
      */
     private function setIsReadOnly(bool $is): void
     {
@@ -746,7 +746,7 @@ abstract class aField extends BObject implements iField
     /**
      * Indica se este campo é ou não ``readonly``.
      *
-     * @return      bool
+     * @return bool
      */
     public function isReadOnly(): bool
     {
@@ -767,7 +767,7 @@ abstract class aField extends BObject implements iField
      *
      * Usado apenas em campos do tipo *reference*.
      *
-     * @var         ?string
+     * @var ?string
      */
     protected ?string $modelName = null;
     /**
@@ -776,7 +776,7 @@ abstract class aField extends BObject implements iField
      *
      * Usado apenas em campos do tipo *reference*.
      *
-     * @var         ?iModelFactory
+     * @var ?iModelFactory
      */
     protected ?iModelFactory $modelFactory = null;
     /**
@@ -785,14 +785,14 @@ abstract class aField extends BObject implements iField
      *
      * Usado apenas em campos do tipo *reference*.
      *
-     * @var         ?iModel
+     * @var ?iModel
      */
     protected ?iModel $modelValidate = null;
     /**
      * Indica quando este campo é do tipo *reference*, ou seja, seu valor é um
      * modelo de dados.
      *
-     * @return      bool
+     * @return bool
      */
     public function isReference(): bool
     {
@@ -807,7 +807,7 @@ abstract class aField extends BObject implements iField
     /**
      * Indica quando trata-se de um campo capaz de conter uma coleção de valores.
      *
-     * @return      bool
+     * @return bool
      */
     public function isCollection(): bool
     {
@@ -837,14 +837,14 @@ abstract class aField extends BObject implements iField
      * Armazena o estado atual de validade do campo com relação a seu valor definido e
      * seus critérios de funcionamento.
      *
-     * @var         bool
+     * @var bool
      */
     protected bool $fieldState_IsValid = true;
     /**
      * Informa se o campo tem no momento um valor que satisfaz os critérios de validação
      * para o mesmo.
      *
-     * @return      bool
+     * @return bool
      */
     public function isValid(): bool
     {
@@ -856,27 +856,30 @@ abstract class aField extends BObject implements iField
      * Armazena o registro da validação referente ao valor que está atualmente definido
      * para este campo.
      *
-     * @var         string|array
+     * @var string|array
      */
     protected string|array $fieldState_CurrentState = "valid";
     /**
      * Retorna o código do estado atual deste campo.
      *
      * **Campos Simples**
+     *
      * Retornará ``valid`` caso o valor definido seja válido, ou o código da validação
      * que caracteríza a invalidez deste valor.
      *
      * **Campos "reference"**
+     *
      * Retornará ``valid`` se **TODOS** os campos estiverem com valores válidos. Caso
      * contrário retornará um ``array`` associativo contendo o estado de cada um dos campos
      * existêntes.
      *
      * **Campos "collection"**
+     *
      * Retornará ``valid`` caso **TODOS** os valores estejam de acordo com os critérios de
      * validação ou um ``array`` contendo a validação individual de cada ítem membro da
      * coleção.
      *
-     * @return      string|array
+     * @return string|array
      */
     public function getState(): string|array
     {
@@ -890,27 +893,30 @@ abstract class aField extends BObject implements iField
      * Este valor é sobrescrito sempre que um método que exige validação for acionado,
      * portanto, sempre conterá o valor da última validação realizada.
      *
-     * @var         string|array
+     * @var string|array
      */
     protected string|array $fieldState_ValidateState = "valid";
     /**
      * Retornará o resultado da validação conforme o tipo de campo testado.
      *
      * **Campos Simples**
+     *
      * Retornará ``valid`` caso o valor definido seja válido, ou o código da validação
      * que caracteríza a invalidez deste valor.
      *
      * **Campos "reference"**
+     *
      * Retornará ``valid`` se **TODOS** os campos estiverem com valores válidos. Caso
      * contrário retornará um ``array`` associativo contendo o estado de cada um dos campos
      * existêntes.
      *
      * **Campos "collection"**
+     *
      * Retornará ``valid`` caso **TODOS** os valores estejam de acordo com os critérios de
      * validação ou um ``array`` contendo a validação individual de cada ítem membro da
      * coleção.
      *
-     * @return      string|array
+     * @return string|array
      */
     public function getLastValidateState(): string|array
     {
@@ -922,7 +928,7 @@ abstract class aField extends BObject implements iField
      * Mantêm a última verificação ``canSet`` referente a última validação realizada para
      * este campo de dados.
      *
-     * @var         bool
+     * @var bool
      */
     protected bool $fieldState_ValidateStateCanSet = true;
     /**
@@ -930,17 +936,20 @@ abstract class aField extends BObject implements iField
      * seja definido para este campo.
      *
      * **Campos Simples**
+     *
      * Valores inválidos podem ser definidos quando eles forem do mesmo ``type`` deste campo.
      *
      * **Campos "reference"**
+     *
      * Se **TODOS** os valores passados para um modelo de dados puderem ser assumidos por seus
      * respectivos campos, então tais dados poderão ser utilizados para preencher a instância.
      *
      * **Campos "collection"**
+     *
      * Se **TODOS** os valores membros para uma coleção de dados puderem ser setados,
      * independente de serem válidos, então, a coleção poderá assumir aquele grupo de dados.
      *
-     * @return      bool
+     * @return bool
      */
     public function getLastValidateCanSet(): bool
     {
@@ -955,7 +964,7 @@ abstract class aField extends BObject implements iField
      * Este valor é sobrescrito sempre que um método que exige validação for acionado,
      * portanto, sempre conterá o valor da última validação realizada.
      *
-     * @var         null|string|array
+     * @var null|string|array
      */
     protected null|string|array $fieldState_CollectionValidateState = null;
     /**
@@ -965,7 +974,7 @@ abstract class aField extends BObject implements iField
      * É usado apenas em campos *collection* mas está aqui definido para simplificar o
      * controle de estados das instâncias independente de seus tipos concretos.
      *
-     * @var         ?string
+     * @var ?string
      */
     protected null|string $fieldState_CollectionState = null;
 
@@ -975,45 +984,50 @@ abstract class aField extends BObject implements iField
      * passado é válido.
      *
      * **Valores especiais e seus efeitos**
-     *  ``undefined``
-     *  Sempre falhará na validação.
      *
-     *  ``null``
-     *  Falhará se o campo não permitir este valor [ veja propriedade ``allowNull`` ].
+     * ``undefined``
+     * Sempre falhará na validação.
      *
-     *  ``''``
-     *  Falhará se o campo não permitir este valor e estiver com a conversão de ``''`` em
-     *  ``null`` desabilitada [ veja as propriedades ``allowEmpty`` e ``convertEmptyToNull`` ].
+     * ``null``
+     * Falhará se o campo não permitir este valor [ veja propriedade ``allowNull`` ].
      *
-     *  ``[]``
-     *  Falhará SEMPRE para campos que não forem ``collection``.
+     * ``''``
+     * Falhará se o campo não permitir este valor e estiver com a conversão de ``''`` em
+     * ``null`` desabilitada [ veja as propriedades ``allowEmpty`` e ``convertEmptyToNull`` ].
+     *
+     * ``[]``
+     * Falhará SEMPRE para campos que não forem ``collection``.
      *
      *
      * **Validação dos Campos Simples**
-     *  A validação é feita seguindo os seguintes passos:
      *
-     *  1. Verifica se o campo está apto a receber um valor ou se ele é do tipo ``readOnly``.
-     *  2. Verifica se o valor cai em algum dos valores especiais citados no tópico anterior.
-     *  3. Verifica se o valor não é um objeto de um tipo não aceito.
-     *    Os tipos aceitos para campos simples são:
-     *    ``bool``, ``int``, ``float``, ``iRealType``, ``DateTime``, ``string``
-     *  4. Validação de tipo:
-     *  4.1. Havendo um ``inputFormat`` definido, identifica se o valor passa em sua
-     *    respectiva validação.
-     *  4.2. Verifica se o valor passado é um representante válido do tipo base do campo.
-     *  5. Verificação de adequação:
-     *  5.1. Enumerador, se houver, verifica se o valor está entre os itens válidos.
-     *  5.2. Sendo um campo ``string`` e existindo uma definição de tamanho máximo
-     *   [ propriedade ``length`` ] verifica se o valor não excede seu limite.
-     *  5.3. Sendo um campo numérico ou de data e existindo limites definidos para seus
-     *   valores mínimos e máximos, identifica se o valor passado não excede algum destes
-     *   limites.
+     * A validação é feita seguindo os seguintes passos:
+     *
+     * - ``1`` Verifica se o campo está apto a receber um valor ou se ele é do tipo ``readOnly``.
+     * - ``2`` Verifica se o valor cai em algum dos valores especiais citados no tópico anterior.
+     * - ``3`` Verifica se o valor não é um objeto de um tipo não aceito.
+     *         Os tipos aceitos para campos simples são:
+     *         ``bool``, ``int``, ``float``, ``iRealType``, ``DateTime``, ``string``
+     * - ``4`` Validação de tipo:
+     * - ``4.1`` Havendo um ``inputFormat`` definido, identifica se o valor passa em sua
+     *           respectiva validação.
+     * - ``4.2`` Verifica se o valor passado é um representante válido do tipo base do campo.
+     * - ``5`` Verificação de adequação:
+     * - ``5.1`` Enumerador, se houver, verifica se o valor está entre os itens válidos.
+     * - ``5.2`` Sendo um campo ``string`` e existindo uma definição de tamanho máximo
+     *           [ propriedade ``length`` ] verifica se o valor não excede seu limite.
+     * - ``5.3`` Sendo um campo numérico ou de data e existindo limites definidos para seus
+     *           valores mínimos e máximos, identifica se o valor passado não excede algum destes
+     *           limites.
+     *
      *
      * **Valores aceitáveis**
+     *
      * ``null``, ``bool``, ``int``, ``float``, ``iRealType``, ``DateTime``, ``string``
      *
      *
      * **Regras de aceitação**
+     *
      *  No passo 4.1, caso falhe na validação de ``inputFormat`` mas tanto o valor passado
      *  quanto o próprio campo são do tipo ``string`` ocorrerá que a validação não impedirá
      *  que tal valor seja definido para este campo, mas ele ficará com o estado inválido.
@@ -1026,6 +1040,7 @@ abstract class aField extends BObject implements iField
      *
      *
      * **Validação de Campos "reference"**
+     *
      *  A validação é feita tentando usar o conjunto de valores passado para que ele preencha
      *  os campos de um modelo de dados do mesmo tipo que este campo está apto a representar.
      *  É preciso que **TODAS** as respectivas chaves de dados compatíveis com o modelo de
@@ -1033,22 +1048,26 @@ abstract class aField extends BObject implements iField
      *  que o objeto seja validado.
      *
      * **Valores aceitáveis**
+     *
      *  ``null``, ``iterable``, ``array``, ``iModel``
      *
      *
      * **Validação de Campos "collection"**
+     *
      *  A validação é feita submetendo cada um dos membros da coleção indicada a seu
      *  respectivo tipo de validação. Os dados serão utilizados pelo campo se todos os membros
      *  apresentados puderem ser definidos.
      *
+     *
      * **Valores aceitáveis**
+     *
      * ``null``, ``array``
      *
      *
-     * @param       mixed $v
-     *              Valor que será testado.
+     * @param mixed $v
+     * Valor que será testado.
      *
-     * @return      bool
+     * @return bool
      */
     public function validateValue(mixed $v): bool
     {
@@ -1088,10 +1107,10 @@ abstract class aField extends BObject implements iField
      *
      * Este método não efetua a validação do valor.
      *
-     * @param       mixed $v
-     *              Valor que será convertido.
+     * @param mixed $v
+     * Valor que será convertido.
      *
-     * @return      mixed
+     * @return mixed
      */
     protected function individualValue_RetrieveInStorageFormat(mixed $v): mixed
     {
@@ -1139,10 +1158,10 @@ abstract class aField extends BObject implements iField
      *      ];
      * ```
      *
-     * @param       mixed $v
-     *              Valor que será testado.
+     * @param mixed $v
+     * Valor que será testado.
      *
-     * @return      array
+     * @return array
      */
     protected function individualValue_CheckValue(mixed $v): array
     {
@@ -1336,10 +1355,10 @@ abstract class aField extends BObject implements iField
      *      ];
      * ```
      *
-     * @param       mixed $v
-     *              Valor que será testado.
+     * @param mixed $v
+     * Valor que será testado.
      *
-     * @return      array
+     * @return array
      */
     protected function individualValue_ProccessSet(mixed $v): array
     {
@@ -1372,14 +1391,14 @@ abstract class aField extends BObject implements iField
     /**
      * Retorna o valor indicado conforme as definições de formatação.
      *
-     * @param       mixed $val
-     *              Valor que será tratado.
+     * @param mixed $val
+     * Valor que será tratado.
      *
-     * @param       bool $formated
-     *              Este parametro só surte efeto se houver um ``inputFormat`` definido.
-     *              Se ``true``, retornará o valor conforme o padrão ``inputFormat`` define.
+     * @param bool $formated
+     * Este parametro só surte efeto se houver um ``inputFormat`` definido.
+     * Se ``true``, retornará o valor conforme o padrão ``inputFormat`` define.
      *
-     * @return      mixed
+     * @return mixed
      */
     protected function individualValue_ProccessGet(mixed $val, bool $formated = false): mixed
     {
@@ -1420,10 +1439,10 @@ abstract class aField extends BObject implements iField
      * Deve ser substituído dentro de cada classe especialista de forma a apontar para o
      * devido processo compatível com os critérios definidos.
      *
-     * @param       mixed $v
-     *              Valor que será convertido.
+     * @param mixed $v
+     * Valor que será convertido.
      *
-     * @return      mixed
+     * @return mixed
      */
     protected function internal_RetrieveInStorageFormat(mixed $v): mixed
     {
@@ -1453,10 +1472,10 @@ abstract class aField extends BObject implements iField
      *      ];
      * ```
      *
-     * @param       mixed $v
-     *              Valor que será testado.
+     * @param mixed $v
+     * Valor que será testado.
      *
-     * @return      array
+     * @return array
      */
     protected function internal_CheckValue(mixed $v): array
     {
@@ -1492,10 +1511,10 @@ abstract class aField extends BObject implements iField
      *      ];
      * ```
      *
-     * @param       mixed $v
-     *              Valor que será testado.
+     * @param mixed $v
+     * Valor que será testado.
      *
-     * @return      array
+     * @return array
      */
     protected function internal_ProccessSet(mixed $v): array
     {
@@ -1507,14 +1526,14 @@ abstract class aField extends BObject implements iField
      * Deve ser substituído dentro de cada classe especialista de forma a apontar para o
      * devido processo compatível com os critérios definidos.
      *
-     * @param       mixed $val
-     *              Valor que será tratado.
+     * @param mixed $val
+     * Valor que será tratado.
      *
-     * @param       bool $formated
-     *              Este parametro só surte efeto se houver um ``inputFormat`` definido.
-     *              Se ``true``, retornará o valor conforme o padrão ``inputFormat`` define.
+     * @param bool $formated
+     * Este parametro só surte efeto se houver um ``inputFormat`` definido.
+     * Se ``true``, retornará o valor conforme o padrão ``inputFormat`` define.
      *
-     * @return      mixed
+     * @return mixed
      */
     protected function internal_ProccessGet(mixed $val, bool $formated = false): mixed
     {
@@ -1543,19 +1562,19 @@ abstract class aField extends BObject implements iField
     /**
      * Valor padrão que este campo deve ter caso nenhum outro seja definido.
      *
-     * @var         mixed
+     * @var mixed
      */
     protected $default = undefined;
     /**
      * Define o valor padrão que este campo deve ter caso nenhum outro seja definido.
      *
-     * @param       mixed $v
-     *              Valor a ser definido para esta propriedade.
+     * @param mixed $v
+     * Valor a ser definido para esta propriedade.
      *
-     * @return      void
+     * @return void
      *
-     * @throws      \InvalidArgumentException
-     *              Caso o argumento passado não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso o argumento passado não seja válido.
      */
     protected function setDefault(mixed $v): void
     {
@@ -1579,11 +1598,11 @@ abstract class aField extends BObject implements iField
      * Retorna o valor padrão que este campo deve ter caso nenhum outro seja definido.
      * Se ``default`` não for definido, ``undefined`` será retornado.
      *
-     * @param       bool $getInstruction
-     *              Quando ``true``, retorna o nome da instrução especial que define o
-     *              valor padrão.
+     * @param bool $getInstruction
+     * Quando ``true``, retorna o nome da instrução especial que define o
+     * valor padrão.
      *
-     * @return      mixed
+     * @return mixed
      */
     public function getDefault(bool $getInstruction = false): mixed
     {
@@ -1601,7 +1620,7 @@ abstract class aField extends BObject implements iField
     /**
      * Coleção de valores que este campo está apto a assumir.
      *
-     * @var         ?array
+     * @var ?array
      */
     private ?array $enumerator = null;
     /**
@@ -1622,13 +1641,13 @@ abstract class aField extends BObject implements iField
      *      ];
      * ```
      *
-     * @param       string|array $enum
-     *              Array a ser definido como enumerador.
+     * @param string|array $enum
+     * Array a ser definido como enumerador.
      *
-     * @return      void
+     * @return void
      *
-     * @throws      \InvalidArgumentException
-     *              Caso o argumento passado não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso o argumento passado não seja válido.
      */
     private function setEnumerator(string|array $enum): void
     {
@@ -1695,11 +1714,11 @@ abstract class aField extends BObject implements iField
      * Os valores aqui pré-definidos devem seguir as mesmas regras de validade especificadas
      * nas demais propriedades.
      *
-     * @param       bool $getOnlyValues
-     *              Quando ``true``, retorna um array unidimensional contendo apenas os
-     *              valores válidos de serem selecionados sem seus respectivos ``labels``.
+     * @param bool $getOnlyValues
+     * Quando ``true``, retorna um array unidimensional contendo apenas os
+     * valores válidos de serem selecionados sem seus respectivos ``labels``.
      *
-     * @return      ?array
+     * @return ?array
      */
     public function getEnumerator(bool $getOnlyValues = false): ?array
     {
@@ -1729,14 +1748,14 @@ abstract class aField extends BObject implements iField
     /**
      * Valor atual do campo.
      *
-     * @var         mixed
+     * @var mixed
      */
     protected $value = undefined;
     /**
      * Valor que foi passado pelo método ``setValue`` armazenado tal qual sem qualquer
      * alteração.
      *
-     * @var         mixed
+     * @var mixed
      */
     protected $rawValue = undefined;
     /**
@@ -1749,28 +1768,36 @@ abstract class aField extends BObject implements iField
      * Define um novo valor para este campo.
      *
      * **undefined**
+     *
      * Este valor **NUNCA** será aceito por nenhum tipo de campo e em qualquer circunstância.
      *
      *
      * **Campos Simples**
+     *
      * Para que o campo assuma o novo valor ele precisa ser compatível com o ``type`` definido.
      * Caso contrário o campo ficará com o valor ``null``.
      *
+     *
      * **Valores aceitáveis**
+     *
      * ``null``, ``bool``, ``int``, ``float``, ``iRealType``, ``DateTime``, ``string``
      *
      *
      * **Campos "reference"**
+     *
      * Campos deste tipo apenas aceitarão valores capazes de preencher os campos do modelo
      * de dados ao qual eles se referenciam. Independente de tornar o modelo de dados válido
      * ou não, os valores serão definidos exceto se o valor passado for incompatível com o
      * modelo de dados configurado.
      *
+     *
      * **Valores aceitáveis**
+     *
      * ``null``, ``iterable``, ``array``, ``iModel``
      *
      *
      * **Campos "collection"**
+     *
      * Uma coleção de dados sempre será definida como o valor de um campo que aceite este
      * tipo de valor.
      * Os membros da coleção serão convertidos para o tipo ``type`` definido. Membros que
@@ -1780,11 +1807,14 @@ abstract class aField extends BObject implements iField
      * Coleções do tipo *reference* apenas serão redefinidos se **TODOS** seus itens forem
      * capazes de tornarem-se objetos ``iModel`` do tipo definido para este campo.
      *
+     *
      * **Valores aceitáveis**
+     *
      * ``null``, ``array``
      *
      *
      * **Estado e validação**
+     *
      * Independente de o valor vir a ser efetivamente definido para o campo o estado da
      * validação pode ser verificado usando ``getLastValidateState()``.
      *
@@ -1792,13 +1822,13 @@ abstract class aField extends BObject implements iField
      * validação e poderá ser verificado em ``getState()``.
      *
      *
-     * @param       mixed $v
-     *              Valor a ser definido para o campo.
+     * @param mixed $v
+     * Valor a ser definido para o campo.
      *
-     * @return      bool
-     *              Retornará ``true`` se o valor tornou o campo válido ou ``false`` caso
-     *              agora ele esteja inválido. Também retornará ``false`` caso o valor seja
-     *              totalmente incompatível com o campo.
+     * @return bool
+     * Retornará ``true`` se o valor tornou o campo válido ou ``false`` caso
+     * agora ele esteja inválido. Também retornará ``false`` caso o valor seja
+     * totalmente incompatível com o campo.
      */
     public function setValue(mixed $v): bool
     {
@@ -1821,23 +1851,27 @@ abstract class aField extends BObject implements iField
      * Retorna o valor atual deste campo.
      *
      * **undefined**
+     *
      * Este valor será retornado **ENQUANTO** o campo **AINDA** não foi redefinido com qualquer
      * outro valor. Esta regra se aplica para campos simples e *reference*.
      *
      *
      * **Campos Simples**
+     *
      * O valor retornado estará sempre no mesmo ``type`` que aquele que o campo está
      * configurado para assumir. Havendo alguma formatação indicada em ``inputFormat``, esta
      * será usada sobrepondo-se ao ``type``.
      *
      *
      * **Campos "reference"**
+     *
      * Estes campos apenas são capazes de retornar valores ``undefined``, ``null`` ou um ``array``
      * associativo representando o respectivo modelo de dados que ele está configurado para
      * receber.
      *
      *
      * **Campos "collection"**
+     *
      * O valor retornado será **SEMPRE** um ``array`` contendo os itens atualmente definidos.
      * Estes itens serão retornados conforme as regras definidas acima para *campos simples*.
      *
@@ -1846,7 +1880,7 @@ abstract class aField extends BObject implements iField
      *
      * Um *collection* em seu estado inicial retornará sempre um ``array`` vazio.
      *
-     * @return      mixed
+     * @return mixed
      */
     public function getValue(): mixed
     {
@@ -1856,22 +1890,26 @@ abstract class aField extends BObject implements iField
      * Retorna o valor atual deste campo em seu formato de armazenamento.
      *
      * **undefined**
+     *
      * O valor ``null`` será retornado no lugar de ``undefined`` para campos simples e
      * *reference*.
      *
      *
      * **Campos Simples**
+     *
      * O valor retornado estará sempre no mesmo ``type`` que aquele que o campo está
      * configurado para assumir. Qualquer regra para **REMOÇÃO** de formatação será aplicada
      * caso exista.
      *
      *
      * **Campos "reference"**
+     *
      * Estes campos apenas são capazes de retornar valores ``null`` ou arrays associativos
      * representando o respectivo modelo de dados que ele está configurado para receber.
      *
      *
      * **Campos "collection"**
+     *
      * O valor retornado será **SEMPRE** um ``array`` contendo os itens atualmente definidos.
      * Estes itens serão retornados conforme as regras definidas acima para *campos simples*.
      *
@@ -1882,7 +1920,7 @@ abstract class aField extends BObject implements iField
      * Coleções que possuam valores inválidos entre seus membros também retornarão um ``array``
      * vazio.
      *
-     * @return      mixed
+     * @return mixed
      */
     public function getStorageValue(): mixed
     {
@@ -1900,7 +1938,7 @@ abstract class aField extends BObject implements iField
      * Retorna o valor que está definido para este campo assim como ele foi passado em
      * ``setValue()``.
      *
-     * @return      mixed
+     * @return mixed
      */
     public function getRawValue(): mixed
     {
@@ -1977,11 +2015,11 @@ abstract class aField extends BObject implements iField
      *      ];
      * ```
      *
-     * @param       array $config
-     *              ``array`` associativo com as configurações para este campo.
+     * @param array $config
+     * ``array`` associativo com as configurações para este campo.
      *
-     * @throws      \InvalidArgumentException
-     *              Caso algum valor passado não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso algum valor passado não seja válido.
      */
     function __construct(array $config)
     {
