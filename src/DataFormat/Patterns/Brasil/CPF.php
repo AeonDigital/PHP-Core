@@ -30,7 +30,7 @@ final class CPF extends aStringFormat
     /**
      * Expressão regular para validação.
      *
-     * @var         ?string
+     * @var ?string
      */
     const RegExp = "/^[0-9]{3}[.]?[0-9]{3}[.]?[0-9]{3}[-]?[0-9]{2}$/";
 
@@ -38,7 +38,7 @@ final class CPF extends aStringFormat
     /**
      * Quantidade **mínima** de caracteres necessários para expressar o formato.
      *
-     * @var         int
+     * @var int
      */
     const MinLength = 11;
 
@@ -46,7 +46,7 @@ final class CPF extends aStringFormat
     /**
      * Quantidade **máxima** de caracteres necessários para expressar o formato.
      *
-     * @var         int
+     * @var int
      */
     const MaxLength = 14;
 
@@ -57,13 +57,13 @@ final class CPF extends aStringFormat
     /**
      * Verifica se o valor passado corresponde ao tipo/formato. esperado.
      *
-     * @param       ?string $v
-     *              Valor a ser testado.
+     * @param ?string $v
+     * Valor a ser testado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      bool
+     * @return bool
      */
     public static function check(?string $v, ?array $aux = null): bool
     {
@@ -122,13 +122,13 @@ final class CPF extends aStringFormat
      * Formata ``$v`` para que seja retornado uma ``string`` que represente este tipo. Caso
      * não seja possível efetuar a formatação retornará ``null``.
      *
-     * @param       mixed $v
-     *              Valor a ser formatado.
+     * @param mixed $v
+     * Valor a ser formatado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      ?string
+     * @return ?string
      */
     public static function format($v, ?array $aux = null): ?string
     {
@@ -152,13 +152,13 @@ final class CPF extends aStringFormat
      *
      * Retornará ``null`` caso a ``string`` passada seja considerada inválida.
      *
-     * @param       ?string $v
-     *              Valor a ser ajustado.
+     * @param ?string $v
+     * Valor a ser ajustado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function removeFormat(?string $v, ?array $aux = null): mixed
     {
@@ -182,10 +182,10 @@ final class CPF extends aStringFormat
      *
      * Retornará ``null`` caso a ``string`` passada seja considerada inválida.
      *
-     * @param       ?string $v
-     *              Valor a ser ajustado.
+     * @param ?string $v
+     * Valor a ser ajustado.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function storageFormat(?string $v): mixed
     {

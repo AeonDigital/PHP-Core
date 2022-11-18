@@ -30,13 +30,13 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
     /**
      * Verifica se o valor passado corresponde ao tipo/formato. esperado.
      *
-     * @param       ?string $v
-     *              Valor a ser testado.
+     * @param ?string $v
+     * Valor a ser testado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      bool
+     * @return bool
      */
     public static function check(?string $v, ?array $aux = null): bool
     {
@@ -49,16 +49,16 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
      * Verifica se o valor passado é uma string válida a representar um objeto ``DateTime``
      * formatada conforme indicado em ``$dateMask``.
      *
-     * @param       ?string $v
-     *              Valor a ser testado.
+     * @param ?string $v
+     * Valor a ser testado.
      *
-     * @param       string $regExp
-     *              RegExp para testar a formatação da data.
+     * @param string $regExp
+     * RegExp para testar a formatação da data.
      *
-     * @param       string $dateMask
-     *              Máscara de formatação para a data.
+     * @param string $dateMask
+     * Máscara de formatação para a data.
      *
-     * @return      bool
+     * @return bool
      */
     protected static function checkDateTime(?string $v, string $regExp, string $dateMask): bool
     {
@@ -82,20 +82,20 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
      * Formata ``$v`` para que seja retornado uma ``string`` que represente este tipo. Caso
      * não seja possível efetuar a formatação retornará ``null``.
      *
-     * @param       mixed $v
-     *              Valor a ser formatado.
+     * @param mixed $v
+     * Valor a ser formatado.
      *
-     * @param       ?array $aux
-     *              Quando ``$v`` for uma string de uma data, este parametro deve ser um
-     *              array com apenas **1** valor indicando o formato em que a data está
-     *              formatada.
+     * @param ?array $aux
+     * Quando ``$v`` for uma string de uma data, este parametro deve ser um
+     * array com apenas **1** valor indicando o formato em que a data está
+     * formatada.
      *
-     *              **Exemplo**
-     *              ``$arr = [ ¨DateMask¨ => ¨d-m-Y ];``
+     * **Exemplo**
+     * ``$arr = [ ¨DateMask¨ => ¨d-m-Y ];``
      *
-     *              ``$arr = [ ¨d-m-Y¨ ];``
+     * ``$arr = [ ¨d-m-Y¨ ];``
      *
-     * @return      ?string
+     * @return ?string
      */
     public static function format(mixed $v, ?array $aux = null): ?string
     {
@@ -108,22 +108,22 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
      * Formata uma ``string`` que representa um ``DateTime`` no formato indicado em ``$aux``
      * para o formato ``$dateMask``.
      *
-     * @param       mixed $v
-     *              Valor a ser testado.
+     * @param mixed $v
+     * Valor a ser testado.
      *
-     * @param       ?array $aux
-     *              Este parametro deve ser um array com apenas 1 valor indicando o
-     *              formato em que a data está formatada.
+     * @param ?array $aux
+     * Este parametro deve ser um array com apenas 1 valor indicando o
+     * formato em que a data está formatada.
      *
-     *              **Exemplo**
-     *              ``$arr = [ ¨DateMask¨ => ¨d-m-Y¨ ];``
+     * **Exemplo**
+     * ``$arr = [ ¨DateMask¨ => ¨d-m-Y¨ ];``
      *
-     *              ``$arr = [ ¨d-m-Y¨ ];``
+     * ``$arr = [ ¨d-m-Y¨ ];``
      *
-     * @param       string $dateMask
-     *              Máscara na qual a ``string`` deve ser devolvida.
+     * @param string $dateMask
+     * Máscara na qual a ``string`` deve ser devolvida.
      *
-     * @return      ?string
+     * @return ?string
      */
     protected static function formatDateTime(mixed $v, ?array $aux = null, string $dateMask): ?string
     {
@@ -159,13 +159,13 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
      *
      * Retornará ``null`` caso a ``string`` passada seja considerada inválida.
      *
-     * @param       ?string $v
-     *              Valor a ser ajustado.
+     * @param ?string $v
+     * Valor a ser ajustado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function removeFormat(?string $v, ?array $aux = null): mixed
     {
@@ -177,13 +177,13 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
     /**
      * Devolve um objeto ``DateTime`` para uma ``string`` passada em um determinado formato.
      *
-     * @param       ?string $v
-     *              Valor a ser ajustado.
+     * @param ?string $v
+     * Valor a ser ajustado.
      *
-     * @param       string $dateMask
-     *              Máscara na qual a ``string`` está formatada.
+     * @param string $dateMask
+     * Máscara na qual a ``string`` está formatada.
      *
-     * @return      ?\DateTime
+     * @return ?\DateTime
      */
     protected static function removeFormatOfDateTimeString(?string $v, string $dateMask): ?\DateTime
     {
@@ -207,10 +207,10 @@ abstract class aDateTimeFormat extends aStringFormat implements iDateTimeFormat
      *
      * Retornará ``null`` caso a ``string`` passada seja considerada inválida.
      *
-     * @param       ?string $v
-     *              Valor a ser ajustado.
+     * @param ?string $v
+     * Valor a ser ajustado.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function storageFormat(?string $v): mixed
     {

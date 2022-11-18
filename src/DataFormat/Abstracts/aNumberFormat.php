@@ -29,13 +29,13 @@ abstract class aNumberFormat extends aStringFormat implements iNumberFormat
     /**
      * Verifica se o valor passado corresponde ao tipo/formato. esperado.
      *
-     * @param       ?string $v
-     *              Valor a ser testado.
+     * @param ?string $v
+     * Valor a ser testado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      bool
+     * @return bool
      */
     public static function check(?string $v, ?array $aux = null): bool
     {
@@ -52,13 +52,13 @@ abstract class aNumberFormat extends aStringFormat implements iNumberFormat
      * Formata ``$v`` para que seja retornado uma ``string`` que represente este tipo. Caso
      * não seja possível efetuar a formatação retornará ``null``.
      *
-     * @param       mixed $v
-     *              Valor a ser formatado.
+     * @param mixed $v
+     * Valor a ser formatado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      ?string
+     * @return ?string
      */
     public static function format(mixed $v, ?array $aux = null): ?string
     {
@@ -78,13 +78,13 @@ abstract class aNumberFormat extends aStringFormat implements iNumberFormat
      *
      * Retornará ``null`` caso a ``string`` passada seja considerada inválida.
      *
-     * @param       ?string $v
-     *              Valor a ser ajustado.
+     * @param ?string $v
+     * Valor a ser ajustado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function removeFormat(?string $v, ?array $aux = null): mixed
     {
@@ -106,17 +106,17 @@ abstract class aNumberFormat extends aStringFormat implements iNumberFormat
      *
      * Retornará ``null`` caso a verificação falhe.
      *
-     * @param       ?string $v
-     *              Valor a ser testado.
+     * @param ?string $v
+     * Valor a ser testado.
      *
-     * @param       string $ret
-     *              Tipo de retorno esperado.
+     * @param string $ret
+     * Tipo de retorno esperado.
      *
-     *              Quando ``string`` retornará o valor devidamente pontuado.
+     * Quando ``string`` retornará o valor devidamente pontuado.
      *
-     *              Quando ``number`` retornará o valor em seu formato numeral (``int`` | ``float``).
+     * Quando ``number`` retornará o valor em seu formato numeral (``int`` | ``float``).
      *
-     * @return      null|string|int|float
+     * @return null|string|int|float
      */
     protected static function formatNumber(?string $v, string $ret = "string"): null|string|int|float
     {
@@ -255,10 +255,10 @@ abstract class aNumberFormat extends aStringFormat implements iNumberFormat
      *
      * Retornará ``null`` caso a ``string`` passada seja considerada inválida.
      *
-     * @param       ?string $v
-     *              Valor a ser ajustado.
+     * @param ?string $v
+     * Valor a ser ajustado.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function storageFormat(?string $v): mixed
     {

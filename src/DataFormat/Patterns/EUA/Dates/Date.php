@@ -30,7 +30,7 @@ final class Date extends aDateTimeFormat
     /**
      * Máscara da data.
      *
-     * @var         ?string
+     * @var ?string
      */
     const DateMask = "m-d-Y";
 
@@ -38,7 +38,7 @@ final class Date extends aDateTimeFormat
     /**
      * Expressão regular para validação.
      *
-     * @var         ?string
+     * @var ?string
      */
     const RegExp = "/^([0]?[1-9]|[1][012])[\/\-.]([0]?[1-9]|[12][0-9]|[3][01])[\/\-.](\d{4})$/";
 
@@ -46,7 +46,7 @@ final class Date extends aDateTimeFormat
     /**
      * Quantidade **mínima** de caracteres necessários para expressar o formato.
      *
-     * @var         int
+     * @var int
      */
     const MinLength = 10;
 
@@ -54,7 +54,7 @@ final class Date extends aDateTimeFormat
     /**
      * Quantidade **máxima** de caracteres necessários para expressar o formato.
      *
-     * @var         int
+     * @var int
      */
     const MaxLength = 10;
 }

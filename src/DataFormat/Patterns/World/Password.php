@@ -29,7 +29,7 @@ final class Password extends aPasswordFormat
     /**
      * Quantidade **mínima** de caracteres necessários para expressar o formato.
      *
-     * @var         int
+     * @var int
      */
     const MinLength = 8;
 
@@ -37,7 +37,7 @@ final class Password extends aPasswordFormat
     /**
      * Quantidade **máxima** de caracteres necessários para expressar o formato.
      *
-     * @var         int
+     * @var int
      */
     const MaxLength = 40;
 
@@ -65,13 +65,13 @@ final class Password extends aPasswordFormat
      *      ];
      * ```
      *
-     * @param       ?string $v
-     *              Valor a ser testado.
+     * @param ?string $v
+     * Valor a ser testado.
      *
-     * @param       ?array $aux
-     *              Array associativo trazendo a configuração para formatação da string.
+     * @param ?array $aux
+     * Array associativo trazendo a configuração para formatação da string.
      *
-     * @return      bool
+     * @return bool
      */
     public static function check(?string $v, ?array $aux = null): bool
     {
@@ -87,13 +87,13 @@ final class Password extends aPasswordFormat
      * Formata ``$v`` para que seja retornado uma ``string`` que represente este tipo. Caso
      * não seja possível efetuar a formatação retornará ``null``.
      *
-     * @param       mixed $v
-     *              Valor a ser formatado.
+     * @param mixed $v
+     * Valor a ser formatado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      ?string
+     * @return ?string
      */
     public static function format($v, ?array $aux = null): ?string
     {
@@ -116,13 +116,13 @@ final class Password extends aPasswordFormat
      *
      * Retornará ``null`` caso a ``string`` passada seja considerada inválida.
      *
-     * @param       ?string $v
-     *              Valor a ser ajustado.
+     * @param ?string $v
+     * Valor a ser ajustado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function removeFormat(?string $v, ?array $aux = null): mixed
     {
@@ -141,10 +141,10 @@ final class Password extends aPasswordFormat
      *
      * Retornará ``null`` caso a ``string`` passada seja considerada inválida.
      *
-     * @param       ?string $v
-     *              Valor a ser ajustado.
+     * @param ?string $v
+     * Valor a ser ajustado.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function storageFormat(?string $v): mixed
     {

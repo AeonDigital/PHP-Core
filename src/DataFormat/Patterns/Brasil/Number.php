@@ -30,7 +30,7 @@ final class Number extends aNumberFormat
     /**
      * Valor **mínimo** em caracteres para expressar o formato.
      *
-     * @var         int
+     * @var int
      */
     const MinLength = 1;
 
@@ -38,7 +38,7 @@ final class Number extends aNumberFormat
     /**
      * Valor **máximo** em caracteres para expressar o formato.
      *
-     * @var         int
+     * @var int
      */
     const MaxLength = 31;
 
@@ -47,7 +47,7 @@ final class Number extends aNumberFormat
     /**
      * Separador decimal.
      *
-     * @var         string
+     * @var string
      */
     const Decimal = ",";
 
@@ -55,7 +55,7 @@ final class Number extends aNumberFormat
     /**
      * Separador de milhar.
      *
-     * @var         string
+     * @var string
      */
     const Thousand = ".";
 }

@@ -37,10 +37,10 @@ abstract class aPasswordFormat extends aStringFormat implements iPasswordFormat
      * ``+ 10 pontos``  :   Por cada familia de caracteres alem da primeira
      * As famílias de caracteres são: ``Minusculas`` | ``Maiusculas`` | ``Numeros`` | ``Simbolos``
      *
-     * @param       string $v
-     *              Valor a ser ajustado.
+     * @param string $v
+     * Valor a ser ajustado.
      *
-     * @return      int
+     * @return int
      */
     public static function checkStrength(string $v): int
     {
@@ -121,11 +121,11 @@ abstract class aPasswordFormat extends aStringFormat implements iPasswordFormat
      *      ];
      * ```
      *
-     * @param       ?array $cfg
-     *              Configurações da senha que será gerada. Usará os valores padrões caso
-     *              este parametro não seja informado.
+     * @param ?array $cfg
+     * Configurações da senha que será gerada. Usará os valores padrões caso
+     * este parametro não seja informado.
      *
-     * @return      string
+     * @return string
      */
     public static function generate(?array $cfg = null): string
     {
@@ -176,16 +176,16 @@ abstract class aPasswordFormat extends aStringFormat implements iPasswordFormat
      *      ];
      * ```
      *
-     * @param       ?string $v
-     *              Valor a ser testado.
+     * @param ?string $v
+     * Valor a ser testado.
      *
-     * @param       ?array $aux
-     *              Array associativo trazendo a configuração para formatação da string.
+     * @param ?array $aux
+     * Array associativo trazendo a configuração para formatação da string.
      *
-     * @param       ?string $err
-     *              Código do erro da validação.
+     * @param ?string $err
+     * Código do erro da validação.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function checkPassword(?string $v, ?array $aux = null, ?string &$err = null): bool
     {

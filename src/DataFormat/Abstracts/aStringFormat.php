@@ -29,13 +29,13 @@ abstract class aStringFormat implements iStringFormat
     /**
      * Verifica se o valor passado corresponde ao tipo/formato esperado.
      *
-     * @param       ?string $v
-     *              Valor a ser testado.
+     * @param ?string $v
+     * Valor a ser testado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      bool
+     * @return bool
      */
     public static function check(?string $v, ?array $aux = null): bool
     {
@@ -52,13 +52,13 @@ abstract class aStringFormat implements iStringFormat
      * Formata ``$v`` para que seja retornado uma ``string`` que represente este tipo. Caso
      * não seja possível efetuar a formatação retornará ``null``.
      *
-     * @param       mixed $v
-     *              Valor a ser formatado.
+     * @param mixed $v
+     * Valor a ser formatado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      ?string
+     * @return ?string
      */
     abstract static function format(mixed $v, ?array $aux = null): ?string;
 
@@ -71,13 +71,13 @@ abstract class aStringFormat implements iStringFormat
      *
      * Retornará ``null`` caso a ``string`` passada seja considerada inválida.
      *
-     * @param       ?string $v
-     *              Valor a ser ajustado.
+     * @param ?string $v
+     * Valor a ser ajustado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      mixed
+     * @return mixed
      */
     abstract static function removeFormat(?string $v, ?array $aux = null): mixed;
 
@@ -90,10 +90,10 @@ abstract class aStringFormat implements iStringFormat
      *
      * Retornará ``null`` caso a ``string`` passada seja considerada inválida.
      *
-     * @param       ?string $v
-     *              Valor a ser ajustado.
+     * @param ?string $v
+     * Valor a ser ajustado.
      *
-     * @return      mixed
+     * @return mixed
      */
     abstract static function storageFormat(?string $v): mixed;
 }

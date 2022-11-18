@@ -30,7 +30,7 @@ final class Week extends aDateTimeFormat
     /**
      * Máscara da data.
      *
-     * @var         ?string
+     * @var ?string
      */
     const DateMask = "o-\WW-N";
 
@@ -38,7 +38,7 @@ final class Week extends aDateTimeFormat
     /**
      * Expressão regular para validação.
      *
-     * @var         ?string
+     * @var ?string
      */
     const RegExp = "/^(\d{4})[-]([W])?([0]?[1-9]|[1-4][0-9]|[5][0-3])([-]([1-7]))?$/";
 
@@ -46,7 +46,7 @@ final class Week extends aDateTimeFormat
     /**
      * Quantidade **mínima** de caracteres necessários para expressar o formato.
      *
-     * @var         int
+     * @var int
      */
     const MinLength = 11;
 
@@ -54,7 +54,7 @@ final class Week extends aDateTimeFormat
     /**
      * Quantidade **máxima** de caracteres necessários para expressar o formato.
      *
-     * @var         int
+     * @var int
      */
     const MaxLength = 11;
 
@@ -65,13 +65,13 @@ final class Week extends aDateTimeFormat
     /**
      * Verifica se o valor passado corresponde ao tipo/formato. esperado.
      *
-     * @param       ?string $v
-     *              Valor a ser testado.
+     * @param ?string $v
+     * Valor a ser testado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      bool
+     * @return bool
      */
     public static function check(?string $v, ?array $aux = null): bool
     {
@@ -90,13 +90,13 @@ final class Week extends aDateTimeFormat
      * Formata ``$v`` para que seja retornado uma ``string`` que represente este tipo. Caso
      * não seja possível efetuar a formatação retornará ``null``.
      *
-     * @param       mixed $v
-     *              Valor a ser formatado.
+     * @param mixed $v
+     * Valor a ser formatado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      ?string
+     * @return ?string
      */
     public static function format($v, ?array $aux = null): ?string
     {
@@ -120,13 +120,13 @@ final class Week extends aDateTimeFormat
      *
      * Retornará ``null`` caso a ``string`` passada seja considerada inválida.
      *
-     * @param       ?string $v
-     *              Valor a ser ajustado.
+     * @param ?string $v
+     * Valor a ser ajustado.
      *
-     * @param       ?array $aux
-     *              Dados auxiliares para o processamento.
+     * @param ?array $aux
+     * Dados auxiliares para o processamento.
      *
-     * @return      mixed
+     * @return mixed
      */
     public static function removeFormat(?string $v, ?array $aux = null): mixed
     {
