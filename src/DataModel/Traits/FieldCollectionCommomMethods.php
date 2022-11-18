@@ -30,7 +30,7 @@ trait FieldCollectionCommomMethods
     /**
      * Retorna o código de estado de uma coleção de dados.
      *
-     * @return      string
+     * @return string
      */
     public function collectionGetState(): string
     {
@@ -40,7 +40,7 @@ trait FieldCollectionCommomMethods
      * Retornará ``valid`` caso a última validação de uma coleção tenha ocorrido sem falhas.
      * Caso a validação tenha falhado, retornará o código que identifica a natureza do erro.
      *
-     * @return      string
+     * @return string
      */
     public function collectionGetLastValidateState(): string
     {
@@ -54,7 +54,7 @@ trait FieldCollectionCommomMethods
     /**
      * Propriedade que define se esta coleção exige que cada um de seus valores seja único.
      *
-     * @var         bool
+     * @var bool
      */
     private bool $collectionDistinct = false;
     /**
@@ -62,10 +62,10 @@ trait FieldCollectionCommomMethods
      *
      * Por padrão este valor deve ser ``false``.
      *
-     * @param       bool $is
-     *              Valor a ser definido para esta propriedade.
+     * @param bool $is
+     * Valor a ser definido para esta propriedade.
      *
-     * @return      void
+     * @return void
      */
     private function setCollectionIsDistinct(bool $is): void
     {
@@ -74,7 +74,7 @@ trait FieldCollectionCommomMethods
     /**
      * Indica se esta coleção exige que cada um de seus valores seja único.
      *
-     * @return      bool
+     * @return bool
      */
     public function collectionIsDistinct(): bool
     {
@@ -90,7 +90,7 @@ trait FieldCollectionCommomMethods
      *
      * Usado apenas para casos de coleções de modelos de dados ``iModel``.
      *
-     * @var         ?array
+     * @var ?array
      */
     private ?array $collectionDistinctKeys = null;
     /**
@@ -99,10 +99,10 @@ trait FieldCollectionCommomMethods
      *
      * Usado apenas para casos de coleções de modelos de dados ``iModel``.
      *
-     * @param       ?array $keys
-     *              Coleção de chaves usadas para distinguir as instâncias de modelos de dados.
+     * @param ?array $keys
+     * Coleção de chaves usadas para distinguir as instâncias de modelos de dados.
      *
-     * @return      void
+     * @return void
      */
     private function setCollectionGetDistinctKeys(?array $keys): void
     {
@@ -117,7 +117,7 @@ trait FieldCollectionCommomMethods
      * Se nenhuma coleção for definida para ``distinctKeys`` então deverá usar TODOS os
      * campos do modelo de dados para efetuar a comparação.
      *
-     * @return      ?array
+     * @return ?array
      */
     public function collectionGetDistinctKeys(): ?array
     {
@@ -143,13 +143,13 @@ trait FieldCollectionCommomMethods
      * Para a aceitação do valor serão seguidas as mesmas regras especificadas para campos
      * simples e *reference*.
      *
-     * @param       mixed $v
-     *              Valor a ser adicionado na coleção.
+     * @param mixed $v
+     * Valor a ser adicionado na coleção.
      *
-     * @return      bool
-     *              Retornará ``true`` se o valor tornou o campo válido ou ``false`` caso
-     *              agora ele esteja inválido. Também retornará ``false`` caso o valor seja
-     *              totalmente incompatível com o campo.
+     * @return bool
+     * Retornará ``true`` se o valor tornou o campo válido ou ``false`` caso
+     * agora ele esteja inválido. Também retornará ``false`` caso o valor seja
+     * totalmente incompatível com o campo.
      */
     public function collectionAddValue(mixed $v): bool
     {
@@ -167,10 +167,10 @@ trait FieldCollectionCommomMethods
      * Havendo mais de 1 valor igual na coleção, retornará o índice da primeira ocorrência
      * encontrada.
      *
-     * @param       mixed $v
-     *              Valor que será verificado.
+     * @param mixed $v
+     * Valor que será verificado.
      *
-     * @return      ?int
+     * @return ?int
      */
     public function collectionGetIndexOfValue(mixed $v): ?int
     {
@@ -217,10 +217,10 @@ trait FieldCollectionCommomMethods
     /**
      * Retorna a contagem de ocorrências do valor passado na coleção atualmente armazenada.
      *
-     * @param       mixed $v
-     *              Valor que será verificado.
+     * @param mixed $v
+     * Valor que será verificado.
      *
-     * @return      int
+     * @return int
      */
     public function collectionCountOccurrenciesOfValue(mixed $v): int
     {
@@ -241,10 +241,10 @@ trait FieldCollectionCommomMethods
     /**
      * Verifica se o valor informado existe na coleção de valores atuais deste campo.
      *
-     * @param       mixed $v
-     *              Valor que será verificado.
+     * @param mixed $v
+     * Valor que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public function collectionHasValue(mixed $v): bool
     {
@@ -258,7 +258,7 @@ trait FieldCollectionCommomMethods
     /**
      * Retorna a quantidade de valores que estão atualmente definidos na coleção do campo.
      *
-     * @return      int
+     * @return int
      */
     public function collectionCount(): int
     {
@@ -272,13 +272,13 @@ trait FieldCollectionCommomMethods
     /**
      * Removerá da coleção de valores a primeira ocorrência do valor informado.
      *
-     * @param       mixed $v
-     *              Valor que será removido.
+     * @param mixed $v
+     * Valor que será removido.
      *
-     * @param       bool $all
-     *              Quando ``true`` irá remover TODAS as ocorrências do valor indicado.
+     * @param bool $all
+     * Quando ``true`` irá remover TODAS as ocorrências do valor indicado.
      *
-     * @return      void
+     * @return void
      */
     public function collectionUnsetValue(mixed $v, bool $all = false): void
     {
@@ -308,10 +308,10 @@ trait FieldCollectionCommomMethods
     /**
      * Removerá da coleção de valores o item na posição indicada.
      *
-     * @param       int $i
-     *              Índice que será removido.
+     * @param int $i
+     * Índice que será removido.
      *
-     * @return      void
+     * @return void
      */
     public function collectionUnsetIndex(int $i): void
     {
@@ -336,7 +336,7 @@ trait FieldCollectionCommomMethods
     /**
      * Regras de aceitação para a contagem dos itens de uma coleção de dados.
      *
-     * @var         ?array
+     * @var ?array
      */
     private ?array $acceptedCount = null;
     /**
@@ -391,13 +391,13 @@ trait FieldCollectionCommomMethods
      *  Também é aceito um conjunto vazio, sem item algum.
      *
      *
-     * @param       ?string $rules
-     *              Regras que serão definidas conforme especificações abaixo.
+     * @param ?string $rules
+     * Regras que serão definidas conforme especificações abaixo.
      *
-     * @return      void
+     * @return void
      *
-     * @throws      \InvalidArgumentException
-     *              Caso algum valor passado não seja válido.
+     * @throws \InvalidArgumentException
+     * Caso algum valor passado não seja válido.
      */
     protected function collectionSetAcceptedCount(?string $rules): void
     {
@@ -487,7 +487,7 @@ trait FieldCollectionCommomMethods
      *      ];
      * ```
      *
-     * @return      ?array
+     * @return ?array
      */
     public function collectionGetAcceptedCount(): ?array
     {
@@ -502,7 +502,7 @@ trait FieldCollectionCommomMethods
      * Retornará o número mínimo de itens que esta coleção pode possuir para ser considerada
      * válida.
      *
-     * @return      ?int
+     * @return ?int
      */
     public function collectionGetMin(): ?int
     {
@@ -521,7 +521,7 @@ trait FieldCollectionCommomMethods
      * Retornará o número máximo de itens que esta coleção pode possuir para ser considerada
      * válida.
      *
-     * @return      ?int
+     * @return ?int
      */
     public function collectionGetMax(): ?int
     {
@@ -555,10 +555,10 @@ trait FieldCollectionCommomMethods
      * Prepara uma ``string`` que permite comparar valores *reference*.
      * A ``string`` é baseada nas chaves informadas em ``distinctKeys``.
      *
-     * @param       mixed $v
-     *              Objeto que será convertido em uma string para comparação.
+     * @param mixed $v
+     * Objeto que será convertido em uma string para comparação.
      *
-     * @return      string
+     * @return string
      */
     private function createStringToCompareReferences(mixed $v): string
     {
@@ -587,10 +587,10 @@ trait FieldCollectionCommomMethods
      * Em coleções de modelos de dados será levado em conta as definições passadas
      * em ``distinctKeys``.
      *
-     * @param       mixed $v
-     *              Coleção que será verificada.
+     * @param mixed $v
+     * Coleção que será verificada.
      *
-     * @return      string
+     * @return string
      */
     private function collectionCheckDistinct(mixed $v): string
     {
@@ -638,10 +638,10 @@ trait FieldCollectionCommomMethods
      * A partir da contagem total de uma coleção, identifica se o número de itens
      * está de acordo com as definições configuradas.
      *
-     * @param       int $count
-     *              Total de itens na coleção.
+     * @param int $count
+     * Total de itens na coleção.
      *
-     * @return      string
+     * @return string
      */
     private function collectionCheckAcceptedCount(int $count): string
     {
@@ -705,10 +705,10 @@ trait FieldCollectionCommomMethods
      * Retorna toda a coleção de dados armazenada com seus valores convertidos em formato
      * de armazenamento.
      *
-     * @param       array $v
-     *              Coleção de valores que serão convertidos.
+     * @param array $v
+     * Coleção de valores que serão convertidos.
      *
-     * @return      array
+     * @return array
      */
     protected function collectionValue_RetrieveInStorageFormat(array $v): array
     {
@@ -743,10 +743,10 @@ trait FieldCollectionCommomMethods
      *      ];
      * ```
      *
-     * @param       mixed $v
-     *              Coleção que será testada.
+     * @param mixed $v
+     * Coleção que será testada.
      *
-     * @return      array
+     * @return array
      */
     protected function collectionValue_CheckValue(mixed $v): array
     {
@@ -856,10 +856,10 @@ trait FieldCollectionCommomMethods
      *      ];
      * ```
      *
-     * @param       mixed $v
-     *              Valor que será testado.
+     * @param mixed $v
+     * Valor que será testado.
      *
-     * @return      array
+     * @return array
      */
     protected function collectionValue_ProccessSet(mixed $v): array
     {
@@ -887,14 +887,14 @@ trait FieldCollectionCommomMethods
     /**
      * Retorna a coleção indicado conforme as definições de formatação.
      *
-     * @param       array $val
-     *              Valor que será tratado.
+     * @param array $val
+     * Valor que será tratado.
      *
-     * @param       bool $formated
-     *              Este parametro só surte efeto se houver um ``inputFormat`` definido.
-     *              Se ``true``, retornará o valor conforme o padrão ``inputFormat`` define.
+     * @param bool $formated
+     * Este parametro só surte efeto se houver um ``inputFormat`` definido.
+     * Se ``true``, retornará o valor conforme o padrão ``inputFormat`` define.
      *
-     * @return      array
+     * @return array
      */
     protected function collectionValue_ProccessGet(array $val, bool $formated = false): array
     {
@@ -925,10 +925,10 @@ trait FieldCollectionCommomMethods
      * Deve ser substituído dentro de cada classe especialista de forma a apontar para o
      * devido processo compatível com os critérios definidos.
      *
-     * @param       mixed $v
-     *              Valor que será convertido.
+     * @param mixed $v
+     * Valor que será convertido.
      *
-     * @return      mixed
+     * @return mixed
      */
     protected function internal_RetrieveInStorageFormat(mixed $v): mixed
     {
@@ -958,10 +958,10 @@ trait FieldCollectionCommomMethods
      *      ];
      * ```
      *
-     * @param       mixed $v
-     *              Valor que será testado.
+     * @param mixed $v
+     * Valor que será testado.
      *
-     * @return      array
+     * @return array
      */
     protected function internal_CheckValue(mixed $v): array
     {
@@ -997,10 +997,10 @@ trait FieldCollectionCommomMethods
      *      ];
      * ```
      *
-     * @param       mixed $v
-     *              Valor que será testado.
+     * @param mixed $v
+     * Valor que será testado.
      *
-     * @return      array
+     * @return array
      */
     protected function internal_ProccessSet(mixed $v): array
     {
@@ -1012,14 +1012,14 @@ trait FieldCollectionCommomMethods
      * Deve ser substituído dentro de cada classe especialista de forma a apontar para o
      * devido processo compatível com os critérios definidos.
      *
-     * @param       mixed $val
-     *              Valor que será tratado.
+     * @param mixed $val
+     * Valor que será tratado.
      *
-     * @param       bool $formated
-     *              Este parametro só surte efeto se houver um ``inputFormat`` definido.
-     *              Se ``true``, retornará o valor conforme o padrão ``inputFormat`` define.
+     * @param bool $formated
+     * Este parametro só surte efeto se houver um ``inputFormat`` definido.
+     * Se ``true``, retornará o valor conforme o padrão ``inputFormat`` define.
      *
-     * @return      mixed
+     * @return mixed
      */
     protected function internal_ProccessGet(mixed $val, bool $formated = false): mixed
     {
