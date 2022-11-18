@@ -30,10 +30,10 @@ class MinifyJS
     /**
      * Minifica o código JS informado.
      *
-     * @param        string $jsCode
-     *               Código JS que será minificado.
+     * @param string $jsCode
+     * Código JS que será minificado.
      *
-     * @return       string
+     * @return string
      */
     public static function minifyCode(string $jsCode): string
     {
@@ -229,10 +229,10 @@ class MinifyJS
     /**
      * Minifica o conteúdo de um arquivo JS.
      *
-     * @param        string $absoluteSystemPathToFile
-     *               Endereço local do arquivo que será minificado.
+     * @param string $absoluteSystemPathToFile
+     * Endereço local do arquivo que será minificado.
      *
-     * @return       string
+     * @return string
      */
     public static function minifyFile(string $absoluteSystemPathToFile): string
     {
@@ -247,10 +247,10 @@ class MinifyJS
     /**
      * Minifica uma coleção de arquivos JS.
      *
-     * @param        string[] $absoluteSystemPathToFiles
-     *               Endereço local dos arquivos que serão minificados.
+     * @param string[] $absoluteSystemPathToFiles
+     * Endereço local dos arquivos que serão minificados.
      *
-     * @return       string
+     * @return string
      */
     public static function minifyFiles(array $absoluteSystemPathToFiles): string
     {
@@ -272,13 +272,13 @@ class MinifyJS
     /**
      * Minifica uma coleção de arquivos JS em um único arquivo.
      *
-     * @param        string[] $absoluteSystemPathToFiles
-     *               Endereço local dos arquivos que serão minificados.
+     * @param string[] $absoluteSystemPathToFiles
+     * Endereço local dos arquivos que serão minificados.
      *
-     * @param        string $absoluteSystemPathToMinifiedFile
-     *               Endereço completo onde o arquivo minificado será armazenado.
+     * @param string $absoluteSystemPathToMinifiedFile
+     * Endereço completo onde o arquivo minificado será armazenado.
      *
-     * @return       bool
+     * @return bool
      */
     public static function createMinifyFile(
         array $absoluteSystemPathToFiles,

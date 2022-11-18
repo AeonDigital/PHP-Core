@@ -30,13 +30,13 @@ class Zip
     /**
      * Zipa um conjunto de arquivos e diretórios e gera um pacote com os dados no local indicado.
      *
-     * @param       string[] $absoluteSystemPaths
-     *              Coleção de endereços dos arquivos e diretórios que serão zipados.
+     * @param string[] $absoluteSystemPaths
+     * Coleção de endereços dos arquivos e diretórios que serão zipados.
      *
-     * @param       string $absoluteSystemPathToFile
-     *              Endereço completo onde o novo arquivo zip será gerado.
+     * @param string $absoluteSystemPathToFile
+     * Endereço completo onde o novo arquivo zip será gerado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function packTargets(array $absoluteSystemPaths, string $absoluteSystemPathToFile): bool
     {
@@ -133,14 +133,14 @@ class Zip
      * Zipa um arquivo ou diretório (e todo seu conteúdo) gerando um pacote com os dados
      * encontrados no mesmo local onde estão os dados apontados.
      *
-     * @param       string $absoluteSystemPaths
-     *              Endereço completo do arquivo ou diretório que será zipado.
+     * @param string $absoluteSystemPaths
+     * Endereço completo do arquivo ou diretório que será zipado.
      *
-     * @param       ?string $absoluteSystemPathToFile
-     *              Quando definido, deve indicar o local de destino do pacote
-     *              gerado e seu respectivo nome.
+     * @param ?string $absoluteSystemPathToFile
+     * Quando definido, deve indicar o local de destino do pacote
+     * gerado e seu respectivo nome.
      *
-     * @return      bool
+     * @return bool
      */
     public static function pack(string $absoluteSystemPaths, ?string $absoluteSystemPathToFile = null): bool
     {
@@ -162,16 +162,16 @@ class Zip
      * Deszipa um pacote e adiciona seu conteúdo no local indicado.
      * SE o local não existir, cria-o.
      *
-     * @param       string $absoluteSystemPathToFile
-     *              Caminho completo até o arquivo zipado.
+     * @param string $absoluteSystemPathToFile
+     * Caminho completo até o arquivo zipado.
      *
-     * @param       ?string $absoluteSystemPathToDir
-     *              Caminho completo até o diretório onde o pacote será descompactado.
-     *              Caso não seja definido, criará um diretório no mesmo local onde o
-     *              arquivo **.zip** se encontra. O novo diretório terá como nome:
-     *              **dirname_unpacked** e, caso já exista, será adicionado um index.
+     * @param ?string $absoluteSystemPathToDir
+     * Caminho completo até o diretório onde o pacote será descompactado.
+     * Caso não seja definido, criará um diretório no mesmo local onde o
+     * arquivo **.zip** se encontra. O novo diretório terá como nome:
+     * **dirname_unpacked** e, caso já exista, será adicionado um index.
      *
-     * @return      bool
+     * @return bool
      */
     public static function unpack(string $absoluteSystemPathToFile, ?string $absoluteSystemPathToDir = null): bool
     {
@@ -233,19 +233,19 @@ class Zip
      * Extrai um ou mais arquivos ou diretórios de dentro de um arquivo zipado e aloca-os
      * em seus respectivos destinos.
      *
-     * @param       string $absoluteSystemPathToFile
-     *              Caminho completo até o arquivo zipado.
+     * @param string $absoluteSystemPathToFile
+     * Caminho completo até o arquivo zipado.
      *
-     * @param       array $targets
-     *              Array de arrays associativos onde:
+     * @param array $targets
+     * Array de arrays associativos onde:
      *
-     *              **key** : Deve ser o caminho para o arquivo ou diretório dentro do
-     *              zip (a partir da raiz do zip).
+     * **key** : Deve ser o caminho para o arquivo ou diretório dentro do
+     * zip (a partir da raiz do zip).
      *
-     *              **value** : Deve ser o caminho completo do diretório onde o arquivo
-     *              ou diretório será extraído.
+     * **value** : Deve ser o caminho completo do diretório onde o arquivo
+     * ou diretório será extraído.
      *
-     * @return      bool
+     * @return bool
      */
     static function unpackTargets(string $absoluteSystemPathToFile, array $targets): bool
     {

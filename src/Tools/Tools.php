@@ -32,10 +32,10 @@ class Tools
      * Retorna o tipo ``scalar`` do objeto passado.
      * Se não for um objeto do tipo ``scalar`` retornará ``null`` .
      *
-     * @param       mixed $o
-     *              Objeto que será verificado.
+     * @param mixed $o
+     * Objeto que será verificado.
      *
-     * @return      ?string
+     * @return ?string
      */
     public static function getScalarType(mixed $o): ?string
     {
@@ -60,14 +60,14 @@ class Tools
     /**
      * Verifica se o objeto passado corresponde ao tipo esperado.
      *
-     * @param       mixed $o
-     *              Objeto que será verificado.
+     * @param mixed $o
+     * Objeto que será verificado.
      *
-     * @param       string $type
-     *              Nome do tipo a ser testado.
-     *              Esperado um dos seguintes: null | bool | int | float | string | array
+     * @param string $type
+     * Nome do tipo a ser testado.
+     * Esperado um dos seguintes: null | bool | int | float | string | array
      *
-     * @return      bool
+     * @return bool
      */
     public static function isScalarType(mixed $o, string $type): bool
     {
@@ -76,10 +76,10 @@ class Tools
     /**
      * Identifica se o objeto passado é um tipo ``scalar``.
      *
-     * @param       mixed $o
-     *              Objeto que será verificado.
+     * @param mixed $o
+     * Objeto que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function isScalar(mixed $o): bool
     {
@@ -93,10 +93,10 @@ class Tools
     /**
      * Verifica se o objeto passado é do tipo ``null``.
      *
-     * @param       mixed $o
-     *              Objeto que será verificado.
+     * @param mixed $o
+     * Objeto que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function isNull(mixed $o): bool
     {
@@ -105,10 +105,10 @@ class Tools
     /**
      * Verifica se o objeto passado é do tipo ``bool``.
      *
-     * @param       mixed $o
-     *              Objeto que será verificado.
+     * @param mixed $o
+     * Objeto que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function isBool(mixed $o): bool
     {
@@ -118,10 +118,10 @@ class Tools
      * Verifica se o objeto passado é do tipo ``int`` ou ``float`` ou ainda se trata-se
      * de uma ``string`` numérica.
      *
-     * @param       mixed $o
-     *              Objeto que será verificado.
+     * @param mixed $o
+     * Objeto que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function isNumeric(mixed $o): bool
     {
@@ -130,10 +130,10 @@ class Tools
     /**
      * Verifica se o objeto passado é do tipo ``int``.
      *
-     * @param       mixed $o
-     *              Objeto que será verificado.
+     * @param mixed $o
+     * Objeto que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function isInt(mixed $o): bool
     {
@@ -142,10 +142,10 @@ class Tools
     /**
      * Verifica se o objeto passado é do tipo ``float``.
      *
-     * @param       mixed $o
-     *              Objeto que será verificado.
+     * @param mixed $o
+     * Objeto que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function isFloat(mixed $o): bool
     {
@@ -154,10 +154,10 @@ class Tools
     /**
      * Verifica se o objeto passado é do tipo ``string``.
      *
-     * @param       mixed $o
-     *              Objeto que será verificado.
+     * @param mixed $o
+     * Objeto que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function isString(mixed $o): bool
     {
@@ -166,10 +166,10 @@ class Tools
     /**
      * Verifica se o objeto passado é do tipo ``array``.
      *
-     * @param       mixed $o
-     *              Objeto que será verificado.
+     * @param mixed $o
+     * Objeto que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function isArray(mixed $o): bool
     {
@@ -178,10 +178,10 @@ class Tools
     /**
      * Verifica se o objeto passado um ``array`` associativo.
      *
-     * @param       mixed $o
-     *              Objeto que será verificado.
+     * @param mixed $o
+     * Objeto que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function isArrayAssoc(mixed $o): bool
     {
@@ -190,10 +190,10 @@ class Tools
     /**
      * Verifica se o objeto passado é do tipo ``DateTime``.
      *
-     * @param       mixed $o
-     *              Objeto que será verificado.
+     * @param mixed $o
+     * Objeto que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function isDateTime(mixed $o): bool
     {
@@ -202,10 +202,10 @@ class Tools
     /**
      * Verifica se o objeto passado é do tipo ``iRealType``.
      *
-     * @param       mixed $o
-     *              Objeto que será verificado.
+     * @param mixed $o
+     * Objeto que será verificado.
      *
-     * @return      bool
+     * @return bool
      */
     public static function isRealType(mixed $o): bool
     {
@@ -230,16 +230,17 @@ class Tools
      * Tenta converter o tipo do valor passado para ``bool``.
      * Apenas valores realmente compatíveis serão convertidos.
      *
-     * @param       mixed $o
-     *              Objeto que será convertido.
+     * @param mixed $o
+     * Objeto que será convertido.
      *
-     * @example     Exemplos de conversão:
-     *                  True = true; yes; 1; on.
-     *                  False = false; no; 0; off
+     * @example
+     * Exemplos de conversão:
+     * True = true; yes; 1; on
+     * False = false; no; 0; off
      *
-     * @return      ?bool
-     *              Retornará o valor booleano correspondente ao originalmente passado.
-     *              Retornará ``null`` caso não seja possível efetuar a conversão.
+     * @return ?bool
+     * Retornará o valor booleano correspondente ao originalmente passado.
+     * Retornará ``null`` caso não seja possível efetuar a conversão.
      */
     public static function toBool(mixed $o): ?bool
     {
@@ -278,11 +279,11 @@ class Tools
      * Tenta converter o tipo do valor passado para ``number`` (seja ``int`` ou ``float``).
      * Apenas valores realmente compatíveis serão convertidos.
      *
-     * @param       mixed $o
-     *              Objeto que será convertido.
+     * @param mixed $o
+     * Objeto que será convertido.
      *
-     * @return      null|int|float
-     *              Retornará ``null`` caso não seja possível efetuar a conversão.
+     * @return null|int|float
+     * Retornará ``null`` caso não seja possível efetuar a conversão.
      */
     public static function toNumeric(mixed $o): null|int|float
     {
@@ -304,11 +305,11 @@ class Tools
      *
      * Números com ponto flutuante serão arredondados pela função ``intval``.
      *
-     * @param       mixed $o
-     *              Objeto que será convertido.
+     * @param mixed $o
+     * Objeto que será convertido.
      *
-     * @return      ?int
-     *              Retornará ``null`` caso não seja possível efetuar a conversão.
+     * @return ?int
+     * Retornará ``null`` caso não seja possível efetuar a conversão.
      */
     public static function toInt(mixed $o): ?int
     {
@@ -328,11 +329,11 @@ class Tools
      * Tenta converter o tipo do valor passado para ``float``.
      * Apenas valores realmente compatíveis serão convertidos.
      *
-     * @param       mixed $o
-     *              Objeto que será convertido.
+     * @param mixed $o
+     * Objeto que será convertido.
      *
-     * @return      ?float
-     *              Retornará ``null`` caso não seja possível efetuar a conversão.
+     * @return ?float
+     * Retornará ``null`` caso não seja possível efetuar a conversão.
      */
     public static function toFloat(mixed $o): ?float
     {
@@ -352,11 +353,11 @@ class Tools
      * ao todo (parte inteira + parte decimal).
      * A parte decimal ficará com : (15 - (número de digitos da parte inteira)) casas.
      *
-     * @param       mixed $o
-     *              Objeto que será convertido.
+     * @param mixed $o
+     * Objeto que será convertido.
      *
-     * @return      ?string
-     *              Retornará ``null`` caso não seja possível efetuar a conversão.
+     * @return ?string
+     * Retornará ``null`` caso não seja possível efetuar a conversão.
      */
     public static function toString(mixed $o): ?string
     {
@@ -397,11 +398,11 @@ class Tools
      * Tenta converter o tipo do valor passado para ``array``.
      * Apenas valores realmente compatíveis serão convertidos.
      *
-     * @param       mixed $o
-     *              Objeto que será convertido.
+     * @param mixed $o
+     * Objeto que será convertido.
      *
-     * @return      ?array
-     *              Retornará ``null`` caso não seja possível efetuar a conversão.
+     * @return ?array
+     * Retornará ``null`` caso não seja possível efetuar a conversão.
      */
     public static function toArray(mixed $o): ?array
     {
@@ -420,16 +421,16 @@ class Tools
      * Se ao menos 1 dos valores originais não for passível de ser convertido, então o
      * processamento falhará e ``null`` será retornado.
      *
-     * @param       ?array $o
-     *              Coleção de valores originais.
+     * @param ?array $o
+     * Coleção de valores originais.
      *
-     * @param       bool $force
-     *              Indica se deve forçar a conversão de tipos não escalares.
-     *              Neste caso será verificado se o objeto possui implementado o método mágico
-     *              ``__toString`` e, caso positivo, irá utilizá-lo, senão, irá retornar o nome
-     *              completo da classe a qual este objeto pertence.
+     * @param bool $force
+     * Indica se deve forçar a conversão de tipos não escalares.
+     * Neste caso será verificado se o objeto possui implementado o método mágico
+     * ``__toString`` e, caso positivo, irá utilizá-lo, senão, irá retornar o nome
+     * completo da classe a qual este objeto pertence.
      *
-     * @return      ?array
+     * @return ?array
      */
     public static function toArrayStr(?array $o, bool $force = false): ?array
     {
@@ -465,22 +466,22 @@ class Tools
      * Tenta converter o tipo do valor passado para ``DateTime``.
      * Apenas valores realmente compatíveis serão convertidos.
      *
-     * @param       mixed $o
-     *              Objeto que será convertido.
-     *              Para ser efetivamente processado, é esperado uma ``string`` ou
-     *              um ``int``, correspondente a um **timestamp**.
+     * @param mixed $o
+     * Objeto que será convertido.
+     * Para ser efetivamente processado, é esperado uma ``string`` ou
+     * um ``int``, correspondente a um **timestamp**.
      *
-     * @param       string $format
-     *              Se o valor original for uma ``string``, este parametro deve indicar qual
-     *              formato que a data se encontra.
-     *              Padrão é **Y-m-d H:i:s**
+     * @param string $format
+     * Se o valor original for uma ``string``, este parametro deve indicar qual
+     * formato que a data se encontra.
+     * Padrão é **Y-m-d H:i:s**
      *
-     * @return      ?\DateTime
-     *              Retornará ``null`` caso não seja possível efetuar a conversão.
+     * @return ?\DateTime
+     * Retornará ``null`` caso não seja possível efetuar a conversão.
      *
-     *              Se passada uma string de data sem a parte ``time``, e, em ``$format`` também
-     *              não existir definições para horários (H | i | s) a conversão assumirá
-     *              o valor zero para cada uma destas posições.
+     * Se passada uma string de data sem a parte ``time``, e, em ``$format`` também
+     * não existir definições para horários (H | i | s) a conversão assumirá
+     * o valor zero para cada uma destas posições.
      */
     public static function toDateTime(
         mixed $o,
@@ -567,22 +568,22 @@ class Tools
      * formato de saida escolhido.
      * Apenas valores realmente compatíveis serão convertidos.
      *
-     * @param       mixed $o
-     *              Objeto que será convertido.
-     *              Para ser efetivamente processado, é esperado um ``DateTime``, uma ``string`` ou
-     *              um ``int``, correspondente a um **timestamp**.
+     * @param mixed $o
+     * Objeto que será convertido.
+     * Para ser efetivamente processado, é esperado um ``DateTime``, uma ``string`` ou
+     * um ``int``, correspondente a um **timestamp**.
      *
-     * @param       string $inputFormat
-     *              Se o valor original for uma ``string``, este parametro deve indicar qual
-     *              formato que a data se encontra.
-     *              Padrão é **Y-m-d H:i:s**.
+     * @param string $inputFormat
+     * Se o valor original for uma ``string``, este parametro deve indicar qual
+     * formato que a data se encontra.
+     * Padrão é **Y-m-d H:i:s**.
      *
-     * @param       string $outputFormat
-     *              Formato ``DateTime string`` em que o valor deve ser retornado.
-     *              Padrão é **Y-m-d H:i:s**.
+     * @param string $outputFormat
+     * Formato ``DateTime string`` em que o valor deve ser retornado.
+     * Padrão é **Y-m-d H:i:s**.
      *
-     * @return      ?string
-     *              Retornará ``null`` caso não seja possível efetuar a conversão.
+     * @return ?string
+     * Retornará ``null`` caso não seja possível efetuar a conversão.
      */
     public static function toDateTimeString(
         mixed $o,
@@ -599,11 +600,11 @@ class Tools
      * Tenta converter o tipo do valor passado para ``iRealType``.
      * Apenas valores realmente compatíveis serão convertidos.
      *
-     * @param       mixed $o
-     *              Objeto que será convertido.
+     * @param mixed $o
+     * Objeto que será convertido.
      *
-     * @return      ?iRealType
-     *              Retornará ``null`` caso não seja possível efetuar a conversão.
+     * @return ?iRealType
+     * Retornará ``null`` caso não seja possível efetuar a conversão.
      */
     public static function toRealType(mixed $o): ?iRealType
     {
@@ -622,11 +623,11 @@ class Tools
      * Tenta converter o tipo do valor passado para uma ``string json``.
      * Apenas valores realmente compatíveis serão convertidos.
      *
-     * @param       mixed $o
-     *              Objeto que será convertido.
+     * @param mixed $o
+     * Objeto que será convertido.
      *
-     * @return      ?string
-     *              Retornará ``null`` caso não seja possível efetuar a conversão.
+     * @return ?string
+     * Retornará ``null`` caso não seja possível efetuar a conversão.
      */
     public static function toJSON(mixed $o): ?string
     {

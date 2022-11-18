@@ -30,65 +30,58 @@ class Image
     /**
      * Efetua a transformação de uma imagem conforme os parametros de configuração.
      *
-     * @param       string $absoluteSystemPathToOriginalImage
-     *              Caminho completo até a imagem.
+     * @param string $absoluteSystemPathToOriginalImage
+     * Caminho completo até a imagem.
      *
-     * @param       string $absoluteSystemPathToNewImage
-     *              Caminho completo até o local onde a nova  imagem será armazenada.
-     *              Se não for definido a imagem original será alterada.
+     * @param string $absoluteSystemPathToNewImage
+     * Caminho completo até o local onde a nova  imagem será armazenada.
+     * Se não for definido a imagem original será alterada.
      *
-     * @param       string $resizeType
-     *              Tipo de ajuste que será feito.
+     * @param string $resizeType
+     * Tipo de ajuste que será feito.
      *
-     *              Os seguintes valores são aceitos:
+     * Os seguintes valores são aceitos:
+     * - **exact**      :   redimenciona a imagem exatamente na medida definida em ``$imgMaxWidth`` e ``$imgMaxHeight``.
+     *                      Se um deste valores não for definido, manterá o valor inicial da imagem.
+     * - **portrait**   :   redimensiona (verticalmente) a imagem parando quando chegar na altura máxima
+     *                      definida em ``$imgMaxHeight``.
+     * - **landscape**  :   redimensiona (horizontalmente) a imagem parando quando chegar na largura máxima
+     *                      definida em ``$imgMaxWidth``.
+     * - **auto**       :   redimensiona a imagem até encontrar uma das dimensões encontre um dos valores máximos
+     *                      definidos por ``$imgMaxWidth`` e ``$imgMaxHeight``.
      *
-     *              **exact** : redimenciona a imagem exatamente na medida definida em
-     *              ``$imgMaxWidth`` e ``$imgMaxHeight``.
-     *              Se um deste valores não for definido, manterá o valor inicial da imagem.
+     * @param ?int $imgMaxWidth
+     * Largura máxima que a imagem deverá ter.
+     * Se não for definido, este valor será calculado conforme o tipo ``$resizeType``.
      *
-     *              **portrait** : redimensiona (verticalmente) a imagem parando quando
-     *              encontra chegar na altura máxima definida em ``$imgMaxHeight``.
+     * @param ?int $imgMaxHeight
+     * Altura máxima que a imagem deverá ter.
+     * Se não for definido, este valor será calculado conforme o tipo ``$resizeType``.
      *
-     *              **landscape** : redimensiona (horizontalmente) a imagem parando quando
-     *              encontra chegar na largura máxima definida em ``$imgMaxWidth``.
+     * @param ?bool $imgCrop
+     * Quando ``true``, irá, após redimencionar a imagem, efetuar um crop(corte)
+     * na imagem resultante e salvará este corte ao invés da imagem como um todo.
      *
-     *              **auto** : redimensiona a imagem até que uma das dimensões encontre um dos
-     *              valores máximos definidos por ``$imgMaxWidth`` e ``$imgMaxHeight``.
+     * Para evitar que um crop exceda os limites de uma imagem que será
+     * redimencionada por um método dinâmico (portrait | landscape | auto) é
+     * recomendavel, mas não obrigatório, que esta opção seja usada em conjunto
+     * com o método ``exact``.
      *
-     * @param       ?int $imgMaxWidth
-     *              Largura máxima que a imagem deverá ter.
-     *              Se não for definido, este valor será calculado conforme o tipo
-     *              ``$resizeType``.
+     * @param ?int $imgCropWidth
+     * Largura do crop que será feito.
+     * Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
      *
-     * @param       ?int $imgMaxHeight
-     *              Altura máxima que a imagem deverá ter.
-     *              Se não for definido, este valor será calculado conforme o tipo
-     *              ``$resizeType``.
+     * @param ?int $imgCropHeight
+     * Altura do crop que será feito.
+     * Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
      *
-     * @param       ?bool $imgCrop
-     *              Quando ``true``, irá, após redimencionar a imagem, efetuar um crop(corte)
-     *              na imagem resultante e salvará este corte ao invés da imagem como um todo.
+     * @param ?int $imgCropX
+     * Posição no eixo X a partir de onde o corte da imagem deve ocorrer.
+     * Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
      *
-     *              Para evitar que um crop exceda os limites de uma imagem que será
-     *              redimencionada por um método dinâmico (portrait | landscape | auto) é
-     *              recomendavel, mas não obrigatório, que esta opção seja usada em conjunto
-     *              com o método ``exact``.
-     *
-     * @param       ?int $imgCropWidth
-     *              Largura do crop que será feito.
-     *              Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
-     *
-     * @param       ?int $imgCropHeight
-     *              Altura do crop que será feito.
-     *              Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
-     *
-     * @param       ?int $imgCropX
-     *              Posição no eixo X a partir de onde o corte da imagem deve ocorrer.
-     *              Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
-     *
-     * @param       ?int $imgCropY
-     *              Posição no eixo Y a partir de onde o corte da imagem deve ocorrer.
-     *              Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
+     * @param ?int $imgCropY
+     * Posição no eixo Y a partir de onde o corte da imagem deve ocorrer.
+     * Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
      *
      * @return      bool
      */
@@ -316,38 +309,33 @@ class Image
     /**
      * Efetua o redimensionamento de uma imagem conforme os parametros de configuração.
      *
-     * @param       string $absoluteSystemPathToOriginalImage
-     *              Caminho completo até a imagem.
+     * @param string $absoluteSystemPathToOriginalImage
+     * Caminho completo até a imagem.
      *
-     * @param       string $absoluteSystemPathToNewImage
-     *              Caminho completo até o local onde a nova  imagem será armazenada.
-     *              Se não for definido a imagem original será alterada.
+     * @param string $absoluteSystemPathToNewImage
+     * Caminho completo até o local onde a nova  imagem será armazenada.
+     * Se não for definido a imagem original será alterada.
      *
-     * @param       string $resizeType
-     *              Tipo de ajuste que será feito.
+     * @param string $resizeType
+     * Tipo de ajuste que será feito.
      *
-     *              Os seguintes valores são aceitos:
+     * Os seguintes valores são aceitos:
+     * - **exact**      :   redimenciona a imagem exatamente na medida definida em ``$imgMaxWidth`` e ``$imgMaxHeight``.
+     *                      Se um deste valores não for definido, manterá o valor inicial da imagem.
+     * - **portrait**   :   redimensiona (verticalmente) a imagem parando quando chegar na altura máxima
+     *                      definida em ``$imgMaxHeight``.
+     * - **landscape**  :   redimensiona (horizontalmente) a imagem parando quando chegar na largura máxima
+     *                      definida em ``$imgMaxWidth``.
+     * - **auto**       :   redimensiona a imagem até encontrar uma das dimensões encontre um dos valores máximos
+     *                      definidos por ``$imgMaxWidth`` e ``$imgMaxHeight``.
      *
-     *              **exact** : redimenciona a imagem exatamente na medida definida em
-     *              ``$imgMaxWidth`` e ``$imgMaxHeight``.
-     *              Se um deste valores não for definido, manterá o valor inicial da imagem.
+     * @param ?int $imgMaxWidth
+     * Largura máxima que a imagem deverá ter.
+     * Se não for definido, este valor será calculado conforme o tipo ``$resizeType``.
      *
-     *              **portrait** : redimensiona (verticalmente) a imagem parando quando
-     *              encontra chegar na altura máxima definida em ``$imgMaxHeight``.
-     *
-     *              **landscape** : redimensiona (horizontalmente) a imagem parando quando
-     *              encontra chegar na largura máxima definida em ``$imgMaxWidth``.
-     *
-     *              **auto** : redimensiona a imagem até que uma das dimensões encontre um dos
-     *              valores máximos definidos por ``$imgMaxWidth`` e ``$imgMaxHeight``.
-     *
-     * @param       ?int $imgMaxWidth
-     *              Largura máxima que a imagem deverá ter.
-     *              Se não for definido, este valor será calculado conforme o tipo ``$resizeType``.
-     *
-     * @param       ?int $imgMaxHeight
-     *              Altura máxima que a imagem deverá ter.
-     *              Se não for definido, este valor será calculado conforme o tipo ``$resizeType``.
+     * @param ?int $imgMaxHeight
+     * Altura máxima que a imagem deverá ter.
+     * Se não for definido, este valor será calculado conforme o tipo ``$resizeType``.
      *
      * @return      bool
      */
@@ -373,28 +361,28 @@ class Image
     /**
      * Efetua o ``crop`` de uma imagem conforme os parametros de configuração.
      *
-     * @param       string $absoluteSystemPathToOriginalImage
-     *              Caminho completo até a imagem.
+     * @param string $absoluteSystemPathToOriginalImage
+     * Caminho completo até a imagem.
      *
-     * @param       string $absoluteSystemPathToNewImage
-     *              Caminho completo até o local onde a nova  imagem será armazenada.
-     *              Se não for definido a imagem original será alterada.
+     * @param string $absoluteSystemPathToNewImage
+     * Caminho completo até o local onde a nova  imagem será armazenada.
+     * Se não for definido a imagem original será alterada.
      *
-     * @param       ?int $imgCropWidth
-     *              Largura do crop que será feito.
-     *              Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
+     * @param ?int $imgCropWidth
+     * Largura do crop que será feito.
+     * Apenas surte efeito se ``$resizeType`` for definido como ``crop``.
      *
-     * @param       ?int $imgCropHeight
-     *              Altura do crop que será feito.
-     *              Apenas surte efeito se ``$resizeType`` for definido como ``crop``
+     * @param ?int $imgCropHeight
+     * Altura do crop que será feito.
+     * Apenas surte efeito se ``$resizeType`` for definido como ``crop``
      *
-     * @param       ?int $imgCropX
-     *              Posição no eixo X a partir de onde o corte da imagem deve ocorrer.
-     *              Apenas surte efeito se ``$resizeType`` for definido como ``crop``
+     * @param ?int $imgCropX
+     * Posição no eixo X a partir de onde o corte da imagem deve ocorrer.
+     * Apenas surte efeito se ``$resizeType`` for definido como ``crop``
      *
-     * @param       ?int $imgCropY
-     *              Posição no eixo Y a partir de onde o corte da imagem deve ocorrer.
-     *              Apenas surte efeito se ``$resizeType`` for definido como ``crop``
+     * @param ?int $imgCropY
+     * Posição no eixo Y a partir de onde o corte da imagem deve ocorrer.
+     * Apenas surte efeito se ``$resizeType`` for definido como ``crop``
      *
      * @return      bool
      */

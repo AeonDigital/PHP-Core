@@ -34,14 +34,14 @@ class JSON
      * Apesar do padrão JSON não assumir a possibilidade de haver comentários este método
      * irá remover os mesmos se existirem e carregará o conteúdo normalmente.
      *
-     * @param       string $absoluteSystemPathToFile
-     *              Caminho completo até o arquivo que será carregado.
+     * @param string $absoluteSystemPathToFile
+     * Caminho completo até o arquivo que será carregado.
      *
-     * @param       bool $isAssoc
-     *              Quando ``true`` retornará um array associativo.
-     *              Se ``false``, retornará um objeto ``stdClass``
+     * @param bool $isAssoc
+     * Quando ``true`` retornará um array associativo.
+     * Se ``false``, retornará um objeto ``stdClass``
      *
-     * @return      null|array|\stdClass
+     * @return null|array|\stdClass
      */
     public static function retrieve(
         string $absoluteSystemPathToFile,
@@ -72,10 +72,10 @@ class JSON
     /**
      * Identa adequadamente uma string representante de um objeto JSON.
      *
-     * @param       string $strJSON
-     *              String que será identada.
+     * @param string $strJSON
+     * String que será identada.
      *
-     * @return      string
+     * @return string
      */
     public static function indent(string $strJSON): string
     {
@@ -155,17 +155,17 @@ class JSON
      * Salva o um objeto JSON (representado por uma ``String``, ``Array Associativo``
      * ou objeto ``stdClass`` no caminho informado).
      *
-     * @param       string $absoluteSystemPathToFile
-     *              Caminho completo até o arquivo que será salvo.
+     * @param string $absoluteSystemPathToFile
+     * Caminho completo até o arquivo que será salvo.
      *
-     * @param       string|array|\stdClass $JSON
-     *              Objeto que será salvo como um arquivo JSON.
+     * @param string|array|\stdClass $JSON
+     * Objeto que será salvo como um arquivo JSON.
      *
-     * @param       int $options
-     *              [Flags](http://php.net/manual/pt_BR/json.constants.php)
-     *              para salvar o documento JSON.
+     * @param int $options
+     * [Flags](http://php.net/manual/pt_BR/json.constants.php)
+     * para salvar o documento JSON.
      *
-     * @return      bool
+     * @return bool
      */
     public static function save(
         string $absoluteSystemPathToFile,
