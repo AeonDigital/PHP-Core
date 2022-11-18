@@ -257,8 +257,6 @@ class TypedCollection extends Collection implements iTypedCollection
     /**
      * Verifica se o objeto passado é um ``array associativo``.
      *
-     * @codeCoverageIgnore
-     *
      * @param mixed $o
      * Objeto que será testado.
      *

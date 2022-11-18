@@ -48,8 +48,5 @@ Terceira Revisão:
     - Retomar a ideia de criar de arrays tipados e outras questões referentes ao uso
       de tipos.
     - A classe 'TypeList' pode servir de base para estas classes derivadas como 'arrayOfString' e 'assocOfStrings' ... etc
-      Mudar o nome dela para 'TypedCollection'
-
-
     - Revisitar a documentação interna das classes e métodos para deixá-los melhores para
       trabalhar com as IDEs.
