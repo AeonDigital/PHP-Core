@@ -154,7 +154,7 @@ abstract class aModel extends BObject implements iModel
      * Coleção de campos que compõe este modelo de dados.
      * Os campos são armazenados em um array associativo conforme o modelo:
      *
-     * ``` php
+     * ```php
      *      // "key"    string      Nome do campo [armazenado em lowercase].
      *      // value    "iField"    Instância do campo.
      *      $arr = [
@@ -796,7 +796,7 @@ abstract class aModel extends BObject implements iModel
      *
      * O ``array`` de configuração deve ter a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // string           Nome do campo.
      *          "name" => ,

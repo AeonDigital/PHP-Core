@@ -48,7 +48,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *
      * Cada item produz uma entrada conforme o modelo indicado abaixo:
      *
-     * ``` php
+     * ```php
      *  [keyname] => [
      *      "originalkey" => "KeyName",
      *      "value" => value
@@ -221,7 +221,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * removidos. A regra geral é que TODOS os itens existentes mantenham como chave o índice
      * correspondente a sua real posição.
      *
-     * ``` php
+     * ```php
      *      // Neste caso uma coleção com 10 itens que execute 5 vezes a instrução:
      *      $collection->remove("0");
      *      // Ficará, ao final com 5 itens cada qual ocupando uma posição entre 0 e 4.
@@ -736,7 +736,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * Método que permite a verificação da existência de um valor usando a notação de
      * ``array associativo`` em conjunto com as funções ``isset()`` e ``empty()`` do PHP:
      *
-     * ``` php
+     * ```php
      *      $oCollect = new iBasicCollection();
      *      ...
      *      if (isset($oCollect["keyName"])) { ... }
@@ -760,7 +760,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * Método que permite resgatar o valor de um item da coleção da instância usando a
      * notação de ``array associativo``.
      *
-     * ``` php
+     * ```php
      *      $oCollect = new iBasicCollection();
      *      if ($oCollect["keyName"] == $value) { ... }
      * ```
@@ -783,7 +783,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * Método que permite inserir um novo valor para a coleção de dados da instância usando a
      * notação de um ``array associativo``.
      *
-     * ``` php
+     * ```php
      *      $oCollect = new iBasicCollection();
      *      $oCollect["keyName"] = $value;
      * ```
@@ -809,7 +809,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * Método que permite remover o valor de um item da coleção da instância usando a notação
      * de ``array associativo`` em conjunto com a função ``unset()`` do PHP:
      *
-     * ``` php
+     * ```php
      *      $oCollect = new iBasicCollection();
      *      unset($oCollect["keyName"]);
      * ```
@@ -840,7 +840,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * Método que permite a verificação da quantidade de itens na coleção atual usando a função
      * ``count()`` do PHP.
      *
-     * ``` php
+     * ```php
      *      $oCollect = new iBasicCollection();
      *      ...
      *      if (count($oCollect) > 1) { ... }
@@ -869,7 +869,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * Método que permite a iteração sobre os valores armazenados na coleção de dados da instância
      * usando ``foreach()`` do PHP.
      *
-     * ``` php
+     * ```php
      *      $oCollect = new iBasicCollection();
      *      ...
      *      foreach($oCollect as $key => $value) { ... }

@@ -49,7 +49,7 @@ final class Password extends aPasswordFormat
      * Verifica se o valor passado corresponde ao tipo/formato. esperado.
      *
      * **Exemplo de parametro $aux***
-     * ``` php
+     * ```php
      *      $arr = [
      *          // Coleção de caracteres comuns aceitos.
      *          "CommomChars"   => "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",

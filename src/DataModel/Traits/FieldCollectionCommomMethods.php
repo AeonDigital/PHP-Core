@@ -471,7 +471,7 @@ trait FieldCollectionCommomMethods
      *
      * O retorno deve ser um ``array`` associativo seguindo as seguintes orientações:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // int      Coleção de valores exatos que podem ser encontrados na contagem dos itens em uma coleção.
      *          "exactValues" => 0,
@@ -727,7 +727,7 @@ trait FieldCollectionCommomMethods
      *
      * O ``array`` retornado terá a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // bool             Indica se o valor pode ou não ser definido para o campo.
      *          "canSet" => ,
@@ -834,7 +834,7 @@ trait FieldCollectionCommomMethods
      *
      * O ``array`` retornado terá a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // mixed            O valor passado de forma bruta, sem qualquer tratamento.
      *          "rawValue" => ,
@@ -942,7 +942,7 @@ trait FieldCollectionCommomMethods
      *
      * O ``array`` retornado terá a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // bool             Indica se o valor pode ou não ser definido para o campo.
      *          "canSet" => ,
@@ -975,7 +975,7 @@ trait FieldCollectionCommomMethods
      *
      * O ``array`` retornado terá a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // mixed            O valor passado de forma bruta, sem qualquer tratamento.
      *          "rawValue" => ,

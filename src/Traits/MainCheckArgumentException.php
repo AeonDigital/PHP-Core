@@ -82,7 +82,7 @@ trait MainCheckArgumentException
      *
      * @throws      \InvalidArgumentException
      */
-    private function throwInvalidArgumentException($argValue): void
+    private function throwInvalidArgumentException(mixed $argValue): void
     {
         $this->lastArgumentValidateResult = true;
         if ($this->invalidArgumentExceptionMessage !== "") {
@@ -335,9 +335,9 @@ trait MainCheckArgumentException
      * @param       array $rules
      *              Regras para as validações.
      *
-     * @return      bool
+     * @return      false
      */
-    protected function checkArgument_fail(array $rules): bool
+    protected function checkArgument_fail(array $rules): false
     {
         $argName = $rules["argName"];
         $this->invalidArgumentExceptionMessage = "Invalid value defined for \"$argName\".";
@@ -445,6 +445,7 @@ trait MainCheckArgumentException
     }
     /**
      * Verifica se o argumento passado é uma string compatível com o padrão informado.
+     *
      * São esperados os seguintes parâmetros:
      * - "patternPregMatch" :   objeto regex a ser usado para a verificação.
      * - "errorShowPattern" :   versão ``string`` do mesmo regex que será adicionado na
@@ -844,6 +845,7 @@ trait MainCheckArgumentException
     }
     /**
      * Verifica se o argumento passado é um array com exatos "x" valores.
+     *
      * São esperados os seguintes parâmetros:
      * - "expectedCountValues" :    Quantidade de itens que o array deve ter.
      *
@@ -871,6 +873,7 @@ trait MainCheckArgumentException
     }
     /**
      * Verifica se o argumento passado é um array associativo contendo as chaves definidas.
+     *
      * São esperados os seguintes parâmetros:
      * - "requiredKeys" :   Array associativo onde, cada chave expressa o nome de uma chave que
      *                      deve estar presente no argumento principal, e, seus valores, devem ser
@@ -922,6 +925,7 @@ trait MainCheckArgumentException
     }
     /**
      * Verifica se cada um dos objetos filhos de um array correspondem as definições de validações.
+     *
      * São esperados os seguintes parâmetros:
      * - "foreachChild" :   Array associativo que deve ter a coleção de regras como se fosse um único
      *                      objeto ``$rules`` mas que será aplicado a cada item filho de forma individual.
@@ -973,6 +977,7 @@ trait MainCheckArgumentException
 
     /**
      * Verifica se o argumento passado é igual a um dos valores permitidos.
+     *
      * São esperados os seguintes parâmetros:
      * - "allowedValues"    : Array simples indicando quais os valores são válidos.
      * - "caseInsensitive"  : Se ``true`` fará a comparação de forma 'case-insensitive'.
@@ -1009,6 +1014,7 @@ trait MainCheckArgumentException
     }
     /**
      * Verifica se o argumento passado é igual a um dos valores permitidos.
+     *
      * São esperados os seguintes parâmetros:
      * - "allowedValues"    : Array simples indicando quais os valores são válidos.
      * - "caseInsensitive"  : Se ``true`` fará a comparação de forma 'case-insensitive'.
@@ -1053,6 +1059,7 @@ trait MainCheckArgumentException
 
     /**
      * Utiliza uma closure para validar o valor do argumento.
+     *
      * São esperados os seguintes parâmetros:
      * - "closure"    : function($arg) { return bool; }
      *
@@ -1129,6 +1136,7 @@ trait MainCheckArgumentException
     /**
      * Verifica se o argumento passado é o nome de uma classe que implementa a interface
      * definida em "interface".
+     *
      * São esperados os seguintes parâmetros:
      * - "interface"    : Namespace da interface que será testada
      *

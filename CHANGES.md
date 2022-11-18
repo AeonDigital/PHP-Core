@@ -1,5 +1,14 @@
 
 
+Documentação:
+Procurar por : ``` php e substituir por ```php [remover espaços e rever o tipo certo para a documentação aparecer corretamente.]
+
+
+Interfaces
+Remover das interfaces atuais todo vínculo direto que existir entre elas e as PSR.
+Substituir tal vínculo por um método do tipo "function toPSR(): PSRInterface"
+
+
 Alteração de assinaturas de funções
 array_in_ci         -> in_array_ci              [nome alterado]
 mb_str_contains     -> str_contains             [removido; atualmente é parte do core do PHP a partir da versão 8.0 e já é binary-safe]
@@ -32,3 +41,15 @@ Segunda revisão:
 
 Remover do 'phpunit.php':
     require_once $rootDir . "/vendor/aeondigital/phpinterfaces/src/iRealType.php"; // @@TODO
+
+
+===========================================================
+Terceira Revisão:
+    - Retomar a ideia de criar de arrays tipados e outras questões referentes ao uso
+      de tipos.
+    - A classe 'TypeList' pode servir de base para estas classes derivadas como 'arrayOfString' e 'assocOfStrings' ... etc
+      Mudar o nome dela para 'TypedCollection'
+
+
+    - Revisitar a documentação interna das classes e métodos para deixá-los melhores para
+      trabalhar com as IDEs.

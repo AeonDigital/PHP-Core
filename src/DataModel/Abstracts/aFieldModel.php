@@ -75,7 +75,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * O ``array`` retornado terá a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // bool             Indica se o valor pode ou não ser definido para o campo.
      *          "canSet" => ,
@@ -158,7 +158,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * O ``array`` retornado terá a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // mixed            O valor passado de forma bruta, sem qualquer tratamento.
      *          "rawValue" => ,
@@ -241,7 +241,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * O ``array`` retornado terá a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // bool             Indica se o valor pode ou não ser definido para o campo.
      *          "canSet" => ,
@@ -274,7 +274,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * O ``array`` retornado terá a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // mixed            O valor passado de forma bruta, sem qualquer tratamento.
      *          "rawValue" => ,
@@ -409,7 +409,7 @@ abstract class aFieldModel extends aField implements iFieldModel
      *
      * O ``array`` de configuração deve ter a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // string           Nome do campo.
      *          "name" => ,

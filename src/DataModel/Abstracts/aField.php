@@ -335,7 +335,7 @@ abstract class aField extends BObject implements iField
      * **OU**
      * pode ser passado um ``array`` conforme as definições especificadas abaixo:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // string   Nome deste tipo de transformação.
      *          "name" => ,
@@ -1123,7 +1123,7 @@ abstract class aField extends BObject implements iField
      *
      * O ``array`` retornado terá a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // bool             Indica se o valor pode ou não ser definido para o campo.
      *          "canSet" => ,
@@ -1314,7 +1314,7 @@ abstract class aField extends BObject implements iField
      *
      * O ``array`` retornado terá a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // mixed            O valor passado de forma bruta, sem qualquer tratamento.
      *          "rawValue" => ,
@@ -1437,7 +1437,7 @@ abstract class aField extends BObject implements iField
      *
      * O ``array`` retornado terá a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // bool             Indica se o valor pode ou não ser definido para o campo.
      *          "canSet" => ,
@@ -1470,7 +1470,7 @@ abstract class aField extends BObject implements iField
      *
      * O ``array`` retornado terá a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // mixed            O valor passado de forma bruta, sem qualquer tratamento.
      *          "rawValue" => ,
@@ -1613,7 +1613,7 @@ abstract class aField extends BObject implements iField
      *
      * Os valores aqui pré-definidos devem seguir as mesmas regras de validação para o campo.
      *
-     * ``` php
+     * ```php
      *      // Exemplo de definição
      *      $arr = [
      *          ["RS", "Rio Grande do Sul"],
@@ -1921,7 +1921,7 @@ abstract class aField extends BObject implements iField
      *
      * O ``array`` de configuração deve ter a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // string           Nome do campo.
      *          "name" => ,

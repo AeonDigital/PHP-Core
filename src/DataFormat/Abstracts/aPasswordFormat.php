@@ -105,7 +105,7 @@ abstract class aPasswordFormat extends aStringFormat implements iPasswordFormat
      * senha será o valor informado em ``$cfg[¨MinLength¨]``
      *
      * **Exemplo de parametro $cfg***
-     * ``` php
+     * ```php
      *      $arr = [
      *          // Coleção de caracteres comuns aceitos.
      *          "CommomChars"   => "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
@@ -160,7 +160,7 @@ abstract class aPasswordFormat extends aStringFormat implements iPasswordFormat
      * variável ``$err``.
      *
      * **Exemplo de parametro $aux***
-     * ``` php
+     * ```php
      *      $arr = [
      *          // Coleção de caracteres comuns aceitos.
      *          "CommomChars"   => "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",

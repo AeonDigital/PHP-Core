@@ -383,7 +383,7 @@ class TypeList extends Collection implements iTypeList
      *
      * O retorno será um ``array associativo`` contendo:
      *
-     * ``` php
+     * ```php
      *      "structureType"     => [nullable-] type | array
      *      "dataType           => type | array-of-types | array-assoc
      *      "internalStructure  =>  Estrutura interna, removendo marcações mais
@@ -456,7 +456,7 @@ class TypeList extends Collection implements iTypeList
      *
      * Exemplo de estrutura que será avaliada :
      *
-     * ``` php
+     * ```php
      *      [ ... ]
      * ```
      *
@@ -476,7 +476,7 @@ class TypeList extends Collection implements iTypeList
      *
      * Exemplo de estrutura que será avaliada :
      *
-     * ``` php
+     * ```php
      *      string  => int
      *      string  => [ ... ]
      *      int     => string
@@ -506,7 +506,7 @@ class TypeList extends Collection implements iTypeList
      *
      * Exemplo de estrutura que será avaliada :
      *
-     * ``` php
+     * ```php
      *      string, int, bool
      * ```
      *
@@ -539,11 +539,11 @@ class TypeList extends Collection implements iTypeList
      *
      * Exemplo de estrutura que será avaliada :
      *
-     * ``` php
+     * ```php
      *      string
      *      int
      *      DateTime
-     * ``` php
+     * ```
      *
      * @param       string $structure
      *              Estrutura de dados que será testada.

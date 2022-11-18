@@ -8,7 +8,7 @@ declare(strict_types=1);
  *
  * O array terá as seguintes chaves:
  *
- * ``` php
+ * ```php
  *      $arr = [
  *          "year"  => int,
  *          "week"  => int,

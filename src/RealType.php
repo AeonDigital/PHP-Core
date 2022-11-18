@@ -32,19 +32,19 @@ final class RealType extends BObject implements iRealType
     /**
      * Valor atual do numeral representado.
      *
-     * @var     string
+     * @var string
      */
     protected string $val = "0";
     /**
      * Parte inteira do numeral representado.
      *
-     * @var     string
+     * @var string
      */
     protected string $integerPart = "0";
     /**
      * Parte decimal do numeral representado.
      *
-     * @var     string
+     * @var string
      */
     protected string $decimalPart = "0";
     /**
@@ -52,19 +52,19 @@ final class RealType extends BObject implements iRealType
      *
      * Trata-se da soma do total de casas antes e após o separador decimal.
      *
-     * @var     int
+     * @var int
      */
     protected int $totalDigits = 0;
     /**
      * Total de dígitos usados para a representação da parte inteira deste valor.
      *
-     * @var     int
+     * @var int
      */
     protected int $totalIntegerDigits = 0;
     /**
      * Total de dígitos usados para a representação da parte decimal deste valor.
      *
-     * @var     int
+     * @var int
      */
     protected int $totalDecimalDigits = 0;
 
@@ -75,7 +75,7 @@ final class RealType extends BObject implements iRealType
     /**
      * Retorna o valor que esta instância está representando.
      *
-     * @return      string
+     * @return string
      */
     public function value(): string
     {
@@ -84,7 +84,7 @@ final class RealType extends BObject implements iRealType
     /**
      * Retorna apenas a parte inteira do numeral representado por esta instância.
      *
-     * @return      string
+     * @return string
      */
     public function getIntegerPart(): string
     {
@@ -94,7 +94,7 @@ final class RealType extends BObject implements iRealType
     /**
      * Retorna apenas a parte decimal do numeral representado por esta instância.
      *
-     * @return      string
+     * @return string
      */
     public function getDecimalPart(): string
     {
@@ -112,7 +112,7 @@ final class RealType extends BObject implements iRealType
      * Retorna o total de dígitos que compõe este numeral somando o total de casas antes e após
      * o separador decimal.
      *
-     * @return      int
+     * @return int
      */
     public function precision(): int
     {
@@ -122,7 +122,7 @@ final class RealType extends BObject implements iRealType
      * Retorna o total de digitos que são usados para representar a parte inteira do numeral
      * atual.
      *
-     * @return      int
+     * @return int
      */
     public function integerPlaces(): int
     {
@@ -132,7 +132,7 @@ final class RealType extends BObject implements iRealType
      * Retorna o total de digitos que são usados para representar a parte decimal do numeral
      * atual.
      *
-     * @return      int
+     * @return int
      */
     public function decimalPlaces(): int
     {
@@ -152,7 +152,7 @@ final class RealType extends BObject implements iRealType
      * Valor padrão para a quantidade de casas decimais que devem ser levadas em conta nas
      * operações que exigem o parametro ``$dPlaces``.
      *
-     * @var         int
+     * @var int
      */
     protected static int $globalDecimalPlaces = 0;
 
@@ -166,10 +166,10 @@ final class RealType extends BObject implements iRealType
      * Quando algum método que usa o argumento ``$dPlaces`` for igual a ``null``, o valor aqui
      * definido é que será usado.
      *
-     * @param       int $v
-     *              Valor padrão a ser usado.
+     * @param int $v
+     * Valor padrão a ser usado.
      *
-     * @return      void
+     * @return void
      */
     public static function defineGlobalDecimalPlaces(int $v): void
     {
@@ -185,7 +185,7 @@ final class RealType extends BObject implements iRealType
      * Retorna o número de casas decimais sendo usadas no momento para fins de cálculos com esta
      * classe.
      *
-     * @return      int
+     * @return int
      */
     public static function getGlobalDecimalPlaces(): int
     {
@@ -197,11 +197,11 @@ final class RealType extends BObject implements iRealType
     /**
      * Retorna a quantidade de casas decimais que devem ser usadas para a operação.
      *
-     * @param       ?int $dPlaces
-     *              Total de casas decimais a serem levadas em conta.
-     *              Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
+     * @param ?int $dPlaces
+     * Total de casas decimais a serem levadas em conta.
+     * Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
      *
-     * @return      int
+     * @return int
      */
     protected function useDecimalPlaces(?int $dPlaces = null): int
     {
@@ -220,21 +220,21 @@ final class RealType extends BObject implements iRealType
     /**
      * Forma padrão usada para o arredondamento dos valores.
      *
-     * @var         ?string
+     * @var ?string
      */
     protected static ?string $globalRoundType = null;
     /**
      * Indica o nível de **sensibilidade** a partir do qual os valores calculados deverão ser
      * arredondados.
      *
-     * @var         ?iRealType
+     * @var ?iRealType
      */
     protected static ?iRealType $globalRoundSensibility = null;
     /**
      * Indica quando, internamente, os arredondamentos NÃO devem ser efetuados para evitar
      * loopings.
      *
-     * @var         ?bool
+     * @var ?bool
      */
     protected static ?bool $globalRoundDisabled = null;
 
@@ -244,30 +244,26 @@ final class RealType extends BObject implements iRealType
     /**
      * Define a forma padrão pela qual os valores, quando calculados, serão arredondados.
      *
-     * @param       ?string $roundType
-     *              Indica o tipo de arredondamento que será feito.
-     *              Valores inválidos não incorrerão em erros e nem em nenhuma conversão.
+     * @param ?string $roundType
+     * Indica o tipo de arredondamento que será feito.
+     * Valores inválidos não incorrerão em erros e nem em nenhuma conversão.
      *
-     *              Os valores aceitos são:
-     *              ``floor``   :   Arredondará para baixo qualquer valor a partir do
-     *                              **digito sensível**.
-     *              ``ceil``    :   Arredondará para cima todo valor diferente de zero a partir
-     *                              do **digito sensível**.
-     *              ``floor-n`` :   Arredondará para baixo todo **digito sensível** que seja
-     *                              igual ou menor que ``n`` e para cima todo **digito sensível**
-     *                              maior que ``n``.
-     *              ``ceil-n``  :   Arredondará para cima todo **digito sensível** que seja igual
-     *                              ou maior que ``n`` e para baixo todo **digito sensível** menor
-     *                              que ``n``.
+     * Os valores aceitos são:
+     * - ``floor``   :  Arredondará para baixo qualquer valor a partir do **digito sensível**.
+     * - ``ceil``    :  Arredondará para cima todo valor diferente de zero a partir do **digito sensível**.
+     * - ``floor-n`` :  Arredondará para baixo todo **digito sensível** que seja igual ou menor que ``n`` e
+     *                  para cima todo **digito sensível** maior que ``n``.
+     * - ``ceil-n``  :  Arredondará para cima todo **digito sensível** que seja igual ou maior que ``n`` e
+     *                  para baixo todo **digito sensível** menor que ``n``.
      *
-     * @param       iRealType $sensibility
-     *              A sensibilidade é sempre um valor que indica qual será exatamente o digito que
-     *              será sensível ao arredondamento.
+     * @param iRealType $sensibility
+     * A sensibilidade é sempre um valor que indica qual será exatamente o digito que será sensível ao
+     * arredondamento.
      *
-     *              Por exemplo: ``0.001`` fará o arredondamento do número a partir do 3º digito após
-     *              o ponto decimal enquanto ``10`` fará o arredondamento das casas das dezenas.
+     * Por exemplo: ``0.001`` fará o arredondamento do número a partir do 3º digito após
+     * o ponto decimal enquanto ``10`` fará o arredondamento das casas das dezenas.
      *
-     * @return      void
+     * @return void
      */
     public static function defineGlobalRoundType(?string $roundType, ?iRealType $sensibility): void
     {
@@ -284,14 +280,14 @@ final class RealType extends BObject implements iRealType
     /**
      * Indica se os valores passados para a configuração do arredondamento de valores são válidos.
      *
-     * @param       ?string $roundType
-     *              Tipo de arredondamento.
+     * @param ?string $roundType
+     * Tipo de arredondamento.
      *
-     * @param       ?iRealType $sensibility
-     *              Sensibilidade usada para o arredondamento.
+     * @param ?iRealType $sensibility
+     * Sensibilidade usada para o arredondamento.
      *
-     * @return      bool
-     *              Retornará ``true`` quando o tipo indicado for válido.
+     * @return bool
+     * Retornará ``true`` quando o tipo indicado for válido.
      */
     protected static function isValidRoundType(?string $roundType, ?iRealType $sensibility): bool
     {
@@ -313,7 +309,7 @@ final class RealType extends BObject implements iRealType
     /**
      * Retorna o tipo de arredondamento definido para os cálculos realizados com esta classe.
      *
-     * @return      ?string
+     * @return ?string
      */
     public static function getRoundType(): ?string
     {
@@ -322,7 +318,7 @@ final class RealType extends BObject implements iRealType
     /**
      * Retorna o nível de sensibilidade usada para os arredondamentos.
      *
-     * @return      ?iRealType
+     * @return ?iRealType
      */
     public static function getRoundSensibility(): ?iRealType
     {
@@ -340,11 +336,11 @@ final class RealType extends BObject implements iRealType
     /**
      * Inicia um novo objeto ``iRealType`` com o valor indicado.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor inicial.
+     * @param int|float|string|iRealType $v
+     * Valor inicial.
      *
-     * @throws      \InvalidArgumentException
-     *              Lançado se o valor inicial indicado não for aceitável para iniciar o objeto.
+     * @throws \InvalidArgumentException
+     * Lançado se o valor inicial indicado não for aceitável para iniciar o objeto.
      */
     function __construct(int|float|string|iRealType $v = 0)
     {
@@ -401,11 +397,11 @@ final class RealType extends BObject implements iRealType
     /**
      * Identifica se o valor passado é um ``iRealType`` válido.
      *
-     * @param       mixed $v
-     *              Valor a ser testado.
+     * @param mixed $v
+     * Valor a ser testado.
      *
-     * @return      bool
-     *              Retorna ``true`` se o valor passado for válido.
+     * @return bool
+     * Retorna ``true`` se o valor passado for válido.
      */
     static public function isValidRealType(mixed $v): bool
     {
@@ -436,13 +432,13 @@ final class RealType extends BObject implements iRealType
     /**
      * Efetua a comparação entre o valor desta instância e o valor indicado.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor usado para comparação.
+     * @param int|float|string|iRealType $v
+     * Valor usado para comparação.
      *
-     * @return      int
-     *              Retornará ``0`` quando os dois operandos são iguais.
-     *              ``1`` se a instância atual é maior que o valor passado em ``$v``.
-     *              ``-1`` se a instância atual é menor que o valor passado em ``$v``.
+     * @return int
+     * - Retornará ``0`` quando os dois operandos são iguais.
+     * - ``1`` se a instância atual é maior que o valor passado em ``$v``.
+     * - ``-1`` se a instância atual é menor que o valor passado em ``$v``.
      */
     protected function compareValues(int|float|string|iRealType $v): int
     {
@@ -463,12 +459,12 @@ final class RealType extends BObject implements iRealType
     /**
      * Verifica se o valor atual desta instância é igual ao valor passado para comparação.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor usado para comparação.
+     * @param int|float|string|iRealType $v
+     * Valor usado para comparação.
      *
-     * @return      bool
-     *              Retorna ``true`` se o valor atual desta instância e o valor passado em ``$v``
-     *              forem **IDÊNTICOS**.
+     * @return bool
+     * Retorna ``true`` se o valor atual desta instância e o valor passado em ``$v``
+     * forem **IDÊNTICOS**.
      */
     public function isEqualAs(int|float|string|iRealType $v): bool
     {
@@ -480,12 +476,12 @@ final class RealType extends BObject implements iRealType
     /**
      * Verifica se o valor atual desta instância é maior que o valor passado para comparação.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor usado para comparação.
+     * @param int|float|string|iRealType $v
+     * Valor usado para comparação.
      *
-     * @return      bool
-     *              Retornará ``true`` se o valor atual desta instância é **MAIOR** que o valor
-     *              indicado em ``$v``.
+     * @return bool
+     * Retornará ``true`` se o valor atual desta instância é **MAIOR** que o valor
+     * indicado em ``$v``.
      */
     public function isGreaterThan(int|float|string|iRealType $v): bool
     {
@@ -497,12 +493,12 @@ final class RealType extends BObject implements iRealType
     /**
      * Verifica se o valor atual desta instância é maior ou igual ao valor passado para comparação.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor usado para comparação.
+     * @param int|float|string|iRealType $v
+     * Valor usado para comparação.
      *
-     * @return      bool
-     *              Retornará ``true`` se o valor atual desta instância é **MAIOR** ou **IGUAL**
-     *              ao o valor indicado em ``$v``.
+     * @return bool
+     * Retornará ``true`` se o valor atual desta instância é **MAIOR** ou **IGUAL**
+     * ao o valor indicado em ``$v``.
      */
     public function isGreaterOrEqualAs(int|float|string|iRealType $v): bool
     {
@@ -515,12 +511,12 @@ final class RealType extends BObject implements iRealType
     /**
      * Verifica se o valor atual desta instância é menor que o valor passado para comparação.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor usado para comparação.
+     * @param int|float|string|iRealType $v
+     * Valor usado para comparação.
      *
-     * @return      bool
-     *              Retornará ``true`` se o valor atual desta instância é **MENOR** que o valor
-     *              indicado em ``$v``.
+     * @return bool
+     * Retornará ``true`` se o valor atual desta instância é **MENOR** que o valor
+     * indicado em ``$v``.
      */
     public function isLessThan(int|float|string|iRealType $v): bool
     {
@@ -532,12 +528,12 @@ final class RealType extends BObject implements iRealType
     /**
      * Verifica se o valor atual desta instância é menor ou igual ao valor passado para comparação.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor usado para comparação.
+     * @param int|float|string|iRealType $v
+     * Valor usado para comparação.
      *
-     * @return      bool
-     *              Retornará ``true`` se o valor atual desta instância é **MENOR** ou **IGUAL**
-     *              ao o valor indicado em ``$v``.
+     * @return bool
+     * Retornará ``true`` se o valor atual desta instância é **MENOR** ou **IGUAL**
+     * ao o valor indicado em ``$v``.
      */
     public function isLessOrEqualAs(int|float|string|iRealType $v): bool
     {
@@ -557,8 +553,8 @@ final class RealType extends BObject implements iRealType
     /**
      * Verifica se o valor atual desta instância é ``zero``.
      *
-     * @return      bool
-     *              Retornará ``true`` se o valor atual desta instância for ``zero``.
+     * @return bool
+     * Retornará ``true`` se o valor atual desta instância for ``zero``.
      */
     public function isZero(): bool
     {
@@ -572,8 +568,8 @@ final class RealType extends BObject implements iRealType
     /**
      * Verifica se o valor atual desta instância é um número positivo.
      *
-     * @return      bool
-     *              Retornará ``true`` se o valor atual desta instância for um número positivo.
+     * @return bool
+     * Retornará ``true`` se o valor atual desta instância for um número positivo.
      */
     public function isPositive(): bool
     {
@@ -587,8 +583,8 @@ final class RealType extends BObject implements iRealType
     /**
      * Verifica se o valor atual desta instância é um número negativo.
      *
-     * @return      bool
-     *              Retornará ``true`` se o valor atual desta instância for um número negativo.
+     * @return bool
+     * Retornará ``true`` se o valor atual desta instância for um número negativo.
      */
     public function isNegative(): bool
     {
@@ -608,7 +604,7 @@ final class RealType extends BObject implements iRealType
      * Retorna uma nova instância ``iRealType`` com o mesmo valor atual desta instância mas com
      * o sinal positivo.
      *
-     * @return      iRealType
+     * @return iRealType
      */
     public function toPositive(): iRealType
     {
@@ -624,7 +620,7 @@ final class RealType extends BObject implements iRealType
      * Retorna uma nova instância ``iRealType`` com o mesmo valor atual desta instância mas com
      * o sinal negativo.
      *
-     * @return      iRealType
+     * @return iRealType
      */
     public function toNegative(): iRealType
     {
@@ -644,7 +640,7 @@ final class RealType extends BObject implements iRealType
      * Retorna uma nova instância ``iRealType`` com o mesmo valor atual desta instância mas com
      * o sinal invertido.
      *
-     * @return      iRealType
+     * @return iRealType
      */
     public function invertSignal(): iRealType
     {
@@ -669,35 +665,31 @@ final class RealType extends BObject implements iRealType
     /**
      * Efetua o arredondamento de valores conforme as regras indicadas.
      *
-     * @param       iRealType $v
-     *              Valor que será arredondado.
+     * @param iRealType $v
+     * Valor que será arredondado.
      *
-     * @param       string $roundType
-     *              Indica o tipo de arredondamento que será feito.
-     *              Valores inválidos não incorrerão em erros e nem em nenhuma conversão.
+     * @param string $roundType
+     * Indica o tipo de arredondamento que será feito.
+     * Valores inválidos não incorrerão em erros e nem em nenhuma conversão.
      *
-     *              Os valores aceitos são:
-     *              ``floor``   :   Arredondará para baixo qualquer valor a partir do
-     *                              **digito sensível**.
-     *              ``ceil``    :   Arredondará para cima todo valor diferente de zero a partir
-     *                              do **digito sensível**.
-     *              ``floor-n`` :   Arredondará para baixo todo **digito sensível** que seja
-     *                              igual ou menor que ``n`` e para cima todo **digito sensível**
-     *                              maior que ``n``.
-     *              ``ceil-n``  :   Arredondará para cima todo **digito sensível** que seja igual
-     *                              ou maior que ``n`` e para baixo todo **digito sensível** menor
-     *                              que ``n``.
+     * Os valores aceitos são:
+     * - ``floor``   :  Arredondará para baixo qualquer valor a partir do **digito sensível**.
+     * - ``ceil``    :  Arredondará para cima todo valor diferente de zero a partir do **digito sensível**.
+     * - ``floor-n`` :  Arredondará para baixo todo **digito sensível** que seja igual ou menor que ``n`` e
+     *                  para cima todo **digito sensível** maior que ``n``.
+     * - ``ceil-n``  :  Arredondará para cima todo **digito sensível** que seja igual ou maior que ``n`` e
+     *                  para baixo todo **digito sensível** menor que ``n``.
      *
+     * @param iRealType $sensibility
+     * A sensibilidade é sempre um valor que indica qual será exatamente o digito que será sensível ao arredondamento.
      *
-     * @param       iRealType $sensibility
-     *              A sensibilidade é sempre um valor que indica qual será exatamente o digito que
-     *              será sensível ao arredondamento.
+     * Por exemplo:
      *
-     *              Por exemplo: ``0.001`` fará o arredondamento do número a partir do 3º digito após
-     *              o ponto decimal enquanto ``10`` fará o arredondamento das casas das dezenas.
+     * ``0.001`` fará o arredondamento do número a partir do 3º digito após o ponto decimal enquanto ``10`` fará o
+     * arredondamento das casas das dezenas.
      *
-     * @return      iRealType
-     *              Nova instância ``iRealType`` com o resultado do arredondamento indicado.
+     * @return iRealType
+     * Nova instância ``iRealType`` com o resultado do arredondamento indicado.
      */
     public static function roundTo(iRealType $v, string $roundType, iRealType $sensibility): iRealType
     {
@@ -782,18 +774,18 @@ final class RealType extends BObject implements iRealType
      * Efetua todas as operações expostas por esta classe e trata de aplicar arredondamentos
      * quando os parametros globais estiverem especificados para isto.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor usado para o cálculo.
+     * @param int|float|string|iRealType $v
+     * Valor usado para o cálculo.
      *
-     * @param       ?int $dPlaces
-     *              Total de casas decimais a serem levadas em conta.
-     *              Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
+     * @param ?int $dPlaces
+     * Total de casas decimais a serem levadas em conta.
+     * Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
      *
-     * @param       string $operator
-     *              Operador que será utilizado.
+     * @param string $operator
+     * Operador que será utilizado.
      *
-     * @return      iRealType
-     *              Nova instância com o resultado da operação.
+     * @return iRealType
+     * Nova instância com o resultado da operação.
      */
     protected function internalCalc(
         int|float|string|iRealType $v,
@@ -884,15 +876,15 @@ final class RealType extends BObject implements iRealType
     /**
      * Efetua uma adição do valor atual desta instância com o valor indicado.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor usado para o cálculo.
+     * @param int|float|string|iRealType $v
+     * Valor usado para o cálculo.
      *
-     * @param       ?int $dPlaces
-     *              Total de casas decimais a serem levadas em conta.
-     *              Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
+     * @param ?int $dPlaces
+     * Total de casas decimais a serem levadas em conta.
+     * Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
      *
-     * @return      iRealType
-     *              Nova instância com o resultado desta operação.
+     * @return iRealType
+     * Nova instância com o resultado desta operação.
      */
     public function sum(
         int|float|string|iRealType $v,
@@ -908,15 +900,15 @@ final class RealType extends BObject implements iRealType
     /**
      * Efetua uma subtração do valor atual desta instância com o valor indicado.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor usado para o cálculo.
+     * @param int|float|string|iRealType $v
+     * Valor usado para o cálculo.
      *
-     * @param       ?int $dPlaces
-     *              Total de casas decimais a serem levadas em conta.
-     *              Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
+     * @param ?int $dPlaces
+     * Total de casas decimais a serem levadas em conta.
+     * Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
      *
-     * @return      iRealType
-     *              Nova instância com o resultado desta operação.
+     * @return iRealType
+     * Nova instância com o resultado desta operação.
      */
     public function sub(
         int|float|string|iRealType $v,
@@ -932,15 +924,15 @@ final class RealType extends BObject implements iRealType
     /**
      * Efetua uma multiplicação do valor atual desta instância com o valor indicado.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor usado para o cálculo.
+     * @param int|float|string|iRealType $v
+     * Valor usado para o cálculo.
      *
-     * @param       ?int $dPlaces
-     *              Total de casas decimais a serem levadas em conta.
-     *              Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
+     * @param ?int $dPlaces
+     * Total de casas decimais a serem levadas em conta.
+     * Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
      *
-     * @return      iRealType
-     *              Nova instância com o resultado desta operação.
+     * @return iRealType
+     * Nova instância com o resultado desta operação.
      */
     public function mul(
         int|float|string|iRealType $v,
@@ -956,15 +948,15 @@ final class RealType extends BObject implements iRealType
     /**
      * Efetua uma divisão do valor atual desta instância com o valor indicado.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor usado para o cálculo.
+     * @param int|float|string|iRealType $v
+     * Valor usado para o cálculo.
      *
-     * @param       ?int $dPlaces
-     *              Total de casas decimais a serem levadas em conta.
-     *              Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
+     * @param ?int $dPlaces
+     * Total de casas decimais a serem levadas em conta.
+     * Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
      *
-     * @return      iRealType
-     *              Nova instância com o resultado desta operação.
+     * @return iRealType
+     * Nova instância com o resultado desta operação.
      */
     public function div(
         int|float|string|iRealType $v,
@@ -980,15 +972,15 @@ final class RealType extends BObject implements iRealType
     /**
      * Calcula o módulo da divisão do valor atual desta instância pelo valor indicado.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor usado para o cálculo.
+     * @param int|float|string|iRealType $v
+     * Valor usado para o cálculo.
      *
-     * @param       ?int $dPlaces
-     *              Total de casas decimais a serem levadas em conta.
-     *              Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
+     * @param ?int $dPlaces
+     * Total de casas decimais a serem levadas em conta.
+     * Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
      *
-     * @return      iRealType
-     *              Nova instância com o resultado desta operação.
+     * @return iRealType
+     * Nova instância com o resultado desta operação.
      */
     public function mod(
         int|float|string|iRealType $v,
@@ -1004,15 +996,15 @@ final class RealType extends BObject implements iRealType
     /**
      * Eleva o valor atual desta instância pelo expoente indicado.
      *
-     * @param       int|float|string|iRealType $v
-     *              Valor usado para o cálculo.
+     * @param int|float|string|iRealType $v
+     * Valor usado para o cálculo.
      *
-     * @param       ?int $dPlaces
-     *              Total de casas decimais a serem levadas em conta.
-     *              Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
+     * @param ?int $dPlaces
+     * Total de casas decimais a serem levadas em conta.
+     * Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
      *
-     * @return      iRealType
-     *              Nova instância com o resultado desta operação.
+     * @return iRealType
+     * Nova instância com o resultado desta operação.
      */
     public function pow(
         int|float|string|iRealType $v,
@@ -1028,12 +1020,12 @@ final class RealType extends BObject implements iRealType
     /**
      * Calcula a raiz quadrada do valor atual desta instância.
      *
-     * @param       ?int $dPlaces
-     *              Total de casas decimais a serem levadas em conta.
-     *              Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
+     * @param ?int $dPlaces
+     * Total de casas decimais a serem levadas em conta.
+     * Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
      *
-     * @return      iRealType
-     *              Raiz quadrada do valor atual desta instância.
+     * @return iRealType
+     * Raiz quadrada do valor atual desta instância.
      */
     public function sqrt(?int $dPlaces = null): iRealType
     {
@@ -1052,7 +1044,7 @@ final class RealType extends BObject implements iRealType
      * Configura a forma como uma instância deve se comportar quando forçada a ser convertida
      * para uma ``string``.
      *
-     * @return      string
+     * @return string
      */
     public function __toString(): string
     {
@@ -1063,11 +1055,11 @@ final class RealType extends BObject implements iRealType
     /**
      * Permite definir um novo objeto baseado no estado completo passado pelo parametro ``$state``.
      *
-     * @param       array $state
-     *              Dados que serão adicionados ao novo objeto.
+     * @param array $state
+     * Dados que serão adicionados ao novo objeto.
      *
-     * @return      iRealType
-     *              Nova instância preenchida com os valores do estado indicado em ``$state``.
+     * @return iRealType
+     * Nova instância preenchida com os valores do estado indicado em ``$state``.
      */
     public static function __set_state(array $state): iRealType
     {
@@ -1089,18 +1081,18 @@ final class RealType extends BObject implements iRealType
     /**
      * Formata o valor atual desta instância usando o pontuador decimal e de milhar indicados.
      *
-     * @param       ?int $dPlaces
-     *              Total de casas decimais a serem levadas em conta.
-     *              Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
+     * @param ?int $dPlaces
+     * Total de casas decimais a serem levadas em conta.
+     * Se ``null`` for passado, usará o padrão definido em ``static::$globalDecimalPlaces``.
      *
-     * @param       string $dec
-     *              Pontuador decimal a ser usado.
+     * @param string $dec
+     * Pontuador decimal a ser usado.
      *
-     * @param       string $tho
-     *              Pontuador de milhar a ser usado.
+     * @param string $tho
+     * Pontuador de milhar a ser usado.
      *
-     * @return      string
-     *              Valor atual desta instância formatado conforme definido.
+     * @return string
+     * Valor atual desta instância formatado conforme definido.
      */
     public function format(?int $dPlaces = null, string $dec, string $tho): string
     {

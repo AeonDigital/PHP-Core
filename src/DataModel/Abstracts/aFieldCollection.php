@@ -39,7 +39,7 @@ abstract class aFieldCollection extends aField implements iFieldCollection
      *
      * O ``array`` de configuração deve ter a seguinte definição:
      *
-     * ``` php
+     * ```php
      *      $arr = [
      *          // string           Nome do campo.
      *          "name" => ,
