@@ -331,7 +331,6 @@ class TypedCollection extends Collection implements iTypedCollection
      *
      * @return array
      *
-     *
      * @throws \InvalidArgumentException
      * Caso ocorra falha no processamento dos dados.
      */

@@ -329,7 +329,7 @@ class BasicCollection extends BObject implements iBasicCollection
      * @return mixed
      * Valor retornado após a transformação.
      */
-    protected function beforeSet($value, mixed $oldValue = null): mixed
+    protected function beforeSet(mixed $value, mixed $oldValue = null): mixed
     {
         $useVal = $value;
         if ($this->isProtected() === true) {
@@ -597,14 +597,10 @@ class BasicCollection extends BObject implements iBasicCollection
      */
     function __construct(?array $initialValues = [], bool $autoincrement = false)
     {
-        if ($initialValues === null) {
-            $initialValues = [];
-        }
-
         $this->constructorActive = true;
 
         $this->autoIncrementCollection = $autoincrement;
-        $this->insertValues($initialValues);
+        $this->insertValues($initialValues ?? []);
 
         $this->constructorActive = false;
     }
@@ -679,7 +675,7 @@ class BasicCollection extends BObject implements iBasicCollection
      *
      * @return array
      */
-    protected function retrieveCollection(?bool $originalKeys = false, ?callable $keyTransform = null): array
+    protected function retrieveCollection(bool $originalKeys = false, ?callable $keyTransform = null): array
     {
         $r = [];
         foreach ($this->collection as $key => $value) {
@@ -881,25 +877,5 @@ class BasicCollection extends BObject implements iBasicCollection
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->retrieveCollection(false));
-    }
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Desabilita a função mágica ``__set`` para assegurar a que apenas alterações dentro das
-     * regras definidas para a classe sejam possíveis.
-     *
-     * @codeCoverageIgnore
-     */
-    public function __set(string $name, mixed $value): void
-    {
-        // Não produz efeito
     }
 }

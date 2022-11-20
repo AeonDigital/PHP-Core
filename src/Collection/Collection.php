@@ -40,14 +40,14 @@ class Collection extends BasicCollection implements iCollection
      * Prioriza o retorno das chaves conforme usadas internamente pois considera que se
      * há uma alteração nelas deve-se a alguma importância relacionado a seu formato de uso.
      *
-     * @param ?bool $originalKeys
+     * @param bool $originalKeys
      * Quando ``true`` irá usar as chaves conforme foram definidas na função ``set``.
      * Se no armazenamento interno elas sofrerem qualquer alteração e for definido
      * ``false`` então elas retornarão seu formato alterado.
      *
      * @return array
      */
-    public function toArray(?bool $originalKeys = false): array
+    public function toArray(bool $originalKeys = false): array
     {
         return $this->retrieveCollection($originalKeys);
     }
