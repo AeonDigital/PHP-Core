@@ -135,26 +135,6 @@ abstract class aField extends BObject implements iField
 
 
     /**
-     * Reflection da classe definida para o ``inputFormat``.
-     *
-     * @var \ReflectionClass
-     */
-    private \ReflectionClass $inputFormatReflection;
-
-
-
-    /**
-     * Identifica se o nome da classe passada para o ``inputFormat`` corresponde a uma classe
-     * ``iFormat`` válida.
-     *
-     * @return bool
-     */
-    private function isValidInputFormat(): bool
-    {
-        $ns = "AeonDigital\\Interfaces\\DataFormat\\iFormat";
-        return ($this->inputFormatReflection->implementsInterface($ns) === true);
-    }
-    /**
      * Indica se o valor passado, se for uma instrução ``NOW()`` pode ou não ser usada para
      * este campo.
      *
@@ -974,7 +954,7 @@ abstract class aField extends BObject implements iField
      * É usado apenas em campos *collection* mas está aqui definido para simplificar o
      * controle de estados das instâncias independente de seus tipos concretos.
      *
-     * @var ?string
+     * @var null|string
      */
     protected null|string $fieldState_CollectionState = null;
 

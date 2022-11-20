@@ -1,8 +1,6 @@
 <?php
 $rootDir = realpath(__DIR__ . "/..");
 require_once $rootDir . "/vendor/autoload.php";
-require_once $rootDir . "/vendor/aeondigital/phpinterfaces/src/iRealType.php"; // @@TODO
-require_once $rootDir . "/vendor/aeondigital/phpinterfaces/src/undefined.php"; // @@TODO
 
 $tstDir = $rootDir . "/tests/src";
 require_once $tstDir . "/DataModel/concrete/DataField.php";
