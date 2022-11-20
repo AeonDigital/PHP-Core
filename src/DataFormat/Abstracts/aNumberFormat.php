@@ -42,7 +42,6 @@ abstract class aNumberFormat extends aStringFormat implements iNumberFormat
         if (self::formatNumber($v) !== null) {
             return true;
         }
-
         return false;
     }
 
@@ -65,7 +64,6 @@ abstract class aNumberFormat extends aStringFormat implements iNumberFormat
         if (\is_int($v) === true || \is_float($v) === true || \is_double($v) === true) {
             $v = (string)$v;
         }
-
         return self::formatNumber($v, "string");
     }
 

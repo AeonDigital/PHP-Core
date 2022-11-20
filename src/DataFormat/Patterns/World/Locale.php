@@ -66,7 +66,7 @@ final class Locale extends aStringFormat
      *
      * @return ?string
      */
-    public static function format($v, ?array $aux = null): ?string
+    public static function format(mixed $v, ?array $aux = null): ?string
     {
         if (\is_string($v) === true && self::check($v) === true) {
             $str = [];

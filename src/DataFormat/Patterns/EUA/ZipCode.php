@@ -66,7 +66,7 @@ final class ZipCode extends aStringFormat
      *
      * @return ?string
      */
-    public static function format($v, ?array $aux = null): ?string
+    public static function format(mixed $v, ?array $aux = null): ?string
     {
         if (self::check($v) === true) {
             $v = \mb_str_preserve_chars($v, "0123456789");

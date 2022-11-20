@@ -66,7 +66,7 @@ final class Color extends aStringFormat
      *
      * @return ?string
      */
-    public static function format($v, ?array $aux = null): ?string
+    public static function format(mixed $v, ?array $aux = null): ?string
     {
         if (\is_string($v) === true) {
             if (\mb_strlen($v) === 6 && \mb_strpos($v, "#") === false) {

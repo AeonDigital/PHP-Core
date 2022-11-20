@@ -98,7 +98,7 @@ final class Week extends aDateTimeFormat
      *
      * @return ?string
      */
-    public static function format($v, ?array $aux = null): ?string
+    public static function format(mixed $v, ?array $aux = null): ?string
     {
         if (\is_string($v) === true && self::check($v) === true) {
             $v = \weekdate_to_datetime($v);
