@@ -437,6 +437,31 @@ class global_functionsTests extends TestCase
 
 
 
+    public function test_method_file_get_mimetype()
+    {
+        $keysAndValues = [
+            "-"     => null,
+            "css"   => ["text/css"],
+            "dmg"   => ["application/x-apple-diskimage"],
+            "gph"   => ["application/vnd.flographit"],
+            "les"   => ["application/vnd.hhe.lesson-player"],
+            "mp4"   => ["video/mp4"],
+            "nml"   => ["application/vnd.enliven"],
+            "otf"   => ["font/otf"],
+            "spf"   => ["application/vnd.yamaha.smaf-phrase"],
+            "tiff"  => ["image/tiff"],
+            "wma"   => ["audio/x-ms-wma"],
+            "xul"   => ["application/vnd.mozilla.xul+xml"],
+            "sub"   => ["image/vnd.dvb.subtitle", "text/vnd.dvb.subtitle"],
+        ];
+
+        foreach ($keysAndValues as $key => $value) {
+            $this->assertSame($value, file_get_mimetypes($key));
+        }
+    }
+
+
+
     public function test_method_html_print()
     {
         $assocTest = [
