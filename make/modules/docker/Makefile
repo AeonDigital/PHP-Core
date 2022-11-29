@@ -12,6 +12,7 @@
 up:
 	make/makeActions.sh makeExecuteBefore "$@"
 	docker-compose up -d
+	make php-composer-update
 	make/makeActions.sh makeExecuteAfter "$@"
 
 #
@@ -45,7 +46,7 @@ down:
 # usando o 'php composer'
 php-composer-install:
 	make/makeActions.sh makeExecuteBefore "$@"
-	docker exec -it ${CONTAINER_WEBSERVER_NAME} composer install --prefer-source
+	docker exec -it ${CONTAINER_WEBSERVER_NAME} composer install --prefer-dist
 	make/makeActions.sh makeExecuteAfter "$@"
 
 #
@@ -53,7 +54,7 @@ php-composer-install:
 # usando o 'php composer'
 php-composer-update:
 	make/makeActions.sh makeExecuteBefore "$@"
-	docker exec -it ${CONTAINER_WEBSERVER_NAME} composer update --prefer-source
+	docker exec -it ${CONTAINER_WEBSERVER_NAME} composer update --prefer-dist
 	make/makeActions.sh makeExecuteAfter "$@"
 
 
