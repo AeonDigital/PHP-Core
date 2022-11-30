@@ -29,3 +29,8 @@ run-web-server-only:
 # sem o uso do docker-compose
 run-db-server-only:
 	docker run --rm -v "./container-config/mysql-8.0/etc/mysql":"/etc/mysql" --name "${CONTAINER_DBSERVER_NAME}" aeondigital/mysql-8.0:dev
+
+#
+# Mostra como iniciar
+help:
+	echo "teste"
