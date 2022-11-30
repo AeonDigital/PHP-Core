@@ -87,5 +87,5 @@ get-ip:
 # Mostra um help
 help:
 	make/makeActions.sh makeExecuteBefore "$@"
-	echo "teste"
+	make/modules/docker/makeActions.sh makeHelp
 	make/makeActions.sh makeExecuteAfter "$@"
