@@ -16,10 +16,12 @@
 /container-config export-ignore
 /docs export-ignore
 /make export-ignore
+/Shell-Make export-ignore
 /tests export-ignore
 
 /.gitattributes export-ignore
 /.gitignore export-ignore
+/.gitmodules export-ignore
 
 /CONTRIBUTORS export-ignore
 /DEV.md export-ignore

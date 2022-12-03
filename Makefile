@@ -9,10 +9,6 @@
 # Módulos e submódulos
 include Shell-Make/Makefile
 
-
-
-
-
 #
 # Roda exclusivamente o servidor web com configurações padrões,
 # sem o uso do docker-compose
