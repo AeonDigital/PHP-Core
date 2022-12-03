@@ -304,6 +304,102 @@ gitTagManagement() {
 
 
 
+#
+# Inicia uma nova branch para a composição de uma tarefa específica.
+gitBranchStart() {
+  local useType=$(mse_str_trim $(mse_str_toLower "${type}"))
+  local useDateTime=$(mse_str_trim "${datetime}")
+  local useTitleMsg=""
+  unset useMsgLines
+  declare -a useMsgLines=()
+
+
+  unset usePromptTypes
+  declare -A usePromptTypes
+  usePromptTypes["f"]="feature"
+  usePromptTypes["i"]="improvement"
+  usePromptTypes["m"]="maintenance"
+  usePromptTypes["b"]="bugfix"
+  usePromptTypes["h"]="hotfix"
+
+
+  if [ "${useType}" != "" ]; then
+    local tmpValue=""
+    local tmpMatch=0
+
+    for tmpKey in "${!usePromptTypes[@]}"; do
+      tmpValue="${usePromptTypes[${tmpKey}]}"
+
+      if [ "${useType}" == "${tmpKey}" ] || [ "${useType}" == "${tmpValue}" ]; then
+        useType="${tmpValue}"
+        tmpMatch=1
+        break
+      fi
+    done
+
+    if [ "${tmpMatch}" == 0 ]; then
+      useTitleMsg="O valor \"${useType}\" é inválido para o parametro \"type\"."
+      mse_inter_showAlert "e" "${useTitleMsg}"
+      mse_inter_setCursorPosition "top" "1"
+      useType=""
+    fi
+  fi
+
+
+  if [ "${useType}" == "" ]; then
+    useTitleMsg="TYPE::Selecione um dos seguintes valores:"
+    mse_inter_showPrompt "" "i" "${useTitleMsg}" "list" "usePromptTypes"
+    useType="${usePromptTypes[${MSE_GLOBAL_PROMPT_RESULT}]}"
+  fi
+
+
+
+  if [ "${useDateTime}" == "" ]; then
+    useDateTime=$(date "+%Y_%m_%d-%H_%M")
+  else
+    tmpCheckDate=$(date -d"$useDateTime" "+%Y_%m_%d-%H_%M" 2> /dev/null)
+    if [ "${tmpCheckDate}" != "${useDateTime}" ]; then
+      useTitleMsg="O valor \"${useDateTime}\" é inválido para o parametro \"datetime\". Use o formato \"%Y_%m_%d-%H_%M\"."
+      mse_inter_showAlert "e" "${useTitleMsg}"
+      useDateTime=""
+    fi
+  fi
+
+
+
+
+  if [ "${useType}" != "" ] && [ "${useDateTime}" != "" ]; then
+    local tmpBranchName="${useType}/${useDateTime}"
+
+    useTitleMsg="Confirme a criação da branch \"${tmpBranchName}\""
+    mse_inter_showPrompt "" "or" "${useTitleMsg}" "bool"
+
+    if [ "${MSE_GLOBAL_PROMPT_RESULT}" == "1" ]; then
+      local tmpAtualBranch=$(git branch --show-current)
+      local tmpHasChanges=$(git status --porcelain 2> /dev/null)
+
+      if [ "${tmpHasChanges}" != "" ]; then
+        useTitleMsg="Você possui alterações não comitadas na branch atualmente aberta \"${tmpAtualBranch}\'."
+        useMsgLines+=("${mseNONE}Faça uma das seguintes ações para prosseguir:")
+        useMsgLines+=("${mseNONE}- Comite as alterações")
+        useMsgLines+=("${mseNONE}- Descarte as alterações")
+        useMsgLines+=("${mseNONE}- Finalize a tarefa da branch atual")
+
+        mse_inter_showAlert "w" "${useTitleMsg}" "useMsgLines"
+      else
+        if [ "${tmpAtualBranch}" != "${GIT_DEFAULT_BRANCH}" ]; then
+          git checkout "${GIT_DEFAULT_BRANCH}"
+          git pull origin "${GIT_DEFAULT_BRANCH}"
+          git checkout -b "${tmpBranchName}"
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
+
 
 
 
