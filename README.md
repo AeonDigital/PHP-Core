@@ -27,7 +27,7 @@ Instale em seu projeto usando o composer:
 **Via composer.json**
 ```json
 "require": {
-    "aeondigital/phpcore": "dev-master"
+    "aeondigital/phpcore": "dev-main"
 }
 ```
 
