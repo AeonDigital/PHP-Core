@@ -463,9 +463,9 @@ abstract class aField extends BObject implements iField
     /**
      * Menor valor possível para um tipo simples numérico ou ``DateTime``.
      *
-     * @var null|int|iRealType|\DateTime
+     * @var null|int|float|iRealType|\DateTime
      */
-    private null|int|iRealType|\DateTime $min = null;
+    private null|int|float|iRealType|\DateTime $min = null;
     /**
      * Define o menor valor possível para um tipo numérico ou ``DateTime``.
      *
@@ -478,7 +478,7 @@ abstract class aField extends BObject implements iField
      * Se for explicitamente definido, o valor deverá estar dentro dos limites definidos
      * pelo ``type``.
      *
-     * @param null|int|string|iRealType|\DateTime $m
+     * @param null|int|float|iRealType|\DateTime|string $m
      * Valor a ser definido.
      *
      * @return void
@@ -486,7 +486,7 @@ abstract class aField extends BObject implements iField
      * @throws \InvalidArgumentException
      * Caso o valor a ser definido não seja válido.
      */
-    private function setMin(null|int|string|iRealType|\DateTime $m): void
+    private function setMin(null|int|float|iRealType|\DateTime|string $m): void
     {
         if ($this->isSimpleTypeNumeric() === true || $this->isSimpleTypeDateTime() === true) {
             if ($m === null) {
@@ -512,9 +512,9 @@ abstract class aField extends BObject implements iField
      * Retorna o menor valor possível para um tipo numérico ou ``DateTime``.
      * Por padrão, herdará este valor da definição de seu ``type`` quando isto for aplicável.
      *
-     * @return null|int|iRealType|\DateTime
+     * @return null|int|float|iRealType|\DateTime
      */
-    public function getMin(): null|int|iRealType|\DateTime
+    public function getMin(): null|int|float|iRealType|\DateTime
     {
         return $this->min;
     }
@@ -526,9 +526,9 @@ abstract class aField extends BObject implements iField
     /**
      * Maior valor possível para um tipo numérico ou ``DateTime``.
      *
-     * @var null|int|iRealType|\DateTime
+     * @var null|int|float|iRealType|\DateTime
      */
-    private null|int|iRealType|\DateTime $max = null;
+    private null|int|float|iRealType|\DateTime $max = null;
     /**
      * Define o maior valor possível para um tipo numérico ou ``DateTime``.
      *
@@ -541,7 +541,7 @@ abstract class aField extends BObject implements iField
      * Se for explicitamente definido, o valor deverá estar dentro dos limites definidos
      * pelo ``type``.
      *
-     * @param null|int|string|iRealType|\DateTime $m
+     * @param null|int|float|iRealType|\DateTime|string $m
      * Valor a ser definido.
      *
      * @return void
@@ -549,7 +549,7 @@ abstract class aField extends BObject implements iField
      * @throws \InvalidArgumentException
      * Caso o valor a ser definido não seja válido.
      */
-    private function setMax(null|int|string|iRealType|\DateTime $m): void
+    private function setMax(null|int|float|iRealType|\DateTime|string $m): void
     {
         if ($this->isSimpleTypeNumeric() === true || $this->isSimpleTypeDateTime() === true) {
             if ($m === null) {
@@ -575,9 +575,9 @@ abstract class aField extends BObject implements iField
      * Retorna o maior valor possível para um tipo numérico ou ``DateTime``.
      * Por padrão, herdará este valor da definição de seu ``type`` quando isto for aplicável.
      *
-     * @return null|int|iRealType|\DateTime
+     * @return null|int|float|iRealType|\DateTime
      */
-    public function getMax(): null|int|iRealType|\DateTime
+    public function getMax(): null|int|float|iRealType|\DateTime
     {
         return $this->max;
     }
