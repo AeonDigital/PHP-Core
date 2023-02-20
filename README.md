@@ -7,7 +7,7 @@ PHP-Core
 
 &nbsp;
 
-Constantes, Funções Globais e Classes de uso geral.
+Constantes, Funções Globais e Classes básicas de uso geral.
 
 
 &nbsp;
@@ -69,8 +69,10 @@ ________________________________________________________________________________
 
 ## Outras Informações
 
+Se estiver trabalhando no VSCode considere a instalação das extensões recomendadas para este **Workspace**.  
+
 Este e outros projetos **Aeon Digital** utilizam o sistema de [Versionamento Semântico](https://semver.org/) proposto 
-por Tom Preston-Werner.
+por Tom Preston-Werner.  
 
 
 &nbsp;

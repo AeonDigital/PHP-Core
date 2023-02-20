@@ -23,6 +23,7 @@
 #
 # Diretórios e arquivos que não são essenciais para rodar o projeto
 # e podem ser ignorados em uma instalação em produção.
+/.vscode export-ignore
 /container-config export-ignore
 /docs export-ignore
 /make export-ignore

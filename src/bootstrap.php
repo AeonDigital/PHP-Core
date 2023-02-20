@@ -1,6 +1,6 @@
 <?php
-declare (strict_types=1);
 
+declare(strict_types=1);
 
 
 
@@ -40,10 +40,11 @@ const DS = DIRECTORY_SEPARATOR;
  * anteriormente.
  */
 foreach (\scandir(__DIR__ . DS . "global_functions") as $function_file) {
-    if ($function_file !== "." &&
+    if (
+        $function_file !== "." &&
         $function_file !== ".." &&
-        \function_exists(\str_replace(".php", "", $function_file)) === false)
-    {
+        \function_exists(\str_replace(".php", "", $function_file)) === false
+    ) {
         require_once __DIR__ . DS . "global_functions" . DS . $function_file;
     }
 }
