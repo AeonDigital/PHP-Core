@@ -13,216 +13,16 @@ use AeonDigital\RealType as RealType;
 
 
 /**
- * Coleção de métodos estáticos para diversos fins.
+ * Coleção de métodos estáticos para conversão de
+ * valores de tipos ``scalar``.
  *
  * @package     AeonDigital
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
- * @copyright   2020, Rianna Cantarelli
+ * @copyright   2023, Rianna Cantarelli
  * @license     MIT
  */
-class Tools
+class Convert
 {
-
-
-
-
-
-
-    /**
-     * Retorna o tipo ``scalar`` do objeto passado.
-     * Se não for um objeto do tipo ``scalar`` retornará ``null`` .
-     *
-     * @param mixed $o
-     * Objeto que será verificado.
-     *
-     * @return ?string
-     */
-    public static function getScalarType(mixed $o): ?string
-    {
-        $r = null;
-
-        if ($o === null) {
-            $r = "null";
-        } elseif (\is_bool($o) === true) {
-            $r = "bool";
-        } elseif (\is_int($o) === true) {
-            $r = "int";
-        } elseif (\is_float($o) === true) {
-            $r = "float";
-        } elseif (\is_string($o) === true) {
-            $r = "string";
-        } elseif (\is_array($o) === true) {
-            $r = "array";
-        }
-
-        return $r;
-    }
-    /**
-     * Verifica se o objeto passado corresponde ao tipo esperado.
-     *
-     * @param mixed $o
-     * Objeto que será verificado.
-     *
-     * @param string $type
-     * Nome do tipo a ser testado.
-     * Esperado um dos seguintes: null | bool | int | float | string | array
-     *
-     * @return bool
-     */
-    public static function isScalarType(mixed $o, string $type): bool
-    {
-        return (self::getScalarType($o) === \mb_strtolower($type));
-    }
-    /**
-     * Identifica se o objeto passado é um tipo ``scalar``.
-     *
-     * @param mixed $o
-     * Objeto que será verificado.
-     *
-     * @return bool
-     */
-    public static function isScalar(mixed $o): bool
-    {
-        return (self::getScalarType($o) !== null);
-    }
-
-
-
-
-
-    /**
-     * Verifica se o objeto passado é do tipo ``null``.
-     *
-     * @param mixed $o
-     * Objeto que será verificado.
-     *
-     * @return bool
-     */
-    public static function isNull(mixed $o): bool
-    {
-        return ($o === null);
-    }
-    /**
-     * Verifica se o objeto passado é do tipo ``bool``.
-     *
-     * @param mixed $o
-     * Objeto que será verificado.
-     *
-     * @return bool
-     */
-    public static function isBool(mixed $o): bool
-    {
-        return (\is_bool($o) === true);
-    }
-    /**
-     * Verifica se o objeto passado é do tipo ``int`` ou ``float`` ou ainda se trata-se
-     * de uma ``string`` numérica.
-     *
-     * @param mixed $o
-     * Objeto que será verificado.
-     *
-     * @return bool
-     */
-    public static function isNumeric(mixed $o): bool
-    {
-        return ((\is_int($o) === true) || (\is_float($o) === true) || (\is_numeric($o) === true));
-    }
-    /**
-     * Verifica se o objeto passado é do tipo ``int``.
-     *
-     * @param mixed $o
-     * Objeto que será verificado.
-     *
-     * @return bool
-     */
-    public static function isInt(mixed $o): bool
-    {
-        return (\is_int($o) === true);
-    }
-    /**
-     * Verifica se o objeto passado é do tipo ``float``.
-     *
-     * @param mixed $o
-     * Objeto que será verificado.
-     *
-     * @return bool
-     */
-    public static function isFloat(mixed $o): bool
-    {
-        return (\is_float($o) === true);
-    }
-    /**
-     * Verifica se o objeto passado é do tipo ``string``.
-     *
-     * @param mixed $o
-     * Objeto que será verificado.
-     *
-     * @return bool
-     */
-    public static function isString(mixed $o): bool
-    {
-        return (\is_string($o) === true);
-    }
-    /**
-     * Verifica se o objeto passado é do tipo ``array``.
-     *
-     * @param mixed $o
-     * Objeto que será verificado.
-     *
-     * @return bool
-     */
-    public static function isArray(mixed $o): bool
-    {
-        return (\is_array($o) === true);
-    }
-    /**
-     * Verifica se o objeto passado um ``array`` associativo.
-     *
-     * @param mixed $o
-     * Objeto que será verificado.
-     *
-     * @return bool
-     */
-    public static function isArrayAssoc(mixed $o): bool
-    {
-        return (\array_is_assoc($o) === true);
-    }
-    /**
-     * Verifica se o objeto passado é do tipo ``DateTime``.
-     *
-     * @param mixed $o
-     * Objeto que será verificado.
-     *
-     * @return bool
-     */
-    public static function isDateTime(mixed $o): bool
-    {
-        return (\is_a($o, "\DateTime") === true);
-    }
-    /**
-     * Verifica se o objeto passado é do tipo ``iRealType``.
-     *
-     * @param mixed $o
-     * Objeto que será verificado.
-     *
-     * @return bool
-     */
-    public static function isRealType(mixed $o): bool
-    {
-        $r = false;
-        if (\is_object($o) === true) {
-            $typeReflection = new \ReflectionClass($o);
-            $r = $typeReflection->implementsInterface("AeonDigital\\Interfaces\\iRealType");
-        }
-        return $r;
-    }
-
-
-
-
-
-
-
 
 
 
@@ -275,6 +75,7 @@ class Tools
             }
         }
     }
+
     /**
      * Tenta converter o tipo do valor passado para ``number`` (seja ``int`` ou ``float``).
      * Apenas valores realmente compatíveis serão convertidos.
@@ -299,6 +100,7 @@ class Tools
             return null;
         }
     }
+
     /**
      * Tenta converter o tipo do valor passado para ``int``.
      * Apenas valores realmente compatíveis serão convertidos.
@@ -325,6 +127,7 @@ class Tools
             return null;
         }
     }
+
     /**
      * Tenta converter o tipo do valor passado para ``float``.
      * Apenas valores realmente compatíveis serão convertidos.
@@ -345,6 +148,7 @@ class Tools
 
         return $o;
     }
+
     /**
      * Tenta converter o tipo do valor passado para ``string``.
      * Apenas valores realmente compatíveis serão convertidos.
@@ -388,12 +192,13 @@ class Tools
             return (string)$o;
         } elseif (\is_array($o) === true) {
             return \implode(" ", $o);
-        } elseif (Tools::isRealType($o) === true) {
+        } elseif (Scalar::isRealType($o) === true) {
             return $o->value();
         } else {
             return null;
         }
     }
+
     /**
      * Tenta converter o tipo do valor passado para ``array``.
      * Apenas valores realmente compatíveis serão convertidos.
@@ -408,12 +213,13 @@ class Tools
     {
         $r = null;
 
-        if (self::isScalar($o) === true) {
-            $r = (self::isArray($o) === true) ? $o : [$o];
+        if (Scalar::isScalar($o) === true) {
+            $r = (Scalar::isArray($o) === true) ? $o : [$o];
         }
 
         return $r;
     }
+
     /**
      * Converte todos os valores do ``array`` passado para ``string`` e retorna um novo ``array``
      * contendo todos os valores convertidos. A conversão ocorre apenas entre valores escalares.
@@ -439,7 +245,7 @@ class Tools
         if ($o !== null) {
             $arr = [];
             foreach ($o as $val) {
-                if (self::isScalar($val) === true) {
+                if (Scalar::isScalar($val) === true) {
                     $arr[] = self::toString($val);
                 } elseif (\is_a($val, "\DateTime") === true) {
                     $arr[] = $val->format("Y-m-d H:i:s");
@@ -462,6 +268,7 @@ class Tools
 
         return $arr;
     }
+
     /**
      * Tenta converter o tipo do valor passado para ``DateTime``.
      * Apenas valores realmente compatíveis serão convertidos.
@@ -563,6 +370,7 @@ class Tools
 
         return $oR;
     }
+
     /**
      * Tenta converter o tipo do valor passado para uma ``DateTime string`` compatível com o
      * formato de saida escolhido.
@@ -596,6 +404,7 @@ class Tools
         }
         return $oR;
     }
+
     /**
      * Tenta converter o tipo do valor passado para ``iRealType``.
      * Apenas valores realmente compatíveis serão convertidos.
@@ -617,8 +426,6 @@ class Tools
 
 
 
-
-
     /**
      * Tenta converter o tipo do valor passado para uma ``string json``.
      * Apenas valores realmente compatíveis serão convertidos.
@@ -637,7 +444,7 @@ class Tools
             $r = "null";
         } elseif (\is_a($o, "\DateTime") === true) {
             $r = \json_encode($o->format("Y-m-d H:i:s"));
-        } elseif (Tools::isRealType($o) === true) {
+        } elseif (Scalar::isRealType($o) === true) {
             $r = \json_encode($o->value());
         } elseif (
             \is_bool($o) === true ||

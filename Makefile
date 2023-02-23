@@ -7,4 +7,5 @@
 
 #
 # Módulos e submódulos
+include .env
 include Shell-Make/Makefile

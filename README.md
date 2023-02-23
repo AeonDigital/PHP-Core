@@ -51,6 +51,7 @@ projeto. Use os comandos abaixo:
 Após a instalação instalar, crie/edite o ``Makefile`` na raiz do seu projeto adicionando o seguinte:
 
 ```Makefile
+  include .env
   include Shell-Make/Makefile
 ```
 

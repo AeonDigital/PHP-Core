@@ -1,39 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
-        bootstrap="phpunit.php"
-        cacheResultFile=".phpunit.cache/test-results"
-        executionOrder="default"
-        forceCoversAnnotation="false"
-        beStrictAboutCoversAnnotation="true"
-        beStrictAboutOutputDuringTests="true"
-        beStrictAboutTodoAnnotatedTests="true"
-        convertDeprecationsToExceptions="true"
-        failOnRisky="true"
-        failOnWarning="true"
-        verbose="true">
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+    bootstrap="phpunit.php"
+    cacheResultFile=".phpunit.cache/test-results"
+    executionOrder="default"
+    forceCoversAnnotation="false"
+    beStrictAboutCoversAnnotation="true"
+    beStrictAboutOutputDuringTests="true"
+    beStrictAboutTodoAnnotatedTests="true"
+    convertDeprecationsToExceptions="true"
+    failOnRisky="true"
+    failOnWarning="true"
+    verbose="true">
 
     <testsuites>
         <testsuite name="default">
             <file>src/global_functionsTests.php</file>
-            <file>src/Traits/MainCheckArgumentExceptionTest.php</file>
+
             <file>src/RealTypeTests.php</file>
-
-            <directory>src/Tools</directory>
-            <directory>src/SimpleType</directory>
-            <directory>src/Collection</directory>
-
-            <directory>src/DataFormat/patterns/brasil</directory>
-            <directory>src/DataFormat/patterns/eua</directory>
-            <directory>src/DataFormat/patterns/world</directory>
-
-            <directory>src/DataModel</directory>
+            <file>src/ScalarTests.php</file>
+            <file>src/ConvertTests.php</file>
         </testsuite>
     </testsuites>
 
     <coverage cacheDirectory=".phpunit.cache/code-coverage"
-            includeUncoveredFiles="false"
-            processUncoveredFiles="false">
+        includeUncoveredFiles="false"
+        processUncoveredFiles="false">
         <include>
             <directory suffix=".php">../src</directory>
         </include>

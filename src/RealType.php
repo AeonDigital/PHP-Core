@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AeonDigital;
 
 use AeonDigital\Interfaces\iRealType as iRealType;
-use AeonDigital\BObject as BObject;
+
 
 
 
@@ -22,10 +22,8 @@ use AeonDigital\BObject as BObject;
  * @copyright   2020, Rianna Cantarelli
  * @license     MIT
  */
-final class RealType extends BObject implements iRealType
+final class RealType implements iRealType
 {
-    use \AeonDigital\Traits\MainCheckArgumentException;
-
 
 
 
@@ -347,19 +345,9 @@ final class RealType extends BObject implements iRealType
         if ($v === "") {
             $v = 0;
         }
-        $this->mainCheckForInvalidArgumentException(
-            "v",
-            $v,
-            [
-                [
-                    "validate"          => "closure",
-                    "closure"           => function ($argValue) {
-                        return RealType::isValidRealType($argValue);
-                    },
-                    "customErrorMessage" => "Argument must be a valid iRealType."
-                ]
-            ]
-        );
+        if (RealType::isValidRealType($v) === false) {
+            throw new \InvalidArgumentException("Argument must be a valid iRealType. Given: [ $v ]");
+        }
 
 
         if (\is_int($v) === true || \is_float($v) === true || \is_string($v) === true) {
