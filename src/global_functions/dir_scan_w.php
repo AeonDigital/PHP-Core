@@ -16,26 +16,38 @@ function dir_scan_w(string $absoluteSystemPathToDir): array
 {
     $dirContent = \scandir($absoluteSystemPathToDir);
 
-    $dotFiles = [];
-    $underFiles = [];
-    $normalFiles = [];
+    $tgtDirs = [];
+    $tgtDotFiles = [];
+    $tgtUnderFiles = [];
+    $tgtFiles = [];
 
-    foreach ($dirContent as $fileName) {
-        if ($fileName[0] === ".") {
-            $dotFiles[] = $fileName;
-        } elseif ($fileName[0] === "_") {
-            $underFiles[] = $fileName;
+    foreach ($dirContent as $tgtName) {
+        if (
+            $tgtName === "." ||
+            $tgtName === ".." ||
+            \is_dir($absoluteSystemPathToDir . DS . $tgtName) === true
+        ) {
+            $tgtDirs[] = $tgtName;
         } else {
-            $normalFiles[] = $fileName;
+            if ($tgtName[0] === ".") {
+                $tgtDotFiles[] = $tgtName;
+            } else {
+                if ($tgtName[0] === "_") {
+                    $tgtUnderFiles[] = $tgtName;
+                } else {
+                    $tgtFiles[] = $tgtName;
+                }
+            }
         }
     }
 
     // Reordena os itens e refaz o index dos elementos.
-    \natcasesort($dotFiles);
-    \natcasesort($underFiles);
-    \natcasesort($normalFiles);
+    \natcasesort($tgtDirs);
+    \natcasesort($tgtDotFiles);
+    \natcasesort($tgtUnderFiles);
+    \natcasesort($tgtFiles);
 
-    $dirContent = \array_merge($dotFiles, $underFiles, $normalFiles);
+    $dirContent = \array_merge($tgtDirs, $tgtDotFiles, $tgtUnderFiles, $tgtFiles);
 
     return $dirContent;
 }
