@@ -1082,7 +1082,7 @@ final class RealType implements iRealType
      * @return string
      * Valor atual desta instância formatado conforme definido.
      */
-    public function format(?int $dPlaces = null, string $dec, string $tho): string
+    public function format(?int $dPlaces = null, string $dec = "", string $tho = ""): string
     {
         $parts = \explode(".", $this->val);
         $integer = $parts[0];
