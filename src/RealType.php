@@ -778,7 +778,7 @@ final class RealType implements iRealType
     protected function internalCalc(
         int|float|string|iRealType $v,
         ?int $dPlaces = null,
-        string $operator
+        string $operator = ""
     ): iRealType {
         $r = null;
         $d = new RealType($v);
