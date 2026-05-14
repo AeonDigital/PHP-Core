@@ -29,10 +29,11 @@ final class CNPJ extends aStringFormat
 
     /**
      * Expressão regular para validação.
+     * Atualizado para suportar o formato alfanumérico na raiz do CNPJ (primeiros 8 caracteres).
      *
      * @var         ?string
      */
-    const RegExp = "/^[0-9]{2}[.]?[0-9]{3}[.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2}$/";
+    const RegExp = "/^[a-zA-Z0-9]{2}[.]?[a-zA-Z0-9]{3}[.]?[a-zA-Z0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2}$/";
 
 
     /**
@@ -67,36 +68,40 @@ final class CNPJ extends aStringFormat
      */
     public static function check(?string $v, ?array $aux = null) : bool
     {
-        if ($v !== null && \mb_str_pattern_match($v, self::RegExp) === true) {
-            $cnpj = \mb_str_preserve_chars($v, "0123456789");
+        if ($v !== null) {
+            // Converte para maiúsculas para facilitar a verificação ASCII
+            $v = \mb_strtoupper($v);
 
-            if (\mb_strlen($cnpj) === 14 && \is_numeric($cnpj) === true) {
-                // Se não for nenhum dos padrões inválidos de CNPJ...
-                if ($cnpj !== "00000000000000" && $cnpj !== "11111111111111" && $cnpj !== "22222222222222" &&
-                    $cnpj !== "33333333333333" && $cnpj !== "44444444444444" && $cnpj !== "55555555555555" &&
-                    $cnpj !== "66666666666666" && $cnpj !== "77777777777777" && $cnpj !== "88888888888888" &&
-                    $cnpj !== "99999999999999") {
-                    $a = [];
-                    $b = 0;
-                    $c = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
-                    for ($i = 0; $i < 12; $i++) {
-                        $a[$i] = $cnpj[$i];
-                        $b += $a[$i] * $c[$i + 1];
-                    }
+            if (\mb_str_pattern_match($v, self::RegExp) === true) {
+                $cnpj = \mb_str_preserve_chars($v, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
-                    $x = $b % 11;
-                    $a[12] = ($x < 2) ? 0 : 11 - $x;
+                if (\mb_strlen($cnpj) === 14) {
+                    // Se não for nenhum dos padrões inválidos de CNPJ (todos os caracteres iguais)
+                    if (\str_repeat($cnpj[0], 14) !== $cnpj) {
+                        $a = [];
+                        $b = 0;
+                        $c = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+                        for ($i = 0; $i < 12; $i++) {
+                            // Subtrai 48 do valor ASCII do caractere.
+                            // Números (48-57) viram 0-9. Letras (65-90) viram 17-42.
+                            $a[$i] = \ord($cnpj[$i]) - 48;
+                            $b += $a[$i] * $c[$i + 1];
+                        }
+
+                        $x = $b % 11;
+                        $a[12] = ($x < 2) ? 0 : 11 - $x;
 
 
-                    $b = 0;
-                    for ($y = 0; $y < 13; $y++) {
-                        $b += ($a[$y] * $c[$y]);
-                    }
-                    $x = $b % 11;
-                    $a[13] = ($x < 2) ? 0 : 11 - $x;
+                        $b = 0;
+                        for ($y = 0; $y < 13; $y++) {
+                            $b += ($a[$y] * $c[$y]);
+                        }
+                        $x = $b % 11;
+                        $a[13] = ($x < 2) ? 0 : 11 - $x;
 
-                    if (((int)$cnpj[12] === (int)$a[12]) && ((int)$cnpj[13] === (int)$a[13])) {
-                        return true;
+                        if (((int)$cnpj[12] === (int)$a[12]) && ((int)$cnpj[13] === (int)$a[13])) {
+                            return true;
+                        }
                     }
                 }
             }
@@ -122,7 +127,8 @@ final class CNPJ extends aStringFormat
     public static function format($v, ?array $aux = null) : ?string
     {
         if (self::check($v) === true) {
-            $v = \mb_str_preserve_chars($v, "0123456789");
+            $v = \mb_strtoupper((string)$v);
+            $v = \mb_str_preserve_chars($v, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
             if (\mb_strlen($v) === 14) {
                 return \mb_substr($v, 0, 2) . "." . \mb_substr($v, 2, 3) . "." . \mb_substr($v, 5, 3) . "/" . \mb_substr($v, 8, 4) . "-" . \mb_substr($v, 12, 2);
@@ -152,7 +158,8 @@ final class CNPJ extends aStringFormat
     public static function removeFormat(?string $v, ?array $aux = null)
     {
         if (self::check($v) === true) {
-            $v = \mb_str_preserve_chars($v, "0123456789");
+            $v = \mb_strtoupper($v);
+            $v = \mb_str_preserve_chars($v, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
             if (\mb_strlen($v) === 14) {
                 return $v;
