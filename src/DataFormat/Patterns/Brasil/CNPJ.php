@@ -33,8 +33,7 @@ final class CNPJ extends aStringFormat
      *
      * @var         ?string
      */
-    const RegExp = "/^[a-zA-Z0-9]{2}[.]?[a-zA-Z0-9]{3}[.]?[a-zA-Z0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2}$/";
-
+    const RegExp = "/^[a-zA-Z0-9]{2}[.]?[a-zA-Z0-9]{3}[.]?[a-zA-Z0-9]{3}[\/]?[a-zA-Z0-9]{4}[-]?[0-9]{2}$/";
 
     /**
      * Quantidade **mínima** de caracteres necessários para expressar o formato.
