@@ -35,7 +35,10 @@ class BrasilCNPJTest extends TestCase
             "12ABC345012356",
             "AB.CDE.FGH/0001-95",
             "ABCDEFGH000195",
-            "1a.2b3.c4d/0001-79" // Aceitar letras minúsculas
+            "1A.2B3.C4D/00A1-00",
+            "1A2B3C4D00A100",
+            "1A.2B3.C4D/E0F1-15",
+            "1a.2b3.c4d/e0f1-15" // Aceitar letras minúsculas
         ];
 
 
@@ -49,7 +52,6 @@ class BrasilCNPJTest extends TestCase
 
             // --- Novo Formato Alfanumérico ---
             "1A.2B3.C4D/0001-80", // Dígito verificador errado
-            "1A.2B3.C4D/00A1-79", // Letras no sufixo da filial
             "1A.2B3.C4D/0001-A9", // Letras no dígito verificador
             "@@.2B3.C4D/0001-79", // Caracteres especiais
             "AA.AAA.AAA/AAAA-AA", // Padrão repetido
@@ -82,8 +84,8 @@ class BrasilCNPJTest extends TestCase
         $this->assertSame("24.728.035/0001-00", CNPJ::format("24.728.035/0001-00"));
         $this->assertSame(null, CNPJ::format("24728035000101"));
         $this->assertSame(null, CNPJ::format(null));
-        $this->assertSame("1A.2B3.C4D/0001-79", CNPJ::format("1A2B3C4D000179"));
-        $this->assertSame("1A.2B3.C4D/0001-79", CNPJ::format("1a2b3c4d000179"));
+        $this->assertSame("1A.2B3.C4D/E0F1-15", CNPJ::format("1A2B3C4DE0F115"));
+        $this->assertSame("1A.2B3.C4D/E0F1-15", CNPJ::format("1a2b3c4de0f115"));
         $this->assertSame(null, CNPJ::format("1A.2B3.C4D/0001-80"));
     }
 
@@ -93,8 +95,8 @@ class BrasilCNPJTest extends TestCase
     {
         $this->assertSame("24728035000100", CNPJ::removeFormat("24.728.035/0001-00"));
         $this->assertSame(null, CNPJ::removeFormat(null));
-        $this->assertSame("1A2B3C4D000179", CNPJ::removeFormat("1A.2B3.C4D/0001-79"));
-        $this->assertSame("1A2B3C4D000179", CNPJ::removeFormat("1a.2b3.c4d/0001-79"));
+        $this->assertSame("1A2B3C4DE0F115", CNPJ::removeFormat("1A.2B3.C4D/E0F1-15"));
+        $this->assertSame("1A2B3C4DE0F115", CNPJ::removeFormat("1a.2b3.c4d/e0f1-15"));
     }
 
 
@@ -103,7 +105,8 @@ class BrasilCNPJTest extends TestCase
     {
         $this->assertSame("24728035000100", CNPJ::storageFormat("24.728.035/0001-00"));
         $this->assertSame(null, CNPJ::storageFormat("24.728.035/0001-01"));
-        $this->assertSame("1A2B3C4D000179", CNPJ::storageFormat("1A.2B3.C4D/0001-79"));
+        $this->assertSame("1A2B3C4DE0F115", CNPJ::storageFormat("1A.2B3.C4D/E0F1-15"));
+        $this->assertSame("1A2B3C4DE0F115", CNPJ::storageFormat("1a.2b3.c4d/e0f1-15"));
         $this->assertSame(null, CNPJ::storageFormat("1A.2B3.C4D/0001-80"));
     }
 }
